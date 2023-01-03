@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.ViewportAdapters;
@@ -17,12 +18,19 @@ namespace Project1
         public static TiledMap _tiledMap;
         public static TiledMapRenderer _tiledMapRenderer;
 
+        public static Vector2 _positionPerso;
+        public static AnimatedSprite _perso;
+        public static int _vitessePerso;
+        public static string animation;
 
-        public int largeurFenetre = 1080;
-        public int hauteurFenetre = 720;
+        public int largeurFenetre = 1440;
+        public int hauteurFenetre = 900;
+
 
         public static OrthographicCamera _camera;
         public static Vector2 _cameraPosition;
+        public static float _positionCameraX;
+        public static float _positionCameraY;
 
         public static int _screenWidth;
         public static int _screenHeight;
@@ -43,25 +51,35 @@ namespace Project1
         {
             // TODO: Add your initialization logic here
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            _screenWidth = 1280;
+            _screenHeight = 720;
 
-            _graphics.PreferredBackBufferWidth = largeurFenetre;
-            _graphics.PreferredBackBufferHeight = hauteurFenetre;
+            _graphics.PreferredBackBufferWidth = _screenWidth;
+            _graphics.PreferredBackBufferHeight = _screenHeight;
             _graphics.ApplyChanges();
 
+            _positionPerso = new Vector2((float)4.5 * 16, 7 * 16);
+
+            _positionCameraX = _positionPerso.X;
+            _positionCameraY = _positionPerso.Y;
+            
             // Camera Stuff
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, largeurFenetre, hauteurFenetre);
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
             _camera = new OrthographicCamera(viewportadapter);
+            _camera.ZoomIn(2f);
             _cameraPosition = new Vector2(0, 0);
             _camera.Position = _cameraPosition;
-            _camera.ZoomIn(0);
+            _mapWidth = 100 * 16;
+            _mapHeight = 100 * 16;
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
             _tiledMap = Content.Load<TiledMap>("Map/map");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -87,16 +105,18 @@ namespace Project1
             {
                 _camera.Position += new Vector2(0, 1);
             }
+
+
             _tiledMapRenderer.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-            Matrix zoomMatrix = Matrix.CreateScale(1.5f);
-            var transformMatrix = _camera.GetViewMatrix() * zoomMatrix;
+
+            var transformMatrix = _camera.GetViewMatrix();
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.End();
 
