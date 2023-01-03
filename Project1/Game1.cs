@@ -44,6 +44,7 @@ namespace Project1
         {
             GraphicsDevice.Clear(Color.Black);
 
+
             base.Draw(gameTime);
         }
     }
