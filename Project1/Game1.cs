@@ -38,7 +38,7 @@ namespace Project1
         public static int _mapHeight;
         public static int _mapWidth;
 
-        public static List<string> _mapLayers = new List<string>() { "Batiments", "Objets" };
+        public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets" };
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -51,7 +51,7 @@ namespace Project1
             //regler la transparence des tuiles
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
 
-            _vitessePerso = 1000;
+            _vitessePerso = 100;
 
             //définition de la taille de la fenetre en fonctiond des dimensions données
             _screenWidth = 1280;

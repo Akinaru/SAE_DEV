@@ -92,8 +92,9 @@ namespace Project1
             }
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            if (Keyboard.GetState().IsKeyDown(Keys.F5))
             {
+                Game1._vitessePerso = 1000;
             }
         }
 
