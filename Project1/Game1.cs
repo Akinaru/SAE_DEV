@@ -2,8 +2,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
+using MonoGame.Extended.ViewportAdapters;
 
 namespace Project1
 {
@@ -15,10 +17,17 @@ namespace Project1
         public static TiledMap _tiledMap;
         public static TiledMapRenderer _tiledMapRenderer;
 
-        public RenderTarget2D _renderTarget;
 
         public int largeurFenetre = 1080;
         public int hauteurFenetre = 720;
+
+        public static OrthographicCamera _camera;
+        public static Vector2 _cameraPosition;
+
+        public static int _screenWidth;
+        public static int _screenHeight;
+        public static int _mapHeight;
+        public static int _mapWidth;
 
 
         public Game1()
@@ -37,9 +46,13 @@ namespace Project1
             _graphics.PreferredBackBufferWidth = largeurFenetre;
             _graphics.PreferredBackBufferHeight = hauteurFenetre;
             _graphics.ApplyChanges();
-            PresentationParameters pp = _graphics.GraphicsDevice.PresentationParameters; 
-            _renderTarget = new RenderTarget2D(_graphics.GraphicsDevice, 320, 240, false,
-                SurfaceFormat.Color, DepthFormat.None, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
+
+            // Camera Stuff
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, largeurFenetre, hauteurFenetre);
+            _camera = new OrthographicCamera(viewportadapter);
+            _cameraPosition = new Vector2(100, 0);
+            _camera.Position = _cameraPosition;
+            _camera.ZoomIn(0.5f);
             base.Initialize();
         }
 
@@ -56,27 +69,20 @@ namespace Project1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
+            
             _tiledMapRenderer.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.Transparent);
 
-            GraphicsDevice.SetRenderTarget(_renderTarget); 
-            GraphicsDevice.Clear(Color.Transparent); 
-            GraphicsDevice.BlendState = BlendState.AlphaBlend; 
-            GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp; 
-            GraphicsDevice.RasterizerState = RasterizerState.CullNone;
-
-            _tiledMapRenderer.Draw();
-
-            GraphicsDevice.SetRenderTarget(null); 
-            GraphicsDevice.Clear(Color.Red); //I do this to have a background color
-
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-            _spriteBatch.Draw(_renderTarget, destinationRectangle: new Rectangle(0, 0, largeurFenetre, hauteurFenetre), color: Color.White); 
+            var transformMatrix = _camera.GetViewMatrix();
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }
