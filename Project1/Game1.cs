@@ -75,11 +75,13 @@ namespace Project1
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _positionPerso = new Vector2((float)4.5 * _tiledMap.TileWidth, 7 * _tiledMap.TileHeight);
-            
+
 
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
-            // Camera Stuff
+
+
+            // Gestion de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
             _camera = new OrthographicCamera(viewportadapter);
             _cameraPosition = new Vector2(_screenWidth, _screenHeight);
@@ -92,8 +94,6 @@ namespace Project1
 
         protected override void LoadContent()
         {
-
-
             _tiledMap = Content.Load<TiledMap>("Map/map");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             _textureObscurite = Content.Load<Texture2D>("obscurite");
@@ -151,18 +151,18 @@ namespace Project1
 
 
             _spriteBatch.Begin();
-
-
             if (_debugMode)
             {
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
             }
             _spriteBatch.End();
 
+
+
             _spriteBatch.Begin(transformMatrix: transformMatrix);
+
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
-
             _spriteBatch.Draw(_perso, _positionPerso);
 
             _spriteBatch.End();
