@@ -61,10 +61,7 @@ namespace Project1
 
                     Game1._positionPerso.Y -= walkSpeed;
                 }
-                //if (Game1.isCollisionPorte(tx, ty))
-                //{
-                //    Console.WriteLine("PORTE AU DESSUS");
-                //}
+ 
 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))

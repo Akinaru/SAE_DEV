@@ -100,29 +100,29 @@ namespace Project1
             animation = "idle";
             float walkSpeed = deltaTime * _vitessePerso;
 
+            //la classe KeyboardManager permet de gérer les touches
             KeyboardManager.Manage(_positionPerso, _tiledMap, animation, walkSpeed, _mapWidth, _mapHeight, _graphics);
 
+
+            //ici on evite a la camera de sortie de la map et d'afficher une zone "morte" qui ne contient pas de tuile
+            
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
 
+            //si le personnage arrive dans l'angle a gauche, on place la camera
             if (_positionPerso.X < _screenWidth / 5)
                 _positionCameraX = _screenWidth / 5;
-            
+            //si le personnage arrive dans l'angle a droite, on place la camera
             if (_positionPerso.X > (_mapWidth - _screenWidth / 5))
                 _positionCameraX = (_mapWidth - _screenWidth / 5);
-            
+            //si le personnage arrive dans l'angle en haut , on place la camera
             if (_positionPerso.Y < _screenHeight / 5)
                 _positionCameraY = _screenHeight / 5;
-            
+            //si le personnage arrive dans l'angle en bas, on place la camera
             if (_positionPerso.Y > (_mapHeight - _screenHeight / 5))
                 _positionCameraY = (_mapHeight - _screenHeight / 5);
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
-
-
-            System.Console.WriteLine("Perso: "+_positionPerso.X + " " + _positionPerso.Y);
-            System.Console.WriteLine("Camera: "+_positionCameraX + " " + _positionCameraY);
-            System.Console.WriteLine("Fenetre: "+_screenWidth + " " + _screenHeight);
 
             _perso.Play(animation);
             _perso.Update(deltaTime);
@@ -136,8 +136,8 @@ namespace Project1
         {
 
             var transformMatrix = _camera.GetViewMatrix();
+            //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
             _spriteBatch.Begin(transformMatrix: transformMatrix);
-
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
@@ -148,7 +148,7 @@ namespace Project1
 
         public static bool IsCollision(ushort x, ushort y)
         {
-
+            //gestion des collisions listé dans la liste _mapLayers
 
             for (int i = 0; i < _mapLayers.Count; i++)
             {
@@ -163,17 +163,6 @@ namespace Project1
             return false;
 
         }
-
-        //public static bool isCollisionPorte(ushort x, ushort y)
-        //{
-        //    TiledMapTileLayer _porte = _tiledMap.GetLayer<TiledMapTileLayer>("Porte");
-        //    TiledMapTile? tile;
-        //    if (_porte.TryGetTile(x, y, out tile) == false)
-        //        return false;
-        //    if (!tile.Value.IsBlank)
-        //        return true;
-        //    return false;
-        //}
 
 
     }
