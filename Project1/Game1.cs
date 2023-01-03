@@ -103,7 +103,6 @@ namespace Project1
             //la classe KeyboardManager permet de gérer les touches
             KeyboardManager.Manage(_positionPerso, _tiledMap, animation, walkSpeed, _mapWidth, _mapHeight, _graphics);
 
-
             //ici on evite a la camera de sortie de la map et d'afficher une zone "morte" qui ne contient pas de tuile
             
             _positionCameraX = _positionPerso.X;
