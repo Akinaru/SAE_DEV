@@ -51,7 +51,7 @@ namespace Project1
             //regler la transparence des tuiles
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
 
-            _vitessePerso = 100;
+            _vitessePerso = 1000;
 
             //définition de la taille de la fenetre en fonctiond des dimensions données
             _screenWidth = 1280;
@@ -105,22 +105,24 @@ namespace Project1
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
 
-            //if (_positionPerso.X < _screenWidth / 2)
-            //    _positionCameraX = _screenWidth / 2;
-            //
-            //if (_positionPerso.X > (_mapWidth - _screenWidth / 2))
-            //    _positionCameraX = (_mapWidth - _screenWidth / 2);
-            //
-            //if (_positionPerso.Y < _screenHeight / 2)
-            //    _positionCameraY = _screenHeight / 2;
-            //
-            //if (_positionPerso.Y > (_mapHeight - _screenHeight / 2))
-            //    _positionCameraY = (_mapHeight - _screenHeight / 2);
+            if (_positionPerso.X < _screenWidth / 5)
+                _positionCameraX = _screenWidth / 5;
+            
+            if (_positionPerso.X > (_mapWidth - _screenWidth / 5))
+                _positionCameraX = (_mapWidth - _screenWidth / 5);
+            
+            if (_positionPerso.Y < _screenHeight / 5)
+                _positionCameraY = _screenHeight / 5;
+            
+            if (_positionPerso.Y > (_mapHeight - _screenHeight / 5))
+                _positionCameraY = (_mapHeight - _screenHeight / 5);
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
 
 
             System.Console.WriteLine("Perso: "+_positionPerso.X + " " + _positionPerso.Y);
+            System.Console.WriteLine("Camera: "+_positionCameraX + " " + _positionCameraY);
+            System.Console.WriteLine("Fenetre: "+_screenWidth + " " + _screenHeight);
 
             _perso.Play(animation);
             _perso.Update(deltaTime);
