@@ -22,7 +22,7 @@ namespace Project1
             KeyboardState keyboardState = Keyboard.GetState();
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.2);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
@@ -35,7 +35,7 @@ namespace Project1
                 }
 
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) || Keyboard.GetState().IsKeyDown(Keys.Q))
             {
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.2);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
@@ -49,7 +49,7 @@ namespace Project1
             }
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) || Keyboard.GetState().IsKeyDown(Keys.Z))
             {
 
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
@@ -64,7 +64,7 @@ namespace Project1
  
 
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.S))
             {
 
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
@@ -92,6 +92,11 @@ namespace Project1
             if (Keyboard.GetState().IsKeyDown(Keys.F5))
             {
                 Game1._vitessePerso = 1000;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.F3))
+            {
+                if (Game1._debugMode) Game1._debugMode = false;
+                else Game1._debugMode = true;
             }
         }
 

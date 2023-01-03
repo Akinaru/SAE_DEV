@@ -9,7 +9,9 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.ViewportAdapters;
+using System;
 using System.Collections.Generic;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Project1
 {
@@ -38,6 +40,10 @@ namespace Project1
         public static int _mapHeight;
         public static int _mapWidth;
 
+        public SpriteFont _police;
+
+        public static bool _debugMode;
+
         public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets" };
         public Game1()
         {
@@ -50,6 +56,7 @@ namespace Project1
         {
             //regler la transparence des tuiles
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
+            _debugMode = false;
 
             _vitessePerso = 100;
 
@@ -88,6 +95,7 @@ namespace Project1
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
+            _police = Content.Load<SpriteFont>("font");
             // TODO: use this.Content to load your game content here
         }
 
@@ -140,6 +148,16 @@ namespace Project1
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
+
+
+
+            if (_debugMode)
+            {
+                _spriteBatch.Begin();
+                _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
+                _spriteBatch.End();
+            }
+
 
             base.Draw(gameTime);
         }
