@@ -81,11 +81,21 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                Game1.animation = "idle";
+                if(Keyboard.GetState().IsKeyDown(Keys.Down))
+                    Game1.animation = "walkSouth";
+                else if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                    Game1.animation = "walkNorth";
+                else
+                    Game1.animation = "idle";
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down) && Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                Game1.animation = "idle";
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                    Game1.animation = "walkEast";
+                else if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                    Game1.animation = "walkWest";
+                else
+                    Game1.animation = "idle";
             }
 
 
