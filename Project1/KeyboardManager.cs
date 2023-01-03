@@ -16,6 +16,7 @@ namespace Project1
     internal class KeyboardManager
     {
 
+
         public static void Manage(Vector2 _positionPerso, TiledMap _tiledMap, string animation, float walkSpeed, int _mapWidth, int _mapHeight, GraphicsDeviceManager _graphics)
         {
             KeyboardState keyboardState = Keyboard.GetState();
@@ -60,10 +61,10 @@ namespace Project1
 
                     Game1._positionPerso.Y -= walkSpeed;
                 }
-                if (Game1.isCollisionPorte(tx, ty))
-                {
-                    Console.WriteLine("PORTE AU DESSUS");
-                }
+                //if (Game1.isCollisionPorte(tx, ty))
+                //{
+                //    Console.WriteLine("PORTE AU DESSUS");
+                //}
 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))

@@ -38,25 +38,24 @@ namespace Project1
         public static int _mapHeight;
         public static int _mapWidth;
 
-        public static List<string> _mapLayers = new List<string>() { "Arbres2" };
+        public static List<string> _mapLayers = new List<string>() { "Batiments", "Objets" };
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-            // Créez une nouvelle caméra
         }
 
         protected override void Initialize()
         {
-
+            //regler la transparence des tuiles
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
+
             _vitessePerso = 100;
 
+            //définition de la taille de la fenetre en fonctiond des dimensions données
             _screenWidth = 1280;
             _screenHeight = 720;
-
             _graphics.PreferredBackBufferWidth = _screenWidth;
             _graphics.PreferredBackBufferHeight = _screenHeight;
             _graphics.ApplyChanges();
@@ -65,7 +64,6 @@ namespace Project1
 
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            //_positionPerso = new Vector2((int)(_screenWidth / 2), _screenHeight / 2);
             _positionPerso = new Vector2((float)4.5 * _tiledMap.TileWidth, 7 * _tiledMap.TileHeight);
 
             _positionCameraX = _positionPerso.X;
@@ -74,10 +72,11 @@ namespace Project1
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
             _camera = new OrthographicCamera(viewportadapter);
             _cameraPosition = new Vector2(_screenWidth, _screenHeight);
-            _camera.ZoomIn(0.5f);
+            _camera.ZoomIn(1.5f);
 
             _mapWidth = _tiledMap.Width * 16;
             _mapHeight = _tiledMap.Height * 16;
+
         }
 
         protected override void LoadContent()
@@ -87,9 +86,8 @@ namespace Project1
             _tiledMap = Content.Load<TiledMap>("Map/map");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
 
-            //SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
-            //_perso = new AnimatedSprite(spriteSheet);
-
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
+            _perso = new AnimatedSprite(spriteSheet);
             // TODO: use this.Content to load your game content here
         }
 
@@ -107,22 +105,25 @@ namespace Project1
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
 
-            if (_positionPerso.X < _screenWidth / 2)
-                _positionCameraX = _screenWidth / 2;
-
-            if (_positionPerso.X > (_mapWidth - _screenWidth / 2))
-                _positionCameraX = (_mapWidth - _screenWidth / 2);
-
-            if (_positionPerso.Y < _screenHeight / 2)
-                _positionCameraY = _screenHeight / 2;
-
-            if (_positionPerso.Y > (_mapHeight - _screenHeight / 2))
-                _positionCameraY = (_mapHeight - _screenHeight / 2);
+            //if (_positionPerso.X < _screenWidth / 2)
+            //    _positionCameraX = _screenWidth / 2;
+            //
+            //if (_positionPerso.X > (_mapWidth - _screenWidth / 2))
+            //    _positionCameraX = (_mapWidth - _screenWidth / 2);
+            //
+            //if (_positionPerso.Y < _screenHeight / 2)
+            //    _positionCameraY = _screenHeight / 2;
+            //
+            //if (_positionPerso.Y > (_mapHeight - _screenHeight / 2))
+            //    _positionCameraY = (_mapHeight - _screenHeight / 2);
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
 
-            //_perso.Play(animation);
-            //_perso.Update(deltaTime);
+
+            System.Console.WriteLine("Perso: "+_positionPerso.X + " " + _positionPerso.Y);
+
+            _perso.Play(animation);
+            _perso.Update(deltaTime);
             _tiledMapRenderer.Update(gameTime);
             base.Update(gameTime);
         }
@@ -136,7 +137,7 @@ namespace Project1
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
-            //_spriteBatch.Draw(_perso, _positionPerso);
+            _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -161,16 +162,16 @@ namespace Project1
 
         }
 
-        public static bool isCollisionPorte(ushort x, ushort y)
-        {
-            TiledMapTileLayer _porte = _tiledMap.GetLayer<TiledMapTileLayer>("Porte");
-            TiledMapTile? tile;
-            if (_porte.TryGetTile(x, y, out tile) == false)
-                return false;
-            if (!tile.Value.IsBlank)
-                return true;
-            return false;
-        }
+        //public static bool isCollisionPorte(ushort x, ushort y)
+        //{
+        //    TiledMapTileLayer _porte = _tiledMap.GetLayer<TiledMapTileLayer>("Porte");
+        //    TiledMapTile? tile;
+        //    if (_porte.TryGetTile(x, y, out tile) == false)
+        //        return false;
+        //    if (!tile.Value.IsBlank)
+        //        return true;
+        //    return false;
+        //}
 
 
     }
