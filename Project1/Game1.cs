@@ -45,6 +45,7 @@ namespace Project1
             GraphicsDevice.Clear(Color.Green);
 
             // TODO: Add your drawing code here
+            System.Console.WriteLine("Oui");
 
             base.Draw(gameTime);
         }
