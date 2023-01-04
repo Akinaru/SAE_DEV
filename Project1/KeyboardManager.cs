@@ -81,7 +81,6 @@ namespace Project1
             if(dir != Vector2.Zero)
                 dir.Normalize();
             Game1._positionPerso += dir * walkSpeed;
-            Console.WriteLine((dir * walkSpeed));
 
             if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
@@ -95,16 +94,16 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
-                Game1.showUI = true;
+                Game1._showUI = true;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Tab))
             {
-                Game1.showUI = false;
+                Game1._showUI = false;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
             {
-                Game1._vitessePerso = 150;
+                Game1._vitessePerso = 125;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.LeftShift))
             {

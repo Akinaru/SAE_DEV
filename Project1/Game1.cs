@@ -52,13 +52,15 @@ namespace Project1
 
         public static bool _debugMode;
 
-        public static List<Monstre> listeMonstre = new List<Monstre>();
-        public static int nombreMonstre;
+        public static List<Monstre> _listeMonstre = new List<Monstre>();
+        public static int _nombreMonstre;
 
-        public static bool showUI;
+        public static bool _showUI;
         public static Texture2D _textureMapUI;
         public static Texture2D _textureMapPerso;
         public static Vector2 _positionMapPersoUI;
+
+        public static double _viePerso;
 
 
         public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
@@ -74,7 +76,7 @@ namespace Project1
             //regler la transparence des tuiles
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _debugMode = false;
-            showUI = false;
+            _showUI = false;
             _vitessePerso = 100;
 
             //définition de la taille de la fenetre en fonctiond des dimensions données
@@ -93,7 +95,7 @@ namespace Project1
 
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
-            nombreMonstre = 0;
+            _nombreMonstre = 0;
             //for (int i = 0; i < 10; i++)
             //{
             //    listeMonstre.Add(new Monstre("persoAnimation.sf", _positionPerso, Content));
@@ -161,15 +163,15 @@ namespace Project1
 
             Game1._rotationSceptre += 0.05f / (float)Math.PI * 2;
 
-            if (showUI)
+            if (_showUI)
                 _positionMapPersoUI = new Vector2((_positionPerso.X/1600*600)+340-8,(_positionPerso.Y/1600*600)+60-8);
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
-            for (int i = 0; i < listeMonstre.Count; i++)
+            for (int i = 0; i < _listeMonstre.Count; i++)
             {
-                listeMonstre[i].Update();
-                listeMonstre[i].Perso.Play(animation);
+                _listeMonstre[i].Update();
+                _listeMonstre[i].Perso.Play(animation);
             }
                 _perso.Play(animation);
             _perso.Update(deltaTime);
@@ -192,9 +194,9 @@ namespace Project1
                 _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
 
             _spriteBatch.Draw(_perso, _positionPerso);
-            for (int i = 0; i < listeMonstre.Count; i++)
+            for (int i = 0; i < _listeMonstre.Count; i++)
             {
-                _spriteBatch.Draw(listeMonstre[i].Perso, listeMonstre[i].Position);
+                _spriteBatch.Draw(_listeMonstre[i].Perso, _listeMonstre[i].Position);
             }
             _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
@@ -202,7 +204,7 @@ namespace Project1
 
 
             _spriteBatch.Begin();
-            if (showUI)
+            if (_showUI)
             {
                 _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
                 _spriteBatch.Draw(_textureMapPerso, _positionMapPersoUI, Color.White);
