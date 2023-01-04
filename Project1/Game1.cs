@@ -43,11 +43,17 @@ namespace Project1
         public static int _mapHeight;
         public static int _mapWidth;
 
+
+        public Texture2D _textureSceptre;
+        public static Vector2 _positionSceptre;
+        public static float _rotationSceptre;
+
         public SpriteFont _police;
 
         public static bool _debugMode;
 
-        public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets" };
+
+        public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -60,7 +66,6 @@ namespace Project1
             //regler la transparence des tuiles
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _debugMode = false;
-
             _vitessePerso = 100;
 
             //définition de la taille de la fenetre en fonctiond des dimensions données
@@ -75,7 +80,7 @@ namespace Project1
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _positionPerso = new Vector2((float)4.5 * _tiledMap.TileWidth, 7 * _tiledMap.TileHeight);
-
+            _positionSceptre = _positionPerso;
 
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
@@ -97,9 +102,11 @@ namespace Project1
             _tiledMap = Content.Load<TiledMap>("Map/map");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             _textureObscurite = Content.Load<Texture2D>("obscurite");
+            _textureSceptre = Content.Load<Texture2D>("sceptre");
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
             _police = Content.Load<SpriteFont>("font");
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -111,6 +118,7 @@ namespace Project1
 
             animation = "idle";
             float walkSpeed = deltaTime * _vitessePerso;
+
 
             //la classe KeyboardManager permet de gérer les touches
             KeyboardManager.Manage(_positionPerso, _tiledMap, animation, walkSpeed, _mapWidth, _mapHeight, _graphics);
@@ -133,6 +141,8 @@ namespace Project1
             if (_positionPerso.Y > (_mapHeight - _screenHeight / 5))
                 _positionCameraY = (_mapHeight - _screenHeight / 5);
 
+            _positionSceptre = _positionPerso;
+
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
             _perso.Play(animation);
@@ -154,7 +164,7 @@ namespace Project1
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
-
+            _spriteBatch.Draw(_textureSceptre, _positionSceptre, Color.White);
             _spriteBatch.End();
 
 
