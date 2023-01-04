@@ -82,37 +82,7 @@ namespace Project1
                 dir.Normalize();
             Game1._positionPerso += dir * walkSpeed;
             Console.WriteLine((dir * walkSpeed));
-            
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) && Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                if(Keyboard.GetState().IsKeyDown(Keys.Down))
-                    Game1.animation = "walkSouth";
-                else if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                    Game1.animation = "walkNorth";
-                else
-                    Game1.animation = "idle";
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                    Game1.animation = "walkEast";
-                else if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                    Game1.animation = "walkWest";
-                else
-                    Game1.animation = "idle";
-            }
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.F11))
-            {
-                Game1._vitessePerso += 50;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.F12))
-            {
-                if (Game1._vitessePerso - 50 > 0)
-                    Game1._vitessePerso -= 50;
-            }
             if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
                 Game1._debugMode = true;
@@ -130,6 +100,15 @@ namespace Project1
             if (Keyboard.GetState().IsKeyUp(Keys.Tab))
             {
                 Game1.showUI = false;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                Game1._vitessePerso = 150;
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.LeftShift))
+            {
+                Game1._vitessePerso = 100;
             }
         }
 

@@ -57,6 +57,8 @@ namespace Project1
 
         public static bool showUI;
         public static Texture2D _textureMapUI;
+        public static Texture2D _textureMapPerso;
+        public static Vector2 _positionMapPersoUI;
 
 
         public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
@@ -92,11 +94,11 @@ namespace Project1
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
             nombreMonstre = 0;
-            for (int i = 0; i < 1; i++)
-            {
-                listeMonstre.Add(new Monstre("persoAnimation.sf", _positionPerso, Content));
-                nombreMonstre++;
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    listeMonstre.Add(new Monstre("persoAnimation.sf", _positionPerso, Content));
+            //    nombreMonstre++;
+            //}
 
             // Gestion de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
@@ -115,8 +117,9 @@ namespace Project1
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureMapUI = Content.Load<Texture2D>("map");
+            _textureMapPerso = Content.Load<Texture2D>("Perso/mapPerso");
             _textureSceptre = Content.Load<Texture2D>("sceptre");
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnim.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
             _police = Content.Load<SpriteFont>("font");
 
@@ -158,6 +161,8 @@ namespace Project1
 
             Game1._rotationSceptre += 0.05f / (float)Math.PI * 2;
 
+            if (showUI)
+                _positionMapPersoUI = new Vector2((_positionPerso.X/1600*600)+340-8,(_positionPerso.Y/1600*600)+60-8);
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
@@ -198,7 +203,11 @@ namespace Project1
 
             _spriteBatch.Begin();
             if (showUI)
+            {
                 _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
+                _spriteBatch.Draw(_textureMapPerso, _positionMapPersoUI, Color.White);
+
+            }
             if (_debugMode)
             {
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
