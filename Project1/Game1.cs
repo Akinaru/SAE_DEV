@@ -27,6 +27,7 @@ namespace Project1
 
         public static Vector2 _positionPerso;
         public static AnimatedSprite _perso;
+        public static Texture2D _textureombrePerso;
         public static int _vitessePerso;
         public static string animation;
 
@@ -61,6 +62,10 @@ namespace Project1
         public static Vector2 _positionMapPersoUI;
 
         public static double _viePerso;
+        public static Texture2D _texturevieCoeurPlein;
+        public static Texture2D _texturevieCoeurDemi;
+        public static Texture2D _texturevieCoeurVide;
+        
 
 
         public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
@@ -78,7 +83,7 @@ namespace Project1
             _debugMode = false;
             _showUI = false;
             _vitessePerso = 100;
-
+            _viePerso = 6;
             //définition de la taille de la fenetre en fonctiond des dimensions données
             _screenWidth = 1280;
             _screenHeight = 720;
@@ -117,10 +122,14 @@ namespace Project1
         {
             _tiledMap = Content.Load<TiledMap>("Map/map");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+            _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureMapUI = Content.Load<Texture2D>("map");
             _textureMapPerso = Content.Load<Texture2D>("Perso/mapPerso");
             _textureSceptre = Content.Load<Texture2D>("sceptre");
+
+            _texturevieCoeurPlein = Content.Load<Texture2D>("coeur");
+            _texturevieCoeurVide = Content.Load<Texture2D>("coeurvide");
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnim.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
             _police = Content.Load<SpriteFont>("font");
@@ -190,9 +199,11 @@ namespace Project1
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
+
             if(!_debugMode)
                 _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
 
+            _spriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-6,5), Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
             for (int i = 0; i < _listeMonstre.Count; i++)
             {
@@ -215,6 +226,7 @@ namespace Project1
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
                 _spriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
             }
+            Vie.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
