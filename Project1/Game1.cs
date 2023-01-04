@@ -165,7 +165,8 @@ namespace Project1
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
-            _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
+            if(!_debugMode)
+                _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
             _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
@@ -177,7 +178,7 @@ namespace Project1
             if (_debugMode)
             {
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.White);
-                _spriteBatch.DrawString(_police, $"Pos Sceptre: " + Math.Round(_positionSceptre.X, 0) + ";" + Math.Round(_positionSceptre.Y, 0), new Vector2(0, 50), Color.White);
+                _spriteBatch.DrawString(_police, $"Pos Sceptre: " + Math.Round(_positionSceptre.X, 0) + ";" + Math.Round(_positionSceptre.Y, 0), new Vector2(0, 20), Color.White);
             }
             _spriteBatch.End();
 

@@ -78,10 +78,10 @@ namespace Project1
                 }
 
             }
-
-            dir.Normalize();
-            //Game1._positionPerso += dir * walkSpeed;
-            Console.WriteLine(dir +" "+walkSpeed);
+            if(dir != Vector2.Zero)
+                dir.Normalize();
+            Game1._positionPerso += dir * walkSpeed;
+            Console.WriteLine((dir * walkSpeed));
             
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && Keyboard.GetState().IsKeyDown(Keys.Right))
