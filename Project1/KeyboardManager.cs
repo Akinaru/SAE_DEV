@@ -21,6 +21,8 @@ namespace Project1
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
+            var dir = Vector2.Zero;
+            
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
             {
@@ -31,7 +33,7 @@ namespace Project1
                 Game1.animation = "walkEast";
                 if (!Game1.IsCollision(tx, ty) && _positionPerso.X < _mapWidth)
                 {
-                    Game1._positionPerso.X += walkSpeed;
+                    dir.X += 1;
                 }
 
             }
@@ -44,7 +46,7 @@ namespace Project1
 
                 if (!Game1.IsCollision(tx, ty) && _positionPerso.X > 0)
                 {
-                    Game1._positionPerso.X -= walkSpeed;
+                    dir.X -= 1;
                 }
             }
 
@@ -58,8 +60,7 @@ namespace Project1
                 Game1.animation = "walkNorth";
                 if (!Game1.IsCollision(tx, ty) && _positionPerso.Y > 0)
                 {
-
-                    Game1._positionPerso.Y -= walkSpeed;
+                    dir.Y -= 1;
                 }
  
 
@@ -73,11 +74,15 @@ namespace Project1
                 Game1.animation = "walkSouth";
                 if (!Game1.IsCollision(tx, ty) && _positionPerso.Y < _mapHeight)
                 {
-
-                    Game1._positionPerso.Y += walkSpeed;
+                    dir.Y += 1;
                 }
 
             }
+
+            dir.Normalize();
+            //Game1._positionPerso += dir * walkSpeed;
+            Console.WriteLine(dir +" "+walkSpeed);
+            
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left) && Keyboard.GetState().IsKeyDown(Keys.Right))
             {
@@ -108,6 +113,7 @@ namespace Project1
                 if (Game1._debugMode) Game1._debugMode = false;
                 else Game1._debugMode = true;
             }
+
         }
 
     }

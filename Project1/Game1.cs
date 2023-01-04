@@ -77,7 +77,7 @@ namespace Project1
 
             base.Initialize();
 
-
+            _rotationSceptre = 0;
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _positionPerso = new Vector2((float)4.5 * _tiledMap.TileWidth, 7 * _tiledMap.TileHeight);
             _positionSceptre = _positionPerso;
@@ -143,6 +143,9 @@ namespace Project1
 
             _positionSceptre = _positionPerso;
 
+            Game1._rotationSceptre += 0.05f / (float)Math.PI * 2;
+
+
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
             _perso.Play(animation);
@@ -164,14 +167,17 @@ namespace Project1
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
-            _spriteBatch.Draw(_textureSceptre, _positionSceptre, Color.White);
+            _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+
             _spriteBatch.End();
 
 
             _spriteBatch.Begin();
+
             if (_debugMode)
             {
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.White);
+                _spriteBatch.DrawString(_police, $"Pos Sceptre: " + Math.Round(_positionSceptre.X, 0) + ";" + Math.Round(_positionSceptre.Y, 0), new Vector2(0, 50), Color.White);
             }
             _spriteBatch.End();
 
