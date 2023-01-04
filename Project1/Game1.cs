@@ -55,6 +55,9 @@ namespace Project1
         public static List<Monstre> listeMonstre = new List<Monstre>();
         public static int nombreMonstre;
 
+        public static bool showUI;
+        public static Texture2D _textureMapUI;
+
 
         public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
         public Game1()
@@ -69,6 +72,7 @@ namespace Project1
             //regler la transparence des tuiles
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _debugMode = false;
+            showUI = false;
             _vitessePerso = 100;
 
             //définition de la taille de la fenetre en fonctiond des dimensions données
@@ -110,6 +114,7 @@ namespace Project1
             _tiledMap = Content.Load<TiledMap>("Map/map");
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
             _textureObscurite = Content.Load<Texture2D>("obscurite");
+            _textureMapUI = Content.Load<Texture2D>("map");
             _textureSceptre = Content.Load<Texture2D>("sceptre");
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
@@ -180,6 +185,7 @@ namespace Project1
             _tiledMapRenderer.Draw(transformMatrix);
             if(!_debugMode)
                 _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
+
             _spriteBatch.Draw(_perso, _positionPerso);
             for (int i = 0; i < listeMonstre.Count; i++)
             {
@@ -191,7 +197,8 @@ namespace Project1
 
 
             _spriteBatch.Begin();
-
+            if (showUI)
+                _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
             if (_debugMode)
             {
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
