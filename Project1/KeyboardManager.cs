@@ -26,7 +26,7 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.2);
+                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.5);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
 
 
@@ -39,7 +39,7 @@ namespace Project1
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left) || Keyboard.GetState().IsKeyDown(Keys.Q))
             {
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.2);
+                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
                 Game1.animation = "walkWest";
 
@@ -55,7 +55,7 @@ namespace Project1
             {
 
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
-                ushort ty = (ushort)((_positionPerso.Y - 2) / _tiledMap.TileHeight - 0.2);
+                ushort ty = (ushort)((_positionPerso.Y - 2) / _tiledMap.TileHeight);
 
                 Game1.animation = "walkNorth";
                 if (!Game1.IsCollision(tx, ty) && _positionPerso.Y > 0)
@@ -69,7 +69,7 @@ namespace Project1
             {
 
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
-                ushort ty = (ushort)((_positionPerso.Y + 2) / _tiledMap.TileHeight + 0.2);
+                ushort ty = (ushort)((_positionPerso.Y + 2) / _tiledMap.TileHeight + 0.5);
 
                 Game1.animation = "walkSouth";
                 if (!Game1.IsCollision(tx, ty) && _positionPerso.Y < _mapHeight)

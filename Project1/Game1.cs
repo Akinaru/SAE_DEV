@@ -49,7 +49,7 @@ namespace Project1
         public static Vector2 _positionSceptre;
         public static float _rotationSceptre;
 
-        public SpriteFont _police;
+        public static SpriteFont _police;
 
         public static bool _debugMode;
 
@@ -65,6 +65,10 @@ namespace Project1
         public static Texture2D _texturevieCoeurPlein;
         public static Texture2D _texturevieCoeurDemi;
         public static Texture2D _texturevieCoeurVide;
+
+        public static Texture2D _textureMonstreUI;
+        public static Texture2D _texturePersoUI;
+     
         
 
 
@@ -127,6 +131,8 @@ namespace Project1
             _textureMapUI = Content.Load<Texture2D>("map");
             _textureMapPerso = Content.Load<Texture2D>("Perso/mapPerso");
             _textureSceptre = Content.Load<Texture2D>("sceptre");
+            _textureMonstreUI = Content.Load<Texture2D>("monstersUI");
+            _texturePersoUI = Content.Load<Texture2D>("persoUI");
 
             _texturevieCoeurPlein = Content.Load<Texture2D>("coeur");
             _texturevieCoeurVide = Content.Load<Texture2D>("coeurvide");
@@ -226,7 +232,7 @@ namespace Project1
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
                 _spriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
             }
-            Vie.Draw(_spriteBatch);
+            UI.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
