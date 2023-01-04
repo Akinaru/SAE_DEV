@@ -149,22 +149,20 @@ namespace Project1
             var transformMatrix = _camera.GetViewMatrix();
             //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
 
-
-            _spriteBatch.Begin();
-            if (_debugMode)
-            {
-                _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
-            }
-            _spriteBatch.End();
-
-
-
             _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
             _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
 
+            _spriteBatch.End();
+
+
+            _spriteBatch.Begin();
+            if (_debugMode)
+            {
+                _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.White);
+            }
             _spriteBatch.End();
 
             base.Draw(gameTime);
