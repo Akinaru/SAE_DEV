@@ -69,7 +69,6 @@ namespace Project1
         public static Texture2D _textureMonstreUI;
         public static Texture2D _texturePersoUI;
      
-        
 
 
         public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
@@ -105,11 +104,10 @@ namespace Project1
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
             _nombreMonstre = 0;
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    listeMonstre.Add(new Monstre("persoAnimation.sf", _positionPerso, Content));
-            //    nombreMonstre++;
-            //}
+            for (int i = 0; i < 10; i++)
+            {
+                _listeMonstre.Add(new Monstre("persoAnimation.sf", _positionPerso, Content));
+            }
 
             // Gestion de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
@@ -213,7 +211,7 @@ namespace Project1
             _spriteBatch.Draw(_perso, _positionPerso);
             for (int i = 0; i < _listeMonstre.Count; i++)
             {
-                _spriteBatch.Draw(_listeMonstre[i].Perso, _listeMonstre[i].Position);
+                _listeMonstre[i].Draw(_spriteBatch);
             }
             _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 

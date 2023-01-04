@@ -53,8 +53,18 @@ namespace Project1
         public void Update()
         {
 
+            float distance = Vector2.Distance(Position, Game1._positionPerso);
+            float speed = 100;
+            if(distance > 1)
+            {
+                Vector2 direction = Vector2.Normalize(Game1._positionPerso - Position);
+                Position += direction * speed;
+            }
+        }
 
-            Position = Game1._positionPerso + new Vector2(50,0);
+        public void Draw(SpriteBatch _spriteBatch)
+        {
+            _spriteBatch.Draw(monstre, Position);
         }
 
     }
