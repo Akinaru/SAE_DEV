@@ -122,6 +122,15 @@ namespace Project1
                 Game1._debugMode = false;
             }
 
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Tab))
+            {
+                Game1.showUI = true;
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Tab))
+            {
+                Game1.showUI = false;
+            }
         }
 
     }
