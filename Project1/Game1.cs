@@ -106,7 +106,7 @@ namespace Project1
             _nombreMonstre = 0;
             for (int i = 0; i < 10; i++)
             {
-                _listeMonstre.Add(new Monstre("persoAnimation.sf", _positionPerso, Content));
+                _listeMonstre.Add(new Monstre("persoAnimation.sf", new Vector2(new Random().Next(0,1600), new Random().Next(0, 1000)), Content));
             }
 
             // Gestion de la caméra
@@ -183,7 +183,7 @@ namespace Project1
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
             for (int i = 0; i < _listeMonstre.Count; i++)
             {
-                _listeMonstre[i].Update();
+                _listeMonstre[i].Update(deltaTime);
                 _listeMonstre[i].Perso.Play(animation);
             }
                 _perso.Play(animation);
@@ -204,8 +204,6 @@ namespace Project1
 
             _tiledMapRenderer.Draw(transformMatrix);
 
-            if(!_debugMode)
-                _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
 
             _spriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-6,5), Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
@@ -215,6 +213,8 @@ namespace Project1
             }
             _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
+            if (!_debugMode)
+                _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             _spriteBatch.End();
 
 

@@ -50,15 +50,14 @@ namespace Project1
             }
         }
 
-        public void Update()
+        public void Update(float deltaTime)
         {
 
             float distance = Vector2.Distance(Position, Game1._positionPerso);
-            float speed = 100;
-            if(distance > 1)
+            if(distance > 5)
             {
                 Vector2 direction = Vector2.Normalize(Game1._positionPerso - Position);
-                Position += direction * speed;
+                Position += direction * 50 * deltaTime;
             }
         }
 
