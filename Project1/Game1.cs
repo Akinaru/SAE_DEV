@@ -52,6 +52,9 @@ namespace Project1
 
         public static bool _debugMode;
 
+        public static List<Monstre> listeMonstre = new List<Monstre>();
+        public static int nombreMonstre;
+
 
         public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
         public Game1()
@@ -74,7 +77,7 @@ namespace Project1
             _graphics.PreferredBackBufferWidth = _screenWidth;
             _graphics.PreferredBackBufferHeight = _screenHeight;
             _graphics.ApplyChanges();
-
+            
             base.Initialize();
 
             _rotationSceptre = 0;
@@ -84,7 +87,12 @@ namespace Project1
 
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
-
+            nombreMonstre = 0;
+            for (int i = 0; i < 1; i++)
+            {
+                listeMonstre.Add(new Monstre("persoAnimation.sf", _positionPerso, Content));
+                nombreMonstre++;
+            }
 
             // Gestion de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
@@ -148,7 +156,12 @@ namespace Project1
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
-            _perso.Play(animation);
+            for (int i = 0; i < listeMonstre.Count; i++)
+            {
+                listeMonstre[i].Update();
+                listeMonstre[i].Perso.Play(animation);
+            }
+                _perso.Play(animation);
             _perso.Update(deltaTime);
             _tiledMapRenderer.Update(gameTime);
             base.Update(gameTime);
@@ -168,6 +181,10 @@ namespace Project1
             if(!_debugMode)
                 _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
+            for (int i = 0; i < listeMonstre.Count; i++)
+            {
+                _spriteBatch.Draw(listeMonstre[i].Perso, listeMonstre[i].Position);
+            }
             _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
             _spriteBatch.End();
