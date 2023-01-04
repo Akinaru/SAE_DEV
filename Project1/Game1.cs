@@ -79,7 +79,7 @@ namespace Project1
 
             _rotationSceptre = 0;
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _positionPerso = new Vector2((float)4.5 * _tiledMap.TileWidth, 7 * _tiledMap.TileHeight);
+            _positionPerso = new Vector2(130,146);
             _positionSceptre = _positionPerso;
 
             _positionCameraX = _positionPerso.X;
@@ -177,8 +177,7 @@ namespace Project1
 
             if (_debugMode)
             {
-                _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.White);
-                _spriteBatch.DrawString(_police, $"Pos Sceptre: " + Math.Round(_positionSceptre.X, 0) + ";" + Math.Round(_positionSceptre.Y, 0), new Vector2(0, 20), Color.White);
+                _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
             }
             _spriteBatch.End();
 
