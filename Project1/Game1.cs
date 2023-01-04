@@ -195,6 +195,7 @@ namespace Project1
             if (_debugMode)
             {
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
+                _spriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
             }
             _spriteBatch.End();
 

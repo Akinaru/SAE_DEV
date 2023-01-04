@@ -30,6 +30,18 @@
 /processor:TiledMapProcessor
 /build:Map/map.tmx
 
+#begin Map/outdoors.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/outdoors.png
+
 #begin Map/tilemap.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -65,18 +77,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:obscurite.png
-
-#begin sceptre.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:sceptre.png
 
 #begin sceptre.png
 /importer:TextureImporter
