@@ -57,7 +57,32 @@ namespace Project1
                 float distance = Vector2.Distance(Game1._listeMonstre[i].Position, Game1._positionPerso);
                 if (distance > 5)
                 {
+                    
                     Vector2 direction = Vector2.Normalize(Game1._positionPerso - Game1._listeMonstre[i].Position);
+                    Vector2 pos = new Vector2(Game1._listeMonstre[i].Position.X, Game1._listeMonstre[i].Position.Y);
+                    int dirX;
+                    int dirY;
+                    ushort x;
+                    ushort y;
+                    if (direction.X <= 0) //x gauche
+                    {
+                        x = (ushort)(pos.X / Game1._tiledMap.TileWidth - 0.5);
+                        y = (ushort)(pos.Y / Game1._tiledMap.TileHeight);
+                        if (Collision.IsCollision(x, y))
+                        {
+                            direction.X = 0;
+                        }
+                    }
+                    if (direction.X <= 0) //x droite
+                    {
+                        x = (ushort)(pos.X / Game1._tiledMap.TileWidth + 0.5);
+                        y = (ushort)(pos.Y / Game1._tiledMap.TileHeight);
+                        if (Collision.IsCollision(x, y))
+                        {
+                            direction.X = 0;
+                        }
+                    }
+
                     Game1._listeMonstre[i].Position += direction * 50 * deltaTime;
                 }
             }

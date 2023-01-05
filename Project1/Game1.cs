@@ -63,7 +63,6 @@ namespace Project1
         public static bool _debugMode;
 
         public static List<Monstre> _listeMonstre = new List<Monstre>();
-        public static int _nombreMonstre;
 
         public static bool _showUI;
         public static Texture2D _textureMapUI;
@@ -114,7 +113,7 @@ namespace Project1
             _graphics.ApplyChanges();
 
 
-            _positionPlayButton = new Vector2(490, 200);
+            _positionPlayButton = new Vector2(490, 300);
 
 
             _vitessePerso = 100;
@@ -127,9 +126,9 @@ namespace Project1
             _positionPerso = new Vector2(130,146);
             _positionSceptre = _positionPerso;
 
+
             _positionCameraX = _positionPerso.X;
             _positionCameraY = _positionPerso.Y;
-            _nombreMonstre = 0;
             for (int i = 0; i < 10; i++)
             {
                 _listeMonstre.Add(new Monstre("persoAnimation.sf", new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
@@ -191,8 +190,9 @@ namespace Project1
 
             if (_gameStarted)
             {
-                
-                if (_gameBegin) { 
+
+                if (_gameBegin)
+                {
                     if (_wait < 4)
                     {
                         _wait += deltaTime;
@@ -201,7 +201,7 @@ namespace Project1
                     {
                         _gameBegin = false;
                     }
-                 }
+                }
                 animation = "idle";
                 float walkSpeed = deltaTime * _vitessePerso;
 
@@ -236,7 +236,7 @@ namespace Project1
 
                 _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
                 _positionObscurite = new Vector2(_positionPerso.X - 1080 / 2, _positionPerso.Y - 720 / 2);
-                if(!_gameBegin)    
+                if (!_gameBegin)
                     Monstre.Update(deltaTime);
                 _perso.Play(animation);
                 _perso.Update(deltaTime);
@@ -245,7 +245,7 @@ namespace Project1
 
             //MENU
 
-            else 
+            else
             {
                 var mouseState = Mouse.GetState();
                 var mousePosition = new Point(mouseState.X, mouseState.Y);
@@ -255,12 +255,18 @@ namespace Project1
                             mousePosition.X <= _positionPlayButton.X + 300 &&
                             mousePosition.Y >= _positionPlayButton.Y &&
                             mousePosition.Y <= _positionPlayButton.Y + 100)
-                        {
-                            _gameStarted = true;
-                            _gameBegin = true;
-                        }
+                    {
+                        _gameStarted = true;
+                        _gameBegin = true;
+                    }
                 }
+                KeyboardState keyboardState = Keyboard.GetState();
 
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    _gameStarted = true;
+                    _gameBegin = true;
+                }
             }
             base.Update(gameTime);
         }

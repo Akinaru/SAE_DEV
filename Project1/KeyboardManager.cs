@@ -31,7 +31,7 @@ namespace Project1
 
 
                 Game1.animation = "walkEast";
-                if (!Collision.IsCollision(tx, ty) && _positionPerso.X < _mapWidth)
+                if (!Collision.IsCollision(tx, ty))
                 {
                     dir.X += 1;
                 }
@@ -44,7 +44,7 @@ namespace Project1
                 Game1.animation = "walkWest";
 
 
-                if (!Collision.IsCollision(tx, ty) && _positionPerso.X > 0)
+                if (!Collision.IsCollision(tx, ty))
                 {
                     dir.X -= 1;
                 }
@@ -58,7 +58,7 @@ namespace Project1
                 ushort ty = (ushort)((_positionPerso.Y - 2) / _tiledMap.TileHeight);
 
                 Game1.animation = "walkNorth";
-                if (!Collision.IsCollision(tx, ty) && _positionPerso.Y > 0)
+                if (!Collision.IsCollision(tx, ty))
                 {
                     dir.Y -= 1;
                 }
@@ -69,10 +69,10 @@ namespace Project1
             {
 
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
-                ushort ty = (ushort)((_positionPerso.Y + 2) / _tiledMap.TileHeight + 0.5);
+                ushort ty = (ushort)((_positionPerso.Y + 3) / _tiledMap.TileHeight + 0.6);
 
                 Game1.animation = "walkSouth";
-                if (!Collision.IsCollision(tx, ty) && _positionPerso.Y < _mapHeight)
+                if (!Collision.IsCollision(tx, ty))
                 {
                     dir.Y += 1;
                 }
@@ -99,6 +99,15 @@ namespace Project1
             if (Keyboard.GetState().IsKeyUp(Keys.Tab))
             {
                 Game1._showUI = false;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                Game1._vitessePerso = 125;
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.LeftShift))
+            {
+                Game1._vitessePerso = 100;
             }
         }
 
