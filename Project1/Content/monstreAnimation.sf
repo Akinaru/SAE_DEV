@@ -1,14 +1,14 @@
 {
   "textureAtlas": {
-    "texture": "Walk.png",
+    "texture": "monstre.png",
     "regionWidth": 16,
     "regionHeight": 16
   },
   "cycles": {
     "idle": {
-      "frames": [0],
+      "frames": [0,4,0,0,0,0],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.1
     },
     "walkNorth": {
       "frames": [1,5,9,13],

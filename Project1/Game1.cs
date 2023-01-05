@@ -125,7 +125,7 @@ namespace Project1
 
             for (int i = 0; i < 10; i++)
             {
-                _listeMonstre.Add(new Monstre("persoAnimation.sf",new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
+                _listeMonstre.Add(new Monstre("monstreAnimation.sf",new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
             }
 
             // Gestion de la caméra
@@ -161,7 +161,7 @@ namespace Project1
 
             _texturevieCoeurPlein = Content.Load<Texture2D>("coeur");
             _texturevieCoeurVide = Content.Load<Texture2D>("coeurvide");
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnim.sf", new JsonContentLoader());
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             _perso = new AnimatedSprite(spriteSheet);
             _police = Content.Load<SpriteFont>("font");
 
@@ -281,7 +281,7 @@ namespace Project1
                 _tiledMapRenderer.Draw(transformMatrix);
 
 
-                _spriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-6, 5), Color.White);
+                _spriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-16, -12), Color.White);
                 _spriteBatch.Draw(_perso, _positionPerso);
                 Monstre.Draw(_spriteBatch);
                 _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);

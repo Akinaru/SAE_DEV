@@ -98,8 +98,19 @@ namespace Project1
                             direction.Y = 0;
                         }
                     }
-
+                    String animation = "walkNorth";
+                    if (direction.X >= 0)
+                        animation = "walkWest";
+                    if (direction.X < 0)
+                        animation = "walkEast";
+                    if (direction.Y >= 0)
+                        animation = "walkSouth";
+                    if (direction.Y < 0)
+                        animation = "walkNorth";
+                    Game1._listeMonstre[i].Perso.Play(animation);
+                    Game1._listeMonstre[i].Perso.Update(deltaTime);
                     Game1._listeMonstre[i].Position += direction * 50 * deltaTime;
+
                 }
             }
 
@@ -109,8 +120,9 @@ namespace Project1
         {
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
-                _spriteBatch.Draw(Game1._listeMonstre[i].monstre, Game1._listeMonstre[i].Position);
 
+                _spriteBatch.Draw(Game1._listeMonstre[i].Perso, Game1._listeMonstre[i].Position);
+                _spriteBatch.Draw(Game1._textureombrePerso, Game1._listeMonstre[i].Position + new Vector2(-16, -12), Color.White);
             }
         }
 

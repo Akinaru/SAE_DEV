@@ -114,6 +114,18 @@
 /processorParam:TextureFormat=Color
 /build:monstersUI.png
 
+#begin monstre.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:monstre.png
+
 #begin obscurite.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -185,6 +197,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:play.png
+
+#begin playHover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:playHover.png
 
 #begin sceptre.png
 /importer:TextureImporter

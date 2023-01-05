@@ -30,10 +30,10 @@
     <Folder Include="Content\Map\" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Content\persoAnimation.sf">
+    <None Update="Content\monstreAnimation.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\persoAnim.sf">
+    <None Update="Content\persoAnimation.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
