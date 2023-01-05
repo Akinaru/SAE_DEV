@@ -50,20 +50,28 @@ namespace Project1
             }
         }
 
-        public void Update(float deltaTime)
+        public static void Update(float deltaTime)
         {
-
-            float distance = Vector2.Distance(Position, Game1._positionPerso);
-            if(distance > 5)
+            for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
-                Vector2 direction = Vector2.Normalize(Game1._positionPerso - Position);
-                Position += direction * 50 * deltaTime;
+                float distance = Vector2.Distance(Game1._listeMonstre[i].Position, Game1._positionPerso);
+                if (distance > 5)
+                {
+                    Vector2 direction = Vector2.Normalize(Game1._positionPerso - Game1._listeMonstre[i].Position);
+                    Game1._listeMonstre[i].Position += direction * 50 * deltaTime;
+                    
+                }
             }
+
         }
 
-        public void Draw(SpriteBatch _spriteBatch)
+        public static void Draw(SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(monstre, Position);
+            for (int i = 0; i < Game1._listeMonstre.Count; i++)
+            {
+                _spriteBatch.Draw(Game1._listeMonstre[i].monstre, Game1._listeMonstre[i].Position);
+
+            }
         }
 
     }

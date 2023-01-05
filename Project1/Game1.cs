@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Content;
+using MonoGame.Extended.Screens;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
@@ -18,7 +19,7 @@ namespace Project1
     public class Game1 : Game
     {
         public static GraphicsDeviceManager _graphics;
-        public static SpriteBatch _spriteBatch;
+        public static SpriteBatch SpriteBatch { get; set; }
 
         public static TiledMap _tiledMap;
         public static TiledMap _tiledMapInterieur;
@@ -68,10 +69,11 @@ namespace Project1
 
         public static Texture2D _textureMonstreUI;
         public static Texture2D _texturePersoUI;
-     
+
+        private readonly ScreenManager _screenManager;
 
 
-        public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -97,7 +99,7 @@ namespace Project1
             base.Initialize();
 
             _rotationSceptre = 0;
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
             _positionPerso = new Vector2(130,146);
             _positionSceptre = _positionPerso;
 
@@ -181,12 +183,10 @@ namespace Project1
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
-            for (int i = 0; i < _listeMonstre.Count; i++)
-            {
-                _listeMonstre[i].Update(deltaTime);
-                _listeMonstre[i].Perso.Play(animation);
-            }
-                _perso.Play(animation);
+
+            Monstre.Update(deltaTime);
+
+            _perso.Play(animation);
             _perso.Update(deltaTime);
             _tiledMapRenderer.Update(gameTime);
             base.Update(gameTime);
@@ -200,61 +200,34 @@ namespace Project1
             var transformMatrix = _camera.GetViewMatrix();
             //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
 
-            _spriteBatch.Begin(transformMatrix: transformMatrix);
+            SpriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
 
 
-            _spriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-6,5), Color.White);
-            _spriteBatch.Draw(_perso, _positionPerso);
-            for (int i = 0; i < _listeMonstre.Count; i++)
-            {
-                _listeMonstre[i].Draw(_spriteBatch);
-            }
-            _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+            SpriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-6,5), Color.White);
+            SpriteBatch.Draw(_perso, _positionPerso);
+            Monstre.Draw(SpriteBatch);
+            SpriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
             if (!_debugMode)
-                _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
-            _spriteBatch.End();
+                SpriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
+            SpriteBatch.End();
 
 
-            _spriteBatch.Begin();
-            if (_showUI)
-            {
-                _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
-                _spriteBatch.Draw(_textureMapPerso, _positionMapPersoUI, Color.White);
+            SpriteBatch.Begin();
+            MapUI.Draw(SpriteBatch);
 
-            }
+
             if (_debugMode)
             {
-                _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
-                _spriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
+                SpriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
+                SpriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
             }
-            UI.Draw(_spriteBatch);
-            _spriteBatch.End();
+            UI.Draw(SpriteBatch);
+            SpriteBatch.End();
 
             base.Draw(gameTime);
         }
-
-
-        public static bool IsCollision(ushort x, ushort y)
-        {
-            //gestion des collisions listé dans la liste _mapLayers
-
-            for (int i = 0; i < _mapLayers.Count; i++)
-            {
-                TiledMapTileLayer _Layer = _tiledMap.GetLayer<TiledMapTileLayer>(_mapLayers[i]);
-                TiledMapTile? tile;
-                if (_Layer.TryGetTile(x, y, out tile) == false)
-                    return false;
-                if (!tile.Value.IsBlank)
-                    return true;
-
-            }
-            return false;
-
-        }
-
-
     }
 }
