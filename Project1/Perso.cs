@@ -19,7 +19,6 @@ namespace Project1
         {
             _vitessePerso = 100;
             _positionPerso = new Vector2(130, 146);
-            Game1._positionSceptre = _positionPerso;
 
         }
 

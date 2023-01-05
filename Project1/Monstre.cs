@@ -17,11 +17,13 @@ namespace Project1
 
         private Vector2 position;
         private AnimatedSprite monstre;
+        private double vitesse;
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
             this.MonstreSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
             this.Position = position;
+            this.Vitesse = new Random().Next(400,550) / 10;
         }
 
         public Vector2 Position
@@ -47,6 +49,19 @@ namespace Project1
             set
             {
                 this.monstre = value;
+            }
+        }
+
+        public double Vitesse
+        {
+            get
+            {
+                return this.vitesse;
+            }
+
+            set
+            {
+                this.vitesse = value;
             }
         }
 
@@ -109,7 +124,7 @@ namespace Project1
                         animation = "walkNorth";
                     Game1._listeMonstre[i].MonstreSprite.Play(animation);
                     Game1._listeMonstre[i].MonstreSprite.Update(deltaTime);
-                    Game1._listeMonstre[i].Position += direction * new Random().Next(45,55) * deltaTime;
+                    Game1._listeMonstre[i].Position += direction * (float)Game1._listeMonstre[i].Vitesse * deltaTime;
 
                 }
             }

@@ -45,9 +45,6 @@ namespace Project1
 
 
 
-        public Texture2D _textureSceptre;
-        public static Vector2 _positionSceptre;
-        public static float _rotationSceptre;
 
         public static SpriteFont _police;
 
@@ -57,13 +54,10 @@ namespace Project1
 
         public static bool _showUI;
         public static Texture2D _textureMapUI;
-        public static Texture2D _textureMapPerso;
         public static Vector2 _positionMapPersoUI;
 
         public static double _viePerso;
-        public static Texture2D _texturevieCoeurPlein;
-        public static Texture2D _texturevieCoeurDemi;
-        public static Texture2D _texturevieCoeurVide;
+
 
         public static Texture2D _textureMonstreUI;
         public static Texture2D _texturePersoUI;
@@ -109,10 +103,8 @@ namespace Project1
 
             _viePerso = 6;
             Perso.Initialise();
-
+            Fee.Initialise();
             base.Initialize();
-
-            _rotationSceptre = 0;
 
 
             for (int i = 0; i < 10; i++)
@@ -141,16 +133,19 @@ namespace Project1
             //JEU
 
             Map.LoadContent(Content, GraphicsDevice);
+            Fee.LoadContent(Content);
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
-            _textureMapUI = Content.Load<Texture2D>("map");
-            _textureMapPerso = Content.Load<Texture2D>("Perso/mapPerso");
-            _textureSceptre = Content.Load<Texture2D>("sceptre");
+
             _textureMonstreUI = Content.Load<Texture2D>("monstersUI");
             _texturePersoUI = Content.Load<Texture2D>("persoUI");
+            _textureMapUI = Content.Load<Texture2D>("map");
 
-            _texturevieCoeurPlein = Content.Load<Texture2D>("coeur");
-            _texturevieCoeurVide = Content.Load<Texture2D>("coeurvide");
+
+            MapUI.LoadContent(Content);
+            UI.Load(Content);
+
+
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             Perso.LoadContent(spriteSheet);
             _police = Content.Load<SpriteFont>("font");
@@ -169,29 +164,20 @@ namespace Project1
 
             if (_gameStarted)
             {
-
                 if (_gameBegin)
                 {
                     if (_wait < 4)
-                    {
                         _wait += deltaTime;
-                    }
                     else
-                    {
                         _gameBegin = false;
-                    }
                 }
                 float walkSpeed = deltaTime * Perso._vitessePerso;
-
                 Perso.Update();
-                //la classe KeyboardManager permet de gérer les touches
+                Fee.Update();
                 KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso.animation, walkSpeed, Map._mapWidth, Map._mapHeight, _graphics);
 
                 Camera.Update();
 
-                _positionSceptre = Perso._positionPerso;
-
-                Game1._rotationSceptre += 0.05f / (float)Math.PI * 2;
 
                 if (_showUI)
                     _positionMapPersoUI = new Vector2((Perso._positionPerso.X / 1600 * 600) + 340 - 8, (Perso._positionPerso.Y / 1600 * 600) + 60 - 8);
@@ -269,8 +255,8 @@ namespace Project1
 
 
                 Perso.Draw(_spriteBatch);
+                Fee.Draw(_spriteBatch);
                 Monstre.Draw(_spriteBatch);
-                _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
                 if (!_debugMode)
                     _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
