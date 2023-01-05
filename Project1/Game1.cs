@@ -19,7 +19,7 @@ namespace Project1
     public class Game1 : Game
     {
         public static GraphicsDeviceManager _graphics;
-        public static SpriteBatch SpriteBatch { get; set; }
+        public static SpriteBatch _spriteBatch { get; set; }
 
         public static TiledMap _tiledMap;
         public static TiledMap _tiledMapInterieur;
@@ -98,7 +98,7 @@ namespace Project1
             base.Initialize();
 
             _rotationSceptre = 0;
-            SpriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
             _positionPerso = new Vector2(130,146);
             _positionSceptre = _positionPerso;
 
@@ -197,7 +197,7 @@ namespace Project1
             var transformMatrix = _camera.GetViewMatrix();
             //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
 
-            SpriteBatch.Begin(transformMatrix: transformMatrix);
+            _spriteBatch.Begin(transformMatrix: transformMatrix);
 
             _tiledMapRenderer.Draw(transformMatrix);
 
@@ -208,12 +208,9 @@ namespace Project1
             _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
             if (!_debugMode)
-                SpriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
-            SpriteBatch.End();
+                _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
+            _spriteBatch.End();
 
-
-            SpriteBatch.Begin();
-            MapUI.Draw(SpriteBatch);
 
             _spriteBatch.Begin();
             MapUI.Draw(_spriteBatch);
@@ -221,11 +218,11 @@ namespace Project1
 
             if (_debugMode)
             {
-                SpriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
-                SpriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
+                _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
+                _spriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
             }
-            UI.Draw(SpriteBatch);
-            SpriteBatch.End();
+            UI.Draw(_spriteBatch);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
