@@ -60,8 +60,6 @@ namespace Project1
                     
                     Vector2 direction = Vector2.Normalize(Game1._positionPerso - Game1._listeMonstre[i].Position);
                     Vector2 pos = new Vector2(Game1._listeMonstre[i].Position.X, Game1._listeMonstre[i].Position.Y);
-                    int dirX;
-                    int dirY;
                     ushort x;
                     ushort y;
                     if (direction.X <= 0) //x gauche

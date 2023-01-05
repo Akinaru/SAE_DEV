@@ -165,7 +165,6 @@ namespace Project1
             _perso = new AnimatedSprite(spriteSheet);
             _police = Content.Load<SpriteFont>("font");
 
-            // TODO: use this.Content to load your game content here
         }
 
 
@@ -225,6 +224,19 @@ namespace Project1
             {
                 var mouseState = Mouse.GetState();
                 var mousePosition = new Point(mouseState.X, mouseState.Y);
+                if (mousePosition.X >= _positionPlayButton.X &&
+                    mousePosition.X <= _positionPlayButton.X + 300 &&
+                    mousePosition.Y >= _positionPlayButton.Y &&
+                    mousePosition.Y <= _positionPlayButton.Y + 100)
+                {
+                    _texturePlayButton = Content.Load<Texture2D>("playHover");
+                }
+                else
+                {
+                    _texturePlayButton = Content.Load<Texture2D>("play");
+                }
+
+                
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
                     if (mousePosition.X >= _positionPlayButton.X &&
