@@ -70,7 +70,6 @@ namespace Project1
         public static Texture2D _textureMonstreUI;
         public static Texture2D _texturePersoUI;
 
-        private readonly ScreenManager _screenManager;
 
 
         public Game1()
@@ -94,7 +93,7 @@ namespace Project1
             _graphics.PreferredBackBufferWidth = _screenWidth;
             _graphics.PreferredBackBufferHeight = _screenHeight;
             _graphics.ApplyChanges();
-            
+
             base.Initialize();
 
             _rotationSceptre = 0;
