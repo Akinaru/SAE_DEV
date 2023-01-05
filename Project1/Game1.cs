@@ -43,10 +43,7 @@ namespace Project1
         public Texture2D _textureObscurite;
         public static Vector2 _positionObscurite;
 
-        public static OrthographicCamera _camera;
-        public static Vector2 _cameraPosition;
-        public static float _positionCameraX;
-        public static float _positionCameraY;
+
 
         public static int _screenWidth;
         public static int _screenHeight;
@@ -126,19 +123,14 @@ namespace Project1
             _positionPerso = new Vector2(130,146);
             _positionSceptre = _positionPerso;
 
-
-            _positionCameraX = _positionPerso.X;
-            _positionCameraY = _positionPerso.Y;
             for (int i = 0; i < 10; i++)
             {
-                _listeMonstre.Add(new Monstre("persoAnimation.sf", new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
+                _listeMonstre.Add(new Monstre("persoAnimation.sf",new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
             }
 
             // Gestion de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
-            _camera = new OrthographicCamera(viewportadapter);
-            _cameraPosition = new Vector2(_screenWidth, _screenHeight);
-            _camera.ZoomIn(1.5f);
+            Camera.Initialise(viewportadapter);
 
             _mapWidth = _tiledMap.Width * 16;
             _mapHeight = _tiledMap.Height * 16;
@@ -209,23 +201,7 @@ namespace Project1
                 //la classe KeyboardManager permet de gérer les touches
                 KeyboardManager.Manage(_positionPerso, _tiledMap, animation, walkSpeed, _mapWidth, _mapHeight, _graphics);
 
-                //ici on evite a la camera de sortie de la map et d'afficher une zone "morte" qui ne contient pas de tuile
-
-                _positionCameraX = _positionPerso.X;
-                _positionCameraY = _positionPerso.Y;
-
-                //si le personnage arrive dans l'angle a gauche, on place la camera
-                if (_positionPerso.X < _screenWidth / 5)
-                    _positionCameraX = _screenWidth / 5;
-                //si le personnage arrive dans l'angle a droite, on place la camera
-                if (_positionPerso.X > (_mapWidth - _screenWidth / 5))
-                    _positionCameraX = (_mapWidth - _screenWidth / 5);
-                //si le personnage arrive dans l'angle en haut , on place la camera
-                if (_positionPerso.Y < _screenHeight / 5)
-                    _positionCameraY = _screenHeight / 5;
-                //si le personnage arrive dans l'angle en bas, on place la camera
-                if (_positionPerso.Y > (_mapHeight - _screenHeight / 5))
-                    _positionCameraY = (_mapHeight - _screenHeight / 5);
+                Camera.Update();
 
                 _positionSceptre = _positionPerso;
 
@@ -234,13 +210,13 @@ namespace Project1
                 if (_showUI)
                     _positionMapPersoUI = new Vector2((_positionPerso.X / 1600 * 600) + 340 - 8, (_positionPerso.Y / 1600 * 600) + 60 - 8);
 
-                _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
                 _positionObscurite = new Vector2(_positionPerso.X - 1080 / 2, _positionPerso.Y - 720 / 2);
                 if (!_gameBegin)
                     Monstre.Update(deltaTime);
                 _perso.Play(animation);
                 _perso.Update(deltaTime);
                 _tiledMapRenderer.Update(gameTime);
+                
             }
 
             //MENU
@@ -285,7 +261,7 @@ namespace Project1
                 _spriteBatch.End();
             }
             else { 
-                var transformMatrix = _camera.GetViewMatrix();
+                var transformMatrix = Camera._camera.GetViewMatrix();
                 //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
 
                 _spriteBatch.Begin(transformMatrix: transformMatrix);

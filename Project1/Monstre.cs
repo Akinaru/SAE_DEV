@@ -73,13 +73,31 @@ namespace Project1
                             direction.X = 0;
                         }
                     }
-                    if (direction.X <= 0) //x droite
+                    if (direction.X > 0) //x droite
                     {
                         x = (ushort)(pos.X / Game1._tiledMap.TileWidth + 0.5);
                         y = (ushort)(pos.Y / Game1._tiledMap.TileHeight);
                         if (Collision.IsCollision(x, y))
                         {
                             direction.X = 0;
+                        }
+                    }
+                    if (direction.Y <= 0) //y haut
+                    {
+                        x = (ushort)(pos.X / Game1._tiledMap.TileWidth);
+                        y = (ushort)((pos.Y -2 )/ Game1._tiledMap.TileHeight);
+                        if (Collision.IsCollision(x, y))
+                        {
+                            direction.Y = 0;
+                        }
+                    }
+                    if (direction.Y > 0) //y bas
+                    {
+                        x = (ushort)(pos.X / Game1._tiledMap.TileWidth);
+                        y = (ushort)((pos.Y + 3) / Game1._tiledMap.TileHeight);
+                        if (Collision.IsCollision(x, y))
+                        {
+                            direction.Y = 0;
                         }
                     }
 
