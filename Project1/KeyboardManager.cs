@@ -30,7 +30,7 @@ namespace Project1
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
 
 
-                Game1.animation = "walkEast";
+                Perso.animation = "walkEast";
                 if (!Collision.IsCollision(tx, ty))
                 {
                     dir.X += 1;
@@ -41,7 +41,7 @@ namespace Project1
             {
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
-                Game1.animation = "walkWest";
+                Perso.animation = "walkWest";
 
 
                 if (!Collision.IsCollision(tx, ty))
@@ -57,7 +57,7 @@ namespace Project1
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)((_positionPerso.Y - 2) / _tiledMap.TileHeight);
 
-                Game1.animation = "walkNorth";
+                Perso.animation = "walkNorth";
                 if (!Collision.IsCollision(tx, ty))
                 {
                     dir.Y -= 1;
@@ -71,7 +71,7 @@ namespace Project1
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)((_positionPerso.Y + 3) / _tiledMap.TileHeight + 0.6);
 
-                Game1.animation = "walkSouth";
+                Perso.animation = "walkSouth";
                 if (!Collision.IsCollision(tx, ty))
                 {
                     dir.Y += 1;
@@ -80,7 +80,7 @@ namespace Project1
             }
             if(dir != Vector2.Zero)
                 dir.Normalize();
-            Game1._positionPerso += dir * walkSpeed;
+            Perso._positionPerso += dir * walkSpeed;
 
             if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
@@ -103,11 +103,11 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
             {
-                Game1._vitessePerso = 125;
+                Perso._vitessePerso = 125;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.LeftShift))
             {
-                Game1._vitessePerso = 100;
+                Perso._vitessePerso = 100;
             }
         }
 

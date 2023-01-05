@@ -17,7 +17,7 @@ namespace Project1
 
             for (int i = 0; i < _mapLayers.Count; i++)
             {
-                TiledMapTileLayer _Layer = Game1._tiledMap.GetLayer<TiledMapTileLayer>(_mapLayers[i]);
+                TiledMapTileLayer _Layer = Map._tiledMap.GetLayer<TiledMapTileLayer>(_mapLayers[i]);
                 TiledMapTile? tile;
                 if (_Layer.TryGetTile(x, y, out tile) == false)
                     return false;

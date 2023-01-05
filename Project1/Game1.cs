@@ -30,16 +30,10 @@ namespace Project1
 
 
         //JEU
-        public static TiledMap _tiledMap;
-        public static TiledMap _tiledMapInterieur;
 
-        public static TiledMapRenderer _tiledMapRenderer;
-
-        public static Vector2 _positionPerso;
-        public static AnimatedSprite _perso;
         public static Texture2D _textureombrePerso;
-        public static int _vitessePerso;
-        public static string animation;
+
+
 
         public Texture2D _textureObscurite;
         public static Vector2 _positionObscurite;
@@ -48,8 +42,7 @@ namespace Project1
 
         public static int _screenWidth;
         public static int _screenHeight;
-        public static int _mapHeight;
-        public static int _mapWidth;
+
 
 
         public Texture2D _textureSceptre;
@@ -114,15 +107,13 @@ namespace Project1
             _positionPlayButton = new Vector2(490, 300);
 
 
-            _vitessePerso = 100;
             _viePerso = 6;
-
+            Perso.Initialise();
 
             base.Initialize();
 
             _rotationSceptre = 0;
-            _positionPerso = new Vector2(130,146);
-            _positionSceptre = _positionPerso;
+
 
             for (int i = 0; i < 10; i++)
             {
@@ -132,9 +123,7 @@ namespace Project1
             // Gestion de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
             Camera.Initialise(viewportadapter);
-
-            _mapWidth = _tiledMap.Width * 16;
-            _mapHeight = _tiledMap.Height * 16;
+            Map.Initialise();
 
         }
 
@@ -151,8 +140,7 @@ namespace Project1
 
             //JEU
 
-            _tiledMap = Content.Load<TiledMap>("Map/map");
-            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+            Map.LoadContent(Content, GraphicsDevice);
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureMapUI = Content.Load<Texture2D>("map");
@@ -164,7 +152,7 @@ namespace Project1
             _texturevieCoeurPlein = Content.Load<Texture2D>("coeur");
             _texturevieCoeurVide = Content.Load<Texture2D>("coeurvide");
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
-            _perso = new AnimatedSprite(spriteSheet);
+            Perso.LoadContent(spriteSheet);
             _police = Content.Load<SpriteFont>("font");
 
         }
@@ -175,8 +163,6 @@ namespace Project1
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //JEU
@@ -195,29 +181,27 @@ namespace Project1
                         _gameBegin = false;
                     }
                 }
-                animation = "idle";
-                float walkSpeed = deltaTime * _vitessePerso;
+                float walkSpeed = deltaTime * Perso._vitessePerso;
 
-
+                Perso.Update();
                 //la classe KeyboardManager permet de gérer les touches
-                KeyboardManager.Manage(_positionPerso, _tiledMap, animation, walkSpeed, _mapWidth, _mapHeight, _graphics);
+                KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso.animation, walkSpeed, Map._mapWidth, Map._mapHeight, _graphics);
 
                 Camera.Update();
 
-                _positionSceptre = _positionPerso;
+                _positionSceptre = Perso._positionPerso;
 
                 Game1._rotationSceptre += 0.05f / (float)Math.PI * 2;
 
                 if (_showUI)
-                    _positionMapPersoUI = new Vector2((_positionPerso.X / 1600 * 600) + 340 - 8, (_positionPerso.Y / 1600 * 600) + 60 - 8);
+                    _positionMapPersoUI = new Vector2((Perso._positionPerso.X / 1600 * 600) + 340 - 8, (Perso._positionPerso.Y / 1600 * 600) + 60 - 8);
 
-                _positionObscurite = new Vector2(_positionPerso.X - 1080 / 2, _positionPerso.Y - 720 / 2);
+                _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
                 if (!_gameBegin)
                     Monstre.Update(deltaTime);
-                _perso.Play(animation);
-                _perso.Update(deltaTime);
-                _tiledMapRenderer.Update(gameTime);
-                
+                Perso._perso.Play(Perso.animation);
+                Perso._perso.Update(deltaTime);
+                Map.Update(gameTime);
             }
 
             //MENU
@@ -272,7 +256,7 @@ namespace Project1
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(_textureFondEcran, new Vector2(0,0), Color.White);
                 _spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
-                _spriteBatch.Draw(_textureControls, new Vector2(440, 600), Color.White);
+                _spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
                 _spriteBatch.End();
             }
             else { 
@@ -281,11 +265,10 @@ namespace Project1
 
                 _spriteBatch.Begin(transformMatrix: transformMatrix);
 
-                _tiledMapRenderer.Draw(transformMatrix);
+                Map.Draw(transformMatrix);
 
 
-                _spriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-16, -12), Color.White);
-                _spriteBatch.Draw(_perso, _positionPerso);
+                Perso.Draw(_spriteBatch);
                 Monstre.Draw(_spriteBatch);
                 _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
@@ -296,13 +279,6 @@ namespace Project1
 
                 _spriteBatch.Begin();
                 MapUI.Draw(_spriteBatch);
-
-
-                if (_debugMode)
-                {
-                    _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
-                    _spriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
-                }
                 UI.Draw(_spriteBatch);
 
                 if (_gameBegin)
