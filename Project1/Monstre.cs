@@ -59,7 +59,6 @@ namespace Project1
                 {
                     Vector2 direction = Vector2.Normalize(Game1._positionPerso - Game1._listeMonstre[i].Position);
                     Game1._listeMonstre[i].Position += direction * 50 * deltaTime;
-                    
                 }
             }
 

@@ -73,8 +73,6 @@ namespace Project1
         private readonly ScreenManager _screenManager;
 
 
-
-
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -184,9 +182,7 @@ namespace Project1
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
-
             Monstre.Update(deltaTime);
-
             _perso.Play(animation);
             _perso.Update(deltaTime);
             _tiledMapRenderer.Update(gameTime);
@@ -206,10 +202,10 @@ namespace Project1
             _tiledMapRenderer.Draw(transformMatrix);
 
 
-            SpriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-6,5), Color.White);
-            SpriteBatch.Draw(_perso, _positionPerso);
-            Monstre.Draw(SpriteBatch);
-            SpriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
+            _spriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-6,5), Color.White);
+            _spriteBatch.Draw(_perso, _positionPerso);
+            Monstre.Draw(_spriteBatch);
+            _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
             if (!_debugMode)
                 SpriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
@@ -218,6 +214,9 @@ namespace Project1
 
             SpriteBatch.Begin();
             MapUI.Draw(SpriteBatch);
+
+            _spriteBatch.Begin();
+            MapUI.Draw(_spriteBatch);
 
 
             if (_debugMode)
