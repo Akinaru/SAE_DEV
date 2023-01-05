@@ -71,7 +71,6 @@ namespace Project1
      
 
 
-        public static List<string> _mapLayers = new List<string>() { "Batiments","Batiments2", "Objets", "Objets2" };
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -181,12 +180,8 @@ namespace Project1
 
             _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
             _positionObscurite = new Vector2(_positionPerso.X - 1080/2, _positionPerso.Y - 720/2);
-            for (int i = 0; i < _listeMonstre.Count; i++)
-            {
-                _listeMonstre[i].Update(deltaTime);
-                _listeMonstre[i].Perso.Play(animation);
-            }
-                _perso.Play(animation);
+            Monstre.Update(deltaTime);
+            _perso.Play(animation);
             _perso.Update(deltaTime);
             _tiledMapRenderer.Update(gameTime);
             base.Update(gameTime);
@@ -207,10 +202,7 @@ namespace Project1
 
             _spriteBatch.Draw(_textureombrePerso, _positionPerso + new Vector2(-6,5), Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
-            for (int i = 0; i < _listeMonstre.Count; i++)
-            {
-                _listeMonstre[i].Draw(_spriteBatch);
-            }
+            Monstre.Draw(_spriteBatch);
             _spriteBatch.Draw(_textureSceptre, _positionSceptre, null, Color.White, _rotationSceptre, new Vector2(_textureSceptre.Width / 2, _textureSceptre.Height / 2), 1.0f, SpriteEffects.None, 1.0f);
 
             if (!_debugMode)
@@ -219,12 +211,9 @@ namespace Project1
 
 
             _spriteBatch.Begin();
-            if (_showUI)
-            {
-                _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
-                _spriteBatch.Draw(_textureMapPerso, _positionMapPersoUI, Color.White);
+            MapUI.Draw(_spriteBatch);
 
-            }
+
             if (_debugMode)
             {
                 _spriteBatch.DrawString(_police, $"Pos: " + Math.Round(_positionPerso.X, 0) + ";" + Math.Round(_positionPerso.Y, 0), new Vector2(0, 0), Color.Black);
@@ -235,26 +224,5 @@ namespace Project1
 
             base.Draw(gameTime);
         }
-
-
-        public static bool IsCollision(ushort x, ushort y)
-        {
-            //gestion des collisions listé dans la liste _mapLayers
-
-            for (int i = 0; i < _mapLayers.Count; i++)
-            {
-                TiledMapTileLayer _Layer = _tiledMap.GetLayer<TiledMapTileLayer>(_mapLayers[i]);
-                TiledMapTile? tile;
-                if (_Layer.TryGetTile(x, y, out tile) == false)
-                    return false;
-                if (!tile.Value.IsBlank)
-                    return true;
-
-            }
-            return false;
-
-        }
-
-
     }
 }
