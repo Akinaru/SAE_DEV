@@ -25,6 +25,7 @@ namespace Project1
         //MAIN MENU
         public static Texture2D _textureFondEcran;
         public static Texture2D _texturePlayButton;
+        public static Texture2D _textureControls;
         public static Vector2 _positionPlayButton;
 
 
@@ -144,6 +145,7 @@ namespace Project1
         {
             //MENU
             _texturePlayButton = Content.Load<Texture2D>("play");
+            _textureControls = Content.Load<Texture2D>("controls");
             _textureFondEcran = Content.Load<Texture2D>("background");
 
 
@@ -270,6 +272,7 @@ namespace Project1
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(_textureFondEcran, new Vector2(0,0), Color.White);
                 _spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
+                _spriteBatch.Draw(_textureControls, new Vector2(440, 600), Color.White);
                 _spriteBatch.End();
             }
             else { 

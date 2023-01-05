@@ -55,7 +55,7 @@ namespace Project1
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
                 float distance = Vector2.Distance(Game1._listeMonstre[i].Position, Game1._positionPerso);
-                if (distance > 5)
+                if (distance > 16)
                 {
                     
                     Vector2 direction = Vector2.Normalize(Game1._positionPerso - Game1._listeMonstre[i].Position);
