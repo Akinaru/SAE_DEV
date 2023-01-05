@@ -23,6 +23,7 @@ namespace Project1
         public static SpriteBatch _spriteBatch { get; set; }
 
         //MAIN MENU
+        public static Texture2D _textureFondEcran;
         public static Texture2D _texturePlayButton;
         public static Vector2 _positionPlayButton;
 
@@ -96,30 +97,33 @@ namespace Project1
 
         protected override void Initialize()
         {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            GraphicsDevice.BlendState = BlendState.AlphaBlend;
+
+
             _gameStarted = false;
             _gameBegin = false;
-            _wait = 0;
-
-            _positionPlayButton = new Vector2(490, 200);
-
-
-            //regler la transparence des tuiles
-            GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _debugMode = false;
             _showUI = false;
-            _vitessePerso = 100;
-            _viePerso = 6;
-            //définition de la taille de la fenetre en fonctiond des dimensions données
+            _wait = 0;
+
             _screenWidth = 1280;
             _screenHeight = 720;
             _graphics.PreferredBackBufferWidth = _screenWidth;
             _graphics.PreferredBackBufferHeight = _screenHeight;
             _graphics.ApplyChanges();
 
+
+            _positionPlayButton = new Vector2(490, 200);
+
+
+            _vitessePerso = 100;
+            _viePerso = 6;
+
+
             base.Initialize();
 
             _rotationSceptre = 0;
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
             _positionPerso = new Vector2(130,146);
             _positionSceptre = _positionPerso;
 
@@ -149,6 +153,7 @@ namespace Project1
         {
             //MENU
             _texturePlayButton = Content.Load<Texture2D>("play");
+            _textureFondEcran = Content.Load<Texture2D>("background");
 
 
             //JEU
@@ -269,6 +274,7 @@ namespace Project1
             if (!_gameStarted)
             {
                 _spriteBatch.Begin();
+                _spriteBatch.Draw(_textureFondEcran, new Vector2(0,0), Color.White);
                 _spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
                 _spriteBatch.End();
             }
