@@ -32,28 +32,17 @@ namespace Project1
         //JEU
 
         public static Texture2D _textureombrePerso;
-
-
-
         public Texture2D _textureObscurite;
         public static Vector2 _positionObscurite;
-
 
 
         public static int _screenWidth;
         public static int _screenHeight;
 
-
-
-
-
         public static bool _debugMode;
 
         public static List<Monstre> _listeMonstre = new List<Monstre>();
 
-        public static bool _showUI;
-        public static Texture2D _textureMapUI;
-        public static Vector2 _positionMapPersoUI;
 
         public static double _viePerso;
 
@@ -87,7 +76,6 @@ namespace Project1
             _gameStarted = false;
             _gameBegin = false;
             _debugMode = false;
-            _showUI = false;
             _wait = 0;
 
             _screenWidth = 1280;
@@ -96,6 +84,7 @@ namespace Project1
             _graphics.PreferredBackBufferHeight = _screenHeight;
             _graphics.ApplyChanges();
 
+            MapUI.Initialise();
 
             _positionPlayButton = new Vector2(490, 300);
 
@@ -106,7 +95,7 @@ namespace Project1
             base.Initialize();
 
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 _listeMonstre.Add(new Monstre("monstreAnimation.sf",new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
             }
@@ -138,11 +127,10 @@ namespace Project1
 
             _textureMonstreUI = Content.Load<Texture2D>("monstersUI");
             _texturePersoUI = Content.Load<Texture2D>("persoUI");
-            _textureMapUI = Content.Load<Texture2D>("map");
 
 
             MapUI.LoadContent(Content);
-            UI.Load(Content);
+            HUD.Load(Content);
 
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
@@ -176,9 +164,7 @@ namespace Project1
 
                 Camera.Update();
 
-
-                if (_showUI)
-                    _positionMapPersoUI = new Vector2((Perso._positionPerso.X / 1600 * 600) + 340 - 8, (Perso._positionPerso.Y / 1600 * 600) + 60 - 8);
+                MapUI.Update();
 
                 _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
                 if (!_gameBegin)
@@ -271,11 +257,11 @@ namespace Project1
 
                 _spriteBatch.Begin();
                 MapUI.Draw(_spriteBatch);
-                UI.Draw(_spriteBatch);
+                HUD.Draw(_spriteBatch);
 
                 if (_gameBegin)
                 {
-                    Message.Draw(_spriteBatch, "Libere la ville des mechant !", "Fais vite... Je crois en toi !");
+                    Message.Draw(_spriteBatch, "Libere la ville des mechants !", "Fais vite... Je crois en toi !");
                 }
                 _spriteBatch.End();
             }

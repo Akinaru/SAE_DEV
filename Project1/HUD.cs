@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project1
 {
-    internal class UI
+    internal class HUD
     {
         public static Texture2D _texturevieCoeurPlein;
         public static Texture2D _texturevieCoeurVide;

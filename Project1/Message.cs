@@ -19,7 +19,7 @@ namespace Project1
         public static void LoadContent(Microsoft.Xna.Framework.Content.ContentManager Content)
         {
             _police = Content.Load<SpriteFont>("font");
-            _positionMessageBox = new Vector2(950, 550);
+            _positionMessageBox = new Vector2(930, 530);
             _positionMessageTexte = _positionMessageBox + new Vector2(50,20);
             _textureMessageBox = Content.Load<Texture2D>("message");
             _textureNavi = Content.Load<Texture2D>("navi_grand");

@@ -94,11 +94,11 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
-                Game1._showUI = true;
+                MapUI._showUI = true;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Tab))
             {
-                Game1._showUI = false;
+                MapUI._showUI = false;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
