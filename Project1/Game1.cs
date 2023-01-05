@@ -79,6 +79,8 @@ namespace Project1
 
 
         public static bool _gameStarted;
+        public static bool _gameBegin;
+        public static float _wait;
 
 
         public Game1()
@@ -94,7 +96,9 @@ namespace Project1
 
         protected override void Initialize()
         {
-            _gameStarted = true;
+            _gameStarted = false;
+            _gameBegin = false;
+            _wait = 0;
 
             _positionPlayButton = new Vector2(490, 200);
 
@@ -124,7 +128,7 @@ namespace Project1
             _nombreMonstre = 0;
             for (int i = 0; i < 10; i++)
             {
-                _listeMonstre.Add(new Monstre("persoAnimation.sf", new Vector2(new Random().Next(0,1600), new Random().Next(0, 1000)), Content));
+                _listeMonstre.Add(new Monstre("persoAnimation.sf", new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
             }
 
             // Gestion de la caméra
@@ -182,6 +186,17 @@ namespace Project1
 
             if (_gameStarted)
             {
+                
+                if (_gameBegin) { 
+                    if (_wait < 4)
+                    {
+                        _wait += deltaTime;
+                    }
+                    else
+                    {
+                        _gameBegin = false;
+                    }
+                 }
                 animation = "idle";
                 float walkSpeed = deltaTime * _vitessePerso;
 
@@ -216,19 +231,31 @@ namespace Project1
 
                 _camera.LookAt(new Vector2(_positionCameraX, _positionCameraY));
                 _positionObscurite = new Vector2(_positionPerso.X - 1080 / 2, _positionPerso.Y - 720 / 2);
-                Monstre.Update(deltaTime);
+                if(!_gameBegin)    
+                    Monstre.Update(deltaTime);
                 _perso.Play(animation);
                 _perso.Update(deltaTime);
                 _tiledMapRenderer.Update(gameTime);
             }
 
-            //MAIN
+            //MENU
 
             else 
             {
                 var mouseState = Mouse.GetState();
                 var mousePosition = new Point(mouseState.X, mouseState.Y);
-                
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    if (mousePosition.X >= _positionPlayButton.X &&
+                            mousePosition.X <= _positionPlayButton.X + 300 &&
+                            mousePosition.Y >= _positionPlayButton.Y &&
+                            mousePosition.Y <= _positionPlayButton.Y + 100)
+                        {
+                            _gameStarted = true;
+                            _gameBegin = true;
+                        }
+                }
+
             }
             base.Update(gameTime);
         }
@@ -274,6 +301,11 @@ namespace Project1
                     _spriteBatch.DrawString(_police, $"Vitesse: " + _vitessePerso, new Vector2(0, 20), Color.Black);
                 }
                 UI.Draw(_spriteBatch);
+
+                if (_gameBegin)
+                {
+                    _spriteBatch.DrawString(_police, "Les monstres arrivent...", new Vector2(550,670), Color.White);
+                }
                 _spriteBatch.End();
             }
 

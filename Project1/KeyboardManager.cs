@@ -100,15 +100,6 @@ namespace Project1
             {
                 Game1._showUI = false;
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-            {
-                Game1._vitessePerso = 125;
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.LeftShift))
-            {
-                Game1._vitessePerso = 100;
-            }
         }
 
     }
