@@ -46,7 +46,6 @@ namespace Project1
 
 
 
-        public static SpriteFont _police;
 
         public static bool _debugMode;
 
@@ -148,8 +147,7 @@ namespace Project1
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             Perso.LoadContent(spriteSheet);
-            _police = Content.Load<SpriteFont>("font");
-
+            Message.LoadContent(Content);
         }
 
 
@@ -218,6 +216,10 @@ namespace Project1
                     {
                         _gameStarted = true;
                         _gameBegin = true;
+                        for (int i = 0; i < _listeMonstre.Count; i++)
+                        {
+                            _listeMonstre[i].Spawn();
+                        }
                     }
                 }
                 KeyboardState keyboardState = Keyboard.GetState();
@@ -226,6 +228,11 @@ namespace Project1
                 {
                     _gameStarted = true;
                     _gameBegin = true;
+
+                    for (int i = 0; i < _listeMonstre.Count; i++)
+                    {
+                        _listeMonstre[i].Spawn();
+                    }
                 }
             }
             base.Update(gameTime);
@@ -237,6 +244,7 @@ namespace Project1
 
         protected override void Draw(GameTime gameTime)
         {
+
             if (!_gameStarted)
             {
                 _spriteBatch.Begin();
@@ -247,13 +255,11 @@ namespace Project1
             }
             else { 
                 var transformMatrix = Camera._camera.GetViewMatrix();
-                //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
 
+                //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
                 _spriteBatch.Begin(transformMatrix: transformMatrix);
 
                 Map.Draw(transformMatrix);
-
-
                 Perso.Draw(_spriteBatch);
                 Fee.Draw(_spriteBatch);
                 Monstre.Draw(_spriteBatch);
@@ -269,7 +275,7 @@ namespace Project1
 
                 if (_gameBegin)
                 {
-                    _spriteBatch.DrawString(_police, "Les monstres arrivent...", new Vector2(550,670), Color.White);
+                    Message.Draw(_spriteBatch, "Libere la ville des mechant !", "Fais vite... Je crois en toi !");
                 }
                 _spriteBatch.End();
             }

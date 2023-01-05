@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
+using MonoGame.Extended.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,24 @@ namespace Project1
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
             this.MonstreSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
-            this.Position = position;
             this.Vitesse = new Random().Next(400,550) / 10;
+        }
+
+        public void Spawn()
+        {
+            bool positionne = false;
+            Vector2 pos = new Vector2(0, 0);
+            while (!positionne)
+            {
+                positionne = true;
+                pos = new Vector2(new Random().Next(0, 1550), new Random().Next(0, 1550));
+                if (Collision.IsCollision( (ushort)(pos.X / Map._tiledMap.TileWidth), (ushort)(pos.Y / Map._tiledMap.TileWidth))){
+                    Console.WriteLine("col restart");
+                    positionne = false;
+                }
+
+            }
+            this.Position = pos;
         }
 
         public Vector2 Position
