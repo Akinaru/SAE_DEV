@@ -94,7 +94,6 @@ namespace Project1
             //JEU
             Map.LoadContent(Content, GraphicsDevice);
 
-            _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black));
         }
 
 
@@ -109,7 +108,11 @@ namespace Project1
 
             if (Etat == Etats.Quit)
                 Exit();
-
+            else if (Etat == Etats.Menu)
+            {
+                Etat = Etats.Attente;
+                _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black));
+            }
             else if (Etat == Etats.Play)
             {
                 Etat = Etats.Attente;

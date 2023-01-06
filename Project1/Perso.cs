@@ -59,7 +59,7 @@ namespace Project1
 
         public static void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(ScreenJeu._textureombrePerso, _positionPerso + new Vector2(-16, -13), Color.White);
+            _spriteBatch.Draw(Jeu._textureombrePerso, _positionPerso + new Vector2(-16, -13), Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
             if (_animEpee)
             {

@@ -15,7 +15,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Project1
 {
-    public class ScreenJeu : GameScreen
+    public class Jeu : GameScreen
     {
 
         public static Texture2D _textureombrePerso;
@@ -29,7 +29,7 @@ namespace Project1
         public static int _vague;
         public static int _nombreMonstre;
 
-        public ScreenJeu(Game1 game) : base(game)
+        public Jeu(Game1 game) : base(game)
         {
         }
 
@@ -53,7 +53,11 @@ namespace Project1
             base.Initialize();
 
             _vague = 1;
-            _nombreMonstre = 1;
+            _nombreMonstre = 50;
+            if (Game1._listeMonstre.Count > 0)
+            {
+                Game1._listeMonstre.Clear();
+            }
             for (int i = 0; i < _nombreMonstre; i++)
             {
                 Game1._listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));

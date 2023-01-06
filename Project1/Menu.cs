@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Project1
 {
-    public class ScreenMenu : GameScreen
+    public class Menu : GameScreen
     {
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est 
         // défini dans Game1
@@ -26,7 +26,7 @@ namespace Project1
         public static Vector2 _positionDifficileButton;
 
 
-        public ScreenMenu(Game1 game) : base(game)
+        public Menu(Game1 game) : base(game)
         {
         }
 
@@ -71,8 +71,8 @@ namespace Project1
                         mousePosition.Y >= _positionPlayButton.Y &&
                         mousePosition.Y <= _positionPlayButton.Y + 100)
                 {
-                    ScreenJeu._gameStarted = true;
-                    ScreenJeu._gameBegin = true;
+                    Jeu._gameStarted = true;
+                    Jeu._gameBegin = true;
                     Game1.Etat = Game1.Etats.Play;
                     Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
 
@@ -82,8 +82,8 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                ScreenJeu._gameStarted = true;
-                ScreenJeu._gameBegin = true;
+                Jeu._gameStarted = true;
+                Jeu._gameBegin = true;
                 Game1.Etat = Game1.Etats.Play;
                 Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
 

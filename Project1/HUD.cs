@@ -38,7 +38,7 @@ namespace Project1
             _spriteBatch.DrawString(Message._police, ""+Zone._zone, pos + new Vector2(55, 105), Color.White);
 
             _spriteBatch.Draw(_textureVagueHUD, pos + new Vector2(0, 135), Color.White);
-            _spriteBatch.DrawString(Message._police, "Vague "+ScreenJeu._vague, pos + new Vector2(55, 150), Color.White);
+            _spriteBatch.DrawString(Message._police, "Vague "+Jeu._vague, pos + new Vector2(55, 150), Color.White);
 
             if (Perso._waitBouclier > 0)
             {

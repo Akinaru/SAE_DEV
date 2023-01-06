@@ -30,7 +30,11 @@ namespace Project1
 
         public override void Update(GameTime gameTime)
         {
-            
+            MouseState mouseState = Mouse.GetState();
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                Game1.Etat = Game1.Etats.Menu;
+            }
         }
         public override void Draw(GameTime gameTime)
         {

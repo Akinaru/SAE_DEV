@@ -130,7 +130,7 @@ namespace Project1
             {
                 Monstre monstre = Game1._listeMonstre[i];
                 float distance = Vector2.Distance(monstre.Position, Perso._positionPerso);
-                if (distance > 6)
+                if (distance >= 6)
                 {
                     
                     Vector2 direction = Vector2.Normalize(Perso._positionPerso - monstre.Position);
@@ -183,18 +183,19 @@ namespace Project1
                     }
                     monstre.Position += direction * (float)vitesse * deltaTime;
 
-                    if (Vector2.Distance(monstre.Position, Perso._positionPerso) <= 6)
+       
+                }
+
+                if (Vector2.Distance(monstre.Position, Perso._positionPerso) <= 6)
+                {
+                    if (!Perso._touche)
                     {
-                        if (!Perso._touche)
-                        {
-                            Perso._touche = true;
-                            ScreenJeu._viePerso -= 1;
-                            ViePerso.Update();
-                        }
+                        Perso._touche = true;
+                        Jeu._viePerso -= 1;
+                        ViePerso.Update();
                     }
                 }
             }
-
         }
 
         public static void Draw(SpriteBatch _spriteBatch, ContentManager Content)
@@ -211,7 +212,7 @@ namespace Project1
                 {
                     _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
                 }
-                _spriteBatch.Draw(ScreenJeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
+                _spriteBatch.Draw(Jeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
                 
                 
                 if(monstre.Vie == 3)
@@ -234,10 +235,10 @@ namespace Project1
 
         public static void NewVague(ContentManager Content)
         {
-            ScreenJeu._nombreMonstre += 6;
-            ScreenJeu._vague += 1;
-            Message.Display("Bravo ! Tu es a la vague "+ ScreenJeu._vague+ ". ", "Les monstres arrivent!", 5);
-            for (int i = 0; i < ScreenJeu._nombreMonstre; i++)
+            Jeu._nombreMonstre += 6;
+            Jeu._vague += 1;
+            Message.Display("Bravo ! Tu es a la vague "+ Jeu._vague+ ". ", "Les monstres arrivent!", 5);
+            for (int i = 0; i < Jeu._nombreMonstre; i++)
             {
                 Game1._listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             }
