@@ -74,7 +74,7 @@ namespace Project1
                     Game1._gameStarted = true;
                     Game1._gameBegin = true;
                     Game1.Etat = Game1.Etats.Play;
-                    Message.Display("Libere la ville des mechants !", "Fais vite... Je crois en toi !", 5);
+                    Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
 
                 }
             }
@@ -85,7 +85,7 @@ namespace Project1
                 Game1._gameStarted = true;
                 Game1._gameBegin = true;
                 Game1.Etat = Game1.Etats.Play;
-                Message.Display("Libere la ville des mechants !", "Fais vite... Je crois en toi !", 5);
+                Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
 
             }
         }

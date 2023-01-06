@@ -24,7 +24,7 @@ namespace Project1
         public static SpriteBatch _spriteBatch { get; set; }
 
         public static Texture2D _textureombrePerso;
-        public Texture2D _textureObscurite;
+        public static Texture2D _textureObscurite;
         public static Vector2 _positionObscurite;
 
         public static int _screenWidth;
@@ -164,78 +164,12 @@ namespace Project1
                 Etat = Etats.Attente;
                 _screenManager.LoadScreen(_screenJeu, new FadeTransition(GraphicsDevice, Color.Black));
             }
-                _viePerso = 6;
+            _viePerso = 6;
 
                 //else if (this.Etat == Etats.GameOver)
                 //    _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
 
-                Message.Update(deltaTime);
-
-            if (_gameStarted)
-            {
-                if (_gameBegin)
-                {
-                    if (_wait < 4)
-                        _wait += deltaTime;
-                    else
-                        _gameBegin = false;
-                }
-
-                if (KeyboardManager.frappe)
-                {
-                    KeyboardManager.wait += 2 * deltaTime;
-                    if(KeyboardManager.wait >= 0.5)
-                    {
-                        for (int i = 0; i < Game1._listeMonstre.Count; i++)
-                        {
-                            Monstre monstre = Game1._listeMonstre[i];
-                            if (monstre.Hit)
-                            {
-                                monstre.Hit = false;
-                            }
-                        }
-                    }
-                    if(KeyboardManager.wait >= 1)
-                    {
-                        KeyboardManager.frappe = false;
-                        Perso._animEpee = false;
-                        Perso._epee.Play("fight");
-                        Perso._epee.Update(deltaTime);
-                        KeyboardManager.wait = 0;
-                    }
-                }
-                if (Perso._touche)
-                {
-                    Perso._waitBouclier += 1 * deltaTime;
-                    if(Math.Round(Perso._waitBouclier, 0) == 3)
-                    {
-                        Perso._touche = false;
-                        Perso._waitBouclier = 0;
-                    }
-                    
-                }
-
-                float walkSpeed = deltaTime * Perso._vitessePerso;
-                Perso.Update(deltaTime);
-                Fee.Update();
-                ViePerso.Update();
-                KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, _graphics, deltaTime);
-                Camera.Update();
-                MapUI.Update();
-                Zone.Update();
-                _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
-                Monstre.Update(deltaTime);
-                Perso._perso.Play(Perso._animation);
-                Perso._perso.Update(deltaTime);
-                Map.Update(gameTime);
-            }
-
-            //MENU
-
-            else
-            {
-            
-            }
+             Message.Update(deltaTime);
             base.Update(gameTime);
         }
 
@@ -246,39 +180,9 @@ namespace Project1
         protected override void Draw(GameTime gameTime)
         {
 
-            if (!_gameStarted)
-            {
-                _spriteBatch.Begin();
-
-                _spriteBatch.End();
-            }
-            else { 
-                var transformMatrix = Camera._camera.GetViewMatrix();
-
-                //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
-                _spriteBatch.Begin(transformMatrix: transformMatrix);
-
-                Map.Draw(transformMatrix);
-                
-                Monstre.Draw(_spriteBatch, Content);
-                Perso.Draw(_spriteBatch);
-
-                ViePerso.Draw(_spriteBatch);
-                Fee.Draw(_spriteBatch);
-
-                if (!_debugMode)
-                    _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
-                _spriteBatch.End();
 
 
-
-
-                _spriteBatch.Begin();
-                MapUI.Draw(_spriteBatch);
-                HUD.Draw(_spriteBatch);
-                Message.Draw(_spriteBatch);
-                _spriteBatch.End();
-            }
+            
 
             base.Draw(gameTime);
         }
