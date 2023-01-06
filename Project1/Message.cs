@@ -20,7 +20,7 @@ namespace Project1
         {
             _police = Content.Load<SpriteFont>("font");
             _positionMessageBox = new Vector2(930, 530);
-            _positionMessageTexte = _positionMessageBox + new Vector2(50,20);
+            _positionMessageTexte = _positionMessageBox + new Vector2(40,20);
             _textureMessageBox = Content.Load<Texture2D>("message");
             _textureNavi = Content.Load<Texture2D>("navi_grand");
         }

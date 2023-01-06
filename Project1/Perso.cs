@@ -19,7 +19,6 @@ namespace Project1
         public static bool _touche;
         public static float _wait;
         public static Texture2D _textureBouclier;
-        public static Texture2D _textureEpee;
 
 
         public static void Initialise()
@@ -35,7 +34,6 @@ namespace Project1
         {
             _perso = new AnimatedSprite(spriteSheet);
             _textureBouclier = Content.Load<Texture2D>("boucllier");
-            _textureEpee = Content.Load<Texture2D>("epee");
 
         }
 
@@ -51,7 +49,6 @@ namespace Project1
 
             _spriteBatch.Draw(Game1._textureombrePerso, _positionPerso + new Vector2(-16, -13), Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
-            _spriteBatch.Draw(_textureEpee, _positionPerso + new Vector2(-7,+3), null, Color.White, 0.5f, new Vector2(0, 0), 1, SpriteEffects.None, 0f); ;
             if (_wait > 0)
             {
                 _spriteBatch.Draw(_textureBouclier, _positionPerso + new Vector2(-10, -10), Color.White);

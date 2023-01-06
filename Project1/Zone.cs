@@ -39,15 +39,27 @@ namespace Project1
         //Mairie : 76;62 98;62 76;99 98;99
         public static void Update()
         {
+            _zone = getZone();
+        }
+
+
+        public static String getZone()
+        {
+            String zone = "Zone Residentielle";
             Vector2 pos = Perso._positionPerso;
-            if(pos.X <= (75 * 16) && pos.Y <= (32 * 16)){
-                _zone = "Zone Redisentielle";
+            if (pos.X <= (75 * 16) && pos.Y <= (32 * 16))
+            {
+                zone = "Zone Redisentielle";
+            }
+            else if (pos.X >= 75 * 16 && pos.Y <= 32 * 16)
+            {
+                zone = "Marcher";
             }
             else
             {
-                _zone = "Inconnue";
+                zone = "Inconnue";
             }
+            return zone;
         }
-
     }
 }

@@ -21,10 +21,11 @@ namespace Project1
             _spriteBatch.Draw(Game1._textureMonstreUI, pos, Color.White);
             _spriteBatch.DrawString(Message._police, Game1._listeMonstre.Count + " monstres", pos + new Vector2(55, 15), Color.White);
 
-            _spriteBatch.Draw(Game1._texturePersoUI, pos + new Vector2(0, 43), Color.White);
-            _spriteBatch.DrawString(Message._police, "0 kills", pos + new Vector2(55, 58), Color.White);
+            _spriteBatch.Draw(Game1._texturePersoUI, pos + new Vector2(0, 45), Color.White);
+            _spriteBatch.DrawString(Message._police, "0 kills", pos + new Vector2(55, 60), Color.White);
 
-            _spriteBatch.DrawString(Message._police, ""+Zone._zone, pos + new Vector2(55, 91), Color.White);
+            _spriteBatch.Draw(Game1._texturePersoUI, pos + new Vector2(0, 90), Color.White);
+            _spriteBatch.DrawString(Message._police, ""+Zone._zone, pos + new Vector2(55, 105), Color.White);
         }
 
 
