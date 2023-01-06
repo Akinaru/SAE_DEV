@@ -128,7 +128,6 @@ namespace Project1
             _textureMonstreUI = Content.Load<Texture2D>("monstersUI");
             _texturePersoUI = Content.Load<Texture2D>("persoUI");
 
-            Vie.LoadContent(Content);
             MapUI.LoadContent(Content);
             HUD.Load(Content);
 
