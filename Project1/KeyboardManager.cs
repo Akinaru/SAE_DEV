@@ -82,6 +82,11 @@ namespace Project1
                 dir.Normalize();
             Perso._positionPerso += dir * walkSpeed;
 
+            if (Keyboard.GetState().IsKeyUp(Keys.Space))
+            {
+
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
                 Game1._debugMode = true;
@@ -109,6 +114,7 @@ namespace Project1
             {
                 Perso._vitessePerso = 100;
             }
+
         }
 
     }
