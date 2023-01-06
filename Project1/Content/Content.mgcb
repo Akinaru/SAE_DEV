@@ -480,3 +480,9 @@
 /processorParam:Quality=Best
 /build:Son/Accept.wav
 
+#begin Son/MusiqueMenu.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Son/MusiqueMenu.ogg
+

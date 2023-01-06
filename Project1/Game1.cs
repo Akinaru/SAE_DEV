@@ -25,7 +25,7 @@ namespace Project1
         public static int _screenWidth;
         public static int _screenHeight;
         public static List<Monstre> _listeMonstre = new List<Monstre>();
-
+        public static float _volumeSon;
 
 
 
@@ -73,7 +73,7 @@ namespace Project1
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-
+            _volumeSon = 0.01f;
             _screenWidth = 1280;
             _screenHeight = 720;
             _graphics.PreferredBackBufferWidth = Game1._screenWidth;

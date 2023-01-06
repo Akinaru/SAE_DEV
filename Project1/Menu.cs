@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Project1
         public static Vector2 _positionDifficileButton;
 
         private SoundEffect _sonJouer;
+        private Song _musique;
 
 
         public Menu(Game1 game) : base(game)
@@ -49,6 +51,9 @@ namespace Project1
             _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
+            _musique = Content.Load<Song>("Son/MusiqueMenu");
+            MediaPlayer.Volume = Game1._volumeSon;
+            MediaPlayer.Play(_musique);
         }
 
         public override void Update(GameTime gameTime)
@@ -95,7 +100,8 @@ namespace Project1
             Jeu._gameBegin = true;
             Game1.Etat = Game1.Etats.Play;
             Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
-            _sonJouer.Play(0.01f, 0, 0);
+            _sonJouer.Play(Game1._volumeSon, 0, 0);
+
         }
         public override void Draw(GameTime gameTime)
         {
