@@ -53,7 +53,7 @@ namespace Project1
             base.Initialize();
 
             _vague = 1;
-            _nombreMonstre = 50;
+            _nombreMonstre = 15;
             if (Game1._listeMonstre.Count > 0)
             {
                 Game1._listeMonstre.Clear();

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Project1
 {
-    public class ScreenGameOver : GameScreen
+    public class GameOver : GameScreen
     {
 
 
-        public ScreenGameOver(Game1 game) : base(game)
+        public GameOver(Game1 game) : base(game)
         {
         }
 

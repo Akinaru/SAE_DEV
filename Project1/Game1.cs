@@ -32,9 +32,9 @@ namespace Project1
         public enum Etats { Menu,Play, GameOver, Quit, Attente };
         public static Etats etat;
         private readonly ScreenManager _screenManager;
-        private ScreenMenu _screenMenu;
-        private ScreenJeu _screenJeu;
-        private ScreenGameOver _screenGameOver;
+        private Menu _screenMenu;
+        private Jeu _screenJeu;
+        private GameOver _screenGameOver;
 
         public static Etats Etat
         {
@@ -60,9 +60,9 @@ namespace Project1
             Etat = Etats.Menu;
 
             // on charge les 2 écrans 
-            _screenMenu = new ScreenMenu(this);
-            _screenJeu = new ScreenJeu(this);
-            _screenGameOver = new ScreenGameOver(this);
+            _screenMenu = new Menu(this);
+            _screenJeu = new Jeu(this);
+            _screenGameOver = new GameOver(this);
         }
 
 

@@ -8,6 +8,8 @@ using MonoGame.Extended.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +20,7 @@ namespace Project1
 
         private Vector2 position;
         private AnimatedSprite monstre;
+        private AnimatedSprite fumee;
         private double vitesse;
         private int vie;
         private Texture2D _texturelowLife;
@@ -25,10 +28,13 @@ namespace Project1
         private Texture2D _texturefullLife;
         private Texture2D _textureMonstreHit;
         private bool hit;
+        private bool mort;
+        private float mortWait;
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
             this.MonstreSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
+            this.fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader())); 
             this.Vitesse = new Random().Next(400,550) / 10;
             this.Vie = 3;
             this._texturelowLife = content.Load<Texture2D>("lowLife");
@@ -37,6 +43,8 @@ namespace Project1
             this._textureMonstreHit = content.Load<Texture2D>("monstreHit");
             this.Spawn();
             this.Hit = false;
+            this.Mort = false;
+            this.mortWait = 0;
         }
 
         public void Spawn()
@@ -124,12 +132,36 @@ namespace Project1
             }
         }
 
+        public bool Mort
+        {
+            get
+            {
+                return mort;
+            }
+
+            set
+            {
+                mort = value;
+            }
+        }
+
         public static void Update(float deltaTime)
         {
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
                 Monstre monstre = Game1._listeMonstre[i];
+                monstre.fumee.Play("fumee");
+                monstre.fumee.Update(deltaTime);
                 float distance = Vector2.Distance(monstre.Position, Perso._positionPerso);
+                if (monstre.Mort)
+                {
+                    monstre.mortWait += 1 * deltaTime;
+                    if(monstre.mortWait >= 0.3)
+                    {
+                        Game1._listeMonstre.Remove(monstre);
+
+                    }
+                }
                 if (distance >= 6)
                 {
                     
@@ -203,32 +235,38 @@ namespace Project1
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
                 Monstre monstre = Game1._listeMonstre[i];
-
+  
                 if (monstre.hit)
                 {
                     _spriteBatch.Draw(monstre._textureMonstreHit, monstre.Position - new Vector2(8, 8), Color.White);
                 }
                 else
                 {
-                    _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
+                    if(!monstre.Mort)
+                        _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
                 }
-                _spriteBatch.Draw(Jeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
-                
-                
-                if(monstre.Vie == 3)
+                if (!monstre.Mort)
+                    _spriteBatch.Draw(Jeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
+                if (monstre.Mort)
+                {
+                    _spriteBatch.Draw(monstre.fumee, monstre.Position);
+                }
+
+                if (monstre.Vie == 3)
                     _spriteBatch.Draw(monstre._texturefullLife, monstre.Position + new Vector2(-12, -12), Color.White);
                 else if (monstre.Vie == 2)
                     _spriteBatch.Draw(monstre._texturemidLife, monstre.Position + new Vector2(-12, -12), Color.White);
                 else if (monstre.Vie == 1)
                     _spriteBatch.Draw(monstre._texturelowLife, monstre.Position + new Vector2(-12, -12), Color.White);
-                else
+                else //vie du monstre = 0
                 {
                     monstre.Hit = false;
-                    Game1._listeMonstre.Remove(monstre);
+                    monstre.Mort = true;
                     if(Game1._listeMonstre.Count == 0)
                     {
                         Monstre.NewVague(Content);
                     }
+
                 }
             }
         }
