@@ -255,6 +255,8 @@ namespace Project1
                 _spriteBatch.End();
 
 
+
+
                 _spriteBatch.Begin();
                 MapUI.Draw(_spriteBatch);
                 HUD.Draw(_spriteBatch);
