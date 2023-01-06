@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Content;
+using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
@@ -17,39 +19,53 @@ namespace Project1
         public static int _vitessePerso;
         public static string _animation;
         public static bool _touche;
-        public static float _wait;
+        public static float _waitBouclier;
         public static Texture2D _textureBouclier;
+        public static AnimatedSprite _epee;
+        public static bool _animEpee;
+        public static Vector2 _positionEpee;
 
 
         public static void Initialise()
         {
             _vitessePerso = 100;
             _positionPerso = new Vector2(130, 146);
+            _positionEpee = new Vector2(130, 146);
             _touche = false;
-            _wait = 0;
+            _waitBouclier = 0;
+            _animEpee = false;
+
 
         }
 
-        public static void LoadContent(SpriteSheet spriteSheet, ContentManager Content)
+        public static void LoadContent(ContentManager Content)
         {
-            _perso = new AnimatedSprite(spriteSheet);
+            SpriteSheet spritesheetPerso = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
+            SpriteSheet spritesheetEpee = Content.Load<SpriteSheet>("Perso/animationEpee.sf", new JsonContentLoader());
+            _perso = new AnimatedSprite(spritesheetPerso);
+            _epee = new AnimatedSprite(spritesheetEpee);
+            
             _textureBouclier = Content.Load<Texture2D>("Perso/bouclier");
 
         }
 
-        public static void Update()
+        public static void Update(float deltaTime)
         {
             _animation = "idle";
-
+            _positionEpee = _positionPerso;
+            _epee.Play("fight");
+            _epee.Update(deltaTime);
         }
 
         public static void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch)
         {
-
-
             _spriteBatch.Draw(Game1._textureombrePerso, _positionPerso + new Vector2(-16, -13), Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
-            if (_wait > 0)
+            if (_animEpee)
+            {
+                _spriteBatch.Draw(_epee, _positionEpee);
+            }
+            if (_waitBouclier > 0)
             {
                 _spriteBatch.Draw(_textureBouclier, _positionPerso + new Vector2(-10, -10), Color.White);
             }

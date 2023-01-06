@@ -88,13 +88,17 @@ namespace Project1
             {
                 if (!frappe)
                 {
+                    Perso._animEpee = true;
+                    frappe = true;
                     for (int i = 0; i < Game1._listeMonstre.Count; i++)
                     {
                         Monstre monstre = Game1._listeMonstre[i];
+           
+
                         if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 30)
                         {
-                            Game1._listeMonstre[i].Vie -= 1;
-                            frappe = true;
+                            monstre.Vie -= 1;
+                            monstre.Hit = true;
                             //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
                             //monstre.Position += direction * 700 * deltaTime;
                         }

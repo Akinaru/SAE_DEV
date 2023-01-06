@@ -23,6 +23,8 @@ namespace Project1
         private Texture2D _texturelowLife;
         private Texture2D _texturemidLife;
         private Texture2D _texturefullLife;
+        private Texture2D _textureMonstreHit;
+        private bool hit;
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
@@ -32,6 +34,9 @@ namespace Project1
             this._texturelowLife = content.Load<Texture2D>("lowLife");
             this._texturemidLife = content.Load<Texture2D>("midLife");
             this._texturefullLife = content.Load<Texture2D>("fullLife");
+            this._textureMonstreHit = content.Load<Texture2D>("monstreHit");
+            this.Spawn();
+            this.Hit = false;
         }
 
         public void Spawn()
@@ -102,13 +107,26 @@ namespace Project1
             }
         }
 
+        public bool Hit
+        {
+            get
+            {
+                return this.hit;
+            }
+
+            set
+            {
+                this.hit = value;
+            }
+        }
+
         public static void Update(float deltaTime)
         {
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
                 Monstre monstre = Game1._listeMonstre[i];
                 float distance = Vector2.Distance(monstre.Position, Perso._positionPerso);
-                if (distance > 16)
+                if (distance > 6)
                 {
                     
                     Vector2 direction = Vector2.Normalize(Perso._positionPerso - monstre.Position);
@@ -151,19 +169,11 @@ namespace Project1
                             direction.Y = 0;
                         }
                     }
-                    String animation = "walkNorth";
-                    if (direction.X >= 0)
-                        animation = "walkWest";
-                    if (direction.X < 0)
-                        animation = "walkEast";
-                    if (direction.Y >= 0)
-                        animation = "walkSouth";
-                    if (direction.Y < 0)
-                        animation = "walkNorth";
+                    String animation = "walkSouth";
                     monstre.MonstreSprite.Play(animation);
                     monstre.MonstreSprite.Update(deltaTime);
                     monstre.Position += direction * (float)monstre.Vitesse * deltaTime;
-                    if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 16)
+                    if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 6)
                     {
                         if (!Perso._touche)
                         {
@@ -182,8 +192,15 @@ namespace Project1
             {
                 Monstre monstre = Game1._listeMonstre[i];
 
-                _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
-                _spriteBatch.Draw(Game1._textureombrePerso, Game1._listeMonstre[i].Position + new Vector2(-16, -13), Color.White);
+                if (monstre.hit)
+                {
+                    _spriteBatch.Draw(monstre._textureMonstreHit, monstre.Position - new Vector2(8, 8), Color.White);
+                }
+                else
+                {
+                    _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
+                }
+                _spriteBatch.Draw(Game1._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
                 
                 
                 if(monstre.Vie == 3)
@@ -194,11 +211,10 @@ namespace Project1
                     _spriteBatch.Draw(monstre._texturelowLife, monstre.Position + new Vector2(-12, -12), Color.White);
                 else
                 {
+                    monstre.Hit = false;
                     monstre.Spawn();
                     monstre.Vie = 3;
                 }
-
-
             }
         }
 

@@ -23,10 +23,7 @@ namespace Project1
         public static SpriteBatch _spriteBatch { get; set; }
 
         //MAIN MENU
-        public static Texture2D _textureFondEcran;
-        public static Texture2D _texturePlayButton;
-        public static Texture2D _textureControls;
-        public static Vector2 _positionPlayButton;
+
 
 
         //JEU
@@ -71,6 +68,7 @@ namespace Project1
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
 
+            Menu.Initialise();
 
             _gameStarted = false;
             _gameBegin = false;
@@ -87,7 +85,6 @@ namespace Project1
 
             MapUI.Initialise();
 
-            _positionPlayButton = new Vector2(490, 300);
 
 
             _viePerso = 6;
@@ -113,10 +110,8 @@ namespace Project1
         {
             //MENU
 
-            _texturePlayButton = Content.Load<Texture2D>("Menu/play");
-            _textureControls = Content.Load<Texture2D>("Menu/controls");
-            _textureFondEcran = Content.Load<Texture2D>("Menu/background");
 
+            Menu.LoadContent(Content);
 
             //JEU
             HUD.LoadContent(Content);
@@ -130,7 +125,7 @@ namespace Project1
             HUD.LoadContent(Content);
             ViePerso.LoadContent(Content);
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
-            Perso.LoadContent(spriteSheet, Content);
+            Perso.LoadContent(Content);
             Message.LoadContent(Content);
         }
 
@@ -144,6 +139,8 @@ namespace Project1
 
             //JEU
 
+
+            Menu.Update(Mouse.GetState(), Content);
             
 
             if (_gameStarted)
@@ -158,26 +155,40 @@ namespace Project1
 
                 if (KeyboardManager.frappe)
                 {
-                    KeyboardManager.wait += 1 * deltaTime;
+                    KeyboardManager.wait += 2 * deltaTime;
+                    if(KeyboardManager.wait >= 0.5)
+                    {
+                        for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                        {
+                            Monstre monstre = Game1._listeMonstre[i];
+                            if (monstre.Hit)
+                            {
+                                monstre.Hit = false;
+                            }
+                        }
+                    }
                     if(KeyboardManager.wait >= 1)
                     {
                         KeyboardManager.frappe = false;
+                        Perso._animEpee = false;
+                        Perso._epee.Play("fight");
+                        Perso._epee.Update(deltaTime);
                         KeyboardManager.wait = 0;
                     }
                 }
                 if (Perso._touche)
                 {
-                    Perso._wait += 1 * deltaTime;
-                    if(Math.Round(Perso._wait, 0) == 3)
+                    Perso._waitBouclier += 1 * deltaTime;
+                    if(Math.Round(Perso._waitBouclier, 0) == 3)
                     {
                         Perso._touche = false;
-                        Perso._wait = 0;
+                        Perso._waitBouclier = 0;
                     }
                     
                 }
 
                 float walkSpeed = deltaTime * Perso._vitessePerso;
-                Perso.Update();
+                Perso.Update(deltaTime);
                 Fee.Update();
                 ViePerso.Update();
                 KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, _graphics, deltaTime);
@@ -195,48 +206,7 @@ namespace Project1
 
             else
             {
-                var mouseState = Mouse.GetState();
-                var mousePosition = new Point(mouseState.X, mouseState.Y);
-                if (mousePosition.X >= _positionPlayButton.X &&
-                    mousePosition.X <= _positionPlayButton.X + 300 &&
-                    mousePosition.Y >= _positionPlayButton.Y &&
-                    mousePosition.Y <= _positionPlayButton.Y + 100)
-                {
-                    _texturePlayButton = Content.Load<Texture2D>("Menu/playHover");
-                }
-                else
-                {
-                    _texturePlayButton = Content.Load<Texture2D>("Menu/play");
-                }
-
-                
-                if (mouseState.LeftButton == ButtonState.Pressed)
-                {
-                    if (mousePosition.X >= _positionPlayButton.X &&
-                            mousePosition.X <= _positionPlayButton.X + 300 &&
-                            mousePosition.Y >= _positionPlayButton.Y &&
-                            mousePosition.Y <= _positionPlayButton.Y + 100)
-                    {
-                        _gameStarted = true;
-                        _gameBegin = true;
-                        for (int i = 0; i < _listeMonstre.Count; i++)
-                        {
-                            _listeMonstre[i].Spawn();
-                        }
-                    }
-                }
-                KeyboardState keyboardState = Keyboard.GetState();
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                {
-                    _gameStarted = true;
-                    _gameBegin = true;
-
-                    for (int i = 0; i < _listeMonstre.Count; i++)
-                    {
-                        _listeMonstre[i].Spawn();
-                    }
-                }
+            
             }
             base.Update(gameTime);
         }
@@ -251,9 +221,8 @@ namespace Project1
             if (!_gameStarted)
             {
                 _spriteBatch.Begin();
-                _spriteBatch.Draw(_textureFondEcran, new Vector2(0,0), Color.White);
-                _spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
-                _spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
+                Menu.Draw(_spriteBatch);
+
                 _spriteBatch.End();
             }
             else { 
