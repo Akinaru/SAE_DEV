@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Screens;
+using MonoGame.Extended.Screens.Transitions;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
@@ -12,35 +13,56 @@ using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.ViewportAdapters;
 using System;
 using System.Collections.Generic;
+using static Project1.Game1;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace Project1
 {
     public class Game1 : Game
     {
-        //BASIC
         public static GraphicsDeviceManager _graphics;
         public static SpriteBatch _spriteBatch { get; set; }
-
-        //MAIN MENU
-
-
-
-        //JEU
 
         public static Texture2D _textureombrePerso;
         public Texture2D _textureObscurite;
         public static Vector2 _positionObscurite;
+
         public static int _screenWidth;
         public static int _screenHeight;
+
         public static bool _debugMode;
+
         public static List<Monstre> _listeMonstre = new List<Monstre>();
+
         public static double _viePerso;
+
         public static bool _gameStarted;
         public static bool _gameBegin;
+
         public static float _wait;
+
         public static int _vague;
         public static int _nombreMonstre;
+
+        public enum Etats { Menu,Play, GameOver, Quit };
+        private Etats etat;
+        private readonly ScreenManager _screenManager;
+        private ScreenMenu _screenMenu;
+        //private ScreenPlay _screenPlay;
+        //private ScreenGameOver _screenGameOver;
+
+        public Etats Etat
+        {
+            get
+            {
+                return this.etat;
+            }
+
+            set
+            {
+                this.etat = value;
+            }
+        }
 
 
         public Game1()
@@ -48,6 +70,14 @@ namespace Project1
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _screenManager = new ScreenManager();
+            Components.Add(_screenManager);
+            Etat = Etats.Menu;
+
+            // on charge les 2 écrans 
+            _screenMenu = new ScreenMenu(this);
+            //_screenPlay = new ScreenPlay(this);
+            //_screenGameOver = new ScreenGameOver(this);
         }
 
 
@@ -59,7 +89,7 @@ namespace Project1
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
 
-            Menu.Initialise();
+            //Menu.Initialise();
 
             _gameStarted = false;
             _gameBegin = false;
@@ -101,7 +131,7 @@ namespace Project1
             //MENU
 
 
-            Menu.LoadContent(Content);
+            //Menu.LoadContent(Content);
 
             //JEU
             HUD.LoadContent(Content);
@@ -117,6 +147,7 @@ namespace Project1
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             Perso.LoadContent(Content);
             Message.LoadContent(Content);
+            _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black));
         }
 
 
@@ -126,11 +157,17 @@ namespace Project1
         protected override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             //JEU
 
+            if (this.Etat == Etats.Quit)
+                Exit();
 
-            Menu.Update(Mouse.GetState(), Content);
+            //else if (this.Etat == Etats.Play)
+            //    _screenManager.LoadScreen(_screenPlay, new FadeTransition(GraphicsDevice, Color.Black));
+            //else if (this.Etat == Etats.GameOver)
+            //    _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
+
+            //Menu.Update(Mouse.GetState(), Content);
             Message.Update(deltaTime);
 
             if (_gameStarted)
@@ -211,7 +248,7 @@ namespace Project1
             if (!_gameStarted)
             {
                 _spriteBatch.Begin();
-                Menu.Draw(_spriteBatch);
+                //Menu.Draw(_spriteBatch);
 
                 _spriteBatch.End();
             }
