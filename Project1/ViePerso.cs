@@ -28,7 +28,10 @@ namespace Project1
 
         public static void Update()
         {
-
+            if(ScreenJeu._viePerso == 0)
+            {
+                Game1.Etat = Game1.Etats.GameOver;
+            }
         }
 
         public static void Draw(SpriteBatch _spriteBatch)

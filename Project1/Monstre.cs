@@ -183,12 +183,13 @@ namespace Project1
                     }
                     monstre.Position += direction * (float)vitesse * deltaTime;
 
-                    if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 6)
+                    if (Vector2.Distance(monstre.Position, Perso._positionPerso) <= 6)
                     {
                         if (!Perso._touche)
                         {
                             Perso._touche = true;
                             ScreenJeu._viePerso -= 1;
+                            ViePerso.Update();
                         }
                     }
                 }

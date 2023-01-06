@@ -34,7 +34,7 @@ namespace Project1
         private readonly ScreenManager _screenManager;
         private ScreenMenu _screenMenu;
         private ScreenJeu _screenJeu;
-        //private ScreenGameOver _screenGameOver;
+        private ScreenGameOver _screenGameOver;
 
         public static Etats Etat
         {
@@ -62,7 +62,7 @@ namespace Project1
             // on charge les 2 écrans 
             _screenMenu = new ScreenMenu(this);
             _screenJeu = new ScreenJeu(this);
-            //_screenGameOver = new ScreenGameOver(this);
+            _screenGameOver = new ScreenGameOver(this);
         }
 
 
@@ -115,11 +115,13 @@ namespace Project1
                 Etat = Etats.Attente;
                 _screenManager.LoadScreen(_screenJeu, new FadeTransition(GraphicsDevice, Color.Black));
             }
+            else if (Etat == Etats.GameOver)
+            {
+                Etat = Etats.Attente;
+                _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
+            }
 
-                //else if (this.Etat == Etats.GameOver)
-                //    _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
-
-             Message.Update(deltaTime);
+            Message.Update(deltaTime);
             base.Update(gameTime);
         }
 
