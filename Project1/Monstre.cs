@@ -35,7 +35,6 @@ namespace Project1
                 positionne = true;
                 pos = new Vector2(new Random().Next(0, 1550), new Random().Next(0, 1550));
                 if (Collision.IsCollision( (ushort)(pos.X / Map._tiledMap.TileWidth), (ushort)(pos.Y / Map._tiledMap.TileWidth))){
-                    Console.WriteLine("col restart");
                     positionne = false;
                 }
 
