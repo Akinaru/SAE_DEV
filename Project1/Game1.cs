@@ -31,25 +31,16 @@ namespace Project1
         public static Texture2D _textureombrePerso;
         public Texture2D _textureObscurite;
         public static Vector2 _positionObscurite;
-
-
         public static int _screenWidth;
         public static int _screenHeight;
-
         public static bool _debugMode;
-
         public static List<Monstre> _listeMonstre = new List<Monstre>();
-
-
         public static double _viePerso;
-
-
-
-
-
         public static bool _gameStarted;
         public static bool _gameBegin;
         public static float _wait;
+        public static int _vague;
+        public static int _nombreMonstre;
 
 
         public Game1()
@@ -74,6 +65,7 @@ namespace Project1
             _gameBegin = false;
             _debugMode = false;
             _wait = 0;
+
             KeyboardManager.frappe = false;
             KeyboardManager.wait = 0;
 
@@ -84,17 +76,18 @@ namespace Project1
             _graphics.ApplyChanges();
 
             MapUI.Initialise();
-
-
-
             _viePerso = 6;
             Perso.Initialise();
             Fee.Initialise();
             Zone.Initialise();
             base.Initialize();
-            for (int i = 0; i < 50; i++)
+
+
+            _vague = 1;
+            _nombreMonstre = 10;
+            for (int i = 0; i < _nombreMonstre; i++)
             {
-                _listeMonstre.Add(new Monstre("monstreAnimation.sf",new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
+                _listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             }
             // Gestion de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
@@ -102,9 +95,6 @@ namespace Project1
             Map.Initialise();
 
         }
-
-
-
 
         protected override void LoadContent()
         {
@@ -233,7 +223,7 @@ namespace Project1
 
                 Map.Draw(transformMatrix);
                 
-                Monstre.Draw(_spriteBatch);
+                Monstre.Draw(_spriteBatch, Content);
                 Perso.Draw(_spriteBatch);
 
                 ViePerso.Draw(_spriteBatch);

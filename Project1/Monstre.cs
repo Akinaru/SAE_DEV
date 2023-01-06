@@ -50,6 +50,10 @@ namespace Project1
                 if (Collision.IsCollision( (ushort)(pos.X / Map._tiledMap.TileWidth), (ushort)(pos.Y / Map._tiledMap.TileWidth))){
                     positionne = false;
                 }
+                if(Vector2.Distance(pos, Perso._positionPerso) < 16* 10)
+                {
+                    positionne = false;
+                }
 
             }
             this.Position = pos;
@@ -172,7 +176,12 @@ namespace Project1
                     String animation = "walkSouth";
                     monstre.MonstreSprite.Play(animation);
                     monstre.MonstreSprite.Update(deltaTime);
-                    monstre.Position += direction * (float)monstre.Vitesse * deltaTime;
+                    double vitesse = monstre.Vitesse;
+                    if (monstre.Hit)
+                    {
+                        vitesse -= 30;
+                    }
+                    monstre.Position += direction * (float)vitesse * deltaTime;
                     if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 6)
                     {
                         if (!Perso._touche)
@@ -186,7 +195,7 @@ namespace Project1
 
         }
 
-        public static void Draw(SpriteBatch _spriteBatch)
+        public static void Draw(SpriteBatch _spriteBatch, ContentManager Content)
         {
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
@@ -212,11 +221,24 @@ namespace Project1
                 else
                 {
                     monstre.Hit = false;
-                    monstre.Spawn();
-                    monstre.Vie = 3;
+                    Game1._listeMonstre.Remove(monstre);
+                    if(Game1._listeMonstre.Count == 0)
+                    {
+                        Monstre.NewVague(Content);
+                    }
                 }
             }
         }
 
+        public static void NewVague(ContentManager Content)
+        {
+            Game1._nombreMonstre += 6;
+            Game1._vague += 1;
+            for (int i = 0; i < Game1._nombreMonstre; i++)
+            {
+                Game1._listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+            }
+            
+        }
     }
 }
