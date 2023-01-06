@@ -132,10 +132,10 @@ namespace Project1
 
             MapUI.LoadContent(Content);
             HUD.Load(Content);
-
+            ViePerso.LoadContent(Content);
 
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
-            Perso.LoadContent(spriteSheet);
+            Perso.LoadContent(spriteSheet, Content);
             Message.LoadContent(Content);
         }
 
@@ -184,6 +184,7 @@ namespace Project1
                 float walkSpeed = deltaTime * Perso._vitessePerso;
                 Perso.Update();
                 Fee.Update();
+                ViePerso.Update();
                 KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, _graphics, deltaTime);
 
                 Camera.Update();
@@ -191,8 +192,7 @@ namespace Project1
                 MapUI.Update();
 
                 _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
-                if (!_gameBegin)
-                    Monstre.Update(deltaTime);
+                Monstre.Update(deltaTime);
                 Perso._perso.Play(Perso._animation);
                 Perso._perso.Update(deltaTime);
                 Map.Update(gameTime);
@@ -270,9 +270,12 @@ namespace Project1
                 _spriteBatch.Begin(transformMatrix: transformMatrix);
 
                 Map.Draw(transformMatrix);
-                Perso.Draw(_spriteBatch);
-                Fee.Draw(_spriteBatch);
+                
                 Monstre.Draw(_spriteBatch);
+                Perso.Draw(_spriteBatch);
+
+                ViePerso.Draw(_spriteBatch);
+                Fee.Draw(_spriteBatch);
 
                 if (!_debugMode)
                     _spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);

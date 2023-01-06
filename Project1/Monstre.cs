@@ -165,7 +165,11 @@ namespace Project1
                     monstre.Position += direction * (float)monstre.Vitesse * deltaTime;
                     if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 16)
                     {
-                        Perso._touche = true;
+                        if (!Perso._touche)
+                        {
+                            Perso._touche = true;
+                            Game1._viePerso -= 1;
+                        }
                     }
                 }
             }
@@ -179,7 +183,9 @@ namespace Project1
                 Monstre monstre = Game1._listeMonstre[i];
 
                 _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
-                _spriteBatch.Draw(Game1._textureombrePerso, Game1._listeMonstre[i].Position + new Vector2(-16, -12), Color.White);
+                _spriteBatch.Draw(Game1._textureombrePerso, Game1._listeMonstre[i].Position + new Vector2(-16, -13), Color.White);
+                
+                
                 if(monstre.Vie == 3)
                     _spriteBatch.Draw(monstre._texturefullLife, monstre.Position + new Vector2(-12, -12), Color.White);
                 else if (monstre.Vie == 2)

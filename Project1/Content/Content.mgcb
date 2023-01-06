@@ -30,6 +30,18 @@
 /processorParam:TextureFormat=Color
 /build:background.png
 
+#begin boucllier.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:boucllier.png
+
 #begin coeur.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -65,6 +77,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:controls.png
+
+#begin epee.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:epee.png
 
 #begin fee.png
 /importer:TextureImporter

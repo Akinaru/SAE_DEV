@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,9 @@ namespace Project1
         public static string _animation;
         public static bool _touche;
         public static float _wait;
+        public static Texture2D _textureBouclier;
+        public static Texture2D _textureEpee;
+
 
         public static void Initialise()
         {
@@ -26,9 +31,11 @@ namespace Project1
 
         }
 
-        public static void LoadContent(SpriteSheet spriteSheet)
+        public static void LoadContent(SpriteSheet spriteSheet, ContentManager Content)
         {
             _perso = new AnimatedSprite(spriteSheet);
+            _textureBouclier = Content.Load<Texture2D>("boucllier");
+            _textureEpee = Content.Load<Texture2D>("epee");
 
         }
 
@@ -40,14 +47,15 @@ namespace Project1
 
         public static void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch)
         {
-            Color color = Color.White;
-            if(Math.Round(_wait,0) == 1 || Math.Round(_wait, 0) == 3)
-            {
-                color = Color.Red;
-            }
 
-            _spriteBatch.Draw(Game1._textureombrePerso, _positionPerso + new Vector2(-16, -12), color);
+
+            _spriteBatch.Draw(Game1._textureombrePerso, _positionPerso + new Vector2(-16, -13), Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
+            _spriteBatch.Draw(_textureEpee, _positionPerso + new Vector2(-7,+3), null, Color.White, 0.5f, new Vector2(0, 0), 1, SpriteEffects.None, 0f); ;
+            if (_wait > 0)
+            {
+                _spriteBatch.Draw(_textureBouclier, _positionPerso + new Vector2(-10, -10), Color.White);
+            }
         }
 
     }

@@ -91,7 +91,7 @@ namespace Project1
                     for (int i = 0; i < Game1._listeMonstre.Count; i++)
                     {
                         Monstre monstre = Game1._listeMonstre[i];
-                        if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 24)
+                        if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 30)
                         {
                             Game1._listeMonstre[i].Vie -= 1;
                             frappe = true;
