@@ -202,11 +202,11 @@ namespace Project1
                     mousePosition.Y >= _positionPlayButton.Y &&
                     mousePosition.Y <= _positionPlayButton.Y + 100)
                 {
-                    _texturePlayButton = Content.Load<Texture2D>("playHover");
+                    _texturePlayButton = Content.Load<Texture2D>("Menu/playHover");
                 }
                 else
                 {
-                    _texturePlayButton = Content.Load<Texture2D>("play");
+                    _texturePlayButton = Content.Load<Texture2D>("Menu/play");
                 }
 
                 
