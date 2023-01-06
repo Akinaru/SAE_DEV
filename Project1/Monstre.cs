@@ -165,7 +165,7 @@ namespace Project1
                     monstre.Position += direction * (float)monstre.Vitesse * deltaTime;
                     if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 16)
                     {
-                        Perso._positionPerso += (direction) *400 * deltaTime;
+                        Perso._touche = true;
                     }
                 }
             }

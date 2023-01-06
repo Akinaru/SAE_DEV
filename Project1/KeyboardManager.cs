@@ -19,7 +19,7 @@ namespace Project1
         public static bool frappe;
         public static float wait;
 
-        public static void Manage(Vector2 _positionPerso, TiledMap _tiledMap, string animation, float walkSpeed, int _mapWidth, int _mapHeight, GraphicsDeviceManager _graphics)
+        public static void Manage(Vector2 _positionPerso, TiledMap _tiledMap, string animation, float walkSpeed, int _mapWidth, int _mapHeight, GraphicsDeviceManager _graphics, float deltaTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -32,7 +32,7 @@ namespace Project1
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
 
 
-                Perso.animation = "walkEast";
+                Perso._animation = "walkEast";
                 if (!Collision.IsCollision(tx, ty))
                 {
                     dir.X += 1;
@@ -43,7 +43,7 @@ namespace Project1
             {
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
                 ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
-                Perso.animation = "walkWest";
+                Perso._animation = "walkWest";
 
 
                 if (!Collision.IsCollision(tx, ty))
@@ -59,7 +59,7 @@ namespace Project1
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)((_positionPerso.Y - 2) / _tiledMap.TileHeight);
 
-                Perso.animation = "walkNorth";
+                Perso._animation = "walkNorth";
                 if (!Collision.IsCollision(tx, ty))
                 {
                     dir.Y -= 1;
@@ -73,7 +73,7 @@ namespace Project1
                 ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
                 ushort ty = (ushort)((_positionPerso.Y + 3) / _tiledMap.TileHeight + 0.6);
 
-                Perso.animation = "walkSouth";
+                Perso._animation = "walkSouth";
                 if (!Collision.IsCollision(tx, ty))
                 {
                     dir.Y += 1;
@@ -90,10 +90,13 @@ namespace Project1
                 {
                     for (int i = 0; i < Game1._listeMonstre.Count; i++)
                     {
-                        if (Vector2.Distance(Game1._listeMonstre[i].Position, Perso._positionPerso) < 24)
+                        Monstre monstre = Game1._listeMonstre[i];
+                        if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 24)
                         {
                             Game1._listeMonstre[i].Vie -= 1;
                             frappe = true;
+                            //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
+                            //monstre.Position += direction * 700 * deltaTime;
                         }
                     }
                 }

@@ -170,11 +170,21 @@ namespace Project1
                         KeyboardManager.wait = 0;
                     }
                 }
+                if (Perso._touche)
+                {
+                    Perso._wait += 1 * deltaTime;
+                    if(Math.Round(Perso._wait, 0) == 3)
+                    {
+                        Perso._touche = false;
+                        Perso._wait = 0;
+                    }
+                    
+                }
 
                 float walkSpeed = deltaTime * Perso._vitessePerso;
                 Perso.Update();
                 Fee.Update();
-                KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso.animation, walkSpeed, Map._mapWidth, Map._mapHeight, _graphics);
+                KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, _graphics, deltaTime);
 
                 Camera.Update();
 
@@ -183,7 +193,7 @@ namespace Project1
                 _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
                 if (!_gameBegin)
                     Monstre.Update(deltaTime);
-                Perso._perso.Play(Perso.animation);
+                Perso._perso.Play(Perso._animation);
                 Perso._perso.Update(deltaTime);
                 Map.Update(gameTime);
             }

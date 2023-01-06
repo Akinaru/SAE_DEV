@@ -13,12 +13,16 @@ namespace Project1
         public static Vector2 _positionPerso;
         public static AnimatedSprite _perso;
         public static int _vitessePerso;
-        public static string animation;
+        public static string _animation;
+        public static bool _touche;
+        public static float _wait;
 
         public static void Initialise()
         {
             _vitessePerso = 100;
             _positionPerso = new Vector2(130, 146);
+            _touche = false;
+            _wait = 0;
 
         }
 
@@ -30,13 +34,19 @@ namespace Project1
 
         public static void Update()
         {
-            animation = "idle";
+            _animation = "idle";
 
         }
 
         public static void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch)
         {
-            _spriteBatch.Draw(Game1._textureombrePerso, _positionPerso + new Vector2(-16, -12), Color.White);
+            Color color = Color.White;
+            if(Math.Round(_wait,0) == 1 || Math.Round(_wait, 0) == 3)
+            {
+                color = Color.Red;
+            }
+
+            _spriteBatch.Draw(Game1._textureombrePerso, _positionPerso + new Vector2(-16, -12), color);
             _spriteBatch.Draw(_perso, _positionPerso);
         }
 
