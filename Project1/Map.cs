@@ -20,8 +20,8 @@ namespace Project1
         public static void Initialise()
         {
 
-            _mapWidth = _tiledMap.Width * 16;
-            _mapHeight = _tiledMap.Height * 16;
+            _mapWidth = 100 * 16;
+            _mapHeight = 100 * 16;
         }
 
         public static void LoadContent(Microsoft.Xna.Framework.Content.ContentManager Content, Microsoft.Xna.Framework.Graphics.GraphicsDevice graphicsDevice)

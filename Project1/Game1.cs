@@ -44,23 +44,23 @@ namespace Project1
         public static int _vague;
         public static int _nombreMonstre;
 
-        public enum Etats { Menu,Play, GameOver, Quit };
-        private Etats etat;
+        public enum Etats { Menu,Play, GameOver, Quit, Attente };
+        public static Etats etat;
         private readonly ScreenManager _screenManager;
         private ScreenMenu _screenMenu;
-        //private ScreenPlay _screenPlay;
+        private ScreenJeu _screenJeu;
         //private ScreenGameOver _screenGameOver;
 
-        public Etats Etat
+        public static Etats Etat
         {
             get
             {
-                return this.etat;
+                return etat;
             }
 
             set
             {
-                this.etat = value;
+                etat = value;
             }
         }
 
@@ -76,7 +76,7 @@ namespace Project1
 
             // on charge les 2 écrans 
             _screenMenu = new ScreenMenu(this);
-            //_screenPlay = new ScreenPlay(this);
+            _screenJeu = new ScreenJeu(this);
             //_screenGameOver = new ScreenGameOver(this);
         }
 
@@ -88,8 +88,6 @@ namespace Project1
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-
-            //Menu.Initialise();
 
             _gameStarted = false;
             _gameBegin = false;
@@ -131,8 +129,6 @@ namespace Project1
             //MENU
 
 
-            //Menu.LoadContent(Content);
-
             //JEU
             HUD.LoadContent(Content);
             Map.LoadContent(Content, GraphicsDevice);
@@ -157,18 +153,23 @@ namespace Project1
         protected override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             //JEU
 
-            if (this.Etat == Etats.Quit)
+            if (Etat == Etats.Quit)
                 Exit();
 
-            //else if (this.Etat == Etats.Play)
-            //    _screenManager.LoadScreen(_screenPlay, new FadeTransition(GraphicsDevice, Color.Black));
-            //else if (this.Etat == Etats.GameOver)
-            //    _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
+            else if (Etat == Etats.Play)
+            {
+                Etat = Etats.Attente;
+                _screenManager.LoadScreen(_screenJeu, new FadeTransition(GraphicsDevice, Color.Black));
+            }
+                _viePerso = 6;
 
-            //Menu.Update(Mouse.GetState(), Content);
-            Message.Update(deltaTime);
+                //else if (this.Etat == Etats.GameOver)
+                //    _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
+
+                Message.Update(deltaTime);
 
             if (_gameStarted)
             {
@@ -248,7 +249,6 @@ namespace Project1
             if (!_gameStarted)
             {
                 _spriteBatch.Begin();
-                //Menu.Draw(_spriteBatch);
 
                 _spriteBatch.End();
             }
