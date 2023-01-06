@@ -108,11 +108,11 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
-                Game1._debugMode = true;
+                ScreenJeu._debugMode = true;
             }
             if (Keyboard.GetState().IsKeyUp(Keys.F3))
             {
-                Game1._debugMode = false;
+                ScreenJeu._debugMode = false;
             }
 
 

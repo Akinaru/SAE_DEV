@@ -71,8 +71,8 @@ namespace Project1
                         mousePosition.Y >= _positionPlayButton.Y &&
                         mousePosition.Y <= _positionPlayButton.Y + 100)
                 {
-                    Game1._gameStarted = true;
-                    Game1._gameBegin = true;
+                    ScreenJeu._gameStarted = true;
+                    ScreenJeu._gameBegin = true;
                     Game1.Etat = Game1.Etats.Play;
                     Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
 
@@ -82,8 +82,8 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                Game1._gameStarted = true;
-                Game1._gameBegin = true;
+                ScreenJeu._gameStarted = true;
+                ScreenJeu._gameBegin = true;
                 Game1.Etat = Game1.Etats.Play;
                 Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
 

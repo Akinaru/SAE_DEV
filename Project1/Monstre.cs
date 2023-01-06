@@ -188,7 +188,7 @@ namespace Project1
                         if (!Perso._touche)
                         {
                             Perso._touche = true;
-                            Game1._viePerso -= 1;
+                            ScreenJeu._viePerso -= 1;
                         }
                     }
                 }
@@ -210,7 +210,7 @@ namespace Project1
                 {
                     _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
                 }
-                _spriteBatch.Draw(Game1._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
+                _spriteBatch.Draw(ScreenJeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
                 
                 
                 if(monstre.Vie == 3)
@@ -233,10 +233,10 @@ namespace Project1
 
         public static void NewVague(ContentManager Content)
         {
-            Game1._nombreMonstre += 6;
-            Game1._vague += 1;
-            Message.Display("Bravo ! Tu es a la vague "+ Game1._vague+ ". ", "Les monstres arrivent!", 5);
-            for (int i = 0; i < Game1._nombreMonstre; i++)
+            ScreenJeu._nombreMonstre += 6;
+            ScreenJeu._vague += 1;
+            Message.Display("Bravo ! Tu es a la vague "+ ScreenJeu._vague+ ". ", "Les monstres arrivent!", 5);
+            for (int i = 0; i < ScreenJeu._nombreMonstre; i++)
             {
                 Game1._listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             }

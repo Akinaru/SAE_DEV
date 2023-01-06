@@ -34,13 +34,13 @@ namespace Project1
         public static void Draw(SpriteBatch _spriteBatch)
         {
             Vector2 pos = Perso._positionPerso + new Vector2(-25, -25);
-            for (int i = 0; i < Game1._viePerso; i++)
+            for (int i = 0; i < ScreenJeu._viePerso; i++)
             {
                 _spriteBatch.Draw(_texturevieCoeurPlein, new Vector2(pos.X + 10 + (5 * i), pos.Y + 10), Color.White);
             }
-            for (int i = 0; i < 6 - Game1._viePerso; i++)
+            for (int i = 0; i < 6 - ScreenJeu._viePerso; i++)
             {
-                _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(5 * Game1._viePerso) + 5 * i, pos.Y + 10), Color.White);
+                _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(5 * ScreenJeu._viePerso) + 5 * i, pos.Y + 10), Color.White);
             }
         }
 

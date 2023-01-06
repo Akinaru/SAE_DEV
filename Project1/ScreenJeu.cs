@@ -11,12 +11,23 @@ using MonoGame.Extended.ViewportAdapters;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Content;
+using Newtonsoft.Json.Linq;
 
 namespace Project1
 {
     public class ScreenJeu : GameScreen
     {
 
+        public static Texture2D _textureombrePerso;
+        public static Texture2D _textureObscurite;
+        public static Vector2 _positionObscurite;
+        public static bool _debugMode;
+        public static double _viePerso;
+        public static bool _gameStarted;
+        public static bool _gameBegin;
+        public static float _wait;
+        public static int _vague;
+        public static int _nombreMonstre;
 
         public ScreenJeu(Game1 game) : base(game)
         {
@@ -24,23 +35,58 @@ namespace Project1
 
         public override void Initialize()
         {
+            _gameStarted = false;
+            _gameBegin = false;
+            _debugMode = false;
+            _wait = 0;
 
-    
+            KeyboardManager.frappe = false;
+            KeyboardManager.wait = 0;
+
+
+
+            MapUI.Initialise();
+            _viePerso = 6;
+            Perso.Initialise();
+            Fee.Initialise();
+            Zone.Initialise();
+            base.Initialize();
+
+            _vague = 1;
+            _nombreMonstre = 1;
+            for (int i = 0; i < _nombreMonstre; i++)
+            {
+                Game1._listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+            }
+            var viewportadapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, Game1._screenWidth, Game1._screenHeight);
+            Camera.Initialise(viewportadapter);
         }
         public override void LoadContent()
         {
+            HUD.LoadContent(Content);
 
+            Fee.LoadContent(Content);
+            _textureombrePerso = Content.Load<Texture2D>("ombre");
+            _textureObscurite = Content.Load<Texture2D>("obscurite");
+
+
+            MapUI.LoadContent(Content);
+            HUD.LoadContent(Content);
+            ViePerso.LoadContent(Content);
+            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
+            Perso.LoadContent(Content);
+            Message.LoadContent(Content);
         }
 
         public override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (Game1._gameBegin)
+            if (_gameBegin)
             {
-                if (Game1._wait < 4)
-                    Game1._wait += deltaTime;
+                if (_wait < 4)
+                    _wait += deltaTime;
                 else
-                    Game1._gameBegin = false;
+                    _gameBegin = false;
             }
 
             if (KeyboardManager.frappe)
@@ -85,7 +131,7 @@ namespace Project1
             Camera.Update();
             MapUI.Update();
             Zone.Update();
-            Game1._positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
+            _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
             Monstre.Update(deltaTime);
             Perso._perso.Play(Perso._animation);
             Perso._perso.Update(deltaTime);
@@ -107,8 +153,8 @@ namespace Project1
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);
 
-            if (!Game1._debugMode)
-                Game1._spriteBatch.Draw(Game1._textureObscurite, Game1._positionObscurite, Color.White);
+            if (!_debugMode)
+                Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             Game1._spriteBatch.End();
 
 
