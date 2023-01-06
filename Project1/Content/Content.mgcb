@@ -474,3 +474,9 @@
 /processorParam:TextureFormat=Color
 /build:sceptre.png
 
+#begin Son/Accept.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/Accept.wav
+

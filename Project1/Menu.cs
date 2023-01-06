@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
@@ -25,6 +26,8 @@ namespace Project1
         public static Vector2 _positionFacileButton;
         public static Vector2 _positionDifficileButton;
 
+        private SoundEffect _sonJouer;
+
 
         public Menu(Game1 game) : base(game)
         {
@@ -44,6 +47,8 @@ namespace Project1
             _textureFondEcran = Content.Load<Texture2D>("Menu/background");
             _textureFacileButton = Content.Load<Texture2D>("Menu/facile");
             _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
+
+            _sonJouer = Content.Load<SoundEffect>("Son/Accept");
         }
 
         public override void Update(GameTime gameTime)
@@ -71,10 +76,7 @@ namespace Project1
                         mousePosition.Y >= _positionPlayButton.Y &&
                         mousePosition.Y <= _positionPlayButton.Y + 100)
                 {
-                    Jeu._gameStarted = true;
-                    Jeu._gameBegin = true;
-                    Game1.Etat = Game1.Etats.Play;
-                    Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
+                    gameStart();
 
                 }
             }
@@ -82,12 +84,18 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                Jeu._gameStarted = true;
-                Jeu._gameBegin = true;
-                Game1.Etat = Game1.Etats.Play;
-                Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
+                gameStart();
 
             }
+        }
+
+        public void gameStart()
+        {
+            Jeu._gameStarted = true;
+            Jeu._gameBegin = true;
+            Game1.Etat = Game1.Etats.Play;
+            Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
+            _sonJouer.Play(0.01f, 0, 0);
         }
         public override void Draw(GameTime gameTime)
         {
