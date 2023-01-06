@@ -22,8 +22,8 @@ namespace Project1
 
         public static void LoadContent(ContentManager Content)
         {
-            _texturevieCoeurPlein = Content.Load<Texture2D>("coeur");
-            _texturevieCoeurVide = Content.Load<Texture2D>("coeurvide");
+            _texturevieCoeurPlein = Content.Load<Texture2D>("Perso/coeur");
+            _texturevieCoeurVide = Content.Load<Texture2D>("Perso/coeurvide");
         }
 
         public static void Update()

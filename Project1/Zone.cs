@@ -55,6 +55,43 @@ namespace Project1
             {
                 zone = "Marcher";
             }
+
+
+            else if (pos.X <= 34*16 && pos.Y <= 61 * 16)
+            {
+                zone = "Parking";
+            }
+            else if (pos.X <= 53*16 && pos.Y <= 61* 16)
+            {
+                zone = "Magasin";
+            }
+            else if (pos.X <= 75*16 && pos.Y <= 61 * 16)
+            {
+                zone = "Lycee";
+            }
+            else if (pos.X <= 98*16 && pos.Y <= 61 * 16)
+            {
+                zone = "Garage";
+            }
+
+
+            else if (pos.X <= 34 * 16 && pos.Y <= 99 * 16)
+            {
+                zone = "Parc";
+            }
+            else if (pos.X <= 53 * 16 && pos.Y <= 99 * 16)
+            {
+                zone = "Residence Etudiante";
+            }
+            else if (pos.X <= 75 * 16 && pos.Y <= 99 * 16)
+            {
+                zone = "Hopital";
+            }
+            else if (pos.X <= 98 * 16 && pos.Y <= 99 * 16)
+            {
+                zone = "Mairie";
+            }
+
             else
             {
                 zone = "Inconnue";

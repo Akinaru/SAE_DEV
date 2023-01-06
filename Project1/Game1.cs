@@ -47,8 +47,7 @@ namespace Project1
         public static double _viePerso;
 
 
-        public static Texture2D _textureMonstreUI;
-        public static Texture2D _texturePersoUI;
+
 
 
         public static bool _gameStarted;
@@ -96,7 +95,7 @@ namespace Project1
             Fee.Initialise();
             Zone.Initialise();
             base.Initialize();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 50; i++)
             {
                 _listeMonstre.Add(new Monstre("monstreAnimation.sf",new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
             }
@@ -113,23 +112,22 @@ namespace Project1
         protected override void LoadContent()
         {
             //MENU
-            _texturePlayButton = Content.Load<Texture2D>("play");
-            _textureControls = Content.Load<Texture2D>("controls");
-            _textureFondEcran = Content.Load<Texture2D>("background");
+
+            _texturePlayButton = Content.Load<Texture2D>("Menu/play");
+            _textureControls = Content.Load<Texture2D>("Menu/controls");
+            _textureFondEcran = Content.Load<Texture2D>("Menu/background");
 
 
             //JEU
-
+            HUD.LoadContent(Content);
             Map.LoadContent(Content, GraphicsDevice);
             Fee.LoadContent(Content);
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
 
-            _textureMonstreUI = Content.Load<Texture2D>("monstersUI");
-            _texturePersoUI = Content.Load<Texture2D>("persoUI");
 
             MapUI.LoadContent(Content);
-            HUD.Load(Content);
+            HUD.LoadContent(Content);
             ViePerso.LoadContent(Content);
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             Perso.LoadContent(spriteSheet, Content);

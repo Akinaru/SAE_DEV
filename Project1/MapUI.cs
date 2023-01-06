@@ -26,9 +26,9 @@ namespace Project1
 
         public static void LoadContent(Microsoft.Xna.Framework.Content.ContentManager Content)
         {
-            _textureMapPerso = Content.Load<Texture2D>("Perso/mapPerso");
-            _textureMapMonstre = Content.Load<Texture2D>("Perso/mapMonstre");
-            _textureMapUI = Content.Load<Texture2D>("map");
+            _textureMapPerso = Content.Load<Texture2D>("MapUI/mapPerso");
+            _textureMapMonstre = Content.Load<Texture2D>("MapUI/mapMonstre");
+            _textureMapUI = Content.Load<Texture2D>("MapUI/map");
 
         }
 

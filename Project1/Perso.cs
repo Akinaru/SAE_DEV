@@ -33,7 +33,7 @@ namespace Project1
         public static void LoadContent(SpriteSheet spriteSheet, ContentManager Content)
         {
             _perso = new AnimatedSprite(spriteSheet);
-            _textureBouclier = Content.Load<Texture2D>("boucllier");
+            _textureBouclier = Content.Load<Texture2D>("Perso/bouclier");
 
         }
 
