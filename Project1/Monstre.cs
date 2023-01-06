@@ -19,11 +19,13 @@ namespace Project1
         private Vector2 position;
         private AnimatedSprite monstre;
         private double vitesse;
+        private int vie;
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
             this.MonstreSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
             this.Vitesse = new Random().Next(400,550) / 10;
+            this.Vie = 3;
         }
 
         public void Spawn()
@@ -78,6 +80,19 @@ namespace Project1
             set
             {
                 this.vitesse = value;
+            }
+        }
+
+        public int Vie
+        {
+            get
+            {
+                return this.vie;
+            }
+
+            set
+            {
+                this.vie = value;
             }
         }
 
