@@ -17,12 +17,14 @@ namespace Project1
         }
         public static void Draw(SpriteBatch _spriteBatch)
         {
+            Vector2 pos = new Vector2(1050,15);
+            _spriteBatch.Draw(Game1._textureMonstreUI, pos, Color.White);
+            _spriteBatch.DrawString(Message._police, Game1._listeMonstre.Count + " monstres", pos + new Vector2(55, 15), Color.White);
 
-            _spriteBatch.Draw(Game1._textureMonstreUI, new Vector2(1125,15), Color.White);
-            _spriteBatch.DrawString(Message._police, Game1._listeMonstre.Count + " monstres", new Vector2(1180, 30), Color.White);
+            _spriteBatch.Draw(Game1._texturePersoUI, pos + new Vector2(0, 43), Color.White);
+            _spriteBatch.DrawString(Message._police, "0 kills", pos + new Vector2(55, 58), Color.White);
 
-            _spriteBatch.Draw(Game1._texturePersoUI, new Vector2(1125, 58), Color.White);
-            _spriteBatch.DrawString(Message._police, "0 kills", new Vector2(1180, 73), Color.White);
+            _spriteBatch.DrawString(Message._police, ""+Zone._zone, pos + new Vector2(55, 91), Color.White);
         }
 
 

@@ -94,14 +94,12 @@ namespace Project1
             _viePerso = 6;
             Perso.Initialise();
             Fee.Initialise();
+            Zone.Initialise();
             base.Initialize();
-
-
             for (int i = 0; i < 100; i++)
             {
                 _listeMonstre.Add(new Monstre("monstreAnimation.sf",new Vector2(new Random().Next(0,1600), new Random().Next(0, 1600)), Content));
             }
-
             // Gestion de la caméra
             var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, _screenWidth, _screenHeight);
             Camera.Initialise(viewportadapter);
@@ -133,7 +131,6 @@ namespace Project1
             MapUI.LoadContent(Content);
             HUD.Load(Content);
             ViePerso.LoadContent(Content);
-
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             Perso.LoadContent(spriteSheet, Content);
             Message.LoadContent(Content);
@@ -186,11 +183,9 @@ namespace Project1
                 Fee.Update();
                 ViePerso.Update();
                 KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, _graphics, deltaTime);
-
                 Camera.Update();
-
                 MapUI.Update();
-
+                Zone.Update();
                 _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
                 Monstre.Update(deltaTime);
                 Perso._perso.Play(Perso._animation);
