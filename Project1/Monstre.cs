@@ -20,12 +20,18 @@ namespace Project1
         private AnimatedSprite monstre;
         private double vitesse;
         private int vie;
+        private Texture2D _texturelowLife;
+        private Texture2D _texturemidLife;
+        private Texture2D _texturefullLife;
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
             this.MonstreSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
             this.Vitesse = new Random().Next(400,550) / 10;
             this.Vie = 3;
+            this._texturelowLife = content.Load<Texture2D>("lowLife");
+            this._texturemidLife = content.Load<Texture2D>("midLife");
+            this._texturefullLife = content.Load<Texture2D>("fullLife");
         }
 
         public void Spawn()
@@ -100,12 +106,13 @@ namespace Project1
         {
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
-                float distance = Vector2.Distance(Game1._listeMonstre[i].Position, Perso._positionPerso);
+                Monstre monstre = Game1._listeMonstre[i];
+                float distance = Vector2.Distance(monstre.Position, Perso._positionPerso);
                 if (distance > 16)
                 {
                     
-                    Vector2 direction = Vector2.Normalize(Perso._positionPerso - Game1._listeMonstre[i].Position);
-                    Vector2 pos = new Vector2(Game1._listeMonstre[i].Position.X, Game1._listeMonstre[i].Position.Y);
+                    Vector2 direction = Vector2.Normalize(Perso._positionPerso - monstre.Position);
+                    Vector2 pos = new Vector2(monstre.Position.X, monstre.Position.Y);
                     ushort x;
                     ushort y;
                     if (direction.X <= 0) //x gauche
@@ -153,10 +160,13 @@ namespace Project1
                         animation = "walkSouth";
                     if (direction.Y < 0)
                         animation = "walkNorth";
-                    Game1._listeMonstre[i].MonstreSprite.Play(animation);
-                    Game1._listeMonstre[i].MonstreSprite.Update(deltaTime);
-                    Game1._listeMonstre[i].Position += direction * (float)Game1._listeMonstre[i].Vitesse * deltaTime;
-
+                    monstre.MonstreSprite.Play(animation);
+                    monstre.MonstreSprite.Update(deltaTime);
+                    monstre.Position += direction * (float)monstre.Vitesse * deltaTime;
+                    if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 16)
+                    {
+                        Perso._positionPerso += (direction) *400 * deltaTime;
+                    }
                 }
             }
 
@@ -166,9 +176,23 @@ namespace Project1
         {
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
+                Monstre monstre = Game1._listeMonstre[i];
 
-                _spriteBatch.Draw(Game1._listeMonstre[i].MonstreSprite, Game1._listeMonstre[i].Position);
+                _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
                 _spriteBatch.Draw(Game1._textureombrePerso, Game1._listeMonstre[i].Position + new Vector2(-16, -12), Color.White);
+                if(monstre.Vie == 3)
+                    _spriteBatch.Draw(monstre._texturefullLife, monstre.Position + new Vector2(-12, -12), Color.White);
+                else if (monstre.Vie == 2)
+                    _spriteBatch.Draw(monstre._texturemidLife, monstre.Position + new Vector2(-12, -12), Color.White);
+                else if (monstre.Vie == 1)
+                    _spriteBatch.Draw(monstre._texturelowLife, monstre.Position + new Vector2(-12, -12), Color.White);
+                else
+                {
+                    monstre.Spawn();
+                    monstre.Vie = 3;
+                }
+
+
             }
         }
 

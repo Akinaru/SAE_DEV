@@ -16,6 +16,8 @@ namespace Project1
     internal class KeyboardManager
     {
 
+        public static bool frappe;
+        public static float wait;
 
         public static void Manage(Vector2 _positionPerso, TiledMap _tiledMap, string animation, float walkSpeed, int _mapWidth, int _mapHeight, GraphicsDeviceManager _graphics)
         {
@@ -82,9 +84,19 @@ namespace Project1
                 dir.Normalize();
             Perso._positionPerso += dir * walkSpeed;
 
-            if (Keyboard.GetState().IsKeyUp(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-
+                if (!frappe)
+                {
+                    for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                    {
+                        if (Vector2.Distance(Game1._listeMonstre[i].Position, Perso._positionPerso) < 24)
+                        {
+                            Game1._listeMonstre[i].Vie -= 1;
+                            frappe = true;
+                        }
+                    }
+                }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.F3))

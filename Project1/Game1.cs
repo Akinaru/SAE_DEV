@@ -77,6 +77,8 @@ namespace Project1
             _gameBegin = false;
             _debugMode = false;
             _wait = 0;
+            KeyboardManager.frappe = false;
+            KeyboardManager.wait = 0;
 
             _screenWidth = 1280;
             _screenHeight = 720;
@@ -147,6 +149,8 @@ namespace Project1
 
             //JEU
 
+            
+
             if (_gameStarted)
             {
                 if (_gameBegin)
@@ -156,6 +160,17 @@ namespace Project1
                     else
                         _gameBegin = false;
                 }
+
+                if (KeyboardManager.frappe)
+                {
+                    KeyboardManager.wait += 1 * deltaTime;
+                    if(KeyboardManager.wait >= 1)
+                    {
+                        KeyboardManager.frappe = false;
+                        KeyboardManager.wait = 0;
+                    }
+                }
+
                 float walkSpeed = deltaTime * Perso._vitessePerso;
                 Perso.Update();
                 Fee.Update();
