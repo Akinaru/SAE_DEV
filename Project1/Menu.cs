@@ -65,6 +65,8 @@ namespace Project1
                 {
                     Game1._gameStarted = true;
                     Game1._gameBegin = true;
+                    Message.Display("Libere la ville des mechants !", "Fais vite... Je crois en toi !", 5);
+
                 }
             }
             KeyboardState keyboardState = Keyboard.GetState();
@@ -73,6 +75,8 @@ namespace Project1
             {
                 Game1._gameStarted = true;
                 Game1._gameBegin = true;
+                Message.Display("Libere la ville des mechants !", "Fais vite... Je crois en toi !", 5);
+
             }
         }
 

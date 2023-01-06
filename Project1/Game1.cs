@@ -84,7 +84,7 @@ namespace Project1
 
 
             _vague = 1;
-            _nombreMonstre = 10;
+            _nombreMonstre = 1;
             for (int i = 0; i < _nombreMonstre; i++)
             {
                 _listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
@@ -131,7 +131,7 @@ namespace Project1
 
 
             Menu.Update(Mouse.GetState(), Content);
-            
+            Message.Update(deltaTime);
 
             if (_gameStarted)
             {
@@ -239,11 +239,7 @@ namespace Project1
                 _spriteBatch.Begin();
                 MapUI.Draw(_spriteBatch);
                 HUD.Draw(_spriteBatch);
-
-                if (_gameBegin)
-                {
-                    Message.Draw(_spriteBatch, "Libere la ville des mechants !", "Fais vite... Je crois en toi !");
-                }
+                Message.Draw(_spriteBatch);
                 _spriteBatch.End();
             }
 
