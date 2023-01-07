@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Content;
@@ -24,6 +25,8 @@ namespace Project1
         public static AnimatedSprite _epee;
         public static bool _animEpee;
         public static Vector2 _positionEpee;
+        public static SoundEffect _sonNewVague;
+        public static SoundEffect _sonHit;
 
 
         public static void Initialise()
@@ -46,7 +49,8 @@ namespace Project1
             _epee = new AnimatedSprite(spritesheetEpee);
             
             _textureBouclier = Content.Load<Texture2D>("Perso/bouclier");
-
+            _sonNewVague = Content.Load<SoundEffect>("Son/NewVague");
+            _sonHit = Content.Load<SoundEffect>("Son/Hit");
         }
 
         public static void Update(float deltaTime)

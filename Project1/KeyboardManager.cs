@@ -92,16 +92,7 @@ namespace Project1
                     frappe = true;
                     for (int i = 0; i < Game1._listeMonstre.Count; i++)
                     {
-                        Monstre monstre = Game1._listeMonstre[i];
-           
-
-                        if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 30)
-                        {
-                            monstre.Vie -= 1;
-                            monstre.Hit = true;
-                            //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
-                            //monstre.Position += direction * 700 * deltaTime;
-                        }
+                        Monstre.Touche(Game1._listeMonstre[i]);
                     }
                 }
             }
@@ -123,15 +114,6 @@ namespace Project1
             if (Keyboard.GetState().IsKeyUp(Keys.Tab))
             {
                 MapUI._showUI = false;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-            {
-                Perso._vitessePerso = 125;
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.LeftShift))
-            {
-                Perso._vitessePerso = 100;
             }
 
         }

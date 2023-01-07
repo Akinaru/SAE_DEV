@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Content;
@@ -30,6 +31,7 @@ namespace Project1
         private bool hit;
         private bool mort;
         private float mortWait;
+        
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
@@ -45,6 +47,7 @@ namespace Project1
             this.Hit = false;
             this.Mort = false;
             this.mortWait = 0;
+            
         }
 
         public void Spawn()
@@ -152,6 +155,8 @@ namespace Project1
                 Monstre monstre = Game1._listeMonstre[i];
                 monstre.fumee.Play("fumee");
                 monstre.fumee.Update(deltaTime);
+
+
                 float distance = Vector2.Distance(monstre.Position, Perso._positionPerso);
                 if (monstre.Mort)
                 {
@@ -166,7 +171,8 @@ namespace Project1
 
                     }
                 }
-                if (distance >= 6)
+
+                if (distance >= 6 && distance < 16 * 10)
                 {
                     
                     Vector2 direction = Vector2.Normalize(Perso._positionPerso - monstre.Position);
@@ -226,9 +232,13 @@ namespace Project1
                 {
                     if (!Perso._touche)
                     {
-                        Perso._touche = true;
-                        Jeu._viePerso -= 1;
-                        ViePerso.Update();
+                        if (!monstre.Mort)
+                        {
+                            Perso._touche = true;
+                            Jeu._viePerso -= 1;
+                            ViePerso.Update();
+                        }
+  
                     }
                 }
             }
@@ -271,9 +281,21 @@ namespace Project1
                 }
             }
         }
+        public static void Touche(Monstre monstre)
+        {
+            if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 30)
+            {
+                monstre.Vie -= 1;
+                monstre.Hit = true;
+                Perso._sonHit.Play(Game1._volumeSon, 0, 0);
+                //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
+                //monstre.Position += direction * 700 * deltaTime;
+            }
+        }
 
         public static void NewVague(ContentManager Content)
         {
+            Perso._sonNewVague.Play(Game1._volumeSon, 0, 0);
             Jeu._nombreMonstre += 6;
             Jeu._vague += 1;
             Message.Display("Bravo ! Tu es a la vague "+ Jeu._vague+ ". ", "Les monstres arrivent!", 5);

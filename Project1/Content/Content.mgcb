@@ -480,9 +480,21 @@
 /processorParam:Quality=Best
 /build:Son/Accept.wav
 
+#begin Son/Hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/Hit.wav
+
 #begin Son/MusiqueMenu.ogg
 /importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Son/MusiqueMenu.ogg
+
+#begin Son/NewVague.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/NewVague.wav
 
