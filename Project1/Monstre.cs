@@ -145,7 +145,7 @@ namespace Project1
             }
         }
 
-        public static void Update(float deltaTime)
+        public static void Update(float deltaTime, ContentManager Content)
         {
             for (int i = 0; i < Game1._listeMonstre.Count; i++)
             {
@@ -159,6 +159,10 @@ namespace Project1
                     if(monstre.mortWait >= 0.3)
                     {
                         Game1._listeMonstre.Remove(monstre);
+                        if (Game1._listeMonstre.Count == 0)
+                        {
+                            Monstre.NewVague(Content);
+                        }
 
                     }
                 }
@@ -262,10 +266,7 @@ namespace Project1
                 {
                     monstre.Hit = false;
                     monstre.Mort = true;
-                    if(Game1._listeMonstre.Count == 0)
-                    {
-                        Monstre.NewVague(Content);
-                    }
+
 
                 }
             }

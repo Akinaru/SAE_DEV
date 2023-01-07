@@ -136,7 +136,7 @@ namespace Project1
             MapUI.Update();
             Zone.Update();
             _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
-            Monstre.Update(deltaTime);
+            Monstre.Update(deltaTime, Content);
             Perso._perso.Play(Perso._animation);
             Perso._perso.Update(deltaTime);
             Map.Update(gameTime);
