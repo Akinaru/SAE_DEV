@@ -81,7 +81,8 @@ namespace Project1
                         mousePosition.Y >= _positionPlayButton.Y &&
                         mousePosition.Y <= _positionPlayButton.Y + 100)
                 {
-                    gameStart();
+                    if (!Jeu._gameStarted)
+                        gameStart();
 
                 }
             }
@@ -89,7 +90,8 @@ namespace Project1
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                gameStart();
+                if (!Jeu._gameStarted)
+                    gameStart();
 
             }
         }
