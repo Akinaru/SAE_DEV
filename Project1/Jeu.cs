@@ -144,12 +144,12 @@ namespace Project1
         }
         public override void Draw(GameTime gameTime)
         {
-            var transformMatrix = Camera._camera.GetViewMatrix();
+            var matriceCamera = Camera._camera.GetViewMatrix();
 
             //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
-            Game1._spriteBatch.Begin(transformMatrix: transformMatrix);
+            Game1._spriteBatch.Begin(transformMatrix: matriceCamera);
 
-            Map.Draw(transformMatrix);
+            Map.Draw(matriceCamera);
 
             Monstre.Draw(Game1._spriteBatch, Content);
             Perso.Draw(Game1._spriteBatch);

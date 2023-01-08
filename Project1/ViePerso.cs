@@ -32,6 +32,7 @@ namespace Project1
             {
                 Game1.Etat = Game1.Etats.GameOver;
             }
+            
         }
 
         public static void Draw(SpriteBatch _spriteBatch)
