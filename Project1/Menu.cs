@@ -16,12 +16,13 @@ namespace Project1
     {
         // pour récupérer une référence à l’objet game pour avoir accès à tout ce qui est 
         // défini dans Game1
-        private Game1 _myGame;
         public static Texture2D _textureFondEcran;
         public static Texture2D _texturePlayButton;
         public static Texture2D _textureControls;
         public static Texture2D _textureFacileButton;
         public static Texture2D _textureDifficileButton;
+        public static Texture2D _texturePlusButton;
+        public static Texture2D _textureMoinButton;
 
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
@@ -44,11 +45,14 @@ namespace Project1
         }
         public override void LoadContent()
         {
+            Message.LoadContent(Content);
             _texturePlayButton = Content.Load<Texture2D>("Menu/play");
             _textureControls = Content.Load<Texture2D>("Menu/controls");
             _textureFondEcran = Content.Load<Texture2D>("Menu/background");
             _textureFacileButton = Content.Load<Texture2D>("Menu/facile");
             _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
+            _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
+            _textureMoinButton = Content.Load<Texture2D>("Menu/moin");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _musique = Content.Load<Song>("Son/MusiqueMenu");
@@ -76,6 +80,7 @@ namespace Project1
 
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
+                //BOUTON JEU
                 if (mousePosition.X >= _positionPlayButton.X &&
                         mousePosition.X <= _positionPlayButton.X + 300 &&
                         mousePosition.Y >= _positionPlayButton.Y &&
@@ -84,6 +89,26 @@ namespace Project1
                     if (!Jeu._gameStarted)
                         gameStart();
 
+                }
+
+                //BOUTON PLUS
+                if(mousePosition.X >= 10 &&
+                    mousePosition.X <= 10+50 &&
+                    mousePosition.Y >= 10 &&
+                    mousePosition.Y <= 10 + 50)
+                {
+                    if(Math.Round(Game1._volumeSon,1) < 1)
+                        Game1._volumeSon += 0.01f;
+                }
+
+                //BOUTON MOIN
+                if (mousePosition.X >= 100 &&
+                    mousePosition.X <= 100 + 50 &&
+                    mousePosition.Y >= 10 &&
+                    mousePosition.Y <= 10 + 50)
+                {
+                    if (Game1._volumeSon > 0)
+                        Game1._volumeSon -= 0.01f;
                 }
             }
             KeyboardState keyboardState = Keyboard.GetState();
@@ -113,6 +138,10 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureFacileButton, _positionFacileButton, Color.White);
             Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
+
+            Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
+            Game1._spriteBatch.DrawString(Message._police, ""+Math.Round((Game1._volumeSon*100),0), new Vector2(80, 30), Color.White);
+            Game1._spriteBatch.Draw(_textureMoinButton, new Vector2(100, 10), Color.White);
             Game1._spriteBatch.End();
         }
     }

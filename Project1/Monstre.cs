@@ -28,9 +28,10 @@ namespace Project1
         private Texture2D _texturemidLife;
         private Texture2D _texturefullLife;
         private Texture2D _textureMonstreHit;
-        private bool hit;
-        private bool mort;
-        private float mortWait;
+        private bool _hit;
+        private bool _mort;
+        private float _mortWait;
+        private float _deplaceWait;
         
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
@@ -46,7 +47,8 @@ namespace Project1
             this.Spawn();
             this.Hit = false;
             this.Mort = false;
-            this.mortWait = 0;
+            this._mortWait = 0;
+            this._deplaceWait = 0;
             
         }
 
@@ -126,12 +128,12 @@ namespace Project1
         {
             get
             {
-                return this.hit;
+                return this._hit;
             }
 
             set
             {
-                this.hit = value;
+                this._hit = value;
             }
         }
 
@@ -139,46 +141,102 @@ namespace Project1
         {
             get
             {
-                return mort;
+                return _mort;
             }
 
             set
             {
-                mort = value;
+                _mort = value;
             }
         }
 
-        public static void Update(float deltaTime, ContentManager Content)
+        public void Update(float deltaTime, ContentManager Content)
         {
-            for (int i = 0; i < Game1._listeMonstre.Count; i++)
+            this.fumee.Play("fumee");
+            this.fumee.Update(deltaTime);
+
+
+            float distance = Vector2.Distance(this.Position, Perso._positionPerso);
+            if (this.Mort)
             {
-                Monstre monstre = Game1._listeMonstre[i];
-                monstre.fumee.Play("fumee");
-                monstre.fumee.Update(deltaTime);
-
-
-                float distance = Vector2.Distance(monstre.Position, Perso._positionPerso);
-                if (monstre.Mort)
+                this._mortWait += 1 * deltaTime;
+                if(this._mortWait >= 0.3)
                 {
-                    monstre.mortWait += 1 * deltaTime;
-                    if(monstre.mortWait >= 0.3)
+                    Game1._listeMonstre.Remove(this);
+                    if (Game1._listeMonstre.Count == 0)
                     {
-                        Game1._listeMonstre.Remove(monstre);
-                        if (Game1._listeMonstre.Count == 0)
-                        {
-                            Monstre.NewVague(Content);
-                        }
+                        Monstre.NewVague(Content);
+                    }
 
+                }
+            }
+
+            if (distance >= 6 && distance < 16 * 10)
+            {
+                this._deplaceWait = 0;
+                Vector2 direction = Vector2.Normalize(Perso._positionPerso - this.Position);
+                Vector2 pos = new Vector2(this.Position.X, this.Position.Y);
+                ushort x;
+                ushort y;
+                if (direction.X <= 0) //x gauche
+                {
+                    x = (ushort)(pos.X / Map._tiledMap.TileWidth - 0.5);
+                    y = (ushort)(pos.Y / Map._tiledMap.TileHeight);
+                    if (Collision.IsCollision(x, y))
+                    {
+                        direction.X = 0;
                     }
                 }
-
-                if (distance >= 6 && distance < 16 * 10)
+                if (direction.X > 0) //x droite
                 {
-                    
-                    Vector2 direction = Vector2.Normalize(Perso._positionPerso - monstre.Position);
-                    Vector2 pos = new Vector2(monstre.Position.X, monstre.Position.Y);
+                    x = (ushort)(pos.X / Map._tiledMap.TileWidth + 0.5);
+                    y = (ushort)(pos.Y / Map._tiledMap.TileHeight);
+                    if (Collision.IsCollision(x, y))
+                    {
+                        direction.X = 0;
+                    }
+                }
+                if (direction.Y <= 0) //y haut
+                {
+                    x = (ushort)(pos.X / Map._tiledMap.TileWidth);
+                    y = (ushort)((pos.Y -2 )/ Map._tiledMap.TileHeight);
+                    if (Collision.IsCollision(x, y))
+                    {
+                        direction.Y = 0;
+                    }
+                }
+                if (direction.Y > 0) //y bas
+                {
+                    x = (ushort)(pos.X / Map._tiledMap.TileWidth);
+                    y = (ushort)((pos.Y + 3) / Map._tiledMap.TileHeight);
+                    if (Collision.IsCollision(x, y))
+                    {
+                        direction.Y = 0;
+                    }
+                }
+                String animation = "walkSouth";
+                this.MonstreSprite.Play(animation);
+                this.MonstreSprite.Update(deltaTime);
+                double vitesse = this.Vitesse;
+                if (this.Hit)
+                {
+                    vitesse -= 30;
+                }
+                this.Position += direction * (float)vitesse * deltaTime;
+
+
+            }
+            else
+            {
+                this._deplaceWait += 1 * deltaTime;
+                if(this._deplaceWait >= 2)
+                {
+                    Vector2 pos = new Vector2(this.Position.X, this.Position.Y);
                     ushort x;
                     ushort y;
+                    Vector2 direction = Vector2.Zero;
+                    direction.X = (float)(new Random().NextDouble() * 2) - 1;
+                    direction.Y = (float)(new Random().NextDouble() * 2) - 1;
                     if (direction.X <= 0) //x gauche
                     {
                         x = (ushort)(pos.X / Map._tiledMap.TileWidth - 0.5);
@@ -200,7 +258,7 @@ namespace Project1
                     if (direction.Y <= 0) //y haut
                     {
                         x = (ushort)(pos.X / Map._tiledMap.TileWidth);
-                        y = (ushort)((pos.Y -2 )/ Map._tiledMap.TileHeight);
+                        y = (ushort)((pos.Y - 2) / Map._tiledMap.TileHeight);
                         if (Collision.IsCollision(x, y))
                         {
                             direction.Y = 0;
@@ -215,31 +273,27 @@ namespace Project1
                             direction.Y = 0;
                         }
                     }
-                    String animation = "walkSouth";
-                    monstre.MonstreSprite.Play(animation);
-                    monstre.MonstreSprite.Update(deltaTime);
-                    double vitesse = monstre.Vitesse;
-                    if (monstre.Hit)
-                    {
-                        vitesse -= 30;
-                    }
-                    monstre.Position += direction * (float)vitesse * deltaTime;
 
-       
+                    this.MonstreSprite.Update(deltaTime);
+                    double vitesse = this.Vitesse;
+                    this.Position += direction * (float)vitesse* 8 * deltaTime;
+                    this._deplaceWait = 0;
                 }
+                String animation = "walkSouth";
+                this.MonstreSprite.Play(animation);
+            }
 
-                if (Vector2.Distance(monstre.Position, Perso._positionPerso) <= 6)
+            if (Vector2.Distance(this.Position, Perso._positionPerso) <= 6)
+            {
+                if (!Perso._touche)
                 {
-                    if (!Perso._touche)
+                    if (!this.Mort)
                     {
-                        if (!monstre.Mort)
-                        {
-                            Perso._touche = true;
-                            Jeu._viePerso -= 1;
-                            ViePerso.Update();
-                        }
-  
+                        Perso._touche = true;
+                        Jeu._viePerso -= 1;
+                        ViePerso.Update();
                     }
+  
                 }
             }
         }
@@ -250,7 +304,7 @@ namespace Project1
             {
                 Monstre monstre = Game1._listeMonstre[i];
   
-                if (monstre.hit)
+                if (monstre._hit)
                 {
                     _spriteBatch.Draw(monstre._textureMonstreHit, monstre.Position - new Vector2(8, 8), Color.White);
                 }

@@ -20,6 +20,7 @@ namespace Project1
 
         public static Texture2D _textureombrePerso;
         public static Texture2D _textureObscurite;
+        public static Texture2D _textureSang;
         public static Vector2 _positionObscurite;
         public static bool _debugMode;
         public static double _viePerso;
@@ -72,6 +73,7 @@ namespace Project1
             Fee.LoadContent(Content);
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
+            _textureSang = Content.Load<Texture2D>("Perso/sang");
 
 
             MapUI.LoadContent(Content);
@@ -136,7 +138,10 @@ namespace Project1
             MapUI.Update();
             Zone.Update();
             _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
-            Monstre.Update(deltaTime, Content);
+            for (int i = 0; i < Game1._listeMonstre.Count; i++)
+            {
+                Game1._listeMonstre[i].Update(deltaTime, Content);
+            }
             Perso._perso.Play(Perso._animation);
             Perso._perso.Update(deltaTime);
             Map.Update(gameTime);
@@ -159,11 +164,9 @@ namespace Project1
 
             if (!_debugMode)
                 Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
+            if (Perso._waitBouclier > 0)
+                Game1._spriteBatch.Draw(_textureSang, Camera._cameraPosition-new Vector2(300,150), Color.White);
             Game1._spriteBatch.End();
-
-
-
-
             Game1._spriteBatch.Begin();
             MapUI.Draw(Game1._spriteBatch);
             HUD.Draw(Game1._spriteBatch);

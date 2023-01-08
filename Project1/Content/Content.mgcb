@@ -270,6 +270,18 @@
 /processorParam:TextureFormat=Color
 /build:Menu/facileHover.png
 
+#begin Menu/moin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/moin.png
+
 #begin Menu/play.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -293,6 +305,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Menu/playHover.png
+
+#begin Menu/plus.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/plus.png
 
 #begin Message/message.png
 /importer:TextureImporter
@@ -425,6 +449,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Perso/coeurvide.png
+
+#begin Perso/sang.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Perso/sang.png
 
 #begin Perso/shadow.png
 /importer:TextureImporter
