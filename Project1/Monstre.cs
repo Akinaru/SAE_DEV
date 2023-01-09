@@ -329,8 +329,17 @@ namespace Project1
                 else //vie du monstre = 0
                 {
                     monstre.Hit = false;
-                    monstre.Mort = true;
+                    if(monstre.Mort == false)
+                    {
+                        Jeu._nombreKill += 1;
+                        int rnd = new Random().Next(0, 100);
+                        if(rnd < 90)
+                        {
+                            new Coeur(monstre.Position, Content);
+                        }
+                    }
 
+                    monstre.Mort = true;
 
                 }
             }

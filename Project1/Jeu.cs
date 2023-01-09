@@ -29,6 +29,9 @@ namespace Project1
         public static float _wait;
         public static int _vague;
         public static int _nombreMonstre;
+        public static int _nombreKill;
+
+        public static List<Coeur> _listeCoeur = new List<Coeur>();
 
         public Jeu(Game1 game) : base(game)
         {
@@ -55,6 +58,7 @@ namespace Project1
 
             _vague = 1;
             _nombreMonstre = 15;
+            _nombreKill = 0;
             if (Game1._listeMonstre.Count > 0)
             {
                 Game1._listeMonstre.Clear();
@@ -65,7 +69,6 @@ namespace Project1
             }
             var viewportadapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, Game1._screenWidth, Game1._screenHeight);
             Camera.Initialise(viewportadapter);
-            Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
 
         }
         public override void LoadContent()
@@ -84,6 +87,8 @@ namespace Project1
             SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             Perso.LoadContent(Content);
             Message.LoadContent(Content);
+            Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
+
         }
 
         public override void Update(GameTime gameTime)
@@ -157,7 +162,10 @@ namespace Project1
             Game1._spriteBatch.Begin(transformMatrix: matriceCamera);
 
             Map.Draw(matriceCamera);
-
+            for (int i = 0; i < _listeCoeur.Count; i++)
+            {
+                Game1._spriteBatch.Draw(_listeCoeur[i].Texture, _listeCoeur[i].Position, Color.White);
+            }
             Monstre.Draw(Game1._spriteBatch, Content);
             Perso.Draw(Game1._spriteBatch);
 
