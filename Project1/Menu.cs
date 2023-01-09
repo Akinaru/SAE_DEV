@@ -27,11 +27,20 @@ namespace Project1
         public static Texture2D _textureMoinButton;
 
         public static Texture2D _textureRaccourciEntree;
+        public static Texture2D _textureRaccourciVolumeDown;
+        public static Texture2D _textureRaccourciVolumeUp;
+        public static Texture2D _textureRaccourciF;
+        public static Texture2D _textureRaccourciD;
 
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
         public static Vector2 _positionDifficileButton;
+
         public static Vector2 _positionRaccourciEntree;
+        public static Vector2 _positionRaccourciVolumeDown;
+        public static Vector2 _positionRaccourciVolumeUp;
+        public static Vector2 _positionRaccourciF;
+        public static Vector2 _positionRaccourciD;
 
         public enum Etats { Facile, Difficile };
         public static Etats difficulte;
@@ -47,9 +56,15 @@ namespace Project1
         public override void Initialize()
         {
             _positionPlayButton = new Vector2(490, 300);
-            _positionRaccourciEntree = new Vector2(500, 310);
             _positionFacileButton = new Vector2(500, 400);
             _positionDifficileButton = new Vector2(500 + 104 + 24, 400);
+
+            _positionRaccourciEntree = new Vector2(500, 310);
+            _positionRaccourciVolumeDown = new Vector2(500, 320);
+            _positionRaccourciVolumeUp = new Vector2(500, 330);
+            _positionRaccourciF = new Vector2(500, 340);
+            _positionRaccourciD = new Vector2(500, 350);
+
             difficulte = Etats.Facile;
             base.Initialize();
         }
@@ -67,6 +82,10 @@ namespace Project1
             _textureMoinButton = Content.Load<Texture2D>("Menu/moin");
 
             _textureRaccourciEntree = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciEntree");
+            _textureRaccourciVolumeDown = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeDown");
+            _textureRaccourciVolumeUp = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeUp");
+            _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciD");
+            _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciF");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _musique = Content.Load<Song>("Son/MusiqueMenu");
@@ -217,6 +236,10 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
+            Game1._spriteBatch.Draw(_textureRaccourciVolumeDown, _positionRaccourciVolumeDown, Color.White);
+            Game1._spriteBatch.Draw(_textureRaccourciVolumeUp, _positionRaccourciVolumeUp, Color.White);
+            Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
+            Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
 
 
             //Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
