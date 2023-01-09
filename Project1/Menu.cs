@@ -26,9 +26,12 @@ namespace Project1
         public static Texture2D _texturePlusButton;
         public static Texture2D _textureMoinButton;
 
+        public static Texture2D _textureRaccourciEntree;
+
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
         public static Vector2 _positionDifficileButton;
+        public static Vector2 _positionRaccourciEntree;
 
         public enum Etats { Facile, Difficile };
         public static Etats difficulte;
@@ -44,8 +47,9 @@ namespace Project1
         public override void Initialize()
         {
             _positionPlayButton = new Vector2(490, 300);
-            _positionFacileButton = new Vector2(500, 500);
-            _positionDifficileButton = new Vector2(500 + 104 + 24, 500);
+            _positionRaccourciEntree = new Vector2(500, 310);
+            _positionFacileButton = new Vector2(500, 400);
+            _positionDifficileButton = new Vector2(500 + 104 + 24, 400);
             difficulte = Etats.Facile;
             base.Initialize();
         }
@@ -61,6 +65,8 @@ namespace Project1
 
             _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
             _textureMoinButton = Content.Load<Texture2D>("Menu/moin");
+
+            _textureRaccourciEntree = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciEntree");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _musique = Content.Load<Song>("Son/MusiqueMenu");
@@ -209,6 +215,9 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
 
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
+
+            Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
+
 
             //Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
             //Game1._spriteBatch.DrawString(Message._police, ""+Math.Round((Game1._volumeSon*100),0), new Vector2(80, 30), Color.White);
