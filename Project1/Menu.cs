@@ -156,7 +156,6 @@ namespace Project1
                 {
                     difficulte = Etats.Difficile;
                 }
-
                 //BOUTON PLUS
                 if (mousePosition.X >= 10 &&
                     mousePosition.X <= 10+50 &&
