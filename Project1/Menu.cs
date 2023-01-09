@@ -84,8 +84,8 @@ namespace Project1
             _textureRaccourciEntree = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciEntree");
             _textureRaccourciVolumeDown = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeDown");
             _textureRaccourciVolumeUp = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeUp");
-            _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciD");
-            _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciF");
+            _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciDifficile");
+            _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciFacile");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _musique = Content.Load<Song>("Son/MusiqueMenu");
