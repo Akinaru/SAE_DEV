@@ -1,5 +1,6 @@
 ﻿using Comora;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
@@ -25,6 +26,7 @@ namespace Project1
         public static int _screenWidth;
         public static int _screenHeight;
         public static List<Monstre> _listeMonstre = new List<Monstre>();
+        public static List<Bombe> _listeBombe = new List<Bombe>();
         public static float _volumeSon;
 
 
@@ -48,7 +50,6 @@ namespace Project1
                 etat = value;
             }
         }
-
 
         public Game1()
         {

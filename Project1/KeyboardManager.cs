@@ -106,8 +106,7 @@ namespace Project1
                 Jeu._debugMode = false;
             }
 
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Tab))
+                if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
                 MapUI._showUI = true;
             }

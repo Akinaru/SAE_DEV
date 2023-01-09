@@ -158,11 +158,11 @@ namespace Project1
                 }
                 //BOUTON PLUS
                 if (mousePosition.X >= 10 &&
-                    mousePosition.X <= 10+50 &&
+                    mousePosition.X <= 10 + 50 &&
                     mousePosition.Y >= 10 &&
                     mousePosition.Y <= 10 + 50)
                 {
-                    if(Math.Round(Game1._volumeSon,1) < 1)
+                    if (Math.Round(Game1._volumeSon, 1) < 1)
                         Game1._volumeSon += 0.01f;
                 }
 
@@ -183,6 +183,10 @@ namespace Project1
                 if (!Jeu._gameStarted)
                     gameStart();
 
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                Game.Exit();   
             }
         }
 
@@ -206,9 +210,9 @@ namespace Project1
 
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
-            Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
-            Game1._spriteBatch.DrawString(Message._police, ""+Math.Round((Game1._volumeSon*100),0), new Vector2(80, 30), Color.White);
-            Game1._spriteBatch.Draw(_textureMoinButton, new Vector2(100, 10), Color.White);
+            //Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
+            //Game1._spriteBatch.DrawString(Message._police, ""+Math.Round((Game1._volumeSon*100),0), new Vector2(80, 30), Color.White);
+            //Game1._spriteBatch.Draw(_textureMoinButton, new Vector2(100, 10), Color.White);
             Game1._spriteBatch.End();
         }
     }
