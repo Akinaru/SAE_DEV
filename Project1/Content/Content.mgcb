@@ -342,7 +342,7 @@
 /processorParam:TextureFormat=Color
 /build:Menu/plus.png
 
-#begin Menu/raccourciTouche/racccourciA.png
+#begin Menu/raccourciTouche/racccourciVolumeUp.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -352,9 +352,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Menu/raccourciTouche/racccourciA.png
+/build:Menu/raccourciTouche/racccourciVolumeUp.png
 
-#begin Menu/raccourciTouche/raccourciB.png
+#begin Menu/raccourciTouche/raccourciDifficile.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -364,19 +364,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Menu/raccourciTouche/raccourciB.png
-
-#begin Menu/raccourciTouche/raccourciD.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Menu/raccourciTouche/raccourciD.png
+/build:Menu/raccourciTouche/raccourciDifficile.png
 
 #begin Menu/raccourciTouche/raccourciEntree.png
 /importer:TextureImporter
@@ -390,7 +378,7 @@
 /processorParam:TextureFormat=Color
 /build:Menu/raccourciTouche/raccourciEntree.png
 
-#begin Menu/raccourciTouche/raccourciF.png
+#begin Menu/raccourciTouche/raccourciFacile.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -400,7 +388,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Menu/raccourciTouche/raccourciF.png
+/build:Menu/raccourciTouche/raccourciFacile.png
+
+#begin Menu/raccourciTouche/raccourciVolumeDown.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/raccourciTouche/raccourciVolumeDown.png
 
 #begin Message/message.png
 /importer:TextureImporter
