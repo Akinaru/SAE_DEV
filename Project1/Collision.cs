@@ -13,8 +13,7 @@ namespace Project1
 
         public static bool IsCollision(ushort x, ushort y)
         {
-            //gestion des collisions listé dans la liste _mapLayers
-
+            
             for (int i = 0; i < _mapLayers.Count; i++)
             {
                 TiledMapTileLayer _Layer = Map._tiledMap.GetLayer<TiledMapTileLayer>(_mapLayers[i]);
