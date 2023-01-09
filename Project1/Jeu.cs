@@ -23,7 +23,6 @@ namespace Project1
         public static Texture2D _textureSang;
         public static Vector2 _positionObscurite;
         public static bool _debugMode;
-        public static double _viePerso;
         public static bool _gameStarted;
         public static bool _gameBegin;
         public static float _wait;
@@ -50,7 +49,6 @@ namespace Project1
 
 
             MapUI.Initialise();
-            _viePerso = 6;
             Perso.Initialise();
             Fee.Initialise();
             Zone.Initialise();
@@ -135,7 +133,10 @@ namespace Project1
                 }
 
             }
-
+            for (int i = 0; i < _listeCoeur.Count; i++)
+            {
+                _listeCoeur[i].CheckRecuperer();
+            }
             float walkSpeed = deltaTime * Perso._vitessePerso;
             Perso.Update(deltaTime);
             Fee.Update();

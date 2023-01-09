@@ -18,18 +18,25 @@ namespace Project1
 
         public Coeur(Vector2 position, ContentManager Content)
         {
-            this.Position = position - new Vector2(8,8);
+            this.Position = position;
             this.Texture = Content.Load<Texture2D>("Perso/coeurDrop");
             this.Recupere = false;
             Jeu._listeCoeur.Add(this);
         }
 
-        public void AEteRecupere()
+        public void CheckRecuperer()
         {
             if(Vector2.Distance(Perso._positionPerso, this.Position) < 5)
             {
-             
-                this.Recupere = true;
+                if(Perso._viePerso < 6)
+                {
+                    if (!this.Recupere)
+                    {
+                        Perso._viePerso += 1;
+                        this.Recupere = true;
+                        this.Remove();
+                    }
+                }
             }
         }
 

@@ -290,7 +290,7 @@ namespace Project1
                     if (!this.Mort)
                     {
                         Perso._touche = true;
-                        Jeu._viePerso -= 1;
+                        Perso._viePerso -= 1;
                         ViePerso.Update();
                     }
   

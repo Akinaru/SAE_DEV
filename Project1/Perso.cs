@@ -27,6 +27,8 @@ namespace Project1
         public static Vector2 _positionEpee;
         public static SoundEffect _sonNewVague;
         public static SoundEffect _sonHit;
+        public static double _viePerso;
+
 
 
         public static void Initialise()
@@ -37,6 +39,7 @@ namespace Project1
             _touche = false;
             _waitBouclier = 0;
             _animEpee = false;
+            _viePerso = 6;
 
 
         }

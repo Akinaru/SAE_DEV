@@ -28,7 +28,7 @@ namespace Project1
 
         public static void Update()
         {
-            if(Jeu._viePerso == 0)
+            if(Perso._viePerso == 0)
             {
                 Game1.Etat = Game1.Etats.GameOver;
             }
@@ -38,13 +38,13 @@ namespace Project1
         public static void Draw(SpriteBatch _spriteBatch)
         {
             Vector2 pos = Perso._positionPerso + new Vector2(-25, -25);
-            for (int i = 0; i < Jeu._viePerso; i++)
+            for (int i = 0; i < Perso._viePerso; i++)
             {
                 _spriteBatch.Draw(_texturevieCoeurPlein, new Vector2(pos.X + 10 + (5 * i), pos.Y + 10), Color.White);
             }
-            for (int i = 0; i < 6 - Jeu._viePerso; i++)
+            for (int i = 0; i < 6 - Perso._viePerso; i++)
             {
-                _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(5 * Jeu._viePerso) + 5 * i, pos.Y + 10), Color.White);
+                _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(5 * Perso._viePerso) + 5 * i, pos.Y + 10), Color.White);
             }
         }
 
