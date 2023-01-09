@@ -24,7 +24,7 @@ namespace Project1
             KeyboardState keyboardState = Keyboard.GetState();
 
             var dir = Vector2.Zero;
-            
+            MouseState mouseState = Mouse.GetState();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
             {
@@ -84,7 +84,7 @@ namespace Project1
                 dir.Normalize();
             Perso._positionPerso += dir * walkSpeed;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) || mouseState.LeftButton == ButtonState.Pressed)
             {
                 if (!frappe)
                 {

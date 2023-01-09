@@ -29,6 +29,7 @@ namespace Project1
         public static int _vague;
         public static int _nombreMonstre;
         public static int _nombreKill;
+        public static float _chrono;
 
         public static List<Coeur> _listeCoeur = new List<Coeur>();
 
@@ -42,7 +43,7 @@ namespace Project1
             _gameBegin = false;
             _debugMode = false;
             _wait = 0;
-
+            _chrono = 0;
             KeyboardManager.frappe = false;
             KeyboardManager.wait = 0;
 
@@ -92,6 +93,7 @@ namespace Project1
         public override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _chrono += 1 * deltaTime;
             if (_gameBegin)
             {
                 if (_wait < 4)
@@ -135,7 +137,7 @@ namespace Project1
             }
             for (int i = 0; i < _listeCoeur.Count; i++)
             {
-                _listeCoeur[i].CheckRecuperer();
+                _listeCoeur[i].CheckRecuperer(deltaTime);
             }
             float walkSpeed = deltaTime * Perso._vitessePerso;
             Perso.Update(deltaTime);
@@ -184,5 +186,11 @@ namespace Project1
             Message.Draw(Game1._spriteBatch);
             Game1._spriteBatch.End();
         }
+
+        public static String getChrono()
+        {
+            return "" + Math.Round(_chrono,0);
+        }
+
     }
 }

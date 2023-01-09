@@ -40,10 +40,14 @@ namespace Project1
             _spriteBatch.Draw(_textureVagueHUD, pos + new Vector2(0, 135), Color.White);
             _spriteBatch.DrawString(Message._police, "Vague "+Jeu._vague, pos + new Vector2(55, 150), Color.White);
 
+            _spriteBatch.Draw(_textureVagueHUD, pos + new Vector2(0, 180), Color.White);
+            _spriteBatch.DrawString(Message._police, "Chrono " + Jeu.getChrono(), pos + new Vector2(55, 195), Color.White);
+
+
             if (Perso._waitBouclier > 0)
             {
-                _spriteBatch.Draw(_textureBouclierHUD, pos + new Vector2(0, 180), Color.White);
-                _spriteBatch.DrawString(Message._police,"Invincible " + (3 - Math.Round(Perso._waitBouclier,0)) + "s", pos + new Vector2(55, 195), Color.White);
+                _spriteBatch.Draw(_textureBouclierHUD, pos + new Vector2(0, 225), Color.White);
+                _spriteBatch.DrawString(Message._police,"Invincible " + (3 - Math.Round(Perso._waitBouclier,0)) + "s", pos + new Vector2(55, 240), Color.White);
             }
         }
 

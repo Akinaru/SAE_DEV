@@ -15,17 +15,20 @@ namespace Project1
         private Texture2D texture;
         private Vector2 position;
         private bool recupere;
+        private float timer;
 
         public Coeur(Vector2 position, ContentManager Content)
         {
             this.Position = position;
             this.Texture = Content.Load<Texture2D>("Perso/coeurDrop");
             this.Recupere = false;
+            this.Timer = 10;
             Jeu._listeCoeur.Add(this);
         }
 
-        public void CheckRecuperer()
+        public void CheckRecuperer(float deltaTime)
         {
+
             if(Vector2.Distance(Perso._positionPerso, this.Position) < 5)
             {
                 if(Perso._viePerso < 6)
@@ -37,6 +40,11 @@ namespace Project1
                         this.Remove();
                     }
                 }
+            }
+            this.Timer -= 1 * deltaTime;
+            if(this.Timer <= 0)
+            {
+                this.Remove();
             }
         }
 
@@ -81,6 +89,19 @@ namespace Project1
             set
             {
                 this.recupere = value;
+            }
+        }
+
+        public float Timer
+        {
+            get
+            {
+                return this.timer;
+            }
+
+            set
+            {
+                this.timer = value;
             }
         }
     }

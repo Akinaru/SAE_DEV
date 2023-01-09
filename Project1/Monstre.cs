@@ -334,9 +334,10 @@ namespace Project1
                     {
                         Jeu._nombreKill += 1;
                         int rnd = new Random().Next(0, 100);
-                        if(rnd < 10)
+                        if(rnd < 10) //10% de chance de drop un coeur
                         {
                             new Coeur(monstre.Position, Content);
+                            Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
                         }
                     }
 
@@ -347,7 +348,7 @@ namespace Project1
         }
         public static void Touche(Monstre monstre)
         {
-            if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 30)
+            if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 40)
             {
                 monstre.Vie -= 1;
                 monstre.Hit = true;
