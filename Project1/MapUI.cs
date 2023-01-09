@@ -13,6 +13,7 @@ namespace Project1
         public static Texture2D _textureMapPerso;
         public static Texture2D _textureMapMonstre;
         public static Texture2D _textureMapUI;
+        public static Texture2D _textureCoeurUI;
         public static Vector2 _positionMapPersoUI;
 
 
@@ -29,6 +30,7 @@ namespace Project1
             _textureMapPerso = Content.Load<Texture2D>("MapUI/mapPerso");
             _textureMapMonstre = Content.Load<Texture2D>("MapUI/mapMonstre");
             _textureMapUI = Content.Load<Texture2D>("MapUI/map");
+            _textureCoeurUI = Content.Load<Texture2D>("Perso/coeurDrop");
 
         }
 
@@ -37,11 +39,16 @@ namespace Project1
             if (_showUI)
             {
             _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
-                _spriteBatch.Draw(_textureMapPerso, _positionMapPersoUI, Color.White);
                 for (int i = 0; i < Game1._listeMonstre.Count; i++)
                 {
                     _spriteBatch.Draw(_textureMapMonstre, new Vector2((Game1._listeMonstre[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeMonstre[i].Position.Y / 1600 * 600) + 60 - 8), Color.Red);
                 }
+                for (int i = 0; i < Jeu._listeCoeur.Count; i++)
+                {
+                    _spriteBatch.Draw(_textureCoeurUI, new Vector2((Jeu._listeCoeur[i].Position.X / 1600 * 600) + 340 - 8, (Jeu._listeCoeur[i].Position.Y / 1600 * 600) + 60 - 8), Color.White);
+                }
+                _spriteBatch.Draw(_textureMapPerso, _positionMapPersoUI, Color.White);
+
             }
 
         }

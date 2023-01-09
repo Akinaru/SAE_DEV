@@ -333,7 +333,7 @@ namespace Project1
                     {
                         Jeu._nombreKill += 1;
                         int rnd = new Random().Next(0, 100);
-                        if(rnd < 90)
+                        if(rnd < 10)
                         {
                             new Coeur(monstre.Position, Content);
                         }
