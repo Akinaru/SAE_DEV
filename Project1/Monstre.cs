@@ -291,7 +291,7 @@ namespace Project1
                     if (!this.Mort)
                     {
                         Perso._touche = true;
-                        Jeu._viePerso -= 1;
+                        Perso._viePerso -= 1;
                         ViePerso.Update();
                     }
   
@@ -334,7 +334,7 @@ namespace Project1
                     {
                         Jeu._nombreKill += 1;
                         int rnd = new Random().Next(0, 100);
-                        if(rnd < 90)
+                        if(rnd < 10)
                         {
                             new Coeur(monstre.Position, Content);
                         }
