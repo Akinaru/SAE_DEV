@@ -44,8 +44,8 @@ namespace Project1
         public override void Initialize()
         {
             _positionPlayButton = new Vector2(490, 300);
-            _positionFacileButton = new Vector2(510, 500);
-            _positionDifficileButton = new Vector2(510 + 104 + 24, 500);
+            _positionFacileButton = new Vector2(500, 500);
+            _positionDifficileButton = new Vector2(500 + 104 + 24, 500);
             difficulte = Etats.Facile;
             base.Initialize();
         }
