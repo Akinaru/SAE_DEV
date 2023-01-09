@@ -342,18 +342,6 @@
 /processorParam:TextureFormat=Color
 /build:Menu/plus.png
 
-#begin Menu/raccourciTouche/racccourciVolumeUp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Menu/raccourciTouche/racccourciVolumeUp.png
-
 #begin Menu/raccourciTouche/raccourciDifficile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -401,6 +389,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Menu/raccourciTouche/raccourciVolumeDown.png
+
+#begin Menu/raccourciTouche/raccourciVolumeUp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/raccourciTouche/raccourciVolumeUp.png
 
 #begin Message/message.png
 /importer:TextureImporter
