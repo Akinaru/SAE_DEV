@@ -65,6 +65,8 @@ namespace Project1
             }
             var viewportadapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, Game1._screenWidth, Game1._screenHeight);
             Camera.Initialise(viewportadapter);
+            Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
+
         }
         public override void LoadContent()
         {

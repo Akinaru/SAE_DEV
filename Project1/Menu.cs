@@ -195,8 +195,8 @@ namespace Project1
             Jeu._gameStarted = true;
             Jeu._gameBegin = true;
             Game1.Etat = Game1.Etats.Play;
-            Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
             _sonJouer.Play(Game1._volumeSon, 0, 0);
+
 
         }
         public override void Draw(GameTime gameTime)
