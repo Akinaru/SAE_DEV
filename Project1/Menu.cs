@@ -59,11 +59,11 @@ namespace Project1
             _positionFacileButton = new Vector2(500, 400);
             _positionDifficileButton = new Vector2(500 + 104 + 24, 400);
 
-            _positionRaccourciEntree = new Vector2(500, 310);
-            _positionRaccourciVolumeDown = new Vector2(500, 320);
-            _positionRaccourciVolumeUp = new Vector2(500, 330);
-            _positionRaccourciF = new Vector2(500, 340);
-            _positionRaccourciD = new Vector2(500, 350);
+            _positionRaccourciEntree = new Vector2(200, 310);
+            _positionRaccourciVolumeDown = new Vector2(200, 320);
+            _positionRaccourciVolumeUp = new Vector2(200, 330);
+            _positionRaccourciF = new Vector2(200, 340);
+            _positionRaccourciD = new Vector2(200, 350);
 
             difficulte = Etats.Facile;
             base.Initialize();

@@ -22,7 +22,6 @@ namespace Project1
         public static Texture2D _textureObscurite;
         public static Texture2D _textureSang;
         public static Vector2 _positionObscurite;
-        public static bool _debugMode;
         public static bool _gameStarted;
         public static bool _gameBegin;
         public static float _wait;
@@ -41,7 +40,6 @@ namespace Project1
         {
             _gameStarted = false;
             _gameBegin = false;
-            _debugMode = false;
             _wait = 0;
             _chrono = 0;
             KeyboardManager.frappe = false;
@@ -174,8 +172,7 @@ namespace Project1
 
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);
-
-            if (!_debugMode)
+            if(Menu.difficulte == Menu.Etats.Difficile)
                 Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             if (Perso._waitBouclier > 0)
                 Game1._spriteBatch.Draw(_textureSang, Camera._cameraPosition-new Vector2(300,150), Color.White);
@@ -189,7 +186,9 @@ namespace Project1
 
         public static String getChrono()
         {
-            return "" + Math.Round(_chrono,0);
+            int minute = (int)Jeu._chrono / 60;
+            int seconde = (int)Jeu._chrono % 60;
+            return "" + minute + "m et "+seconde+"s";
         }
 
     }

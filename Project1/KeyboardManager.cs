@@ -97,15 +97,6 @@ namespace Project1
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.F3))
-            {
-                Jeu._debugMode = true;
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.F3))
-            {
-                Jeu._debugMode = false;
-            }
-
                 if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
                 MapUI._showUI = true;
