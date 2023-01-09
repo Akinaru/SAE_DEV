@@ -19,14 +19,19 @@ namespace Project1
         public static Texture2D _textureFondEcran;
         public static Texture2D _texturePlayButton;
         public static Texture2D _textureControls;
+
         public static Texture2D _textureFacileButton;
         public static Texture2D _textureDifficileButton;
+
         public static Texture2D _texturePlusButton;
         public static Texture2D _textureMoinButton;
 
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
         public static Vector2 _positionDifficileButton;
+
+        public enum Etats { Facile, Difficile };
+        public static Etats difficulte;
 
         private SoundEffect _sonJouer;
         private Song _musique;
@@ -39,8 +44,9 @@ namespace Project1
         public override void Initialize()
         {
             _positionPlayButton = new Vector2(490, 300);
-            _positionFacileButton = new Vector2(400, 500);
-            _positionDifficileButton = new Vector2(Game1._screenWidth / 2, 500);
+            _positionFacileButton = new Vector2(510, 500);
+            _positionDifficileButton = new Vector2(510 + 104 + 24, 500);
+            difficulte = Etats.Facile;
             base.Initialize();
         }
         public override void LoadContent()
@@ -49,8 +55,10 @@ namespace Project1
             _texturePlayButton = Content.Load<Texture2D>("Menu/play");
             _textureControls = Content.Load<Texture2D>("Menu/controls");
             _textureFondEcran = Content.Load<Texture2D>("Menu/background");
+
             _textureFacileButton = Content.Load<Texture2D>("Menu/facile");
             _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
+
             _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
             _textureMoinButton = Content.Load<Texture2D>("Menu/moin");
 
@@ -65,6 +73,7 @@ namespace Project1
             MouseState mouseState = Mouse.GetState();
 
             var mousePosition = new Point(mouseState.X, mouseState.Y);
+            //hover play
             if (mousePosition.X >= _positionPlayButton.X &&
                 mousePosition.X <= _positionPlayButton.X + 300 &&
                 mousePosition.Y >= _positionPlayButton.Y &&
@@ -75,6 +84,47 @@ namespace Project1
             else
             {
                 _texturePlayButton = Content.Load<Texture2D>("Menu/play");
+            }
+
+
+            //hover facile
+            if (difficulte != Etats.Facile)
+            {
+                if (mousePosition.X >= _positionFacileButton.X &&
+                    mousePosition.X <= _positionFacileButton.X + 104 &&
+                    mousePosition.Y >= _positionFacileButton.Y &&
+                    mousePosition.Y <= _positionFacileButton.Y + 32)
+                {
+                    _textureFacileButton = Content.Load<Texture2D>("Menu/facileHover");
+                }
+                else
+                {
+                    _textureFacileButton = Content.Load<Texture2D>("Menu/facile");
+                }
+            }
+            else
+            {
+                _textureFacileButton = Content.Load<Texture2D>("menu/facileSouligne");
+            }
+
+            //hover difficile
+            if (difficulte != Etats.Difficile)
+            {
+                if (mousePosition.X >= _positionDifficileButton.X &&
+                    mousePosition.X <= _positionDifficileButton.X + 104 &&
+                    mousePosition.Y >= _positionDifficileButton.Y &&
+                    mousePosition.Y <= _positionDifficileButton.Y + 32)
+                {
+                    _textureDifficileButton = Content.Load<Texture2D>("Menu/difficileHover");
+                }
+                else
+                {
+                    _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
+                }
+            }
+            else
+            {
+                _textureDifficileButton = Content.Load<Texture2D>("menu/difficileSouligne");
             }
 
 
@@ -90,9 +140,25 @@ namespace Project1
                         gameStart();
 
                 }
+                //BOUTON FACILE
+                if (mousePosition.X >= _positionFacileButton.X &&
+                    mousePosition.X <= _positionFacileButton.X + 104 &&
+                    mousePosition.Y >= _positionFacileButton.Y &&
+                    mousePosition.Y <= _positionFacileButton.Y + 32)
+                {
+                    difficulte = Etats.Facile;
+                }
+                //BOUTON DIFFICILE
+                if (mousePosition.X >= _positionDifficileButton.X &&
+                    mousePosition.X <= _positionDifficileButton.X + 104 &&
+                    mousePosition.Y >= _positionDifficileButton.Y &&
+                    mousePosition.Y <= _positionDifficileButton.Y + 32)
+                {
+                    difficulte = Etats.Difficile;
+                }
 
                 //BOUTON PLUS
-                if(mousePosition.X >= 10 &&
+                if (mousePosition.X >= 10 &&
                     mousePosition.X <= 10+50 &&
                     mousePosition.Y >= 10 &&
                     mousePosition.Y <= 10 + 50)
@@ -135,8 +201,10 @@ namespace Project1
             Game1._spriteBatch.Begin();
             Game1._spriteBatch.Draw(_textureFondEcran, new Vector2(0, 0), Color.White);
             Game1._spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
+
             Game1._spriteBatch.Draw(_textureFacileButton, _positionFacileButton, Color.White);
             Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
+
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
             Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
