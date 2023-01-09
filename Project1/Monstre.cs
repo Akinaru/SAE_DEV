@@ -47,6 +47,7 @@ namespace Project1
             this.Spawn();
             this.Hit = false;
             this.Mort = false;
+
             this._mortWait = 0;
             this._deplaceWait = 0;
             
