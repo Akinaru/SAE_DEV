@@ -30,7 +30,7 @@ namespace Project1
 
 
 
-        public enum Etats { Menu,Play, GameOver, Quit, Attente };
+        public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu };
         public static Etats etat;
         private readonly ScreenManager _screenManager;
         private Menu _screenMenu;
@@ -109,6 +109,11 @@ namespace Project1
             if (Etat == Etats.Quit)
                 Exit();
             else if (Etat == Etats.Menu)
+            {
+                Etat = Etats.Attente;
+                _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black, 0.1f));
+            }
+            else if (Etat == Etats.BackMenu)
             {
                 Etat = Etats.Attente;
                 _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black));

@@ -12,11 +12,13 @@ using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Content;
 using Newtonsoft.Json.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Project1
 {
     public class Jeu : GameScreen
     {
+
 
         public static Texture2D _textureombrePerso;
         public static Texture2D _textureObscurite;
@@ -29,6 +31,9 @@ namespace Project1
         public static int _nombreMonstre;
         public static int _nombreKill;
         public static float _chrono;
+        public enum NiveauDifficulte { Facile, Difficile };
+        public static NiveauDifficulte difficulte;
+
 
         public static List<Coeur> _listeCoeur = new List<Coeur>();
 
@@ -42,6 +47,7 @@ namespace Project1
             _gameBegin = false;
             _wait = 0;
             _chrono = 0;
+            difficulte = NiveauDifficulte.Facile;
             KeyboardManager.frappe = false;
             KeyboardManager.wait = 0;
 
@@ -54,7 +60,14 @@ namespace Project1
             base.Initialize();
 
             _vague = 1;
-            _nombreMonstre = 15;
+            if(difficulte == NiveauDifficulte.Facile)
+            {
+                _nombreMonstre = 15;
+            }
+            else
+            {
+                _nombreMonstre = 25;
+            }
             _nombreKill = 0;
             if (Game1._listeMonstre.Count > 0)
             {
@@ -73,6 +86,7 @@ namespace Project1
             HUD.LoadContent(Content);
 
             Fee.LoadContent(Content);
+
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureSang = Content.Load<Texture2D>("Perso/sang");
@@ -91,67 +105,74 @@ namespace Project1
         public override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _chrono += 1 * deltaTime;
-            if (_gameBegin)
+            if (!Perso._mort)
             {
-                if (_wait < 4)
-                    _wait += deltaTime;
-                else
-                    _gameBegin = false;
-            }
-
-            if (KeyboardManager.frappe)
-            {
-                KeyboardManager.wait += 2 * deltaTime;
-                if (KeyboardManager.wait >= 0.5)
+                _chrono += 1 * deltaTime;
+                if (_gameBegin)
                 {
-                    for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                    if (_wait < 4)
+                        _wait += deltaTime;
+                    else
+                        _gameBegin = false;
+                }
+
+                if (KeyboardManager.frappe)
+                {
+                    KeyboardManager.wait += 2 * deltaTime;
+                    if (KeyboardManager.wait >= 0.5)
                     {
-                        Monstre monstre = Game1._listeMonstre[i];
-                        if (monstre.Hit)
+                        for (int i = 0; i < Game1._listeMonstre.Count; i++)
                         {
-                            monstre.Hit = false;
+                            Monstre monstre = Game1._listeMonstre[i];
+                            if (monstre.Hit)
+                            {
+                                monstre.Hit = false;
+                            }
                         }
                     }
+                    if (KeyboardManager.wait >= 1)
+                    {
+                        KeyboardManager.frappe = false;
+                        Perso._animEpee = false;
+                        Perso._epee.Play("fight");
+                        Perso._epee.Update(deltaTime);
+                        KeyboardManager.wait = 0;
+                    }
                 }
-                if (KeyboardManager.wait >= 1)
+                if (Perso._touche)
                 {
-                    KeyboardManager.frappe = false;
-                    Perso._animEpee = false;
-                    Perso._epee.Play("fight");
-                    Perso._epee.Update(deltaTime);
-                    KeyboardManager.wait = 0;
+                    Perso._waitBouclier += 1 * deltaTime;
+                    if (Math.Round(Perso._waitBouclier, 0) == 3)
+                    {
+                        Perso._touche = false;
+                        Perso._waitBouclier = 0;
+                    }
+
                 }
+                for (int i = 0; i < _listeCoeur.Count; i++)
+                {
+                    _listeCoeur[i].CheckRecuperer(deltaTime);
+                }
+                float walkSpeed = deltaTime * Perso._vitessePerso;
+                Perso.Update(deltaTime);
+                ViePerso.Update();
+                KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, Game1._graphics, deltaTime);
+                Camera.Update();
+                MapUI.Update();
+                Zone.Update();
+                _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
+                for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                {
+                    Game1._listeMonstre[i].Update(deltaTime, Content);
+                }
+                Perso._perso.Play(Perso._animation);
+                Perso._perso.Update(deltaTime);
             }
-            if (Perso._touche)
+            else
             {
-                Perso._waitBouclier += 1 * deltaTime;
-                if (Math.Round(Perso._waitBouclier, 0) == 3)
-                {
-                    Perso._touche = false;
-                    Perso._waitBouclier = 0;
-                }
 
             }
-            for (int i = 0; i < _listeCoeur.Count; i++)
-            {
-                _listeCoeur[i].CheckRecuperer(deltaTime);
-            }
-            float walkSpeed = deltaTime * Perso._vitessePerso;
-            Perso.Update(deltaTime);
             Fee.Update();
-            ViePerso.Update();
-            KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, Game1._graphics, deltaTime);
-            Camera.Update();
-            MapUI.Update();
-            Zone.Update();
-            _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
-            for (int i = 0; i < Game1._listeMonstre.Count; i++)
-            {
-                Game1._listeMonstre[i].Update(deltaTime, Content);
-            }
-            Perso._perso.Play(Perso._animation);
-            Perso._perso.Update(deltaTime);
             Map.Update(gameTime);
             
         }
@@ -159,9 +180,7 @@ namespace Project1
         {
             var matriceCamera = Camera._camera.GetViewMatrix();
 
-            //affichage de la map et des sprites en fonction de la matrice créée depuis la caméra actuelle.
             Game1._spriteBatch.Begin(transformMatrix: matriceCamera);
-
             Map.Draw(matriceCamera);
             for (int i = 0; i < _listeCoeur.Count; i++)
             {
@@ -172,15 +191,17 @@ namespace Project1
 
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);
-            if(Menu.difficulte == Menu.Etats.Difficile)
+            if(difficulte == NiveauDifficulte.Difficile)
                 Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             if (Perso._waitBouclier > 0)
                 Game1._spriteBatch.Draw(_textureSang, Camera._cameraPosition-new Vector2(300,150), Color.White);
             Game1._spriteBatch.End();
+
             Game1._spriteBatch.Begin();
             MapUI.Draw(Game1._spriteBatch);
             HUD.Draw(Game1._spriteBatch);
             Message.Draw(Game1._spriteBatch);
+
             Game1._spriteBatch.End();
         }
 

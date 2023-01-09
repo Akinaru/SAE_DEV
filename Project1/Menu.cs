@@ -42,8 +42,7 @@ namespace Project1
         public static Vector2 _positionRaccourciF;
         public static Vector2 _positionRaccourciD;
 
-        public enum Etats { Facile, Difficile };
-        public static Etats difficulte;
+
 
         private SoundEffect _sonJouer;
         private Song _musique;
@@ -65,7 +64,6 @@ namespace Project1
             _positionRaccourciF = new Vector2(200, 340);
             _positionRaccourciD = new Vector2(200, 350);
 
-            difficulte = Etats.Facile;
             base.Initialize();
         }
         public override void LoadContent()
@@ -96,7 +94,6 @@ namespace Project1
         public override void Update(GameTime gameTime)
         {
             MouseState mouseState = Mouse.GetState();
-
             var mousePosition = new Point(mouseState.X, mouseState.Y);
             //hover play
             if (mousePosition.X >= _positionPlayButton.X &&
@@ -113,7 +110,7 @@ namespace Project1
 
 
             //hover facile
-            if (difficulte != Etats.Facile)
+            if (Jeu.difficulte != Jeu.NiveauDifficulte.Facile)
             {
                 if (mousePosition.X >= _positionFacileButton.X &&
                     mousePosition.X <= _positionFacileButton.X + 104 &&
@@ -133,7 +130,7 @@ namespace Project1
             }
 
             //hover difficile
-            if (difficulte != Etats.Difficile)
+            if (Jeu.difficulte != Jeu.NiveauDifficulte.Difficile)
             {
                 if (mousePosition.X >= _positionDifficileButton.X &&
                     mousePosition.X <= _positionDifficileButton.X + 104 &&
@@ -171,7 +168,7 @@ namespace Project1
                     mousePosition.Y >= _positionFacileButton.Y &&
                     mousePosition.Y <= _positionFacileButton.Y + 32)
                 {
-                    difficulte = Etats.Facile;
+                    Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
                 }
                 //BOUTON DIFFICILE
                 if (mousePosition.X >= _positionDifficileButton.X &&
@@ -179,7 +176,7 @@ namespace Project1
                     mousePosition.Y >= _positionDifficileButton.Y &&
                     mousePosition.Y <= _positionDifficileButton.Y + 32)
                 {
-                    difficulte = Etats.Difficile;
+                    Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
                 }
                 //BOUTON PLUS
                 if (mousePosition.X >= 10 &&
@@ -221,8 +218,6 @@ namespace Project1
             Jeu._gameBegin = true;
             Game1.Etat = Game1.Etats.Play;
             _sonJouer.Play(Game1._volumeSon, 0, 0);
-
-
         }
         public override void Draw(GameTime gameTime)
         {

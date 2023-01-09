@@ -215,8 +215,6 @@ namespace Project1
                         direction.Y = 0;
                     }
                 }
-                String animation = "walkSouth";
-                this.MonstreSprite.Play(animation);
                 this.MonstreSprite.Update(deltaTime);
                 double vitesse = this.Vitesse;
                 if (this.Hit)
@@ -224,62 +222,6 @@ namespace Project1
                     vitesse -= 30;
                 }
                 this.Position += direction * (float)vitesse * deltaTime;
-
-
-            }
-            else
-            {
-                this._deplaceWait += 1 * deltaTime;
-                if(this._deplaceWait >= 2)
-                {
-                    Vector2 pos = new Vector2(this.Position.X, this.Position.Y);
-                    ushort x;
-                    ushort y;
-                    Vector2 direction = Vector2.Zero;
-                    direction.X = (float)(new Random().NextDouble() * 2) - 1;
-                    direction.Y = (float)(new Random().NextDouble() * 2) - 1;
-                    if (direction.X <= 0) //x gauche
-                    {
-                        x = (ushort)(pos.X / Map._tiledMap.TileWidth - 0.5);
-                        y = (ushort)(pos.Y / Map._tiledMap.TileHeight);
-                        if (Collision.IsCollision(x, y))
-                        {
-                            direction.X = 0;
-                        }
-                    }
-                    if (direction.X > 0) //x droite
-                    {
-                        x = (ushort)(pos.X / Map._tiledMap.TileWidth + 0.5);
-                        y = (ushort)(pos.Y / Map._tiledMap.TileHeight);
-                        if (Collision.IsCollision(x, y))
-                        {
-                            direction.X = 0;
-                        }
-                    }
-                    if (direction.Y <= 0) //y haut
-                    {
-                        x = (ushort)(pos.X / Map._tiledMap.TileWidth);
-                        y = (ushort)((pos.Y - 2) / Map._tiledMap.TileHeight);
-                        if (Collision.IsCollision(x, y))
-                        {
-                            direction.Y = 0;
-                        }
-                    }
-                    if (direction.Y > 0) //y bas
-                    {
-                        x = (ushort)(pos.X / Map._tiledMap.TileWidth);
-                        y = (ushort)((pos.Y + 3) / Map._tiledMap.TileHeight);
-                        if (Collision.IsCollision(x, y))
-                        {
-                            direction.Y = 0;
-                        }
-                    }
-
-                    this.MonstreSprite.Update(deltaTime);
-                    double vitesse = this.Vitesse;
-                    this.Position += direction * (float)vitesse* 8 * deltaTime;
-                    this._deplaceWait = 0;
-                }
                 String animation = "walkSouth";
                 this.MonstreSprite.Play(animation);
             }
@@ -360,7 +302,14 @@ namespace Project1
         public static void NewVague(ContentManager Content)
         {
             Perso._sonNewVague.Play(Game1._volumeSon, 0, 0);
-            Jeu._nombreMonstre += 6;
+            if(Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+            {
+                Jeu._nombreMonstre += 6;
+            }
+            else
+            {
+                Jeu._nombreMonstre += 12;
+            }
             Jeu._vague += 1;
             Message.Display("Bravo ! Tu es a la vague "+ Jeu._vague+ ". ", "Les monstres arrivent!", 5);
             for (int i = 0; i < Jeu._nombreMonstre; i++)

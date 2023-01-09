@@ -18,6 +18,8 @@ namespace Project1
         public static Texture2D _textureChronoHUD;
         public static Texture2D _textureBouclierHUD;
 
+        public static Texture2D _textureBackgroundHUD;
+
         public static Vector2 _positionBaseImage;
         public static Vector2 _positionBaseTexte;
 
@@ -31,32 +33,63 @@ namespace Project1
             _textureChronoHUD = Content.Load<Texture2D>("HUD/chronoHUD");
             _textureBouclierHUD = Content.Load<Texture2D>("HUD/bouclierHUD");
 
+            _textureBackgroundHUD = Content.Load<Texture2D>("HUD/backgroundHUD");
+
             _positionBaseImage = new Vector2(1050, 15);
             _positionBaseTexte = _positionBaseImage + new Vector2(55,15);
         }
         public static void Draw(SpriteBatch _spriteBatch)
         {
+            if(Perso._mort)
+            {
+                return;
+            }
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+            {
+                _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5,3), Color.White);
+            }
             _spriteBatch.Draw(_textureMonstreHUD, _positionBaseImage, Color.White);
             _spriteBatch.DrawString(Message._police, Game1._listeMonstre.Count + " monstres", _positionBaseTexte, Color.White);
-            if(Menu.difficulte == Menu.Etats.Facile)
-            {
 
+
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+            {
+                _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5, 3) + new Vector2(0, 45 * 1), Color.White);
             }
             _spriteBatch.Draw(_texturePersoHUD, _positionBaseImage + new Vector2(0, 45 * 1), Color.White);
             _spriteBatch.DrawString(Message._police, Jeu._nombreKill+" kills", _positionBaseTexte + new Vector2(0, 45 * 1), Color.White);
 
+
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+            {
+                _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5, 3) + new Vector2(0, 45 * 2), Color.White);
+            }
             _spriteBatch.Draw(_textureLocHUD, _positionBaseImage + new Vector2(0, 45 * 2), Color.White);
             _spriteBatch.DrawString(Message._police, ""+Zone._zone, _positionBaseTexte + new Vector2(0, 45 * 2), Color.White);
 
+
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+            {
+                _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5, 3) + new Vector2(0, 45 * 3), Color.White);
+            }
             _spriteBatch.Draw(_textureVagueHUD, _positionBaseImage + new Vector2(0, 45 * 3), Color.White);
             _spriteBatch.DrawString(Message._police, "Vague "+Jeu._vague, _positionBaseTexte + new Vector2(0, 45 * 3), Color.White);
 
+
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+            {
+                _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5, 3) + new Vector2(0, 45 * 4), Color.White);
+            }
             _spriteBatch.Draw(_textureChronoHUD, _positionBaseImage + new Vector2(0, 45 * 4), Color.White);
             _spriteBatch.DrawString(Message._police, "Chrono " + Jeu.getChrono(), _positionBaseTexte + new Vector2(0, 45 * 4), Color.White);
 
 
             if (Perso._waitBouclier > 0)
             {
+                if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+                {
+                    _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5, 3) + new Vector2(0, 45 * 5), Color.White);
+                }
                 _spriteBatch.Draw(_textureBouclierHUD, _positionBaseImage + new Vector2(0, 45 * 5), Color.White);
                 _spriteBatch.DrawString(Message._police,"Invincible " + (3 - Math.Round(Perso._waitBouclier,0)) + "s", _positionBaseTexte + new Vector2(0, 45 * 5), Color.White);
             }

@@ -30,6 +30,7 @@ namespace Project1
         {
             if(Perso._viePerso == 0)
             {
+                Perso._mort = true;
                 Game1.Etat = Game1.Etats.GameOver;
             }
             
