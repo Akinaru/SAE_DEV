@@ -346,7 +346,6 @@ namespace Project1
                 //monstre.Position += direction * 700 * deltaTime;
             }
         }
-
         public static void NewVague(ContentManager Content)
         {
             Perso._sonNewVague.Play(Game1._volumeSon, 0, 0);
