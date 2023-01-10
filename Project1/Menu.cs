@@ -204,11 +204,18 @@ namespace Project1
             {
                 if (!Jeu._gameStarted)
                     gameStart();
-
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Game.Exit();   
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.F))
+            {
+                Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
             }
         }
 
