@@ -22,8 +22,8 @@ namespace Project1
     {
         public static GraphicsDeviceManager _graphics;
         public static SpriteBatch _spriteBatch { get; set; }
-        public static int _screenWidth;
-        public static int _screenHeight;
+        public static int _largeurEcran;
+        public static int _hauteurEcran;
         public static List<Monstre> _listeMonstre = new List<Monstre>();
         public static List<Bombe> _listeBombe = new List<Bombe>();
         public static float _volumeSon;
@@ -72,10 +72,10 @@ namespace Project1
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _volumeSon = 0.01f;
-            _screenWidth = 1280;
-            _screenHeight = 720;
-            _graphics.PreferredBackBufferWidth = Game1._screenWidth;
-            _graphics.PreferredBackBufferHeight = Game1._screenHeight;
+            _largeurEcran = 1280;
+            _hauteurEcran = 720;
+            _graphics.PreferredBackBufferWidth = Game1._largeurEcran;
+            _graphics.PreferredBackBufferHeight = Game1._hauteurEcran;
             _graphics.ApplyChanges();
             base.Initialize();
             Map.Initialise();
