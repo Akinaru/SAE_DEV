@@ -29,8 +29,8 @@ namespace Project1
         public override void Initialize()
         {
             _positionGameOver = new Vector2(490, 110);
-            _positionBoutonMenu = new Vector2(490, 330);
-            _positionRaccourciM = new Vector2(531, 435);
+            _positionBoutonMenu = new Vector2(490, 470);
+            _positionRaccourciM = new Vector2(631, 575);
             base.Initialize();
         }
         public override void LoadContent()
