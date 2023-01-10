@@ -32,8 +32,8 @@ namespace Project1
         public override void LoadContent()
         {
             _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
-            _textureblurBackground = Content.Load<Texture2D>("blurBackground");
-            _textureGameOver = Content.Load<Texture2D>("gameOver");
+            _textureblurBackground = Content.Load<Texture2D>("Menu/blurBackground");
+            _textureGameOver = Content.Load<Texture2D>("Menu/gameOver");
         }
 
         public override void Update(GameTime gameTime)

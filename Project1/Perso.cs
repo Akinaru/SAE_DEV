@@ -15,6 +15,7 @@ namespace Project1
 {
     internal class Perso
     {
+
         public static SpriteSheet _spriteSheetWalkNormal;
         public static SpriteSheet _spriteSheetWalkEpee;
         public static Vector2 _positionPerso;
@@ -63,14 +64,6 @@ namespace Project1
 
         public static void Update(float deltaTime)
         {
-            if (_animEpee)
-            {
-                _perso = new AnimatedSprite(_spriteSheetWalkNormal);
-            }
-            else
-            {
-                _perso = new AnimatedSprite(_spriteSheetWalkEpee);
-            }
             _positionEpee = _positionPerso;
             _epee.Play("fight");
             _epee.Update(deltaTime);
@@ -80,6 +73,7 @@ namespace Project1
 
         public static void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch)
         {
+
             _spriteBatch.Draw(Jeu._textureombrePerso, _positionPerso + new Vector2(-16, -13), Color.White);
             _spriteBatch.Draw(_perso, _positionPerso);
             if (_animEpee)

@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Content;
+using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
@@ -25,7 +28,7 @@ namespace Project1
             _keyEscape = false;
         }
 
-        public static void Manage(Vector2 _positionPerso, TiledMap _tiledMap, string animation, float walkSpeed, int _mapWidth, int _mapHeight, GraphicsDeviceManager _graphics, float deltaTime)
+        public static void Manage(Vector2 _positionPerso, TiledMap _tiledMap, string animation, float walkSpeed, int _mapWidth, int _mapHeight, GraphicsDeviceManager _graphics, float deltaTime, ContentManager Content)
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -34,7 +37,6 @@ namespace Project1
 
             if (!Jeu._pause)
             {
-                Perso._animation = "idle";
                 if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
                 {
                     ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.5);
@@ -99,6 +101,7 @@ namespace Project1
                     {
                         Perso._animEpee = true;
                         _frappe = true;
+                        Perso._perso = new AnimatedSprite(Perso._spriteSheetWalkNormal);
                         for (int i = 0; i < Game1._listeMonstre.Count; i++)
                         {
                             Monstre.Touche(Game1._listeMonstre[i]);
