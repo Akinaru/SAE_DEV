@@ -229,8 +229,8 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureFondEcran, new Vector2(0, 0), Color.White);
             Game1._spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
 
-            Game1._spriteBatch.Draw(_textureFacileButton, _positionFacileButton, Color.Green);
-            Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.Red);
+            Game1._spriteBatch.Draw(_textureFacileButton, _positionFacileButton, Color.White);
+            Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
 
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
