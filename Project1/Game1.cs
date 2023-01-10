@@ -30,7 +30,7 @@ namespace Project1
 
 
 
-        public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu, Pause };
+        public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu };
         public static Etats etat;
         private readonly ScreenManager _screenManager;
         private Menu _screenMenu;

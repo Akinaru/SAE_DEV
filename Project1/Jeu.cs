@@ -31,6 +31,7 @@ namespace Project1
         public static int _nombreMonstre;
         public static int _nombreKill;
         public static float _chrono;
+        public static bool _pause;
         public enum NiveauDifficulte { Facile, Difficile };
         public static NiveauDifficulte difficulte;
 
@@ -47,6 +48,7 @@ namespace Project1
             _gameBegin = false;
             _wait = 0;
             _chrono = 0;
+            _pause = false;
             KeyboardManager._frappe = false;
             KeyboardManager._wait = 0;
 
@@ -101,7 +103,9 @@ namespace Project1
         public override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (Game1.etat != Game1.Etats.Pause)
+            float walkSpeed = deltaTime * Perso._vitessePerso;
+
+            if (!_pause)
             {
                 _chrono += 1 * deltaTime;
                 if (_gameBegin)
@@ -149,10 +153,8 @@ namespace Project1
                 {
                     _listeCoeur[i].CheckRecuperer(deltaTime);
                 }
-                float walkSpeed = deltaTime * Perso._vitessePerso;
                 Perso.Update(deltaTime);
                 ViePerso.Update();
-                KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, Game1._graphics, deltaTime);
                 Camera.Update();
                 MapUI.Update();
                 Zone.Update();
@@ -166,8 +168,10 @@ namespace Project1
             }
             else
             {
-                Game1._spriteBatch.Draw(_textureblurBackground, new Vector2(0, 0), Color.White);
+
             }
+            KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, Game1._graphics, deltaTime);
+
             Fee.Update();
             Map.Update(gameTime);
             
@@ -197,6 +201,12 @@ namespace Project1
             MapUI.Draw(Game1._spriteBatch);
             HUD.Draw(Game1._spriteBatch);
             Message.Draw(Game1._spriteBatch);
+
+            if(_pause)
+            {
+                Game1._spriteBatch.Draw(_textureblurBackground, new Vector2(0, 0), Color.White);
+
+            }
 
             Game1._spriteBatch.End();
         }
