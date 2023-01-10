@@ -43,7 +43,7 @@ namespace Project1
         public static Vector2 _positionRaccourciE;
         public static Vector2 _positionBoutonSon;
 
-
+        private bool _sourisClick;
         private bool _boutonSon;
         private SoundEffect _sonJouer;
         private SoundEffect _sonDifficulte;
@@ -68,6 +68,7 @@ namespace Project1
             _positionRaccourciE = new Vector2(631, 532);
             _positionBoutonSon = new Vector2(10, 10);
             _boutonSon = false;
+            _sourisClick = false;
             base.Initialize();
         }
         public override void LoadContent()
@@ -175,57 +176,61 @@ namespace Project1
 
 			if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                //BOUTON JEU
-                if (mousePosition.X >= _positionPlayButton.X &&
-                        mousePosition.X <= _positionPlayButton.X + 300 &&
-                        mousePosition.Y >= _positionPlayButton.Y &&
-                        mousePosition.Y <= _positionPlayButton.Y + 100)
-                {
-                    if (!Jeu._gameStarted)
-                        gameStart();
-
-                }
-                //BOUTON FACILE
-                if (mousePosition.X >= _positionFacileButton.X &&
-                    mousePosition.X <= _positionFacileButton.X + 104 &&
-                    mousePosition.Y >= _positionFacileButton.Y &&
-                    mousePosition.Y <= _positionFacileButton.Y + 32)
-                {
-                    Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
-                    _sonDifficulte.Play(Game1._volumeSon, 0, 0);
-                }
-                //BOUTON DIFFICILE
-                if (mousePosition.X >= _positionDifficileButton.X &&
-                    mousePosition.X <= _positionDifficileButton.X + 104 &&
-                    mousePosition.Y >= _positionDifficileButton.Y &&
-                    mousePosition.Y <= _positionDifficileButton.Y + 32)
-                {
-                    Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
-                    _sonDifficulte.Play(Game1._volumeSon, 0, 0);
-                }
-                //BOUTON EXTREME
-                if (mousePosition.X >= _positionExtremeButton.X &&
-                    mousePosition.X <= _positionExtremeButton.X + 186 &&
-                    mousePosition.Y >= _positionExtremeButton.Y &&
-                    mousePosition.Y <= _positionExtremeButton.Y + 32)
-                {
-                    Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
-                    _sonDifficulte.Play(Game1._volumeSon, 0, 0);
-                }
-                //BOUTON SON
-                if (mousePosition.X >= _positionBoutonSon.X &&
-                    mousePosition.X <= _positionBoutonSon.X + 50 &&
-                    mousePosition.Y >= _positionBoutonSon.Y &&
-                    mousePosition.Y <= _positionBoutonSon.Y + 50)
-                {
-                    if (!_boutonSon)
+                if (!_sourisClick) { 
+                    //BOUTON JEU
+                    if (mousePosition.X >= _positionPlayButton.X &&
+                            mousePosition.X <= _positionPlayButton.X + 300 &&
+                            mousePosition.Y >= _positionPlayButton.Y &&
+                            mousePosition.Y <= _positionPlayButton.Y + 100)
                     {
-                        if (Game1._volumeSon == 0)
-                            Game1._volumeSon = 0.01f;
-                        else
-                            Game1._volumeSon = 0;
-                        _boutonSon = true;
+                        if (!Jeu._gameStarted)
+                            gameStart();
+
                     }
+                    //BOUTON FACILE
+                    if (mousePosition.X >= _positionFacileButton.X &&
+                        mousePosition.X <= _positionFacileButton.X + 104 &&
+                        mousePosition.Y >= _positionFacileButton.Y &&
+                        mousePosition.Y <= _positionFacileButton.Y + 32)
+                    {
+                        Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
+                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                    }
+                    //BOUTON DIFFICILE
+                    if (mousePosition.X >= _positionDifficileButton.X &&
+                        mousePosition.X <= _positionDifficileButton.X + 104 &&
+                        mousePosition.Y >= _positionDifficileButton.Y &&
+                        mousePosition.Y <= _positionDifficileButton.Y + 32)
+                    {
+                        Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
+                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                    }
+                    //BOUTON EXTREME
+                    if (mousePosition.X >= _positionExtremeButton.X &&
+                        mousePosition.X <= _positionExtremeButton.X + 186 &&
+                        mousePosition.Y >= _positionExtremeButton.Y &&
+                        mousePosition.Y <= _positionExtremeButton.Y + 32)
+                    {
+                        Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
+                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                    }
+                    //BOUTON SON
+                    if (mousePosition.X >= _positionBoutonSon.X &&
+                        mousePosition.X <= _positionBoutonSon.X + 50 &&
+                        mousePosition.Y >= _positionBoutonSon.Y &&
+                        mousePosition.Y <= _positionBoutonSon.Y + 50)
+                    {
+                        if (!_boutonSon)
+                        {
+                            if (Game1._volumeSon == 0)
+                                Game1._volumeSon += 0.5f;
+                            else
+                                Game1._volumeSon -= 0.5f;
+                            _boutonSon = true;
+                        }
+                    }
+                    _sourisClick = true;
+
                 }
 
             }
@@ -233,6 +238,8 @@ namespace Project1
             {
                 if (_boutonSon)
                     _boutonSon = false;
+                if (_sourisClick)
+                    _sourisClick = false;
             }
                 KeyboardState keyboardState = Keyboard.GetState();
 

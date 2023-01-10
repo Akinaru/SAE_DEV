@@ -71,7 +71,7 @@ namespace Project1
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-            _volumeSon = 0.01f;
+            _volumeSon = 0.5f;
             _largeurEcran = 1280;
             _hauteurEcran = 720;
             _graphics.PreferredBackBufferWidth = Game1._largeurEcran;

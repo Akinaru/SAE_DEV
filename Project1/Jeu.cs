@@ -61,13 +61,11 @@ namespace Project1
 
             _vague = 1;
             if(difficulte == NiveauDifficulte.Facile)
-            {
                 _nombreMonstre = 15;
-            }
-            else
-            {
+            else if (difficulte == NiveauDifficulte.Difficile)
                 _nombreMonstre = 25;
-            }
+            else
+                _nombreMonstre = 35;
             _nombreKill = 0;
             if (Game1._listeMonstre.Count > 0)
             {
@@ -187,7 +185,7 @@ namespace Project1
             Perso.Draw(Game1._spriteBatch);
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);
-            if (difficulte == NiveauDifficulte.Difficile)
+            if (difficulte == NiveauDifficulte.Difficile || difficulte == NiveauDifficulte.Extreme)
                 
                 Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
 
