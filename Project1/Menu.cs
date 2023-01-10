@@ -61,8 +61,8 @@ namespace Project1
             _positionRaccourciEntree = new Vector2(611, 392);
             _positionRaccourciVolumeDown = new Vector2(200, 320);
             _positionRaccourciVolumeUp = new Vector2(200, 330);
-            _positionRaccourciF = new Vector2(543, 457);
-            _positionRaccourciD = new Vector2(695, 457);
+            _positionRaccourciF = new Vector2(543, 450);
+            _positionRaccourciD = new Vector2(695, 450);
 
             base.Initialize();
         }
@@ -233,8 +233,10 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
             /*Game1._spriteBatch.Draw(_textureRaccourciVolumeDown, _positionRaccourciVolumeDown, Color.White);
             Game1._spriteBatch.Draw(_textureRaccourciVolumeUp, _positionRaccourciVolumeUp, Color.White);*/
-            Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
-            Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+                Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
+            else
+                Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
 
 
             //Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
