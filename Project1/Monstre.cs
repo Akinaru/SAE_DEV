@@ -309,9 +309,13 @@ namespace Project1
             {
                 Jeu._nombreMonstre += 6;
             }
-            else
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
             {
                 Jeu._nombreMonstre += 12;
+            }
+            else
+            {
+                Jeu._nombreMonstre += 18;
             }
             Jeu._vague += 1;
             Message.Display("Bravo ! Tu es a la vague "+ Jeu._vague+ ". ", "Les monstres arrivent!", 5);
