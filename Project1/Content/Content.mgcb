@@ -792,6 +792,12 @@
 /processorParam:Quality=Best
 /build:Son/Accept.wav
 
+#begin Son/Difficulte.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/Difficulte.wav
+
 #begin Son/Hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

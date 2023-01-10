@@ -41,11 +41,12 @@ namespace Project1
         public static Vector2 _positionRaccourciF;
         public static Vector2 _positionRaccourciD;
         public static Vector2 _positionRaccourciE;
+        public static Vector2 _positionBoutonSon;
 
 
-
+        private bool _boutonSon;
         private SoundEffect _sonJouer;
-        private Song _musique;
+        private SoundEffect _sonDifficulte;
 
 
         public Menu(Game1 game) : base(game)
@@ -65,7 +66,8 @@ namespace Project1
             _positionRaccourciF = new Vector2(543, 470);
             _positionRaccourciD = new Vector2(695, 470);
             _positionRaccourciE = new Vector2(631, 532);
-
+            _positionBoutonSon = new Vector2(10, 10);
+            _boutonSon = false;
             base.Initialize();
         }
         public override void LoadContent()
@@ -88,9 +90,8 @@ namespace Project1
             _textureRaccourciE = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciE");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
-            _musique = Content.Load<Song>("Son/MusiqueMenu");
+            _sonDifficulte = Content.Load<SoundEffect>("Son/Difficulte");
             MediaPlayer.Volume = Game1._volumeSon;
-            MediaPlayer.Play(_musique);
         }
 
         public override void Update(GameTime gameTime)
@@ -191,6 +192,7 @@ namespace Project1
                     mousePosition.Y <= _positionFacileButton.Y + 32)
                 {
                     Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
+                    _sonDifficulte.Play(Game1._volumeSon, 0, 0);
                 }
                 //BOUTON DIFFICILE
                 if (mousePosition.X >= _positionDifficileButton.X &&
@@ -199,6 +201,7 @@ namespace Project1
                     mousePosition.Y <= _positionDifficileButton.Y + 32)
                 {
                     Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
+                    _sonDifficulte.Play(Game1._volumeSon, 0, 0);
                 }
                 //BOUTON EXTREME
                 if (mousePosition.X >= _positionExtremeButton.X &&
@@ -207,28 +210,31 @@ namespace Project1
                     mousePosition.Y <= _positionExtremeButton.Y + 32)
                 {
                     Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
+                    _sonDifficulte.Play(Game1._volumeSon, 0, 0);
                 }
-                //BOUTON PLUS
-                if (mousePosition.X >= 10 &&
-                    mousePosition.X <= 10 + 50 &&
-                    mousePosition.Y >= 10 &&
-                    mousePosition.Y <= 10 + 50)
+                //BOUTON SON
+                if (mousePosition.X >= _positionBoutonSon.X &&
+                    mousePosition.X <= _positionBoutonSon.X + 50 &&
+                    mousePosition.Y >= _positionBoutonSon.Y &&
+                    mousePosition.Y <= _positionBoutonSon.Y + 50)
                 {
-                    if (Math.Round(Game1._volumeSon, 1) < 1)
-                        Game1._volumeSon += 0.01f;
+                    if (!_boutonSon)
+                    {
+                        if (Game1._volumeSon == 0)
+                            Game1._volumeSon = 0.01f;
+                        else
+                            Game1._volumeSon = 0;
+                        _boutonSon = true;
+                    }
                 }
 
-                //BOUTON MOIN
-                if (mousePosition.X >= 100 &&
-                    mousePosition.X <= 100 + 50 &&
-                    mousePosition.Y >= 10 &&
-                    mousePosition.Y <= 10 + 50)
-                {
-                    if (Game1._volumeSon > 0)
-                        Game1._volumeSon -= 0.01f;
-                }
             }
-            KeyboardState keyboardState = Keyboard.GetState();
+            if (mouseState.LeftButton == ButtonState.Released)
+            {
+                if (_boutonSon)
+                    _boutonSon = false;
+            }
+                KeyboardState keyboardState = Keyboard.GetState();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
@@ -259,6 +265,7 @@ namespace Project1
         public override void Draw(GameTime gameTime)
         {
             Game1._spriteBatch.Begin();
+
             Game1._spriteBatch.Draw(_textureFondEcran, new Vector2(0, 0), Color.White);
             Game1._spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
 
@@ -287,10 +294,10 @@ namespace Project1
             }
 
 
-
-            Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
-            //Game1._spriteBatch.DrawString(Message._police, ""+Math.Round((Game1._volumeSon*100),0), new Vector2(80, 30), Color.White);
-            Game1._spriteBatch.Draw(_textureMoinButton, new Vector2(100, 10), Color.White);
+            if (Game1._volumeSon == 0)
+                Game1._spriteBatch.Draw(_textureMoinButton, _positionBoutonSon, Color.White);
+            else
+                Game1._spriteBatch.Draw(_texturePlusButton, _positionBoutonSon, Color.White);
             Game1._spriteBatch.End();
         }
     }
