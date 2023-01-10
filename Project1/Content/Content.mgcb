@@ -792,18 +792,6 @@
 /processorParam:Quality=Best
 /build:Son/Accept.wav
 
-#begin Son/Accept.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Son/Accept.wav
-
-#begin Son/Difficulte.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Son/Difficulte.wav
-
 #begin Son/Difficulte.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -816,11 +804,11 @@
 /processorParam:Quality=Best
 /build:Son/epee.wav
 
-#begin Son/Hit.wav
+#begin Son/fee.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Son/Hit.wav
+/build:Son/fee.wav
 
 #begin Son/Hit.wav
 /importer:WavImporter
@@ -834,29 +822,11 @@
 /processorParam:Quality=Best
 /build:Son/MenuBack.wav
 
-#begin Son/MenuBack.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Son/MenuBack.wav
-
 #begin Son/MusiqueMenu.ogg
 /importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Son/MusiqueMenu.ogg
-
-#begin Son/MusiqueMenu.ogg
-/importer:OggImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Son/MusiqueMenu.ogg
-
-#begin Son/NewVague.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Son/NewVague.wav
 
 #begin Son/NewVague.wav
 /importer:WavImporter

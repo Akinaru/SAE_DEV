@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,8 @@ namespace Project1
         public static bool _messageDraw;
         public static String _message;
         public static String _message2;
+        public static SoundEffect _sonFee;
+        public static bool _sonJoue;
 
         public static void LoadContent(Microsoft.Xna.Framework.Content.ContentManager Content)
         {
@@ -28,6 +32,8 @@ namespace Project1
             _positionMessageTexte = _positionMessageBox + new Vector2(40,32);
             _textureMessageBox = Content.Load<Texture2D>("Message/message");
             _textureNavi = Content.Load<Texture2D>("Message/navi_grand");
+            _sonFee = Content.Load<SoundEffect>("Son/fee");
+            _sonJoue = false;
         }
 
         public static void Update(float deltaTime)
@@ -39,6 +45,7 @@ namespace Project1
                 {
                     _messageDraw = false;
                     _time = 0;
+                    _sonJoue = false;
                 }
             }
         }
@@ -60,6 +67,11 @@ namespace Project1
                 _spriteBatch.DrawString(Message._police, _message, _positionMessageTexte, Color.Black);
                 _spriteBatch.DrawString(Message._police, _message2, _positionMessageTexte + new Vector2(0, 18), Color.Black);
                 _spriteBatch.Draw(_textureNavi, _positionMessageBox + new Vector2(260, 70), Color.White);
+                if (!_sonJoue)
+                {
+                    _sonJoue = true;
+                    _sonFee.Play(Game1._volumeSon, 0, 0);
+                }
             }
         }
 
