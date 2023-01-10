@@ -27,17 +27,17 @@ namespace Project1
             _cameraPosition = new Vector2(Perso._positionPerso.X, Perso._positionPerso.Y);
 
             //si le personnage arrive dans l'angle a gauche, on place la camera
-            if (Perso._positionPerso.X < Game1._screenWidth / 5)
-                _cameraPosition.X = Game1._screenWidth / 5;
+            if (Perso._positionPerso.X < Game1._largeurEcran / 5)
+                _cameraPosition.X = Game1._largeurEcran / 5;
             //si le personnage arrive dans l'angle a droite, on place la camera
-            if (Perso._positionPerso.X > (Map._mapWidth - Game1._screenWidth / 5))
-                _cameraPosition.X = (Map._mapWidth - Game1._screenWidth / 5);
+            if (Perso._positionPerso.X > (Map._mapWidth - Game1._largeurEcran / 5))
+                _cameraPosition.X = (Map._mapWidth - Game1._largeurEcran / 5);
             //si le personnage arrive dans l'angle en haut , on place la camera
-            if (Perso._positionPerso.Y < Game1._screenHeight / 5)
-                _cameraPosition.Y = Game1._screenHeight / 5;
+            if (Perso._positionPerso.Y < Game1._hauteurEcran / 5)
+                _cameraPosition.Y = Game1._hauteurEcran / 5;
             //si le personnage arrive dans l'angle en bas, on place la camera
-            if (Perso._positionPerso.Y > (Map._mapHeight - Game1._screenHeight / 5))
-                _cameraPosition.Y = (Map._mapHeight - Game1._screenHeight / 5);
+            if (Perso._positionPerso.Y > (Map._mapHeight - Game1._hauteurEcran / 5))
+                _cameraPosition.Y = (Map._mapHeight - Game1._hauteurEcran / 5);
 
             _camera.LookAt(_cameraPosition);
 

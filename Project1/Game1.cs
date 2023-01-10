@@ -22,8 +22,8 @@ namespace Project1
     {
         public static GraphicsDeviceManager _graphics;
         public static SpriteBatch _spriteBatch { get; set; }
-        public static int _screenWidth;
-        public static int _screenHeight;
+        public static int _largeurEcran;
+        public static int _hauteurEcran;
         public static List<Monstre> _listeMonstre = new List<Monstre>();
         public static List<Bombe> _listeBombe = new List<Bombe>();
         public static float _volumeSon;
@@ -58,8 +58,6 @@ namespace Project1
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
             Etat = Etats.Menu;
-
-            // on charge les 2 écrans 
             _screenMenu = new Menu(this);
             _screenJeu = new Jeu(this);
             _screenGameOver = new GameOver(this);
@@ -74,26 +72,20 @@ namespace Project1
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _volumeSon = 0.01f;
-            _screenWidth = 1280;
-            _screenHeight = 720;
-            _graphics.PreferredBackBufferWidth = Game1._screenWidth;
-            _graphics.PreferredBackBufferHeight = Game1._screenHeight;
+            _largeurEcran = 1280;
+            _hauteurEcran = 720;
+            _graphics.PreferredBackBufferWidth = Game1._largeurEcran;
+            _graphics.PreferredBackBufferHeight = Game1._hauteurEcran;
             _graphics.ApplyChanges();
-
             base.Initialize();
-
             Map.Initialise();
 
         }
 
         protected override void LoadContent()
         {
-            //MENU
-
-
-            //JEU
+            //on laod la map avant le reste car on va utiliser les valeur de la tileMap dans l'initialise
             Map.LoadContent(Content, GraphicsDevice);
-
         }
 
 
@@ -103,9 +95,7 @@ namespace Project1
         protected override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             //JEU
-
             if (Etat == Etats.Quit)
                 Exit();
             else if (Etat == Etats.Menu)
@@ -138,11 +128,6 @@ namespace Project1
 
         protected override void Draw(GameTime gameTime)
         {
-
-
-
-            
-
             base.Draw(gameTime);
         }
     }
