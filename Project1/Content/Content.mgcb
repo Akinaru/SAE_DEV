@@ -378,18 +378,6 @@
 /processorParam:TextureFormat=Color
 /build:Menu/moins.png
 
-#begin Menu/moins.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Menu/moins.png
-
 #begin Menu/pause.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -486,6 +474,18 @@
 /processorParam:TextureFormat=Color
 /build:Menu/raccourciTouche/raccourciM.png
 
+#begin Menu/raccourciTouche/raccourciR.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/raccourciTouche/raccourciR.png
+
 #begin Menu/raccourciTouche/raccourciVolumeDown.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -509,6 +509,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Menu/raccourciTouche/raccourciVolumeUp.png
+
+#begin Menu/reprendre.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/reprendre.png
+
+#begin Menu/reprendreHover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/reprendreHover.png
 
 #begin Message/message.png
 /importer:TextureImporter

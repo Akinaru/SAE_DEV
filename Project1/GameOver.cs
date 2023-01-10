@@ -45,6 +45,21 @@ namespace Project1
         {
             MouseState mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
+
+            //hover menu
+            if (mousePosition.X >= _positionBoutonMenu.X &&
+                mousePosition.X <= _positionBoutonMenu.X + 300 &&
+                mousePosition.Y >= _positionBoutonMenu.Y &&
+                mousePosition.Y <= _positionBoutonMenu.Y + 100)
+            {
+                _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenuHover");
+            }
+            else
+            {
+                _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
+            }
+
+            //clique pour menu
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
                 if(mousePosition.X >= _positionBoutonMenu.X &&
@@ -57,6 +72,7 @@ namespace Project1
                 }
             }
 
+            //raccourci pour menu
             KeyboardState keyboardState = Keyboard.GetState();
 
             if (Keyboard.GetState().IsKeyDown(Keys.M))
