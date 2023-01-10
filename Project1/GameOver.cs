@@ -28,8 +28,9 @@ namespace Project1
 
         public override void Initialize()
         {
-            _positionGameOver = new Vector2(1280 / 2 - 150, 720 / 2 - 250);
-            _positionBoutonMenu = new Vector2(1280 / 2 - 150, 720 / 2 + 130);
+            _positionGameOver = new Vector2(490, 110);
+            _positionBoutonMenu = new Vector2(490, 470);
+            _positionRaccourciM = new Vector2(631, 575);
             base.Initialize();
         }
         public override void LoadContent()
@@ -54,6 +55,14 @@ namespace Project1
                     Game1.Etat = Game1.Etats.BackMenu;
 
                 }
+            }
+
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            {
+                if (!Jeu._gameStarted)
+                    Game1.Etat = Game1.Etats.BackMenu;
             }
         }
         public override void Draw(GameTime gameTime)
