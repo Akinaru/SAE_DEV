@@ -54,6 +54,14 @@ namespace Project1
             {
                 _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
             }
+
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            {
+                if (!Jeu._gameStarted)
+                    Game1.Etat = Game1.Etats.BackMenu;
+            }
         }
 
         public static void Draw(SpriteBatch _spriteBatch)
