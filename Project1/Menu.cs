@@ -55,14 +55,14 @@ namespace Project1
         public override void Initialize()
         {
             _positionPlayButton = new Vector2(490, 300);
-            _positionFacileButton = new Vector2(500, 400);
-            _positionDifficileButton = new Vector2(500 + 104 + 24, 400);
+            _positionFacileButton = new Vector2(500, 420);
+            _positionDifficileButton = new Vector2(628, 420);
 
-            _positionRaccourciEntree = new Vector2(200, 310);
+            _positionRaccourciEntree = new Vector2(611, 392);
             _positionRaccourciVolumeDown = new Vector2(200, 320);
             _positionRaccourciVolumeUp = new Vector2(200, 330);
-            _positionRaccourciF = new Vector2(200, 340);
-            _positionRaccourciD = new Vector2(200, 350);
+            _positionRaccourciF = new Vector2(543, 457);
+            _positionRaccourciD = new Vector2(695, 457);
 
             base.Initialize();
         }
@@ -231,8 +231,8 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
-            Game1._spriteBatch.Draw(_textureRaccourciVolumeDown, _positionRaccourciVolumeDown, Color.White);
-            Game1._spriteBatch.Draw(_textureRaccourciVolumeUp, _positionRaccourciVolumeUp, Color.White);
+            /*Game1._spriteBatch.Draw(_textureRaccourciVolumeDown, _positionRaccourciVolumeDown, Color.White);
+            Game1._spriteBatch.Draw(_textureRaccourciVolumeUp, _positionRaccourciVolumeUp, Color.White);*/
             Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
             Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
 

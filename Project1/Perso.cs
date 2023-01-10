@@ -40,7 +40,7 @@ namespace Project1
             _touche = false;
             _waitBouclier = 0;
             _animEpee = false;
-            _viePerso = 2;
+            _viePerso = 6;
             _mort = false;
 
         }
