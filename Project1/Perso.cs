@@ -43,7 +43,7 @@ namespace Project1
             _touche = false;
             _waitBouclier = 0;
             _animEpee = false;
-            _viePerso = 1;
+            _viePerso = 6;
             _mort = false;
             _animation = "idle";
 
