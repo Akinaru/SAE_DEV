@@ -30,6 +30,7 @@ namespace Project1
         public static Texture2D _textureRaccourciEntree;
         public static Texture2D _textureRaccourciF;
         public static Texture2D _textureRaccourciD;
+        public static Texture2D _textureRaccourciE;
 
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
@@ -39,6 +40,7 @@ namespace Project1
         public static Vector2 _positionRaccourciEntree;
         public static Vector2 _positionRaccourciF;
         public static Vector2 _positionRaccourciD;
+        public static Vector2 _positionRaccourciE;
 
 
 
@@ -58,10 +60,11 @@ namespace Project1
 
             _positionFacileButton = new Vector2(500, 440);
             _positionDifficileButton = new Vector2(628, 440);
-            _positionDifficileButton = new Vector2(490, 540);
+            _positionExtremeButton = new Vector2(547, 500);
 
             _positionRaccourciF = new Vector2(543, 470);
             _positionRaccourciD = new Vector2(695, 470);
+            _positionRaccourciE = new Vector2(631, 507);
 
             base.Initialize();
         }
@@ -74,7 +77,7 @@ namespace Project1
 
             _textureFacileButton = Content.Load<Texture2D>("Menu/facile");
             _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
-            _textureDifficileButton = Content.Load<Texture2D>("Menu/extreme");
+            _textureExtremeButton = Content.Load<Texture2D>("Menu/extreme");
 
             _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
             _textureMoinButton = Content.Load<Texture2D>("Menu/moins");
@@ -82,6 +85,7 @@ namespace Project1
             _textureRaccourciEntree = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciEntree");
             _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciDifficile");
             _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciFacile");
+            _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciD");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _musique = Content.Load<Song>("Son/MusiqueMenu");
@@ -236,9 +240,21 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
             
             if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+			{
                 Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
-            else
+                Game1._spriteBatch.Draw(_textureRaccourciE, _positionRaccourciE, Color.White);
+            }
+			else if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
+			{
+                Game1._spriteBatch.Draw(_textureRaccourciE, _positionRaccourciE, Color.White);
                 Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
+            }
+            else
+			{
+                Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
+                Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
+            }
+
 
 
             Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);

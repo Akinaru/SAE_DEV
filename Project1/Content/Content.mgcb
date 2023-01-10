@@ -474,6 +474,18 @@
 /processorParam:TextureFormat=Color
 /build:Menu/raccourciTouche/raccourciDifficile.png
 
+#begin Menu/raccourciTouche/raccourciE.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/raccourciTouche/raccourciE.png
+
 #begin Menu/raccourciTouche/raccourciEntree.png
 /importer:TextureImporter
 /processor:TextureProcessor
