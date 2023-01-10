@@ -17,8 +17,11 @@ namespace Project1
         public static Texture2D _textureBoutonMenu;
         public static Texture2D _textureblurBackground;
         public static Texture2D _textureGameOver;
+        public static Texture2D _textureRaccourciM;
+
         public static Vector2 _positionGameOver;
         public static Vector2 _positionBoutonMenu;
+        public static Vector2 _positionRaccourciM;
         public GameOver(Game1 game) : base(game)
         {
         }
@@ -34,6 +37,7 @@ namespace Project1
             _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
             _textureblurBackground = Content.Load<Texture2D>("Menu/blurBackground");
             _textureGameOver = Content.Load<Texture2D>("Menu/gameOver");
+            _textureRaccourciM = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciM");
         }
 
         public override void Update(GameTime gameTime)
@@ -80,6 +84,7 @@ namespace Project1
                 Game1._spriteBatch.Draw(_textureblurBackground, new Vector2(0, 0), Color.White);
                 Game1._spriteBatch.Draw(_textureBoutonMenu, _positionBoutonMenu, Color.White);
                 Game1._spriteBatch.Draw(_textureGameOver, _positionGameOver, Color.White);
+                Game1._spriteBatch.Draw(_textureRaccourciM, _positionRaccourciM, Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 + 40), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 60), Color.White);
