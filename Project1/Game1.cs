@@ -58,8 +58,6 @@ namespace Project1
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
             Etat = Etats.Menu;
-
-            // on charge les 2 écrans 
             _screenMenu = new Menu(this);
             _screenJeu = new Jeu(this);
             _screenGameOver = new GameOver(this);
@@ -79,21 +77,15 @@ namespace Project1
             _graphics.PreferredBackBufferWidth = Game1._screenWidth;
             _graphics.PreferredBackBufferHeight = Game1._screenHeight;
             _graphics.ApplyChanges();
-
             base.Initialize();
-
             Map.Initialise();
 
         }
 
         protected override void LoadContent()
         {
-            //MENU
-
-
-            //JEU
+            //on laod la map avant le reste car on va utiliser les valeur de la tileMap dans l'initialise
             Map.LoadContent(Content, GraphicsDevice);
-
         }
 
 
@@ -103,9 +95,7 @@ namespace Project1
         protected override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             //JEU
-
             if (Etat == Etats.Quit)
                 Exit();
             else if (Etat == Etats.Menu)
@@ -138,11 +128,6 @@ namespace Project1
 
         protected override void Draw(GameTime gameTime)
         {
-
-
-
-            
-
             base.Draw(gameTime);
         }
     }

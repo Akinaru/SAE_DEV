@@ -50,8 +50,6 @@ namespace Project1
             _pause = false;
             KeyboardManager._frappe = false;
             KeyboardManager._wait = 0;
-
-
             KeyboardManager.Initialise();
             MapUI.Initialise();
             Perso.Initialise();
