@@ -22,6 +22,7 @@ namespace Project1
 
         public static Texture2D _textureFacileButton;
         public static Texture2D _textureDifficileButton;
+        public static Texture2D _textureExtremeButton;
 
         public static Texture2D _texturePlusButton;
         public static Texture2D _textureMoinButton;
@@ -33,6 +34,7 @@ namespace Project1
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
         public static Vector2 _positionDifficileButton;
+        public static Vector2 _positionExtremeButton;
 
         public static Vector2 _positionRaccourciEntree;
         public static Vector2 _positionRaccourciF;
@@ -56,6 +58,8 @@ namespace Project1
 
             _positionFacileButton = new Vector2(500, 440);
             _positionDifficileButton = new Vector2(628, 440);
+            _positionDifficileButton = new Vector2(490, 540);
+
             _positionRaccourciF = new Vector2(543, 470);
             _positionRaccourciD = new Vector2(695, 470);
 
@@ -70,6 +74,7 @@ namespace Project1
 
             _textureFacileButton = Content.Load<Texture2D>("Menu/facile");
             _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
+            _textureDifficileButton = Content.Load<Texture2D>("Menu/extreme");
 
             _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
             _textureMoinButton = Content.Load<Texture2D>("Menu/moins");
@@ -223,6 +228,8 @@ namespace Project1
 
             Game1._spriteBatch.Draw(_textureFacileButton, _positionFacileButton, Color.White);
             Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
+            Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
+            Game1._spriteBatch.Draw(_textureExtremeButton, _positionExtremeButton, Color.White);
 
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
