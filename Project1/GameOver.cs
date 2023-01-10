@@ -28,9 +28,9 @@ namespace Project1
 
         public override void Initialize()
         {
-            _positionGameOver = new Vector2(490, 110);
-            _positionBoutonMenu = new Vector2(490, 470);
-            _positionRaccourciM = new Vector2(631, 575);
+            _positionGameOver = new Vector2(490, 90);
+            _positionBoutonMenu = new Vector2(490, 480);
+            _positionRaccourciM = new Vector2(631, 585);
             base.Initialize();
         }
         public override void LoadContent()
@@ -93,10 +93,11 @@ namespace Project1
                 Game1._spriteBatch.Draw(_textureBoutonMenu, _positionBoutonMenu, Color.White);
                 Game1._spriteBatch.Draw(_textureGameOver, _positionGameOver, Color.White);
                 Game1._spriteBatch.Draw(_textureRaccourciM, _positionRaccourciM, Color.White);
-                Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
-                Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 + 40), Color.White);
-                Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 60), Color.White);
-                Game1._spriteBatch.DrawString(Message._police, "Nombre de coups: " + Jeu._nombreCoup, new Vector2(1280 / 2 - 100, 720 / 2 + 80), Color.White);
+
+                Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 40), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Nombre de coups: " + Jeu._nombreCoup, new Vector2(1280 / 2 - 100, 720 / 2 + 60), Color.White);
             }
             Game1._spriteBatch.End();
         }
