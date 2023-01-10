@@ -19,7 +19,6 @@ namespace Project1
     public class Jeu : GameScreen
     {
 
-        public static Texture2D _textureblurBackground;
         public static Texture2D _textureombrePerso;
         public static Texture2D _textureObscurite;
         public static Texture2D _textureSang;
@@ -84,10 +83,11 @@ namespace Project1
         }
         public override void LoadContent()
         {
-            _textureblurBackground = Content.Load<Texture2D>("Menu/blurBackground");
+
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureSang = Content.Load<Texture2D>("Perso/sang");
+            Pause.LoadContent(Content);
             HUD.LoadContent(Content);
             Fee.LoadContent(Content);
             MapUI.LoadContent(Content);
@@ -201,11 +201,8 @@ namespace Project1
             HUD.Draw(Game1._spriteBatch);
             Message.Draw(Game1._spriteBatch);
 
-            if(_pause)
-            {
-                Game1._spriteBatch.Draw(_textureblurBackground, new Vector2(0, 0), Color.White);
-
-            }
+            
+            Pause.Draw(Game1._spriteBatch);
 
             Game1._spriteBatch.End();
         }
