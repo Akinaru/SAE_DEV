@@ -130,7 +130,7 @@ namespace Project1
                             }
                         }
                     }
-                    if (KeyboardManager._wait >= 1)
+                    if (KeyboardManager._wait >= 0.7)
                     {
                         KeyboardManager._frappe = false;
                         Perso._perso = new AnimatedSprite(Perso._spriteSheetWalkEpee);

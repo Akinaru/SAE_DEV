@@ -56,14 +56,14 @@ namespace Project1
         {
             Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
             _positionPlayButton = new Vector2(490, 300);
-            _positionFacileButton = new Vector2(500, 420);
-            _positionDifficileButton = new Vector2(628, 420);
-
             _positionRaccourciEntree = new Vector2(611, 392);
-            _positionRaccourciVolumeDown = new Vector2(200, 320);
-            _positionRaccourciVolumeUp = new Vector2(200, 330);
-            _positionRaccourciF = new Vector2(543, 450);
-            _positionRaccourciD = new Vector2(695, 450);
+
+            _positionFacileButton = new Vector2(500, 440);
+            _positionDifficileButton = new Vector2(628, 440);
+            _positionRaccourciVolumeDown = new Vector2(200, 340);
+            _positionRaccourciVolumeUp = new Vector2(200, 350);
+            _positionRaccourciF = new Vector2(543, 470);
+            _positionRaccourciD = new Vector2(695, 470);
 
             base.Initialize();
         }
