@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,24 @@ namespace Project1
             _positionBoutonMenu = new Vector2(1280 / 2 - 50 + 100, 720 / 2 + 130);
             _positionRaccourciM = new Vector2(1280 / 2 - 50 + 100, 720 / 2 + 230);
             _positionRaccourciR = new Vector2(1280 / 2 - 350 + 100, 720 / 2 + 230);
+        }
+
+        public static void Update(ContentManager Content)
+        {
+            MouseState mouseState = Mouse.GetState();
+            var mousePosition = new Point(mouseState.X, mouseState.Y);
+            //hover play
+            if (mousePosition.X >= _positionBoutonMenu.X &&
+                mousePosition.X <= _positionBoutonMenu.X + 300 &&
+                mousePosition.Y >= _positionBoutonMenu.Y &&
+                mousePosition.Y <= _positionBoutonMenu.Y + 100)
+            {
+                _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenuHover");
+            }
+            else
+            {
+                _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
+            }
         }
 
         public static void Draw(SpriteBatch _spriteBatch)

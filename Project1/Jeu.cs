@@ -167,6 +167,7 @@ namespace Project1
             }
             else
             {
+                Pause.Update(Content);
 
             }
 
