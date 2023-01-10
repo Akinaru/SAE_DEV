@@ -79,7 +79,6 @@ namespace Project1
             }
             var viewportadapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, Game1._screenWidth, Game1._screenHeight);
             Camera.Initialise(viewportadapter);
-
         }
         public override void LoadContent()
         {
