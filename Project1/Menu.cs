@@ -27,8 +27,6 @@ namespace Project1
         public static Texture2D _textureMoinButton;
 
         public static Texture2D _textureRaccourciEntree;
-        public static Texture2D _textureRaccourciVolumeDown;
-        public static Texture2D _textureRaccourciVolumeUp;
         public static Texture2D _textureRaccourciF;
         public static Texture2D _textureRaccourciD;
 
@@ -37,8 +35,6 @@ namespace Project1
         public static Vector2 _positionDifficileButton;
 
         public static Vector2 _positionRaccourciEntree;
-        public static Vector2 _positionRaccourciVolumeDown;
-        public static Vector2 _positionRaccourciVolumeUp;
         public static Vector2 _positionRaccourciF;
         public static Vector2 _positionRaccourciD;
 
@@ -60,8 +56,6 @@ namespace Project1
 
             _positionFacileButton = new Vector2(500, 440);
             _positionDifficileButton = new Vector2(628, 440);
-            _positionRaccourciVolumeDown = new Vector2(200, 340);
-            _positionRaccourciVolumeUp = new Vector2(200, 350);
             _positionRaccourciF = new Vector2(543, 470);
             _positionRaccourciD = new Vector2(695, 470);
 
@@ -78,11 +72,9 @@ namespace Project1
             _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
 
             _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
-            _textureMoinButton = Content.Load<Texture2D>("Menu/moin");
+            _textureMoinButton = Content.Load<Texture2D>("Menu/moins");
 
             _textureRaccourciEntree = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciEntree");
-            _textureRaccourciVolumeDown = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeDown");
-            _textureRaccourciVolumeUp = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeUp");
             _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciDifficile");
             _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciFacile");
 
@@ -235,17 +227,16 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
-            /*Game1._spriteBatch.Draw(_textureRaccourciVolumeDown, _positionRaccourciVolumeDown, Color.White);
-            Game1._spriteBatch.Draw(_textureRaccourciVolumeUp, _positionRaccourciVolumeUp, Color.White);*/
+            
             if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
                 Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
             else
                 Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
 
 
-            //Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
+            Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
             //Game1._spriteBatch.DrawString(Message._police, ""+Math.Round((Game1._volumeSon*100),0), new Vector2(80, 30), Color.White);
-            //Game1._spriteBatch.Draw(_textureMoinButton, new Vector2(100, 10), Color.White);
+            Game1._spriteBatch.Draw(_textureMoinButton, new Vector2(100, 10), Color.White);
             Game1._spriteBatch.End();
         }
     }
