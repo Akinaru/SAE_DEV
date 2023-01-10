@@ -20,11 +20,17 @@ namespace Project1
         public static Texture2D _textureRaccourciM;
         public static Texture2D _textureRaccourciR;
 
+        public static Texture2D _texturePlusButton;
+        public static Texture2D _textureMoinButton;
+
         public static Vector2 _positionBoutonPause;
         public static Vector2 _positionBoutonReprendre;
         public static Vector2 _positionBoutonMenu;
         public static Vector2 _positionRaccourciM;
         public static Vector2 _positionRaccourciR;
+        public static Vector2 _positionBoutonSon;
+        public static bool _boutonSon;
+
 
         public static SoundEffect _sonMenuBack;
         public static bool _sourisClick;
@@ -32,18 +38,23 @@ namespace Project1
         public static void LoadContent(ContentManager Content){
             _sonMenuBack = Content.Load<SoundEffect>("Son/MenuBack");
             _sourisClick = false;
+            _boutonSon = false;
+
             _textureblurBackground = Content.Load<Texture2D>("Menu/blurBackground");
             _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
             _textureReprendre = Content.Load<Texture2D>("Menu/reprendre");
             _textureBoutonPause = Content.Load<Texture2D>("Menu/pause");
             _textureRaccourciM = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciM");
             _textureRaccourciR = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciR");
+            _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
+            _textureMoinButton = Content.Load<Texture2D>("Menu/moins");
 
             _positionBoutonPause = new Vector2(1280 / 2 - 250, 720 / 2 - 300);
             _positionBoutonReprendre = new Vector2(1280 / 2 - 351, 420);
             _positionBoutonMenu = new Vector2(1280 / 2 - 150, 550);
             _positionRaccourciM = new Vector2(1280 / 2 - 9, 655);
             _positionRaccourciR = new Vector2(1280 / 2 - 9, 525);
+            _positionBoutonSon = new Vector2(10, 10);
         }
 
         public static void Update(ContentManager Content)
@@ -98,15 +109,30 @@ namespace Project1
                     {
                         Jeu._pause = false;
                     }
+                    //BOUTON SON
+                    if (mousePosition.X >= _positionBoutonSon.X &&
+                        mousePosition.X <= _positionBoutonSon.X + 50 &&
+                        mousePosition.Y >= _positionBoutonSon.Y &&
+                        mousePosition.Y <= _positionBoutonSon.Y + 50)
+                    {
+                        if (!_boutonSon)
+                        {
+                            if (Game1._volumeSon == 0)
+                                Game1._volumeSon += 0.5f;
+                            else
+                                Game1._volumeSon -= 0.5f;
+                            _boutonSon = true;
+                        }
+                    }
                     _sourisClick = true;
                 }
             }
             if (mouseState.LeftButton == ButtonState.Released)
             {
                 if (_sourisClick)
-                {
                     _sourisClick = false;
-                }
+                if (_boutonSon)
+                    _boutonSon = false;
             }
 
 
@@ -135,6 +161,10 @@ namespace Project1
                 _spriteBatch.Draw(_textureBoutonMenu, _positionBoutonMenu, Color.White);
                 _spriteBatch.Draw(_textureRaccourciM, _positionRaccourciM, Color.White);
                 _spriteBatch.Draw(_textureRaccourciR, _positionRaccourciR, Color.White);
+                if (Game1._volumeSon == 0)
+                    Game1._spriteBatch.Draw(_textureMoinButton, _positionBoutonSon, Color.White);
+                else
+                    Game1._spriteBatch.Draw(_texturePlusButton, _positionBoutonSon, Color.White);
             }
 
         }
