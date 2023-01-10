@@ -25,7 +25,7 @@ namespace Project1
 
         public override void Initialize()
         {
-            _positionGameOver = new Vector2(1280 / 2 - 250, 720 / 2 - 350);
+            _positionGameOver = new Vector2(1280 / 2 - 150, 720 / 2 - 500);
             _positionBoutonMenu = new Vector2(1280 / 2 - 150, 720 / 2 + 130);
             base.Initialize();
         }
@@ -80,8 +80,9 @@ namespace Project1
                 Game1._spriteBatch.Draw(_textureblurBackground, new Vector2(0, 0), Color.White);
                 Game1._spriteBatch.Draw(_textureBoutonMenu, _positionBoutonMenu, Color.White);
                 Game1._spriteBatch.Draw(_textureGameOver, _positionGameOver, Color.White);
-                Game1._spriteBatch.DrawString(Message._police, "Vous avez tenu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 + 40), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 60), Color.White);
             }
             Game1._spriteBatch.End();
         }
