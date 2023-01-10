@@ -64,7 +64,7 @@ namespace Project1
 
             _positionRaccourciF = new Vector2(543, 470);
             _positionRaccourciD = new Vector2(695, 470);
-            _positionRaccourciE = new Vector2(631, 507);
+            _positionRaccourciE = new Vector2(631, 532);
 
             base.Initialize();
         }
@@ -85,7 +85,7 @@ namespace Project1
             _textureRaccourciEntree = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciEntree");
             _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciDifficile");
             _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciFacile");
-            _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciD");
+            _textureRaccourciE = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciE");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _musique = Content.Load<Song>("Son/MusiqueMenu");
@@ -151,8 +151,28 @@ namespace Project1
                 _textureDifficileButton = Content.Load<Texture2D>("menu/difficileSouligne");
             }
 
+			//hover extreme
+			if (Jeu.difficulte != Jeu.NiveauDifficulte.Extreme)
+			{
+				if (mousePosition.X >= _positionExtremeButton.X &&
+					mousePosition.X <= _positionExtremeButton.X + 186 &&
+					mousePosition.Y >= _positionExtremeButton.Y &&
+					mousePosition.Y <= _positionExtremeButton.Y + 32)
+				{
+					_textureExtremeButton = Content.Load<Texture2D>("Menu/extremeHover");
+				}
+				else
+				{
+                    _textureExtremeButton = Content.Load<Texture2D>("Menu/extreme");
+				}
+			}
+			else
+			{
+                _textureExtremeButton = Content.Load<Texture2D>("menu/extremeSouligne");
+			}
 
-            if (mouseState.LeftButton == ButtonState.Pressed)
+
+			if (mouseState.LeftButton == ButtonState.Pressed)
             {
                 //BOUTON JEU
                 if (mousePosition.X >= _positionPlayButton.X &&
@@ -179,6 +199,14 @@ namespace Project1
                     mousePosition.Y <= _positionDifficileButton.Y + 32)
                 {
                     Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
+                }
+                //BOUTON EXTREME
+                if (mousePosition.X >= _positionExtremeButton.X &&
+                    mousePosition.X <= _positionExtremeButton.X + 186 &&
+                    mousePosition.Y >= _positionExtremeButton.Y &&
+                    mousePosition.Y <= _positionExtremeButton.Y + 32)
+                {
+                    Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
                 }
                 //BOUTON PLUS
                 if (mousePosition.X >= 10 &&
@@ -215,6 +243,10 @@ namespace Project1
             {
                 Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            {
+                Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
+            }
         }
 
         public void gameStart()
@@ -231,7 +263,6 @@ namespace Project1
             Game1._spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
 
             Game1._spriteBatch.Draw(_textureFacileButton, _positionFacileButton, Color.White);
-            Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
             Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
             Game1._spriteBatch.Draw(_textureExtremeButton, _positionExtremeButton, Color.White);
 

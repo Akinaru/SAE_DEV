@@ -32,7 +32,7 @@ namespace Project1
         public static int _nombreCoup;
         public static float _chrono;
         public static bool _pause;
-        public enum NiveauDifficulte { Facile, Difficile, Extreme };
+        public enum NiveauDifficulte { Facile, Difficile, Extreme};
         public static NiveauDifficulte difficulte;
 
 
