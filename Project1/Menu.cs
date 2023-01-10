@@ -54,6 +54,7 @@ namespace Project1
 
         public override void Initialize()
         {
+            Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
             _positionPlayButton = new Vector2(490, 300);
             _positionFacileButton = new Vector2(500, 420);
             _positionDifficileButton = new Vector2(628, 420);
@@ -204,10 +205,6 @@ namespace Project1
             {
                 if (!Jeu._gameStarted)
                     gameStart();
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                Game.Exit();   
             }
             if (Keyboard.GetState().IsKeyDown(Keys.F))
             {

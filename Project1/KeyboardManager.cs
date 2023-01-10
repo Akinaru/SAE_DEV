@@ -16,8 +16,14 @@ namespace Project1
     internal class KeyboardManager
     {
 
-        public static bool frappe;
-        public static float wait;
+        public static bool _frappe;
+        public static float _wait;
+        public static bool _keyEscape;
+
+        public static void Initialise()
+        {
+            _keyEscape = false;
+        }
 
         public static void Manage(Vector2 _positionPerso, TiledMap _tiledMap, string animation, float walkSpeed, int _mapWidth, int _mapHeight, GraphicsDeviceManager _graphics, float deltaTime)
         {
@@ -64,7 +70,7 @@ namespace Project1
                 {
                     dir.Y -= 1;
                 }
- 
+
 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.S))
@@ -80,16 +86,16 @@ namespace Project1
                 }
 
             }
-            if(dir != Vector2.Zero)
+            if (dir != Vector2.Zero)
                 dir.Normalize();
             Perso._positionPerso += dir * walkSpeed;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) || mouseState.LeftButton == ButtonState.Pressed)
             {
-                if (!frappe)
+                if (!_frappe)
                 {
                     Perso._animEpee = true;
-                    frappe = true;
+                    _frappe = true;
                     for (int i = 0; i < Game1._listeMonstre.Count; i++)
                     {
                         Monstre.Touche(Game1._listeMonstre[i]);
@@ -97,7 +103,7 @@ namespace Project1
                 }
             }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Tab))
+            if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
                 MapUI._showUI = true;
             }
@@ -105,8 +111,21 @@ namespace Project1
             {
                 MapUI._showUI = false;
             }
-
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                if (!_keyEscape)
+                {
+                    Game1.etat = Game1.Etats.Pause;
+                    _keyEscape = true;
+                }
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                if (_keyEscape)
+                {
+                    _keyEscape = false;
+                }
+            }
         }
-
     }
 }

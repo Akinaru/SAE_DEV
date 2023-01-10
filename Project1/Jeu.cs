@@ -19,7 +19,7 @@ namespace Project1
     public class Jeu : GameScreen
     {
 
-
+        public static Texture2D _textureblurBackground;
         public static Texture2D _textureombrePerso;
         public static Texture2D _textureObscurite;
         public static Texture2D _textureSang;
@@ -47,12 +47,11 @@ namespace Project1
             _gameBegin = false;
             _wait = 0;
             _chrono = 0;
-            difficulte = NiveauDifficulte.Facile;
-            KeyboardManager.frappe = false;
-            KeyboardManager.wait = 0;
+            KeyboardManager._frappe = false;
+            KeyboardManager._wait = 0;
 
 
-
+            KeyboardManager.Initialise();
             MapUI.Initialise();
             Perso.Initialise();
             Fee.Initialise();
@@ -83,15 +82,12 @@ namespace Project1
         }
         public override void LoadContent()
         {
-            HUD.LoadContent(Content);
-
-            Fee.LoadContent(Content);
-
+            _textureblurBackground = Content.Load<Texture2D>("blurBackground");
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureSang = Content.Load<Texture2D>("Perso/sang");
-
-
+            HUD.LoadContent(Content);
+            Fee.LoadContent(Content);
             MapUI.LoadContent(Content);
             HUD.LoadContent(Content);
             ViePerso.LoadContent(Content);
@@ -105,7 +101,7 @@ namespace Project1
         public override void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (!Perso._mort)
+            if (Game1.etat != Game1.Etats.Pause)
             {
                 _chrono += 1 * deltaTime;
                 if (_gameBegin)
@@ -116,10 +112,10 @@ namespace Project1
                         _gameBegin = false;
                 }
 
-                if (KeyboardManager.frappe)
+                if (KeyboardManager._frappe)
                 {
-                    KeyboardManager.wait += 2 * deltaTime;
-                    if (KeyboardManager.wait >= 0.5)
+                    KeyboardManager._wait += 2 * deltaTime;
+                    if (KeyboardManager._wait >= 0.5)
                     {
                         for (int i = 0; i < Game1._listeMonstre.Count; i++)
                         {
@@ -130,13 +126,13 @@ namespace Project1
                             }
                         }
                     }
-                    if (KeyboardManager.wait >= 1)
+                    if (KeyboardManager._wait >= 1)
                     {
-                        KeyboardManager.frappe = false;
+                        KeyboardManager._frappe = false;
                         Perso._animEpee = false;
                         Perso._epee.Play("fight");
                         Perso._epee.Update(deltaTime);
-                        KeyboardManager.wait = 0;
+                        KeyboardManager._wait = 0;
                     }
                 }
                 if (Perso._touche)
@@ -170,7 +166,7 @@ namespace Project1
             }
             else
             {
-
+                Game1._spriteBatch.Draw(_textureblurBackground, new Vector2(0, 0), Color.White);
             }
             Fee.Update();
             Map.Update(gameTime);
@@ -179,7 +175,6 @@ namespace Project1
         public override void Draw(GameTime gameTime)
         {
             var matriceCamera = Camera._camera.GetViewMatrix();
-
             Game1._spriteBatch.Begin(transformMatrix: matriceCamera);
             Map.Draw(matriceCamera);
             for (int i = 0; i < _listeCoeur.Count; i++)
@@ -188,11 +183,12 @@ namespace Project1
             }
             Monstre.Draw(Game1._spriteBatch, Content);
             Perso.Draw(Game1._spriteBatch);
-
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);
             if (difficulte == NiveauDifficulte.Difficile)
+                
                 Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
+
             if (Perso._waitBouclier > 0)
                 Game1._spriteBatch.Draw(_textureSang, Camera._cameraPosition-new Vector2(300,150), Color.White);
             Game1._spriteBatch.End();
