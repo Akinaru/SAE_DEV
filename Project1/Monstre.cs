@@ -32,7 +32,9 @@ namespace Project1
         private bool _mort;
         private float _mortWait;
         private float _deplaceWait;
-        
+        private SoundEffect _sonHit;
+
+
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
@@ -44,10 +46,10 @@ namespace Project1
             this._texturemidLife = content.Load<Texture2D>("midLife");
             this._texturefullLife = content.Load<Texture2D>("fullLife");
             this._textureMonstreHit = content.Load<Texture2D>("monstreHit");
+            this._sonHit = content.Load<SoundEffect>("Son/playerHurt");
             this.Spawn();
             this.Hit = false;
             this.Mort = false;
-
             this._mortWait = 0;
             this._deplaceWait = 0;
             
@@ -235,6 +237,7 @@ namespace Project1
                         Perso._touche = true;
                         Perso._viePerso -= 1;
                         ViePerso.Update();
+                        _sonHit.Play(Game1._volumeSon, 0, 0);
                     }
   
                 }

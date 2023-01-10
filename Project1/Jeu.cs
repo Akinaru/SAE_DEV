@@ -13,6 +13,7 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Content;
 using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Project1
 {
@@ -34,6 +35,8 @@ namespace Project1
         public static bool _pause;
         public enum NiveauDifficulte { Facile, Difficile, Extreme};
         public static NiveauDifficulte difficulte;
+        public static SoundEffect _sonEpee;
+
 
 
         public static List<Coeur> _listeCoeur = new List<Coeur>();
@@ -84,6 +87,7 @@ namespace Project1
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureSang = Content.Load<Texture2D>("Perso/sang");
+            _sonEpee = Content.Load<SoundEffect>("Son/epee");
             Pause.LoadContent(Content);
             HUD.LoadContent(Content);
             Fee.LoadContent(Content);
