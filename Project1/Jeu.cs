@@ -84,7 +84,7 @@ namespace Project1
         }
         public override void LoadContent()
         {
-            _textureblurBackground = Content.Load<Texture2D>("blurBackground");
+            _textureblurBackground = Content.Load<Texture2D>("Menu/blurBackground");
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureSang = Content.Load<Texture2D>("Perso/sang");
@@ -103,6 +103,8 @@ namespace Project1
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float walkSpeed = deltaTime * Perso._vitessePerso;
+            Perso._animation = "idle";
+            KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, Game1._graphics, deltaTime, Content);
 
             if (!_pause)
             {
@@ -132,6 +134,7 @@ namespace Project1
                     if (KeyboardManager._wait >= 1)
                     {
                         KeyboardManager._frappe = false;
+                        Perso._perso = new AnimatedSprite(Perso._spriteSheetWalkEpee);
                         Perso._animEpee = false;
                         Perso._epee.Play("fight");
                         Perso._epee.Update(deltaTime);
@@ -162,14 +165,11 @@ namespace Project1
                 {
                     Game1._listeMonstre[i].Update(deltaTime, Content);
                 }
-                Perso._perso.Play(Perso._animation);
-                Perso._perso.Update(deltaTime);
             }
             else
             {
 
             }
-            KeyboardManager.Manage(Perso._positionPerso, Map._tiledMap, Perso._animation, walkSpeed, Map._mapWidth, Map._mapHeight, Game1._graphics, deltaTime);
 
             Fee.Update();
             Map.Update(gameTime);
