@@ -191,7 +191,7 @@ namespace Project1
 
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);
-            if(difficulte == NiveauDifficulte.Difficile)
+            if (difficulte == NiveauDifficulte.Difficile)
                 Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
             if (Perso._waitBouclier > 0)
                 Game1._spriteBatch.Draw(_textureSang, Camera._cameraPosition-new Vector2(300,150), Color.White);
