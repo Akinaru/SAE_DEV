@@ -35,10 +35,13 @@
     <None Update="Content\monstreAnimation.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\persoAnimation.sf">
+    <None Update="Content\Perso\animationEpee.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\Perso\animationEpee.sf">
+    <None Update="Content\Perso\persoWalkEpee.sf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Perso\persoWalkNormal.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -93,7 +93,6 @@ namespace Project1
             MapUI.LoadContent(Content);
             HUD.LoadContent(Content);
             ViePerso.LoadContent(Content);
-            SpriteSheet spriteSheet = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
             Perso.LoadContent(Content);
             Message.LoadContent(Content);
             Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);

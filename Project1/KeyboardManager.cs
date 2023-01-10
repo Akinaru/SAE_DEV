@@ -34,6 +34,7 @@ namespace Project1
 
             if (!Jeu._pause)
             {
+                Perso._animation = "idle";
                 if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
                 {
                     ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.5);

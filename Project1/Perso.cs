@@ -15,6 +15,8 @@ namespace Project1
 {
     internal class Perso
     {
+        public static SpriteSheet _spriteSheetWalkNormal;
+        public static SpriteSheet _spriteSheetWalkEpee;
         public static Vector2 _positionPerso;
         public static AnimatedSprite _perso;
         public static int _vitessePerso;
@@ -42,14 +44,16 @@ namespace Project1
             _animEpee = false;
             _viePerso = 6;
             _mort = false;
+            _animation = "idle";
 
         }
 
         public static void LoadContent(ContentManager Content)
         {
-            SpriteSheet spritesheetPerso = Content.Load<SpriteSheet>("persoAnimation.sf", new JsonContentLoader());
+            _spriteSheetWalkNormal = Content.Load<SpriteSheet>("Perso/persoWalkNormal.sf", new JsonContentLoader());
+            _spriteSheetWalkEpee = Content.Load<SpriteSheet>("Perso/persoWalkEpee.sf", new JsonContentLoader());
             SpriteSheet spritesheetEpee = Content.Load<SpriteSheet>("Perso/animationEpee.sf", new JsonContentLoader());
-            _perso = new AnimatedSprite(spritesheetPerso);
+            _perso = new AnimatedSprite(_spriteSheetWalkEpee);
             _epee = new AnimatedSprite(spritesheetEpee);
             
             _textureBouclier = Content.Load<Texture2D>("Perso/bouclier");
@@ -59,10 +63,19 @@ namespace Project1
 
         public static void Update(float deltaTime)
         {
-            _animation = "idle";
+            if (_animEpee)
+            {
+                _perso = new AnimatedSprite(_spriteSheetWalkNormal);
+            }
+            else
+            {
+                _perso = new AnimatedSprite(_spriteSheetWalkEpee);
+            }
             _positionEpee = _positionPerso;
             _epee.Play("fight");
             _epee.Update(deltaTime);
+            _perso.Play(_animation);
+            _perso.Update(deltaTime);
         }
 
         public static void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch)
