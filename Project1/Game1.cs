@@ -30,7 +30,7 @@ namespace Project1
 
 
 
-        public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu };
+        public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu, Pause };
         public static Etats etat;
         private readonly ScreenManager _screenManager;
         private Menu _screenMenu;
@@ -128,7 +128,6 @@ namespace Project1
                 Etat = Etats.Attente;
                 _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
             }
-
             Message.Update(deltaTime);
             base.Update(gameTime);
         }
