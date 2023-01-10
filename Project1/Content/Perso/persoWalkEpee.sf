@@ -1,6 +1,6 @@
 {
   "textureAtlas": {
-    "texture": "Perso\\Walk.png",
+    "texture": "Walk.png",
     "regionWidth": 16,
     "regionHeight": 16
   },
@@ -20,13 +20,13 @@
       "isLooping": false,
       "frameDuration": 0.2
     },
-    "walkWest": {
-      "frames": [2,6,10,14],
+    "walkEast": {
+      "frames": [3,7,11,15],
       "isLooping": false,
       "frameDuration": 0.2
     },
-    "walkEast": {
-      "frames": [3,7,11,15],
+    "walkWest": {
+      "frames": [2,6,10,14],
       "isLooping": false,
       "frameDuration": 0.2
     }
