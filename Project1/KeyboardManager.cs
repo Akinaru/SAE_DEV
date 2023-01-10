@@ -32,94 +32,108 @@ namespace Project1
             var dir = Vector2.Zero;
             MouseState mouseState = Mouse.GetState();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
+            if (!Jeu._pause)
             {
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.5);
-                ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
-
-
-                Perso._animation = "walkEast";
-                if (!Collision.IsCollision(tx, ty))
+                if (Keyboard.GetState().IsKeyDown(Keys.Right) || Keyboard.GetState().IsKeyDown(Keys.D))
                 {
-                    dir.X += 1;
-                }
-
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) || Keyboard.GetState().IsKeyDown(Keys.Q))
-            {
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
-                ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
-                Perso._animation = "walkWest";
+                    ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth + 0.5);
+                    ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
 
 
-                if (!Collision.IsCollision(tx, ty))
-                {
-                    dir.X -= 1;
-                }
-            }
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) || Keyboard.GetState().IsKeyDown(Keys.Z))
-            {
-
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
-                ushort ty = (ushort)((_positionPerso.Y - 2) / _tiledMap.TileHeight);
-
-                Perso._animation = "walkNorth";
-                if (!Collision.IsCollision(tx, ty))
-                {
-                    dir.Y -= 1;
-                }
-
-
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-
-                ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
-                ushort ty = (ushort)((_positionPerso.Y + 3) / _tiledMap.TileHeight + 0.6);
-
-                Perso._animation = "walkSouth";
-                if (!Collision.IsCollision(tx, ty))
-                {
-                    dir.Y += 1;
-                }
-
-            }
-            if (dir != Vector2.Zero)
-                dir.Normalize();
-            Perso._positionPerso += dir * walkSpeed;
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) || mouseState.LeftButton == ButtonState.Pressed)
-            {
-                if (!_frappe)
-                {
-                    Perso._animEpee = true;
-                    _frappe = true;
-                    for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                    Perso._animation = "walkEast";
+                    if (!Collision.IsCollision(tx, ty))
                     {
-                        Monstre.Touche(Game1._listeMonstre[i]);
+                        dir.X += 1;
+                    }
+
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Left) || Keyboard.GetState().IsKeyDown(Keys.Q))
+                {
+                    ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth - 0.5);
+                    ushort ty = (ushort)(_positionPerso.Y / _tiledMap.TileHeight);
+                    Perso._animation = "walkWest";
+
+
+                    if (!Collision.IsCollision(tx, ty))
+                    {
+                        dir.X -= 1;
                     }
                 }
+
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Up) || Keyboard.GetState().IsKeyDown(Keys.Z))
+                {
+
+                    ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
+                    ushort ty = (ushort)((_positionPerso.Y - 2) / _tiledMap.TileHeight);
+
+                    Perso._animation = "walkNorth";
+                    if (!Collision.IsCollision(tx, ty))
+                    {
+                        dir.Y -= 1;
+                    }
+
+
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.S))
+                {
+
+                    ushort tx = (ushort)(_positionPerso.X / _tiledMap.TileWidth);
+                    ushort ty = (ushort)((_positionPerso.Y + 3) / _tiledMap.TileHeight + 0.6);
+
+                    Perso._animation = "walkSouth";
+                    if (!Collision.IsCollision(tx, ty))
+                    {
+                        dir.Y += 1;
+                    }
+
+                }
+                if (dir != Vector2.Zero)
+                    dir.Normalize();
+                Perso._positionPerso += dir * walkSpeed;
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) || mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    if (!_frappe)
+                    {
+                        Perso._animEpee = true;
+                        _frappe = true;
+                        for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                        {
+                            Monstre.Touche(Game1._listeMonstre[i]);
+                        }
+                    }
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Tab))
+                {
+                    MapUI._showUI = true;
+                }
+                if (Keyboard.GetState().IsKeyUp(Keys.Tab))
+                {
+                    MapUI._showUI = false;
+                }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Tab))
-            {
-                MapUI._showUI = true;
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.Tab))
-            {
-                MapUI._showUI = false;
-            }
+
+
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 if (!_keyEscape)
                 {
-                    Game1.etat = Game1.Etats.Pause;
                     _keyEscape = true;
+
+                    if (!Jeu._pause)
+                    {
+                        Jeu._pause = true;
+                    }
+                    else
+                    {
+                        Jeu._pause = false;
+                    }
                 }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyUp(Keys.Escape))
             {
                 if (_keyEscape)
                 {
