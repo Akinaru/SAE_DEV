@@ -29,7 +29,7 @@ namespace Project1
         public void CheckRecuperer(float deltaTime)
         {
 
-            if(Vector2.Distance(Perso._positionPerso, this.Position) < 5)
+            if(Vector2.Distance(Perso._positionPerso, this.Position) < 16)
             {
                 if(Perso._viePerso < 6)
                 {

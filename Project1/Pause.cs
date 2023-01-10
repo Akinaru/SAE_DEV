@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -25,7 +26,12 @@ namespace Project1
         public static Vector2 _positionRaccourciM;
         public static Vector2 _positionRaccourciR;
 
+        public static SoundEffect _sonMenuBack;
+        public static bool _sourisClick;
+
         public static void LoadContent(ContentManager Content){
+            _sonMenuBack = Content.Load<SoundEffect>("Son/MenuBack");
+            _sourisClick = false;
             _textureblurBackground = Content.Load<Texture2D>("Menu/blurBackground");
             _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
             _textureReprendre = Content.Load<Texture2D>("Menu/reprendre");
@@ -69,32 +75,43 @@ namespace Project1
                 _textureReprendre = Content.Load<Texture2D>("Menu/reprendre");
             }
 
-            //clique pour menu
             if (mouseState.LeftButton == ButtonState.Pressed)
 			{
-                if (mousePosition.X >= _positionBoutonMenu.X &&
-                                        mousePosition.X <= _positionBoutonMenu.X + 300 &&
-                                        mousePosition.Y >= _positionBoutonMenu.Y &&
-                                        mousePosition.Y <= _positionBoutonMenu.Y + 100)
+                if (!_sourisClick)
                 {
-                    Game1.etat = Game1.Etats.BackMenu;
+                    //clique pour menu
+
+                    if (mousePosition.X >= _positionBoutonMenu.X &&
+                                            mousePosition.X <= _positionBoutonMenu.X + 300 &&
+                                            mousePosition.Y >= _positionBoutonMenu.Y &&
+                                            mousePosition.Y <= _positionBoutonMenu.Y + 100)
+                    {
+                        _sonMenuBack.Play(Game1._volumeSon, 0, 0);
+                        Game1.etat = Game1.Etats.BackMenu;
+                    }
+
+                    //clique pour reprendre
+                    if (mousePosition.X >= _positionBoutonReprendre.X &&
+                                            mousePosition.X <= _positionBoutonReprendre.X + 702 &&
+                                            mousePosition.Y >= _positionBoutonReprendre.Y &&
+                                            mousePosition.Y <= _positionBoutonReprendre.Y + 100)
+                    {
+                        Jeu._pause = false;
+                    }
+                    _sourisClick = true;
                 }
             }
-
-            //clique pour reprendre
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            if (mouseState.LeftButton == ButtonState.Released)
             {
-                if (mousePosition.X >= _positionBoutonReprendre.X &&
-                                        mousePosition.X <= _positionBoutonReprendre.X + 702 &&
-                                        mousePosition.Y >= _positionBoutonReprendre.Y &&
-                                        mousePosition.Y <= _positionBoutonReprendre.Y + 100)
+                if (_sourisClick)
                 {
-                   Jeu._pause = false;
+                    _sourisClick = false;
                 }
             }
 
-            //raccourci pour retourner au menu et pour reprendre
-            KeyboardState keyboardState = Keyboard.GetState();
+
+                    //raccourci pour retourner au menu et pour reprendre
+                    KeyboardState keyboardState = Keyboard.GetState();
 
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {

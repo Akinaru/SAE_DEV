@@ -804,6 +804,12 @@
 /processorParam:Quality=Best
 /build:Son/Hit.wav
 
+#begin Son/MenuBack.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/MenuBack.wav
+
 #begin Son/MusiqueMenu.ogg
 /importer:OggImporter
 /processor:SongProcessor
