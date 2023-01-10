@@ -38,13 +38,10 @@ namespace Project1
         {
             if (_showUI)
             {
-            _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
-				if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
-				{
-                    for (int i = 0; i < Game1._listeMonstre.Count; i++)
-                    {
-                        _spriteBatch.Draw(_textureMapMonstre, new Vector2((Game1._listeMonstre[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeMonstre[i].Position.Y / 1600 * 600) + 60 - 8), Color.Red);
-                    }
+                _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
+                for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                {
+                    _spriteBatch.Draw(_textureMapMonstre, new Vector2((Game1._listeMonstre[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeMonstre[i].Position.Y / 1600 * 600) + 60 - 8), Color.Red);
                 }
                 
                 for (int i = 0; i < Jeu._listeCoeur.Count; i++)

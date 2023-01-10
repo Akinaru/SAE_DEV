@@ -73,7 +73,6 @@ namespace Project1
             Game1._spriteBatch.End();
 
             Game1._spriteBatch.Begin();
-            MapUI.Draw(Game1._spriteBatch);
             HUD.Draw(Game1._spriteBatch);
             Message.Draw(Game1._spriteBatch);
 
@@ -88,6 +87,7 @@ namespace Project1
                 Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 + 40), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 60), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Nombre de coups: " + Jeu._nombreCoup, new Vector2(1280 / 2 - 100, 720 / 2 + 80), Color.White);
             }
             Game1._spriteBatch.End();
         }

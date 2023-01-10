@@ -29,6 +29,7 @@ namespace Project1
         public static int _vague;
         public static int _nombreMonstre;
         public static int _nombreKill;
+        public static int _nombreCoup;
         public static float _chrono;
         public static bool _pause;
         public enum NiveauDifficulte { Facile, Difficile };
@@ -48,6 +49,7 @@ namespace Project1
             _wait = 0;
             _chrono = 0;
             _pause = false;
+            _nombreCoup = 0;
             KeyboardManager._frappe = false;
             KeyboardManager._wait = 0;
             KeyboardManager.Initialise();

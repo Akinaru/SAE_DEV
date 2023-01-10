@@ -99,8 +99,10 @@ namespace Project1
                 {
                     if (!_frappe)
                     {
+                        Jeu._nombreCoup += 1;
                         Perso._animEpee = true;
                         _frappe = true;
+                        
                         Perso._perso = new AnimatedSprite(Perso._spriteSheetWalkNormal);
                         for (int i = 0; i < Game1._listeMonstre.Count; i++)
                         {
