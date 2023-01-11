@@ -51,6 +51,7 @@ namespace Project1
             }
         }
 
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
