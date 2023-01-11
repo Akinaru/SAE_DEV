@@ -254,7 +254,7 @@ namespace Project1
 
             if (boss._hit)
             {
-                _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(8, 8), Color.White);
+                _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(16, 16), Color.White);
             }
             else
             {
