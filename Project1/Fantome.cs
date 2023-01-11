@@ -203,46 +203,44 @@ namespace Project1
             }
         }
 
-        public static void Draw(SpriteBatch _spriteBatch, ContentManager Content)
+        public void Draw(SpriteBatch _spriteBatch, ContentManager Content)
         {
-            for (int i = 0; i < Game1._listeFantome.Count; i++)
+            Fantome fantome = this;
+
+            if (fantome._hit)
             {
-                Fantome fantome = Game1._listeFantome[i];
-
-                if (fantome._hit)
-                {
-                    _spriteBatch.Draw(fantome._textureFantomeHit, fantome.Position - new Vector2(8, 8), Color.White);
-                }
-                else
-                {
-                    if (!fantome.Mort)
-                        _spriteBatch.Draw(fantome.FantomeSprite, fantome.Position);
-                }
-                if (!fantome.Mort)
-                    _spriteBatch.Draw(Jeu._textureombrePerso, fantome.Position + new Vector2(-16, -13), Color.White);
-                if (fantome.Mort)
-                {
-                    _spriteBatch.Draw(fantome.fumee, fantome.Position);
-                }
-
-                if (fantome.Vie == 3)
-                    _spriteBatch.Draw(fantome._texturefullLife, fantome.Position + new Vector2(-12, -12), Color.White);
-                else if (fantome.Vie == 2)
-                    _spriteBatch.Draw(fantome._texturemidLife, fantome.Position + new Vector2(-12, -12), Color.White);
-                else if (fantome.Vie == 1)
-                    _spriteBatch.Draw(fantome._texturelowLife, fantome.Position + new Vector2(-12, -12), Color.White);
-                else //vie du monstre = 0
-                {
-                    fantome.Hit = false;
-                    if (fantome.Mort == false)
-                    {
-                        Jeu._nombreKill += 1;
-                    }
-
-                    fantome.Mort = true;
-
-                }
+                _spriteBatch.Draw(fantome._textureFantomeHit, fantome.Position - new Vector2(8, 8), Color.White);
             }
+            else
+            {
+                if (!fantome.Mort)
+                    _spriteBatch.Draw(fantome.FantomeSprite, fantome.Position);
+            }
+            if (!fantome.Mort)
+                _spriteBatch.Draw(Jeu._textureombrePerso, fantome.Position + new Vector2(-16, -13), Color.White);
+            if (fantome.Mort)
+            {
+                _spriteBatch.Draw(fantome.fumee, fantome.Position);
+            }
+
+            if (fantome.Vie == 3)
+                _spriteBatch.Draw(fantome._texturefullLife, fantome.Position + new Vector2(-12, -12), Color.White);
+            else if (fantome.Vie == 2)
+                _spriteBatch.Draw(fantome._texturemidLife, fantome.Position + new Vector2(-12, -12), Color.White);
+            else if (fantome.Vie == 1)
+                _spriteBatch.Draw(fantome._texturelowLife, fantome.Position + new Vector2(-12, -12), Color.White);
+            else //vie du monstre = 0
+            {
+                fantome.Hit = false;
+                if (fantome.Mort == false)
+                {
+                    Jeu._nombreKill += 1;
+                }
+
+                fantome.Mort = true;
+
+            }
+            
         }
         public static void Touche(Fantome fantome)
         {

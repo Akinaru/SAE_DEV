@@ -5,29 +5,26 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
-using MonoGame.Extended.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Project1
 {
-    public class Monstre
+    public class Boss
     {
 
         private Vector2 position;
-        private AnimatedSprite monstre;
+        private AnimatedSprite boss;
         private AnimatedSprite fumee;
         private double vitesse;
         private int vie;
         private Texture2D _texturelowLife;
         private Texture2D _texturemidLife;
         private Texture2D _texturefullLife;
-        private Texture2D _textureMonstreHit;
+        private Texture2D _textureBossHit;
         private bool _hit;
         private bool _mort;
         private float _mortWait;
@@ -39,23 +36,23 @@ namespace Project1
 
 
 
-        public Monstre(String spritesheet, Vector2 position, ContentManager content)
+        public Boss(String spritesheet, Vector2 position, ContentManager content)
         {
-            this.MonstreSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
-            this.fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader())); 
-            this.Vitesse = new Random().Next(400,550) / 10;
-            this.Vie = 3;
+            this.BossSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
+            this.fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader()));
+            this.Vitesse = new Random().Next(400, 550) / 10;
+            this.Vie = 10;
             this._texturelowLife = content.Load<Texture2D>("lowLife");
             this._texturemidLife = content.Load<Texture2D>("midLife");
             this._texturefullLife = content.Load<Texture2D>("fullLife");
-            this._textureMonstreHit = content.Load<Texture2D>("monstreHit");
+            this._textureBossHit = content.Load<Texture2D>("bossHit");
             this._sonHit = content.Load<SoundEffect>("Son/playerHurt");
             this.Spawn();
             this.Hit = false;
             this.Mort = false;
             this._mortWait = 0;
             this._deplaceWait = 0;
-            
+
         }
 
         public void Spawn()
@@ -66,10 +63,11 @@ namespace Project1
             {
                 positionne = true;
                 pos = new Vector2(new Random().Next(64, 1550), new Random().Next(64, 1550));
-                if (Collision.IsCollision( (ushort)(pos.X / Map._tiledMap.TileWidth), (ushort)(pos.Y / Map._tiledMap.TileWidth))){
+                if (Collision.IsCollision((ushort)(pos.X / Map._tiledMap.TileWidth), (ushort)(pos.Y / Map._tiledMap.TileWidth)))
+                {
                     positionne = false;
                 }
-                if(Vector2.Distance(pos, Perso._positionPerso) < 16* 10)
+                if (Vector2.Distance(pos, Perso._positionPerso) < 16 * 10)
                 {
                     positionne = false;
                 }
@@ -91,16 +89,16 @@ namespace Project1
             }
         }
 
-        public AnimatedSprite MonstreSprite
+        public AnimatedSprite BossSprite
         {
             get
             {
-                return this.monstre;
+                return this.boss;
             }
 
             set
             {
-                this.monstre = value;
+                this.boss = value;
             }
         }
 
@@ -166,20 +164,25 @@ namespace Project1
             if (this.Mort)
             {
                 this._mortWait += 1 * deltaTime;
-                if(this._mortWait >= 0.3)
+                if (this._mortWait >= 0.3)
                 {
-                    Game1._listeMonstre.Remove(this);
+                    Game1._listeBoss.Remove(this);
                     Vague.NewVague(Content);
                 }
             }
+            String animation = "idle";
 
-            if (distance >= 6 && distance < 16 * 10)
+            if (distance >= 6 && distance < 16 * 15)
             {
                 this._deplaceWait = 0;
                 Vector2 direction = Vector2.Normalize(Perso._positionPerso - this.Position);
                 Vector2 pos = new Vector2(this.Position.X, this.Position.Y);
                 ushort x;
                 ushort y;
+                if (direction.X <= 0)
+                    animation = "walkWest";
+                else
+                    animation = "walkEast";
                 if (direction.X <= 0) //x gauche
                 {
                     x = (ushort)(pos.X / Map._tiledMap.TileWidth - 0.5);
@@ -216,16 +219,18 @@ namespace Project1
                         direction.Y = 0;
                     }
                 }
-                this.MonstreSprite.Update(deltaTime);
+                this.BossSprite.Update(deltaTime);
                 double vitesse = this.Vitesse;
                 if (this.Hit)
                 {
                     vitesse -= 30;
                 }
+
+
                 this.Position += direction * (float)vitesse * deltaTime;
-                String animation = "walkSouth";
-                this.MonstreSprite.Play(animation);
             }
+            this.BossSprite.Play(animation);
+
 
             if (Vector2.Distance(this.Position, Perso._positionPerso) <= 6)
             {
@@ -234,71 +239,71 @@ namespace Project1
                     if (!this.Mort)
                     {
                         Perso._touche = true;
-                        Perso._viePerso -= 1;
-                        Perso._coeurPerdu += 1;
+                        int vieAEnelver = 1;
+                        if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+                            vieAEnelver = 2;
+                        if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
+                            vieAEnelver = 4;
+                        Perso._viePerso -= vieAEnelver;
                         ViePerso.Update();
                         _sonHit.Play(Game1._volumeSon, 0, 0);
                     }
-  
+
                 }
             }
         }
 
         public void Draw(SpriteBatch _spriteBatch, ContentManager Content)
         {
-            Monstre monstre = this;
-  
-            if (monstre._hit)
+            Boss boss = this;
+
+            if (boss._hit)
             {
-                _spriteBatch.Draw(monstre._textureMonstreHit, monstre.Position - new Vector2(8, 8), Color.White);
+                _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(20, 20), Color.White);
             }
             else
             {
-                if(!monstre.Mort)
-                    _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
+                if (!boss.Mort)
+                    _spriteBatch.Draw(boss.BossSprite, boss.Position);
             }
-            if (!monstre.Mort)
-                _spriteBatch.Draw(Jeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
-            if (monstre.Mort)
+            if (!boss.Mort)
+                _spriteBatch.Draw(Jeu._textureombrePerso, boss.Position + new Vector2(-16, -10), Color.White);
+            if (boss.Mort)
             {
-                _spriteBatch.Draw(monstre.fumee, monstre.Position);
+                _spriteBatch.Draw(boss.fumee, boss.Position);
             }
-
-            if (monstre.Vie == 3)
-                _spriteBatch.Draw(monstre._texturefullLife, monstre.Position + new Vector2(-12, -12), Color.White);
-            else if (monstre.Vie == 2)
-                _spriteBatch.Draw(monstre._texturemidLife, monstre.Position + new Vector2(-12, -12), Color.White);
-            else if (monstre.Vie == 1)
-                _spriteBatch.Draw(monstre._texturelowLife, monstre.Position + new Vector2(-12, -12), Color.White);
+            if(boss.Vie > 0)
+                _spriteBatch.Draw(boss._texturefullLife, boss.Position + new Vector2(-12, -12), Color.White);
             else //vie du monstre = 0
             {
-                monstre.Hit = false;
-                if(monstre.Mort == false)
+                boss.Hit = false;
+                if (boss.Mort == false)
                 {
                     Jeu._nombreKill += 1;
                     int rnd = new Random().Next(0, 100);
                     if (rnd <= DROP_COEUR_FACILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme && Jeu.difficulte == Jeu.NiveauDifficulte.Facile) //25% de chance de drop un coeur
                     {
-                        new Coeur(monstre.Position, Content);
+                        new Coeur(boss.Position, Content);
                         Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
                     }
                     else if (rnd <= DROP_COEUR_DIFFICILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) //10% de chance de drop un coeur
                     {
-                        new Coeur(monstre.Position, Content);
+                        new Coeur(boss.Position, Content);
                         Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
                     }
                 }
 
-                monstre.Mort = true;
+                boss.Mort = true;
 
             }
+            
         }
-        public static void Touche(Monstre monstre)
+        public static void Touche(Boss boss)
         {
-            if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 40)
+            if (Vector2.Distance(boss.Position, Perso._positionPerso) < 40)
             {
-                monstre.Vie -= 1;
-                monstre.Hit = true;
+                boss.Vie -= 1;
+                boss.Hit = true;
                 Perso._sonHit.Play(Game1._volumeSon, 0, 0);
                 //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
                 //monstre.Position += direction * 700 * deltaTime;

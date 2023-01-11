@@ -1,0 +1,24 @@
+{
+  "textureAtlas": {
+    "texture": "bossAnimation.png",
+    "regionWidth": 40,
+    "regionHeight": 40
+  },
+  "cycles": {
+    "idle": {
+      "frames": [16,15,14,13,12],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "walkWest": {
+      "frames": [5,4,3,2,1,0,4],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "walkEast": {
+      "frames": [6,7,8,9,10,11,7],
+      "isLooping": false,
+      "frameDuration": 0.2
+    }
+  }
+}

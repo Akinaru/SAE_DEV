@@ -13,6 +13,7 @@ namespace Project1
         public static Texture2D _textureMapPerso;
         public static Texture2D _textureMapMonstre;
         public static Texture2D _textureMapFantome;
+        public static Texture2D _textureMapBoss;
         public static Texture2D _textureMapUI;
         public static Texture2D _textureCoeurUI;
         public static Vector2 _positionMapPersoUI;
@@ -31,6 +32,7 @@ namespace Project1
             _textureMapPerso = Content.Load<Texture2D>("MapUI/mapPerso");
             _textureMapMonstre = Content.Load<Texture2D>("MapUI/mapMonstre");
             _textureMapFantome = Content.Load<Texture2D>("MapUI/mapFantome");
+            _textureMapBoss = Content.Load<Texture2D>("MapUI/mapBoss");
             _textureMapUI = Content.Load<Texture2D>("MapUI/map");
             _textureCoeurUI = Content.Load<Texture2D>("Perso/coeurDrop");
 
@@ -54,6 +56,11 @@ namespace Project1
                     {
                         _spriteBatch.Draw(_textureMapFantome, new Vector2((Game1._listeFantome[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeFantome[i].Position.Y / 1600 * 600) + 60 - 8), Color.Cyan);
                     }
+                }
+                //affiche le boss
+                for (int i = 0; i < Game1._listeBoss.Count; i++)
+                {
+                    _spriteBatch.Draw(_textureMapBoss, new Vector2((Game1._listeBoss[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeBoss[i].Position.Y / 1600 * 600) + 60 - 8), Color.White);
                 }
                 //affichage coeur sur la carte
                 for (int i = 0; i < Jeu._listeCoeur.Count; i++)
