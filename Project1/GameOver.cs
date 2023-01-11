@@ -32,11 +32,11 @@ namespace Project1
 
         public override void Initialize()
         {
-            _positionGameOver = new Vector2(490, 50);
-            _positionBoutonMenu = new Vector2(490, 480);
-            _positionBoutonRejouer = new Vector2(490, 380);
-            _positionRaccourciM = new Vector2(631, 585);
-            _positionRaccourciR = new Vector2(631, 485);
+            _positionGameOver = new Vector2(490, 30);
+            _positionRaccourciM = new Vector2(631, 685);
+            _positionRaccourciR = new Vector2(631, 555);
+            _positionBoutonRejouer = new Vector2(1280/2 - (538/2), 450);
+            _positionBoutonMenu = new Vector2(490, 580);
             base.Initialize();
         }
         public override void LoadContent()
@@ -46,7 +46,7 @@ namespace Project1
             _textureblurBackground = Content.Load<Texture2D>("Menu/blurBackground");
             _textureGameOver = Content.Load<Texture2D>("Menu/gameOver");
             _textureRaccourciM = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciM");
-            _textureRaccourciR = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciR ");
+            _textureRaccourciR = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciR");
         }
 
         public override void Update(GameTime gameTime)
@@ -72,11 +72,11 @@ namespace Project1
                 mousePosition.Y >= _positionBoutonRejouer.Y &&
                 mousePosition.Y <= _positionBoutonRejouer.Y + 100)
             {
-                _textureBoutonMenu = Content.Load<Texture2D>("Menu/rejouerHover");
+                _textureBoutonRejouer = Content.Load<Texture2D>("Menu/rejouerHover");
             }
             else
             {
-                _textureBoutonMenu = Content.Load<Texture2D>("Menu/rejouer");
+                _textureBoutonRejouer = Content.Load<Texture2D>("Menu/rejouer");
             }
 
             //clique pour menu
@@ -99,7 +99,7 @@ namespace Project1
                     mousePosition.Y >= _positionBoutonRejouer.Y &&
                     mousePosition.Y <= _positionBoutonRejouer.Y + 100)
                 {
-                    Game1.Etat = Game1.Etats.BackMenu;
+                    Game1.Etat = Game1.Etats.Play;
 
                 }
             }
@@ -150,14 +150,14 @@ namespace Project1
                 Game1._spriteBatch.Draw(_textureRaccourciM, _positionRaccourciM, Color.White);
                 Game1._spriteBatch.Draw(_textureRaccourciR, _positionRaccourciR, Color.White);
 
-                Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2), Color.White);
-                Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
-                Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 40), Color.White);
-                Game1._spriteBatch.DrawString(Message._police, "Nombre de coups: " + Jeu._nombreCoup, new Vector2(1280 / 2 - 100, 720 / 2 + 60), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2 - 40), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 - 20), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 0), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Nombre de coups: " + Jeu._nombreCoup, new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
                 double precision = 0;
                 if (Jeu._nombreCoup > 0) {
                     precision = Math.Round((Jeu._precision / Jeu._nombreCoup * 100), 0);
-                    Game1._spriteBatch.DrawString(Message._police, "Precision: " + precision + " pourcent", new Vector2(1280 / 2 - 100, 720 / 2 + 80), Color.White);
+                    Game1._spriteBatch.DrawString(Message._police, "Precision: " + precision + " pourcent", new Vector2(1280 / 2 - 100, 720 / 2 + 40), Color.White);
                 }
             }
             Game1._spriteBatch.End();
