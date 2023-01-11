@@ -254,7 +254,7 @@ namespace Project1
 
             if (boss._hit)
             {
-                _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(16, 16), Color.White);
+                _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(20, 20), Color.White);
             }
             else
             {
@@ -262,7 +262,7 @@ namespace Project1
                     _spriteBatch.Draw(boss.BossSprite, boss.Position);
             }
             if (!boss.Mort)
-                _spriteBatch.Draw(Jeu._textureombrePerso, boss.Position + new Vector2(-16, -13), Color.White);
+                _spriteBatch.Draw(Jeu._textureombrePerso, boss.Position + new Vector2(-16, -10), Color.White);
             if (boss.Mort)
             {
                 _spriteBatch.Draw(boss.fumee, boss.Position);
