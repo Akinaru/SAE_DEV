@@ -249,7 +249,7 @@ namespace Project1
                         mousePosition.Y >= _positionBoutonSortir.Y &&
                         mousePosition.Y <= _positionBoutonSortir.Y + 50)
                     {
-                        //euizhfuehzuifhzeuihzfi
+                        Game1.Etat = Game1.Etats.Exit;
                     }
                     //BOUTON JEU
                     if (mousePosition.X >= _positionPlayButton.X &&

@@ -31,7 +31,7 @@ namespace Project1
 
 
 
-        public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu };
+        public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu, Exit };
         public static Etats etat;
         private readonly ScreenManager _screenManager;
         private Menu _screenMenu;
@@ -126,8 +126,12 @@ namespace Project1
                 Etat = Etats.Attente;
                 _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
             }
+            else if (Etat == Etats.Exit)
+            {
+                Exit();
+            }
 
-            if (Jeu._pause )
+                if (Jeu._pause )
                 IsMouseVisible = true;
             else
                 if(Etat == Etats.Play)

@@ -20,12 +20,14 @@ namespace Project1
         public static Texture2D _textureBoutonRejouer;
         public static Texture2D _textureRaccourciM;
         public static Texture2D _textureRaccourciR;
+        public static Texture2D _textureBoutonSortir;
 
         public static Vector2 _positionGameOver;
         public static Vector2 _positionBoutonMenu;
         public static Vector2 _positionBoutonRejouer;
         public static Vector2 _positionRaccourciM;
         public static Vector2 _positionRaccourciR;
+        public static Vector2 _positionBoutonSortir;
         public GameOver(Game1 game) : base(game) 
         {
         }
@@ -37,6 +39,7 @@ namespace Project1
             _positionRaccourciR = new Vector2(631, 555);
             _positionBoutonRejouer = new Vector2(1280/2 - (538/2), 450);
             _positionBoutonMenu = new Vector2(490, 580);
+            _positionBoutonSortir = new Vector2(1220, 650);
             base.Initialize();
         }
         public override void LoadContent()
@@ -47,12 +50,14 @@ namespace Project1
             _textureGameOver = Content.Load<Texture2D>("Menu/gameOver");
             _textureRaccourciM = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciM");
             _textureRaccourciR = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciR");
+            _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortir");
         }
 
         public override void Update(GameTime gameTime)
         {
             MouseState mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
+
 
             //hover menu
             if (mousePosition.X >= _positionBoutonMenu.X &&
@@ -77,6 +82,21 @@ namespace Project1
             else
             {
                 _textureBoutonRejouer = Content.Load<Texture2D>("Menu/rejouer");
+            }
+            //hover sortir
+            if (Game1._volumeSon != 0)
+            {
+                if (mousePosition.X >= _positionBoutonSortir.X &&
+                    mousePosition.X <= _positionBoutonSortir.X + 50 &&
+                    mousePosition.Y >= _positionBoutonSortir.Y &&
+                    mousePosition.Y <= _positionBoutonSortir.Y + 50)
+                {
+                    _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortirHovevr");
+                }
+                else
+                {
+                    _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortir");
+                }
             }
 
             //clique pour menu
@@ -103,7 +123,17 @@ namespace Project1
 
                 }
             }
-
+            //BOUTON SORTIR
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (mousePosition.X >= _positionBoutonSortir.X &&
+                    mousePosition.X <= _positionBoutonSortir.X + 50 &&
+                    mousePosition.Y >= _positionBoutonSortir.Y &&
+                    mousePosition.Y <= _positionBoutonSortir.Y + 50)
+                {
+                    Game1.Etat = Game1.Etats.Exit;
+                }
+            }
             //raccourci pour menu
             KeyboardState keyboardState = Keyboard.GetState();
 
@@ -149,7 +179,7 @@ namespace Project1
                 Game1._spriteBatch.Draw(_textureGameOver, _positionGameOver, Color.White);
                 Game1._spriteBatch.Draw(_textureRaccourciM, _positionRaccourciM, Color.White);
                 Game1._spriteBatch.Draw(_textureRaccourciR, _positionRaccourciR, Color.White);
-
+                Game1._spriteBatch.Draw(_textureBoutonSortir, _positionBoutonSortir, Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2 - 40), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 - 20), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 0), Color.White);
