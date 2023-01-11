@@ -41,7 +41,7 @@ namespace Project1
         {
             this.FantomeSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
             this.fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader()));
-            this.Vitesse = new Random().Next(400, 550) / 10;
+            this.Vitesse = new Random().Next(350, 550) / 10;
             this.Vie = 3;
             this._texturelowLife = content.Load<Texture2D>("lowLife");
             this._texturemidLife = content.Load<Texture2D>("midLife");

@@ -221,7 +221,7 @@ namespace Project1
             Perso.Draw(Game1._spriteBatch);
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);
-            if (difficulte == NiveauDifficulte.Difficile || difficulte == NiveauDifficulte.Extreme)
+            if ((difficulte == NiveauDifficulte.Difficile || difficulte == NiveauDifficulte.Extreme))
                 
                 Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
 
