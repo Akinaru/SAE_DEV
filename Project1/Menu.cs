@@ -41,6 +41,7 @@ namespace Project1
         public static Vector2 _positionDifficileButton;
         public static Vector2 _positionExtremeButton;
 
+        public static Vector2 _positionControls;
         public static Vector2 _positionRaccourciEntree;
         public static Vector2 _positionRaccourciF;
         public static Vector2 _positionRaccourciD;
@@ -65,21 +66,24 @@ namespace Project1
         public override void Initialize()
         {
             Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
-            _positionPlayButton = new Vector2(Game1._largeurEcran/2 -150, 300);
-            _positionRaccourciEntree = new Vector2(611, 392);
+            float x = Game1._largeurEcran / 2;
+            _positionPlayButton = new Vector2(x -150, 300);
+            _positionRaccourciEntree = new Vector2(x - 29, 392);
 
-            _positionFacileButton = new Vector2(500, 440);
-            _positionDifficileButton = new Vector2(628, 440);
-            _positionExtremeButton = new Vector2(547, 500);
+            _positionFacileButton = new Vector2(x - 140, 440);
+            _positionDifficileButton = new Vector2(x - 12, 440);
+            _positionExtremeButton = new Vector2(x - 93, 500);
 
-            _positionRaccourciF = new Vector2(543, 470);
-            _positionRaccourciD = new Vector2(695, 470);
-            _positionRaccourciE = new Vector2(631, 532);
-            _positionRaccourciS = new Vector2(1234, 700);
+            _positionRaccourciF = new Vector2(x - 97, 470);
+            _positionRaccourciD = new Vector2(x + 55, 470);
+            _positionRaccourciE = new Vector2(x - 9, 532);
+            _positionRaccourciS = new Vector2(x + 594, 700);
             _positionRaccourciFleche = new Vector2(24, 70);
 
             _positionBoutonSon = new Vector2(10, 10);
-            _positionBoutonSortir = new Vector2(1220, 650);
+            _positionBoutonSortir = new Vector2((x*2) - 60, 640);
+
+            _positionControls = new Vector2(x -300, 570);
             _boutonSon = false;
             _sourisClick = false;
             base.Initialize();
@@ -105,7 +109,7 @@ namespace Project1
             _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciFacile");
             _textureRaccourciE = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciE");
             _textureRaccourciS = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciS");
-            _textureRaccourciFleche = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeUp");
+            _textureRaccourciFleche = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeDown");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _sonDifficulte = Content.Load<SoundEffect>("Son/Difficulte");
@@ -373,7 +377,7 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
             Game1._spriteBatch.Draw(_textureExtremeButton, _positionExtremeButton, Color.White);
 
-            Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
+            Game1._spriteBatch.Draw(_textureControls, _positionControls, Color.White);
 
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
             Game1._spriteBatch.Draw(_textureRaccourciFleche, _positionRaccourciFleche, Color.White);
