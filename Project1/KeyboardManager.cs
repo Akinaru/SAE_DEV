@@ -105,10 +105,17 @@ namespace Project1
                         _frappe = true;
                         Jeu._sonEpee.Play(Game1._volumeSon, 0, 0);
                         Perso._perso = new AnimatedSprite(Perso._spriteSheetWalkNormal);
+                        bool aToucheUnMonstre = false;
                         for (int i = 0; i < Game1._listeMonstre.Count; i++)
                         {
+                            if (Vector2.Distance(Game1._listeMonstre[i].Position, Perso._positionPerso) < 40)
+                                aToucheUnMonstre = true;
+
                             Monstre.Touche(Game1._listeMonstre[i]);
                         }
+                        if(aToucheUnMonstre)
+                            Jeu._precision += 1;
+
                     }
                 }
 
