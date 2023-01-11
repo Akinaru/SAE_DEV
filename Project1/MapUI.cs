@@ -42,7 +42,7 @@ namespace Project1
             {
                 _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
                 if ((Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) ||
-                    ((Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) && Jeu._nombreMonstre <= 10))
+                    ((Jeu.difficulte == Jeu.NiveauDifficulte.Extreme) && Jeu._nombreMonstre <= 10))
                 {
                     //affichage monstre sur la carte
                     for (int i = 0; i < Game1._listeMonstre.Count; i++)
