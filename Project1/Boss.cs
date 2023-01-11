@@ -21,8 +21,6 @@ namespace Project1
         private AnimatedSprite fumee;
         private double vitesse;
         private int vie;
-        private Texture2D _texturepleinLife;
-        private Texture2D _texturevideLife;
         private Texture2D _textureBossHit;
         private bool _hit;
         private bool _mort;
@@ -30,8 +28,8 @@ namespace Project1
         private float _deplaceWait;
         private SoundEffect _sonHit;
 
-        private const int DROP_COEUR_FACILE = 25;
-        private const int DROP_COEUR_DIFFICILE = 10;
+        private const int DROP_COEUR_FACILE = 100;
+        private const int DROP_COEUR_DIFFICILE = 100;
 
 
 
@@ -41,8 +39,6 @@ namespace Project1
             this.fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader()));
             this.Vitesse = new Random().Next(400, 550) / 10;
             this.Vie = 10;
-            this._texturepleinLife = content.Load<Texture2D>("fullLife");
-            this._texturevideLife = content.Load<Texture2D>("fullLife");
             this._textureBossHit = content.Load<Texture2D>("bossHit");
             this._sonHit = content.Load<SoundEffect>("Son/playerHurt");
             this.Spawn();
@@ -60,7 +56,7 @@ namespace Project1
             while (!positionne)
             {
                 positionne = true;
-                pos = new Vector2(new Random().Next(64, 1550), new Random().Next(64, 1550));
+                pos = new Vector2(new Random().Next(64, 500), new Random().Next(64, 500));
                 if (Collision.IsCollision((ushort)(pos.X / Map._tiledMap.TileWidth), (ushort)(pos.Y / Map._tiledMap.TileWidth)))
                 {
                     positionne = false;
@@ -270,9 +266,7 @@ namespace Project1
             {
                 _spriteBatch.Draw(boss.fumee, boss.Position);
             }
-            if(boss.Vie > 0)
-                _spriteBatch.Draw(boss._texturepleinLife, boss.Position + new Vector2(-12, -12), Color.White);
-            else //vie du monstre = 0
+            if(boss.Vie == 0)//vie du monstre = 0
             {
                 boss.Hit = false;
                 if (boss.Mort == false)

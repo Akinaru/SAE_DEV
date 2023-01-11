@@ -98,6 +98,7 @@ namespace Project1
                 Game1._listeFantome.Add(new Fantome("fantome.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             }
             Game1._listeBoss.Add(new Boss("bossAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+            Game1._listeBoss.Add(new Boss("bossAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             var viewportadapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, Game1._largeurEcran, Game1._hauteurEcran);
             Camera.Initialise(viewportadapter);
         }
@@ -114,6 +115,7 @@ namespace Project1
             MapUI.LoadContent(Content);
             HUD.LoadContent(Content);
             ViePerso.LoadContent(Content);
+            VieBoss.LoadContent(Content);
             Perso.LoadContent(Content);
             Message.LoadContent(Content);
             Message.Display("Libere la ville des monstres !", "Fais vite... Je crois en toi !", 5);
@@ -194,6 +196,7 @@ namespace Project1
                 }
                 Perso.Update(deltaTime);
                 ViePerso.Update();
+                VieBoss.Update();
                 Camera.Update();
                 MapUI.Update();
                 Zone.Update();
@@ -250,8 +253,7 @@ namespace Project1
             MapUI.Draw(Game1._spriteBatch);
             HUD.Draw(Game1._spriteBatch);
             Message.Draw(Game1._spriteBatch);
-
-            
+            VieBoss.Draw(Game1._spriteBatch);
             Pause.Draw(Game1._spriteBatch);
 
             Game1._spriteBatch.End();

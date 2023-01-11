@@ -18,10 +18,6 @@ namespace Project1
         private const int VIE_MAX_FACILE_DIFFICILE = 6;
         private const int VIE_MAX_EXTREME = 1;
 
-        public static void Initialise()
-        {
-
-        }
 
         public static void LoadContent(ContentManager Content)
         {
