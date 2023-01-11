@@ -239,7 +239,12 @@ namespace Project1
                     if (!this.Mort)
                     {
                         Perso._touche = true;
-                        Perso._viePerso -= 1;
+                        int vieAEnelver = 1;
+                        if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+                            vieAEnelver = 2;
+                        if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
+                            vieAEnelver = 4;
+                        Perso._viePerso -= vieAEnelver;
                         ViePerso.Update();
                         _sonHit.Play(Game1._volumeSon, 0, 0);
                     }

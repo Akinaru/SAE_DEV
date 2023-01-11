@@ -40,7 +40,22 @@ namespace Project1
                     Jeu._nombreFantome += NOMBRE_FANTOME_PLUS_EXTREME;
                 for (int i = 0; i < Jeu._nombreFantome; i++)
                     Game1._listeFantome.Add(new Fantome("fantome.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
-
+                
+                if(Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+                {
+                    if(Jeu._vague % 5 == 0)
+                        Game1._listeBoss.Add(new Boss("bossAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+                }
+                if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
+                {
+                    if (Jeu._vague % 3 == 0)
+                        Game1._listeBoss.Add(new Boss("bossAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+                }
+                if (Jeu.difficulte == Jeu.NiveauDifficulte.Extreme)
+                {
+                    if (Jeu._vague % 2 == 0)
+                        Game1._listeBoss.Add(new Boss("bossAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+                }
             }
 
         }
