@@ -54,7 +54,9 @@ namespace Project1
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
             IsMouseVisible = true;
+
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
             Etat = Etats.Menu;
@@ -71,7 +73,7 @@ namespace Project1
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-            _volumeSon = 0.01f;
+            _volumeSon = 0.5f;
             _largeurEcran = 1280;
             _hauteurEcran = 720;
             _graphics.PreferredBackBufferWidth = Game1._largeurEcran;
@@ -100,24 +102,35 @@ namespace Project1
                 Exit();
             else if (Etat == Etats.Menu)
             {
+                IsMouseVisible = true;
                 Etat = Etats.Attente;
-                _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black, 0.1f));
+                _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black, 0.01f));
             }
             else if (Etat == Etats.BackMenu)
             {
+                IsMouseVisible = true;
                 Etat = Etats.Attente;
                 _screenManager.LoadScreen(_screenMenu, new FadeTransition(GraphicsDevice, Color.Black));
             }
             else if (Etat == Etats.Play)
             {
+                IsMouseVisible = false;
                 Etat = Etats.Attente;
                 _screenManager.LoadScreen(_screenJeu, new FadeTransition(GraphicsDevice, Color.Black));
             }
             else if (Etat == Etats.GameOver)
             {
+                IsMouseVisible = true;
                 Etat = Etats.Attente;
                 _screenManager.LoadScreen(_screenGameOver, new FadeTransition(GraphicsDevice, Color.Black));
             }
+
+            if (Jeu._pause )
+                IsMouseVisible = true;
+            else
+                if(Etat == Etats.Play)
+                    IsMouseVisible = false;
+
             Message.Update(deltaTime);
             base.Update(gameTime);
         }

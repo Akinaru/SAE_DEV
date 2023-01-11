@@ -13,6 +13,7 @@ using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Content;
 using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Project1
 {
@@ -30,10 +31,13 @@ namespace Project1
         public static int _nombreMonstre;
         public static int _nombreKill;
         public static int _nombreCoup;
+        public static double _precision;
         public static float _chrono;
         public static bool _pause;
-        public enum NiveauDifficulte { Facile, Difficile };
+        public enum NiveauDifficulte { Facile, Difficile, Extreme};
         public static NiveauDifficulte difficulte;
+        public static SoundEffect _sonEpee;
+
 
 
         public static List<Coeur> _listeCoeur = new List<Coeur>();
@@ -61,14 +65,13 @@ namespace Project1
 
             _vague = 1;
             if(difficulte == NiveauDifficulte.Facile)
-            {
                 _nombreMonstre = 15;
-            }
-            else
-            {
+            else if (difficulte == NiveauDifficulte.Difficile)
                 _nombreMonstre = 25;
-            }
+            else
+                _nombreMonstre = 100;
             _nombreKill = 0;
+            _precision = 0;
             if (Game1._listeMonstre.Count > 0)
             {
                 Game1._listeMonstre.Clear();
@@ -86,6 +89,7 @@ namespace Project1
             _textureombrePerso = Content.Load<Texture2D>("ombre");
             _textureObscurite = Content.Load<Texture2D>("obscurite");
             _textureSang = Content.Load<Texture2D>("Perso/sang");
+            _sonEpee = Content.Load<SoundEffect>("Son/epee");
             Pause.LoadContent(Content);
             HUD.LoadContent(Content);
             Fee.LoadContent(Content);
@@ -187,7 +191,7 @@ namespace Project1
             Perso.Draw(Game1._spriteBatch);
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);
-            if (difficulte == NiveauDifficulte.Difficile)
+            if (difficulte == NiveauDifficulte.Difficile || difficulte == NiveauDifficulte.Extreme)
                 
                 Game1._spriteBatch.Draw(_textureObscurite, _positionObscurite, Color.White);
 

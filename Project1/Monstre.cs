@@ -32,7 +32,12 @@ namespace Project1
         private bool _mort;
         private float _mortWait;
         private float _deplaceWait;
-        
+        private SoundEffect _sonHit;
+
+        private const int DROP_COEUR_FACILE = 25;
+        private const int DROP_COEUR_DIFFICILE = 10;
+
+
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
@@ -44,10 +49,10 @@ namespace Project1
             this._texturemidLife = content.Load<Texture2D>("midLife");
             this._texturefullLife = content.Load<Texture2D>("fullLife");
             this._textureMonstreHit = content.Load<Texture2D>("monstreHit");
+            this._sonHit = content.Load<SoundEffect>("Son/playerHurt");
             this.Spawn();
             this.Hit = false;
             this.Mort = false;
-
             this._mortWait = 0;
             this._deplaceWait = 0;
             
@@ -200,7 +205,7 @@ namespace Project1
                 if (direction.Y <= 0) //y haut
                 {
                     x = (ushort)(pos.X / Map._tiledMap.TileWidth);
-                    y = (ushort)((pos.Y -2 )/ Map._tiledMap.TileHeight);
+                    y = (ushort)((pos.Y - 2) / Map._tiledMap.TileHeight);
                     if (Collision.IsCollision(x, y))
                     {
                         direction.Y = 0;
@@ -235,6 +240,7 @@ namespace Project1
                         Perso._touche = true;
                         Perso._viePerso -= 1;
                         ViePerso.Update();
+                        _sonHit.Play(Game1._volumeSon, 0, 0);
                     }
   
                 }
@@ -276,7 +282,12 @@ namespace Project1
                     {
                         Jeu._nombreKill += 1;
                         int rnd = new Random().Next(0, 100);
-                        if(rnd < 10) //10% de chance de drop un coeur
+                        if (rnd <= DROP_COEUR_FACILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme && Jeu.difficulte == Jeu.NiveauDifficulte.Facile) //25% de chance de drop un coeur
+                        {
+                            new Coeur(monstre.Position, Content);
+                            Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
+                        }
+                        else if (rnd <= DROP_COEUR_DIFFICILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) //10% de chance de drop un coeur
                         {
                             new Coeur(monstre.Position, Content);
                             Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
@@ -293,6 +304,7 @@ namespace Project1
             if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 40)
             {
                 monstre.Vie -= 1;
+                Jeu._precision += 1;
                 monstre.Hit = true;
                 Perso._sonHit.Play(Game1._volumeSon, 0, 0);
                 //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
@@ -306,9 +318,13 @@ namespace Project1
             {
                 Jeu._nombreMonstre += 6;
             }
-            else
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
             {
                 Jeu._nombreMonstre += 12;
+            }
+            else
+            {
+                Jeu._nombreMonstre += 18;
             }
             Jeu._vague += 1;
             Message.Display("Bravo ! Tu es a la vague "+ Jeu._vague+ ". ", "Les monstres arrivent!", 5);

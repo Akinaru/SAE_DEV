@@ -43,7 +43,15 @@ namespace Project1
             _touche = false;
             _waitBouclier = 0;
             _animEpee = false;
-            _viePerso = 6;
+
+            if (Jeu.difficulte == Jeu.NiveauDifficulte.Extreme)
+            {
+                _viePerso = 1;
+            }
+            else
+            {
+                _viePerso = 6;
+            }
             _mort = false;
             _animation = "idle";
 

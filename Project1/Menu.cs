@@ -22,6 +22,7 @@ namespace Project1
 
         public static Texture2D _textureFacileButton;
         public static Texture2D _textureDifficileButton;
+        public static Texture2D _textureExtremeButton;
 
         public static Texture2D _texturePlusButton;
         public static Texture2D _textureMoinButton;
@@ -29,19 +30,23 @@ namespace Project1
         public static Texture2D _textureRaccourciEntree;
         public static Texture2D _textureRaccourciF;
         public static Texture2D _textureRaccourciD;
+        public static Texture2D _textureRaccourciE;
 
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
         public static Vector2 _positionDifficileButton;
+        public static Vector2 _positionExtremeButton;
 
         public static Vector2 _positionRaccourciEntree;
         public static Vector2 _positionRaccourciF;
         public static Vector2 _positionRaccourciD;
+        public static Vector2 _positionRaccourciE;
+        public static Vector2 _positionBoutonSon;
 
-
-
+        private bool _sourisClick;
+        private bool _boutonSon;
         private SoundEffect _sonJouer;
-        private Song _musique;
+        private SoundEffect _sonDifficulte;
 
 
         public Menu(Game1 game) : base(game)
@@ -56,9 +61,14 @@ namespace Project1
 
             _positionFacileButton = new Vector2(500, 440);
             _positionDifficileButton = new Vector2(628, 440);
+            _positionExtremeButton = new Vector2(547, 500);
+
             _positionRaccourciF = new Vector2(543, 470);
             _positionRaccourciD = new Vector2(695, 470);
-
+            _positionRaccourciE = new Vector2(631, 532);
+            _positionBoutonSon = new Vector2(10, 10);
+            _boutonSon = false;
+            _sourisClick = false;
             base.Initialize();
         }
         public override void LoadContent()
@@ -70,6 +80,7 @@ namespace Project1
 
             _textureFacileButton = Content.Load<Texture2D>("Menu/facile");
             _textureDifficileButton = Content.Load<Texture2D>("Menu/difficile");
+            _textureExtremeButton = Content.Load<Texture2D>("Menu/extreme");
 
             _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
             _textureMoinButton = Content.Load<Texture2D>("Menu/moins");
@@ -77,11 +88,11 @@ namespace Project1
             _textureRaccourciEntree = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciEntree");
             _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciDifficile");
             _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciFacile");
+            _textureRaccourciE = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciE");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
-            _musique = Content.Load<Song>("Son/MusiqueMenu");
+            _sonDifficulte = Content.Load<SoundEffect>("Son/Difficulte");
             MediaPlayer.Volume = Game1._volumeSon;
-            MediaPlayer.Play(_musique);
         }
 
         public override void Update(GameTime gameTime)
@@ -142,56 +153,127 @@ namespace Project1
                 _textureDifficileButton = Content.Load<Texture2D>("menu/difficileSouligne");
             }
 
+			//hover extreme
+			if (Jeu.difficulte != Jeu.NiveauDifficulte.Extreme)
+			{
+				if (mousePosition.X >= _positionExtremeButton.X &&
+					mousePosition.X <= _positionExtremeButton.X + 186 &&
+					mousePosition.Y >= _positionExtremeButton.Y &&
+					mousePosition.Y <= _positionExtremeButton.Y + 32)
+				{
+					_textureExtremeButton = Content.Load<Texture2D>("Menu/extremeHover");
+				}
+				else
+				{
+                    _textureExtremeButton = Content.Load<Texture2D>("Menu/extreme");
+				}
+			}
+			else
+			{
+                _textureExtremeButton = Content.Load<Texture2D>("menu/extremeSouligne");
+			}
+
+            //hover moins volume
+            if (Game1._volumeSon == 0)
+            {
+                if (mousePosition.X >= _positionBoutonSon.X &&
+                    mousePosition.X <= _positionBoutonSon.X + 50 &&
+                    mousePosition.Y >= _positionBoutonSon.Y &&
+                    mousePosition.Y <= _positionBoutonSon.Y + 50)
+                {
+                    _textureMoinButton = Content.Load<Texture2D>("Menu/moinsHover");
+                }
+                else
+                {
+                    _textureMoinButton = Content.Load<Texture2D>("Menu/moins");
+                }
+            }
+
+            //hover plus volume
+            if (Game1._volumeSon != 0)
+            {
+                if (mousePosition.X >= _positionBoutonSon.X &&
+                    mousePosition.X <= _positionBoutonSon.X + 50 &&
+                    mousePosition.Y >= _positionBoutonSon.Y &&
+                    mousePosition.Y <= _positionBoutonSon.Y + 50)
+                {
+                    _texturePlusButton = Content.Load<Texture2D>("Menu/plusHover");
+                }
+                else
+                {
+                    _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
+                }
+            }
+
 
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                //BOUTON JEU
-                if (mousePosition.X >= _positionPlayButton.X &&
-                        mousePosition.X <= _positionPlayButton.X + 300 &&
-                        mousePosition.Y >= _positionPlayButton.Y &&
-                        mousePosition.Y <= _positionPlayButton.Y + 100)
-                {
-                    if (!Jeu._gameStarted)
-                        gameStart();
+                if (!_sourisClick) { 
+                    //BOUTON JEU
+                    if (mousePosition.X >= _positionPlayButton.X &&
+                            mousePosition.X <= _positionPlayButton.X + 300 &&
+                            mousePosition.Y >= _positionPlayButton.Y &&
+                            mousePosition.Y <= _positionPlayButton.Y + 100)
+                    {
+                        if (!Jeu._gameStarted)
+                            gameStart();
+
+                    }
+                    //BOUTON FACILE
+                    if (mousePosition.X >= _positionFacileButton.X &&
+                        mousePosition.X <= _positionFacileButton.X + 104 &&
+                        mousePosition.Y >= _positionFacileButton.Y &&
+                        mousePosition.Y <= _positionFacileButton.Y + 32)
+                    {
+                        Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
+                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                    }
+                    //BOUTON DIFFICILE
+                    if (mousePosition.X >= _positionDifficileButton.X &&
+                        mousePosition.X <= _positionDifficileButton.X + 104 &&
+                        mousePosition.Y >= _positionDifficileButton.Y &&
+                        mousePosition.Y <= _positionDifficileButton.Y + 32)
+                    {
+                        Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
+                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                    }
+                    //BOUTON EXTREME
+                    if (mousePosition.X >= _positionExtremeButton.X &&
+                        mousePosition.X <= _positionExtremeButton.X + 186 &&
+                        mousePosition.Y >= _positionExtremeButton.Y &&
+                        mousePosition.Y <= _positionExtremeButton.Y + 32)
+                    {
+                        Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
+                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                    }
+                    //BOUTON SON
+                    if (mousePosition.X >= _positionBoutonSon.X &&
+                        mousePosition.X <= _positionBoutonSon.X + 50 &&
+                        mousePosition.Y >= _positionBoutonSon.Y &&
+                        mousePosition.Y <= _positionBoutonSon.Y + 50)
+                    {
+                        if (!_boutonSon)
+                        {
+                            if (Game1._volumeSon == 0)
+                                Game1._volumeSon += 0.5f;
+                            else
+                                Game1._volumeSon -= 0.5f;
+                            _boutonSon = true;
+                        }
+                    }
+                    _sourisClick = true;
 
                 }
-                //BOUTON FACILE
-                if (mousePosition.X >= _positionFacileButton.X &&
-                    mousePosition.X <= _positionFacileButton.X + 104 &&
-                    mousePosition.Y >= _positionFacileButton.Y &&
-                    mousePosition.Y <= _positionFacileButton.Y + 32)
-                {
-                    Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
-                }
-                //BOUTON DIFFICILE
-                if (mousePosition.X >= _positionDifficileButton.X &&
-                    mousePosition.X <= _positionDifficileButton.X + 104 &&
-                    mousePosition.Y >= _positionDifficileButton.Y &&
-                    mousePosition.Y <= _positionDifficileButton.Y + 32)
-                {
-                    Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
-                }
-                //BOUTON PLUS
-                if (mousePosition.X >= 10 &&
-                    mousePosition.X <= 10 + 50 &&
-                    mousePosition.Y >= 10 &&
-                    mousePosition.Y <= 10 + 50)
-                {
-                    if (Math.Round(Game1._volumeSon, 1) < 1)
-                        Game1._volumeSon += 0.01f;
-                }
 
-                //BOUTON MOIN
-                if (mousePosition.X >= 100 &&
-                    mousePosition.X <= 100 + 50 &&
-                    mousePosition.Y >= 10 &&
-                    mousePosition.Y <= 10 + 50)
-                {
-                    if (Game1._volumeSon > 0)
-                        Game1._volumeSon -= 0.01f;
-                }
             }
-            KeyboardState keyboardState = Keyboard.GetState();
+            if (mouseState.LeftButton == ButtonState.Released)
+            {
+                if (_boutonSon)
+                    _boutonSon = false;
+                if (_sourisClick)
+                    _sourisClick = false;
+            }
+                KeyboardState keyboardState = Keyboard.GetState();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
@@ -206,6 +288,10 @@ namespace Project1
             {
                 Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            {
+                Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
+            }
         }
 
         public void gameStart()
@@ -218,25 +304,39 @@ namespace Project1
         public override void Draw(GameTime gameTime)
         {
             Game1._spriteBatch.Begin();
+
             Game1._spriteBatch.Draw(_textureFondEcran, new Vector2(0, 0), Color.White);
             Game1._spriteBatch.Draw(_texturePlayButton, _positionPlayButton, Color.White);
 
             Game1._spriteBatch.Draw(_textureFacileButton, _positionFacileButton, Color.White);
             Game1._spriteBatch.Draw(_textureDifficileButton, _positionDifficileButton, Color.White);
+            Game1._spriteBatch.Draw(_textureExtremeButton, _positionExtremeButton, Color.White);
 
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
             
             if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+			{
                 Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
-            else
+                Game1._spriteBatch.Draw(_textureRaccourciE, _positionRaccourciE, Color.White);
+            }
+			else if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
+			{
+                Game1._spriteBatch.Draw(_textureRaccourciE, _positionRaccourciE, Color.White);
                 Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
+            }
+            else
+			{
+                Game1._spriteBatch.Draw(_textureRaccourciF, _positionRaccourciF, Color.White);
+                Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
+            }
 
 
-            Game1._spriteBatch.Draw(_texturePlusButton, new Vector2(10, 10), Color.White);
-            //Game1._spriteBatch.DrawString(Message._police, ""+Math.Round((Game1._volumeSon*100),0), new Vector2(80, 30), Color.White);
-            Game1._spriteBatch.Draw(_textureMoinButton, new Vector2(100, 10), Color.White);
+            if (Game1._volumeSon == 0)
+                Game1._spriteBatch.Draw(_textureMoinButton, _positionBoutonSon, Color.White);
+            else
+                Game1._spriteBatch.Draw(_texturePlusButton, _positionBoutonSon, Color.White);
             Game1._spriteBatch.End();
         }
     }

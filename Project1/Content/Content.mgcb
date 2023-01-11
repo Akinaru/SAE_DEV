@@ -318,6 +318,42 @@
 /processorParam:TextureFormat=Color
 /build:Menu/difficileSouligne.png
 
+#begin Menu/extreme.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/extreme.png
+
+#begin Menu/extremeHover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/extremeHover.png
+
+#begin Menu/extremeSouligne.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/extremeSouligne.png
+
 #begin Menu/facile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -378,6 +414,30 @@
 /processorParam:TextureFormat=Color
 /build:Menu/moins.png
 
+#begin Menu/moins.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/moins.png
+
+#begin Menu/moinsHover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/moinsHover.png
+
 #begin Menu/pause.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -426,6 +486,30 @@
 /processorParam:TextureFormat=Color
 /build:Menu/plus.png
 
+#begin Menu/plus.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/plus.png
+
+#begin Menu/plusHover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/plusHover.png
+
 #begin Menu/raccourciTouche/raccourciDifficile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -437,6 +521,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Menu/raccourciTouche/raccourciDifficile.png
+
+#begin Menu/raccourciTouche/raccourciE.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/raccourciTouche/raccourciE.png
 
 #begin Menu/raccourciTouche/raccourciEntree.png
 /importer:TextureImporter
@@ -726,29 +822,41 @@
 /processorParam:TextureFormat=Color
 /build:Perso/WalkNormal.png
 
-#begin sceptre.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:sceptre.png
-
 #begin Son/Accept.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Son/Accept.wav
 
+#begin Son/Difficulte.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/Difficulte.wav
+
+#begin Son/epee.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/epee.wav
+
+#begin Son/fee.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/fee.wav
+
 #begin Son/Hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Son/Hit.wav
+
+#begin Son/MenuBack.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/MenuBack.wav
 
 #begin Son/MusiqueMenu.ogg
 /importer:OggImporter
@@ -761,4 +869,10 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Son/NewVague.wav
+
+#begin Son/playerHurt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Son/playerHurt.wav
 

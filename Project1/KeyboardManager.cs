@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,10 +23,10 @@ namespace Project1
         public static bool _frappe;
         public static float _wait;
         public static bool _keyEscape;
-
         public static void Initialise()
         {
             _keyEscape = false;
+            
         }
 
         public static void Manage(Vector2 _positionPerso, TiledMap _tiledMap, string animation, float walkSpeed, int _mapWidth, int _mapHeight, GraphicsDeviceManager _graphics, float deltaTime, ContentManager Content)
@@ -102,7 +103,7 @@ namespace Project1
                         Jeu._nombreCoup += 1;
                         Perso._animEpee = true;
                         _frappe = true;
-                        
+                        Jeu._sonEpee.Play(Game1._volumeSon, 0, 0);
                         Perso._perso = new AnimatedSprite(Perso._spriteSheetWalkNormal);
                         for (int i = 0; i < Game1._listeMonstre.Count; i++)
                         {
