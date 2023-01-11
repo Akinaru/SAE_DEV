@@ -25,6 +25,7 @@ namespace Project1
         public static int _largeurEcran;
         public static int _hauteurEcran;
         public static List<Monstre> _listeMonstre = new List<Monstre>();
+        public static List<Fantome> _listeFantome = new List<Fantome>();
         public static List<Bombe> _listeBombe = new List<Bombe>();
         public static float _volumeSon;
 

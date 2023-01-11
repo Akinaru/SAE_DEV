@@ -29,6 +29,7 @@ namespace Project1
         public static float _wait;
         public static int _vague;
         public static int _nombreMonstre;
+        public static int _nombreFantome;
         public static int _nombreKill;
         public static int _nombreCoup;
         public static double _precision;
@@ -65,20 +66,36 @@ namespace Project1
 
             _vague = 1;
             if(difficulte == NiveauDifficulte.Facile)
+            {
                 _nombreMonstre = 15;
+                _nombreFantome = 3;
+            }
             else if (difficulte == NiveauDifficulte.Difficile)
+            {
                 _nombreMonstre = 25;
-            else
+                _nombreFantome = 5;
+            }
+            else {
                 _nombreMonstre = 100;
+                _nombreFantome = 25;
+            }
             _nombreKill = 0;
             _precision = 0;
             if (Game1._listeMonstre.Count > 0)
             {
                 Game1._listeMonstre.Clear();
             }
+            if (Game1._listeFantome.Count > 0)
+            {
+                Game1._listeFantome.Clear();
+            }
             for (int i = 0; i < _nombreMonstre; i++)
             {
                 Game1._listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+            }
+            for (int i = 0; i < _nombreFantome; i++)
+            {
+                Game1._listeFantome.Add(new Fantome("Perso/persoWalkNormal.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             }
             var viewportadapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, Game1._largeurEcran, Game1._hauteurEcran);
             Camera.Initialise(viewportadapter);
@@ -133,6 +150,14 @@ namespace Project1
                                 monstre.Hit = false;
                             }
                         }
+                        for (int i = 0; i < Game1._listeFantome.Count; i++)
+                        {
+                            Fantome fantome = Game1._listeFantome[i];
+                            if (fantome.Hit)
+                            {
+                                fantome.Hit = false;
+                            }
+                        }
                     }
                     if (KeyboardManager._wait >= 0.7)
                     {
@@ -168,6 +193,10 @@ namespace Project1
                 {
                     Game1._listeMonstre[i].Update(deltaTime, Content);
                 }
+                for (int i = 0; i < Game1._listeFantome.Count; i++)
+                {
+                    Game1._listeFantome[i].Update(deltaTime, Content);
+                }
             }
             else
             {
@@ -188,6 +217,7 @@ namespace Project1
                 Game1._spriteBatch.Draw(_listeCoeur[i].Texture, _listeCoeur[i].Position, Color.White);
             }
             Monstre.Draw(Game1._spriteBatch, Content);
+            Fantome.Draw(Game1._spriteBatch, Content);
             Perso.Draw(Game1._spriteBatch);
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);

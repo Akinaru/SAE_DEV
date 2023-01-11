@@ -76,9 +76,9 @@ namespace Project1
                     {
                         dir.Y -= 1;
                     }
-
-
                 }
+
+
                 if (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.S))
                 {
 
@@ -90,7 +90,6 @@ namespace Project1
                     {
                         dir.Y += 1;
                     }
-
                 }
                 if (dir != Vector2.Zero)
                     dir.Normalize();
@@ -110,10 +109,15 @@ namespace Project1
                         {
                             if (Vector2.Distance(Game1._listeMonstre[i].Position, Perso._positionPerso) < 40)
                                 aToucheUnMonstre = true;
-
                             Monstre.Touche(Game1._listeMonstre[i]);
                         }
-                        if(aToucheUnMonstre)
+                        for (int i = 0; i < Game1._listeFantome.Count; i++)
+                        {
+                            if (Vector2.Distance(Game1._listeFantome[i].Position, Perso._positionPerso) < 40)
+                                aToucheUnMonstre = true;
+                            Fantome.Touche(Game1._listeFantome[i]);
+                        }
+                        if (aToucheUnMonstre)
                             Jeu._precision += 1;
 
                     }
