@@ -117,6 +117,12 @@ namespace Project1
                                 aToucheUnMonstre = true;
                             Fantome.Touche(Game1._listeFantome[i]);
                         }
+                        for (int i = 0; i < Game1._listeBoss.Count; i++)
+                        {
+                            if (Vector2.Distance(Game1._listeBoss[i].Position, Perso._positionPerso) < 40)
+                                aToucheUnMonstre = true;
+                            Boss.Touche(Game1._listeBoss[i]);
+                        }
                         if (aToucheUnMonstre)
                             Jeu._precision += 1;
 

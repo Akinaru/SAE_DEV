@@ -97,6 +97,7 @@ namespace Project1
             {
                 Game1._listeFantome.Add(new Fantome("fantome.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             }
+            Game1._listeBoss.Add(new Boss("bossAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             var viewportadapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, Game1._largeurEcran, Game1._hauteurEcran);
             Camera.Initialise(viewportadapter);
         }
@@ -158,6 +159,14 @@ namespace Project1
                                 fantome.Hit = false;
                             }
                         }
+                        for (int i = 0; i < Game1._listeBoss.Count; i++)
+                        {
+                            Boss fantome = Game1._listeBoss[i];
+                            if (fantome.Hit)
+                            {
+                                fantome.Hit = false;
+                            }
+                        }
                     }
                     if (KeyboardManager._wait >= 0.7)
                     {
@@ -197,6 +206,10 @@ namespace Project1
                 {
                     Game1._listeFantome[i].Update(deltaTime, Content);
                 }
+                for (int i = 0; i < Game1._listeBoss.Count; i++)
+                {
+                    Game1._listeBoss[i].Update(deltaTime, Content);
+                }
             }
             else
             {
@@ -212,12 +225,16 @@ namespace Project1
             var matriceCamera = Camera._camera.GetViewMatrix();
             Game1._spriteBatch.Begin(transformMatrix: matriceCamera);
             Map.Draw(matriceCamera);
+
             for (int i = 0; i < _listeCoeur.Count; i++)
-            {
                 Game1._spriteBatch.Draw(_listeCoeur[i].CoeurSprite, _listeCoeur[i].Position);
-            }
-            Monstre.Draw(Game1._spriteBatch, Content);
-            Fantome.Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                Game1._listeMonstre[i].Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Game1._listeFantome.Count; i++)
+                Game1._listeFantome[i].Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Game1._listeBoss.Count; i++)
+                Game1._listeBoss[i].Draw(Game1._spriteBatch, Content);
+
             Perso.Draw(Game1._spriteBatch);
             ViePerso.Draw(Game1._spriteBatch);
             Fee.Draw(Game1._spriteBatch);

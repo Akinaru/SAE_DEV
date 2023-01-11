@@ -153,7 +153,12 @@ namespace Project1
             var matriceCamera = Camera._camera.GetViewMatrix();
             Game1._spriteBatch.Begin(transformMatrix: matriceCamera);
             Map.Draw(matriceCamera);
-            Monstre.Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                Game1._listeMonstre[i].Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Game1._listeFantome.Count; i++)
+                Game1._listeFantome[i].Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Game1._listeBoss.Count; i++)
+                Game1._listeBoss[i].Draw(Game1._spriteBatch, Content);
             Perso.Draw(Game1._spriteBatch);
 
             ViePerso.Draw(Game1._spriteBatch);

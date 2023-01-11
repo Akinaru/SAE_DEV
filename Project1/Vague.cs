@@ -40,6 +40,7 @@ namespace Project1
                     Jeu._nombreFantome += NOMBRE_FANTOME_PLUS_EXTREME;
                 for (int i = 0; i < Jeu._nombreFantome; i++)
                     Game1._listeFantome.Add(new Fantome("fantome.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+
             }
 
         }

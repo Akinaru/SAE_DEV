@@ -243,56 +243,53 @@ namespace Project1
             }
         }
 
-        public static void Draw(SpriteBatch _spriteBatch, ContentManager Content)
+        public void Draw(SpriteBatch _spriteBatch, ContentManager Content)
         {
-            for (int i = 0; i < Game1._listeMonstre.Count; i++)
-            {
-                Monstre monstre = Game1._listeMonstre[i];
+            Monstre monstre = this;
   
-                if (monstre._hit)
-                {
-                    _spriteBatch.Draw(monstre._textureMonstreHit, monstre.Position - new Vector2(8, 8), Color.White);
-                }
-                else
-                {
-                    if(!monstre.Mort)
-                        _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
-                }
-                if (!monstre.Mort)
-                    _spriteBatch.Draw(Jeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
-                if (monstre.Mort)
-                {
-                    _spriteBatch.Draw(monstre.fumee, monstre.Position);
-                }
+            if (monstre._hit)
+            {
+                _spriteBatch.Draw(monstre._textureMonstreHit, monstre.Position - new Vector2(8, 8), Color.White);
+            }
+            else
+            {
+                if(!monstre.Mort)
+                    _spriteBatch.Draw(monstre.MonstreSprite, monstre.Position);
+            }
+            if (!monstre.Mort)
+                _spriteBatch.Draw(Jeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
+            if (monstre.Mort)
+            {
+                _spriteBatch.Draw(monstre.fumee, monstre.Position);
+            }
 
-                if (monstre.Vie == 3)
-                    _spriteBatch.Draw(monstre._texturefullLife, monstre.Position + new Vector2(-12, -12), Color.White);
-                else if (monstre.Vie == 2)
-                    _spriteBatch.Draw(monstre._texturemidLife, monstre.Position + new Vector2(-12, -12), Color.White);
-                else if (monstre.Vie == 1)
-                    _spriteBatch.Draw(monstre._texturelowLife, monstre.Position + new Vector2(-12, -12), Color.White);
-                else //vie du monstre = 0
+            if (monstre.Vie == 3)
+                _spriteBatch.Draw(monstre._texturefullLife, monstre.Position + new Vector2(-12, -12), Color.White);
+            else if (monstre.Vie == 2)
+                _spriteBatch.Draw(monstre._texturemidLife, monstre.Position + new Vector2(-12, -12), Color.White);
+            else if (monstre.Vie == 1)
+                _spriteBatch.Draw(monstre._texturelowLife, monstre.Position + new Vector2(-12, -12), Color.White);
+            else //vie du monstre = 0
+            {
+                monstre.Hit = false;
+                if(monstre.Mort == false)
                 {
-                    monstre.Hit = false;
-                    if(monstre.Mort == false)
+                    Jeu._nombreKill += 1;
+                    int rnd = new Random().Next(0, 100);
+                    if (rnd <= DROP_COEUR_FACILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme && Jeu.difficulte == Jeu.NiveauDifficulte.Facile) //25% de chance de drop un coeur
                     {
-                        Jeu._nombreKill += 1;
-                        int rnd = new Random().Next(0, 100);
-                        if (rnd <= DROP_COEUR_FACILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme && Jeu.difficulte == Jeu.NiveauDifficulte.Facile) //25% de chance de drop un coeur
-                        {
-                            new Coeur(monstre.Position, Content);
-                            Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
-                        }
-                        else if (rnd <= DROP_COEUR_DIFFICILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) //10% de chance de drop un coeur
-                        {
-                            new Coeur(monstre.Position, Content);
-                            Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
-                        }
+                        new Coeur(monstre.Position, Content);
+                        Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
                     }
-
-                    monstre.Mort = true;
-
+                    else if (rnd <= DROP_COEUR_DIFFICILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) //10% de chance de drop un coeur
+                    {
+                        new Coeur(monstre.Position, Content);
+                        Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
+                    }
                 }
+
+                monstre.Mort = true;
+
             }
         }
         public static void Touche(Monstre monstre)

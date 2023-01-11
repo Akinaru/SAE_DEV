@@ -55,6 +55,11 @@ namespace Project1
                         _spriteBatch.Draw(_textureMapFantome, new Vector2((Game1._listeFantome[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeFantome[i].Position.Y / 1600 * 600) + 60 - 8), Color.Cyan);
                     }
                 }
+                //affiche le boss
+                for (int i = 0; i < Game1._listeBoss.Count; i++)
+                {
+                    _spriteBatch.Draw(_textureMapFantome, new Vector2((Game1._listeBoss[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeBoss[i].Position.Y / 1600 * 600) + 60 - 8), Color.Green);
+                }
                 //affichage coeur sur la carte
                 for (int i = 0; i < Jeu._listeCoeur.Count; i++)
                 {

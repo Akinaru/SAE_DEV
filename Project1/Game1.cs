@@ -24,6 +24,7 @@ namespace Project1
         public static SpriteBatch _spriteBatch { get; set; }
         public static int _largeurEcran;
         public static int _hauteurEcran;
+        public static List<Boss> _listeBoss = new List<Boss>();
         public static List<Monstre> _listeMonstre = new List<Monstre>();
         public static List<Fantome> _listeFantome = new List<Fantome>();
         public static List<Bombe> _listeBombe = new List<Bombe>();

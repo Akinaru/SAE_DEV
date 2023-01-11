@@ -13,19 +13,18 @@ using System.Threading.Tasks;
 
 namespace Project1
 {
-    public class Fantome
+    public class Boss
     {
 
-
         private Vector2 position;
-        private AnimatedSprite fantome;
+        private AnimatedSprite boss;
         private AnimatedSprite fumee;
         private double vitesse;
         private int vie;
         private Texture2D _texturelowLife;
         private Texture2D _texturemidLife;
         private Texture2D _texturefullLife;
-        private Texture2D _textureFantomeHit;
+        private Texture2D _textureBossHit;
         private bool _hit;
         private bool _mort;
         private float _mortWait;
@@ -37,16 +36,16 @@ namespace Project1
 
 
 
-        public Fantome(String spritesheet, Vector2 position, ContentManager content)
+        public Boss(String spritesheet, Vector2 position, ContentManager content)
         {
-            this.FantomeSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
+            this.BossSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
             this.fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader()));
-            this.Vitesse = new Random().Next(350, 550) / 10;
-            this.Vie = 3;
+            this.Vitesse = new Random().Next(400, 550) / 10;
+            this.Vie = 10;
             this._texturelowLife = content.Load<Texture2D>("lowLife");
             this._texturemidLife = content.Load<Texture2D>("midLife");
             this._texturefullLife = content.Load<Texture2D>("fullLife");
-            this._textureFantomeHit = content.Load<Texture2D>("monstreHit");
+            this._textureBossHit = content.Load<Texture2D>("bossHit");
             this._sonHit = content.Load<SoundEffect>("Son/playerHurt");
             this.Spawn();
             this.Hit = false;
@@ -90,16 +89,16 @@ namespace Project1
             }
         }
 
-        public AnimatedSprite FantomeSprite
+        public AnimatedSprite BossSprite
         {
             get
             {
-                return this.fantome;
+                return this.boss;
             }
 
             set
             {
-                this.fantome = value;
+                this.boss = value;
             }
         }
 
@@ -167,24 +166,71 @@ namespace Project1
                 this._mortWait += 1 * deltaTime;
                 if (this._mortWait >= 0.3)
                 {
-                    Game1._listeFantome.Remove(this);
+                    Game1._listeBoss.Remove(this);
                     Vague.NewVague(Content);
-
-
                 }
             }
-            this._deplaceWait = 0;
-            Vector2 direction = Vector2.Normalize(Perso._positionPerso - this.Position);
-            this.FantomeSprite.Update(deltaTime);
-            double vitesse = this.Vitesse;
-            if (this.Hit)
+            String animation = "idle";
+
+            if (distance >= 6 && distance < 16 * 15)
             {
-                vitesse -= 30;
+                this._deplaceWait = 0;
+                Vector2 direction = Vector2.Normalize(Perso._positionPerso - this.Position);
+                Vector2 pos = new Vector2(this.Position.X, this.Position.Y);
+                ushort x;
+                ushort y;
+                if (direction.X <= 0)
+                    animation = "walkWest";
+                else
+                    animation = "walkEast";
+                if (direction.X <= 0) //x gauche
+                {
+                    x = (ushort)(pos.X / Map._tiledMap.TileWidth - 0.5);
+                    y = (ushort)(pos.Y / Map._tiledMap.TileHeight);
+                    if (Collision.IsCollision(x, y))
+                    {
+                        direction.X = 0;
+                    }
+                }
+                if (direction.X > 0) //x droite
+                {
+                    x = (ushort)(pos.X / Map._tiledMap.TileWidth + 0.5);
+                    y = (ushort)(pos.Y / Map._tiledMap.TileHeight);
+                    if (Collision.IsCollision(x, y))
+                    {
+                        direction.X = 0;
+                    }
+                }
+                if (direction.Y <= 0) //y haut
+                {
+                    x = (ushort)(pos.X / Map._tiledMap.TileWidth);
+                    y = (ushort)((pos.Y - 2) / Map._tiledMap.TileHeight);
+                    if (Collision.IsCollision(x, y))
+                    {
+                        direction.Y = 0;
+                    }
+                }
+                if (direction.Y > 0) //y bas
+                {
+                    x = (ushort)(pos.X / Map._tiledMap.TileWidth);
+                    y = (ushort)((pos.Y + 3) / Map._tiledMap.TileHeight);
+                    if (Collision.IsCollision(x, y))
+                    {
+                        direction.Y = 0;
+                    }
+                }
+                this.BossSprite.Update(deltaTime);
+                double vitesse = this.Vitesse;
+                if (this.Hit)
+                {
+                    vitesse -= 30;
+                }
+
+
+                this.Position += direction * (float)vitesse * deltaTime;
             }
-            this.Position += direction * (float)vitesse * deltaTime;
-            String animation = "walkSouth";
-            this.FantomeSprite.Play(animation);
-            
+            this.BossSprite.Play(animation);
+
 
             if (Vector2.Distance(this.Position, Perso._positionPerso) <= 6)
             {
@@ -204,49 +250,55 @@ namespace Project1
 
         public void Draw(SpriteBatch _spriteBatch, ContentManager Content)
         {
-            Fantome fantome = this;
+            Boss boss = this;
 
-            if (fantome._hit)
+            if (boss._hit)
             {
-                _spriteBatch.Draw(fantome._textureFantomeHit, fantome.Position - new Vector2(8, 8), Color.White);
+                _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(8, 8), Color.White);
             }
             else
             {
-                if (!fantome.Mort)
-                    _spriteBatch.Draw(fantome.FantomeSprite, fantome.Position);
+                if (!boss.Mort)
+                    _spriteBatch.Draw(boss.BossSprite, boss.Position);
             }
-            if (!fantome.Mort)
-                _spriteBatch.Draw(Jeu._textureombrePerso, fantome.Position + new Vector2(-16, -13), Color.White);
-            if (fantome.Mort)
+            if (!boss.Mort)
+                _spriteBatch.Draw(Jeu._textureombrePerso, boss.Position + new Vector2(-16, -13), Color.White);
+            if (boss.Mort)
             {
-                _spriteBatch.Draw(fantome.fumee, fantome.Position);
+                _spriteBatch.Draw(boss.fumee, boss.Position);
             }
-
-            if (fantome.Vie == 3)
-                _spriteBatch.Draw(fantome._texturefullLife, fantome.Position + new Vector2(-12, -12), Color.White);
-            else if (fantome.Vie == 2)
-                _spriteBatch.Draw(fantome._texturemidLife, fantome.Position + new Vector2(-12, -12), Color.White);
-            else if (fantome.Vie == 1)
-                _spriteBatch.Draw(fantome._texturelowLife, fantome.Position + new Vector2(-12, -12), Color.White);
+            if(boss.Vie > 0)
+                _spriteBatch.Draw(boss._texturefullLife, boss.Position + new Vector2(-12, -12), Color.White);
             else //vie du monstre = 0
             {
-                fantome.Hit = false;
-                if (fantome.Mort == false)
+                boss.Hit = false;
+                if (boss.Mort == false)
                 {
                     Jeu._nombreKill += 1;
+                    int rnd = new Random().Next(0, 100);
+                    if (rnd <= DROP_COEUR_FACILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme && Jeu.difficulte == Jeu.NiveauDifficulte.Facile) //25% de chance de drop un coeur
+                    {
+                        new Coeur(boss.Position, Content);
+                        Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
+                    }
+                    else if (rnd <= DROP_COEUR_DIFFICILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) //10% de chance de drop un coeur
+                    {
+                        new Coeur(boss.Position, Content);
+                        Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
+                    }
                 }
 
-                fantome.Mort = true;
+                boss.Mort = true;
 
             }
             
         }
-        public static void Touche(Fantome fantome)
+        public static void Touche(Boss boss)
         {
-            if (Vector2.Distance(fantome.Position, Perso._positionPerso) < 40)
+            if (Vector2.Distance(boss.Position, Perso._positionPerso) < 40)
             {
-                fantome.Vie -= 1;
-                fantome.Hit = true;
+                boss.Vie -= 1;
+                boss.Hit = true;
                 Perso._sonHit.Play(Game1._volumeSon, 0, 0);
                 //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
                 //monstre.Position += direction * 700 * deltaTime;
