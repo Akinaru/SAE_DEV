@@ -76,7 +76,7 @@ namespace Project1
                 _nombreFantome = 5;
             }
             else {
-                _nombreMonstre = 100;
+                _nombreMonstre = 50;
                 _nombreFantome = 25;
             }
             _nombreKill = 0;

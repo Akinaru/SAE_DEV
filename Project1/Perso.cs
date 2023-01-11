@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,7 +80,7 @@ namespace Project1
             _perso.Update(deltaTime);
         }
 
-        public static void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch _spriteBatch)
+        public static void Draw(SpriteBatch _spriteBatch)
         {
 
             _spriteBatch.Draw(Jeu._textureombrePerso, _positionPerso + new Vector2(-16, -13), Color.White);
