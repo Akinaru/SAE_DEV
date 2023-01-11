@@ -486,6 +486,18 @@
 /processorParam:TextureFormat=Color
 /build:Menu/gameOver.png
 
+#begin Menu/logo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/logo.png
+
 #begin Menu/moins.png
 /importer:TextureImporter
 /processor:TextureProcessor
