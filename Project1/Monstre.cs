@@ -169,7 +169,7 @@ namespace Project1
                 if(this._mortWait >= 0.3)
                 {
                     Game1._listeMonstre.Remove(this);
-                    if (Game1._listeMonstre.Count == 0)
+                    if (Game1._listeMonstre.Count == 0 && Game1._listeFantome.Count == 0)
                     {
                         Monstre.NewVague(Content);
                     }
