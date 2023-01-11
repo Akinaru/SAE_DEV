@@ -34,6 +34,9 @@ namespace Project1
         private float _deplaceWait;
         private SoundEffect _sonHit;
 
+        private const int DROP_COEUR_FACILE = 25;
+        private const int DROP_COEUR_DIFFICILE = 10;
+
 
 
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
@@ -202,7 +205,7 @@ namespace Project1
                 if (direction.Y <= 0) //y haut
                 {
                     x = (ushort)(pos.X / Map._tiledMap.TileWidth);
-                    y = (ushort)((pos.Y -2 )/ Map._tiledMap.TileHeight);
+                    y = (ushort)((pos.Y - 2) / Map._tiledMap.TileHeight);
                     if (Collision.IsCollision(x, y))
                     {
                         direction.Y = 0;
@@ -279,7 +282,12 @@ namespace Project1
                     {
                         Jeu._nombreKill += 1;
                         int rnd = new Random().Next(0, 100);
-                        if(rnd < 10) //10% de chance de drop un coeur
+                        if (rnd <= DROP_COEUR_FACILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme && Jeu.difficulte == Jeu.NiveauDifficulte.Facile) //25% de chance de drop un coeur
+                        {
+                            new Coeur(monstre.Position, Content);
+                            Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
+                        }
+                        else if (rnd <= DROP_COEUR_DIFFICILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) //10% de chance de drop un coeur
                         {
                             new Coeur(monstre.Position, Content);
                             Message.Display("Oh ! Il y a un coeur", "par terre !", 5);

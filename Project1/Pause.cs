@@ -59,6 +59,8 @@ namespace Project1
 
         public static void Update(ContentManager Content)
         {
+            
+
             MouseState mouseState = Mouse.GetState();
             var mousePosition = new Point(mouseState.X, mouseState.Y);
             //hover menu
@@ -147,7 +149,7 @@ namespace Project1
             if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
                 if (!Jeu._gameStarted)
-                    Game1.Etat = Game1.Etats.Play;
+                    Jeu._pause = false;
             }
         }
 
