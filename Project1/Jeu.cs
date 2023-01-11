@@ -68,7 +68,7 @@ namespace Project1
             else if (difficulte == NiveauDifficulte.Difficile)
                 _nombreMonstre = 25;
             else
-                _nombreMonstre = 35;
+                _nombreMonstre = 100;
             _nombreKill = 0;
             if (Game1._listeMonstre.Count > 0)
             {
