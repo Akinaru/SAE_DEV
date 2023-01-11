@@ -51,16 +51,22 @@ namespace Project1
             {
                 _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5,3), Color.White);
             }
+            string pluriel = "";
+            if (Jeu._nombreMonstre > 1)
+                pluriel = "s";
             _spriteBatch.Draw(_textureMonstreHUD, _positionBaseImage, Color.White);
-            _spriteBatch.DrawString(Message._police, Game1._listeMonstre.Count + " monstres", _positionBaseTexte, Color.White);
+            _spriteBatch.DrawString(Message._police, Game1._listeMonstre.Count + " monstre"+pluriel, _positionBaseTexte, Color.White);
             
             //fantome
             if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
             {
                 _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5, 3) + new Vector2(0, 45 * 1), Color.White);
             }
+            pluriel = "";
+            if (Jeu._nombreFantome > 1)
+                pluriel = "s";
             _spriteBatch.Draw(_textureFantomeHUD, _positionBaseImage + new Vector2(0, 45 * 1), Color.White);
-            _spriteBatch.DrawString(Message._police, Game1._listeFantome.Count + " fantomes", _positionBaseTexte + new Vector2(0, 45 * 1), Color.White);
+            _spriteBatch.DrawString(Message._police, Game1._listeFantome.Count + " fantome"+pluriel, _positionBaseTexte + new Vector2(0, 45 * 1), Color.White);
 
             //kills
             if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
