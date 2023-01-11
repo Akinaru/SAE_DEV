@@ -17,28 +17,36 @@ namespace Project1
         public static Texture2D _textureBoutonMenu;
         public static Texture2D _textureblurBackground;
         public static Texture2D _textureGameOver;
+        public static Texture2D _textureBoutonRejouer;
         public static Texture2D _textureRaccourciM;
+        public static Texture2D _textureRaccourciR;
 
         public static Vector2 _positionGameOver;
         public static Vector2 _positionBoutonMenu;
+        public static Vector2 _positionBoutonRejouer;
         public static Vector2 _positionRaccourciM;
+        public static Vector2 _positionRaccourciR;
         public GameOver(Game1 game) : base(game) 
         {
         }
 
         public override void Initialize()
         {
-            _positionGameOver = new Vector2(490, 90);
+            _positionGameOver = new Vector2(490, 50);
             _positionBoutonMenu = new Vector2(490, 480);
+            _positionBoutonRejouer = new Vector2(490, 380);
             _positionRaccourciM = new Vector2(631, 585);
+            _positionRaccourciR = new Vector2(631, 485);
             base.Initialize();
         }
         public override void LoadContent()
         {
             _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
+            _textureBoutonRejouer = Content.Load<Texture2D>("Menu/rejouer");
             _textureblurBackground = Content.Load<Texture2D>("Menu/blurBackground");
             _textureGameOver = Content.Load<Texture2D>("Menu/gameOver");
             _textureRaccourciM = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciM");
+            _textureRaccourciR = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciR ");
         }
 
         public override void Update(GameTime gameTime)
@@ -58,6 +66,18 @@ namespace Project1
             {
                 _textureBoutonMenu = Content.Load<Texture2D>("Menu/boutonMenu");
             }
+            //hover rejouer
+            if (mousePosition.X >= _positionBoutonRejouer.X &&
+                mousePosition.X <= _positionBoutonRejouer.X + 538 &&
+                mousePosition.Y >= _positionBoutonRejouer.Y &&
+                mousePosition.Y <= _positionBoutonRejouer.Y + 100)
+            {
+                _textureBoutonMenu = Content.Load<Texture2D>("Menu/rejouerHover");
+            }
+            else
+            {
+                _textureBoutonMenu = Content.Load<Texture2D>("Menu/rejouer");
+            }
 
             //clique pour menu
             if (mouseState.LeftButton == ButtonState.Pressed)
@@ -71,6 +91,18 @@ namespace Project1
 
                 }
             }
+            //clique pour rejouer
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (mousePosition.X >= _positionBoutonRejouer.X &&
+                    mousePosition.X <= _positionBoutonRejouer.X + 538 &&
+                    mousePosition.Y >= _positionBoutonRejouer.Y &&
+                    mousePosition.Y <= _positionBoutonRejouer.Y + 100)
+                {
+                    Game1.Etat = Game1.Etats.BackMenu;
+
+                }
+            }
 
             //raccourci pour menu
             KeyboardState keyboardState = Keyboard.GetState();
@@ -79,6 +111,11 @@ namespace Project1
             {
                 if (!Jeu._gameStarted)
                     Game1.Etat = Game1.Etats.BackMenu;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                if (!Jeu._gameStarted)
+                    Game1.Etat = Game1.Etats.Play;
             }
         }
         public override void Draw(GameTime gameTime)
@@ -108,8 +145,10 @@ namespace Project1
 
                 Game1._spriteBatch.Draw(_textureblurBackground, new Vector2(0, 0), Color.White);
                 Game1._spriteBatch.Draw(_textureBoutonMenu, _positionBoutonMenu, Color.White);
+                Game1._spriteBatch.Draw(_textureBoutonRejouer, _positionBoutonRejouer, Color.White);
                 Game1._spriteBatch.Draw(_textureGameOver, _positionGameOver, Color.White);
                 Game1._spriteBatch.Draw(_textureRaccourciM, _positionRaccourciM, Color.White);
+                Game1._spriteBatch.Draw(_textureRaccourciR, _positionRaccourciR, Color.White);
 
                 Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);

@@ -88,6 +88,38 @@ namespace Project1
                 _textureReprendre = Content.Load<Texture2D>("Menu/reprendre");
             }
 
+            //hover moins volume
+            if (Game1._volumeSon == 0)
+            {
+                if (mousePosition.X >= _positionBoutonSon.X &&
+                    mousePosition.X <= _positionBoutonSon.X + 50 &&
+                    mousePosition.Y >= _positionBoutonSon.Y &&
+                    mousePosition.Y <= _positionBoutonSon.Y + 50)
+                {
+                    _textureMoinButton = Content.Load<Texture2D>("Menu/moinsHover");
+                }
+                else
+                {
+                    _textureMoinButton = Content.Load<Texture2D>("Menu/moins");
+                }
+            }
+
+            //hover plus volume
+            if (Game1._volumeSon != 0)
+            {
+                if (mousePosition.X >= _positionBoutonSon.X &&
+                    mousePosition.X <= _positionBoutonSon.X + 50 &&
+                    mousePosition.Y >= _positionBoutonSon.Y &&
+                    mousePosition.Y <= _positionBoutonSon.Y + 50)
+                {
+                    _texturePlusButton = Content.Load<Texture2D>("Menu/plusHover");
+                }
+                else
+                {
+                    _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
+                }
+            }
+
             if (mouseState.LeftButton == ButtonState.Pressed)
 			{
                 if (!_sourisClick)
