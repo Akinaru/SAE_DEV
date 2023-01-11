@@ -236,17 +236,6 @@ namespace Project1
                     if (fantome.Mort == false)
                     {
                         Jeu._nombreKill += 1;
-                        int rnd = new Random().Next(0, 100);
-                        if (rnd <= DROP_COEUR_FACILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme && Jeu.difficulte == Jeu.NiveauDifficulte.Facile) //25% de chance de drop un coeur
-                        {
-                            new Coeur(fantome.Position, Content);
-                            Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
-                        }
-                        else if (rnd <= DROP_COEUR_DIFFICILE && Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) //10% de chance de drop un coeur
-                        {
-                            new Coeur(fantome.Position, Content);
-                            Message.Display("Oh ! Il y a un coeur", "par terre !", 5);
-                        }
                     }
 
                     fantome.Mort = true;

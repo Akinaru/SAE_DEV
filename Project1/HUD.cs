@@ -12,6 +12,7 @@ namespace Project1
     internal class HUD
     {
         public static Texture2D _textureMonstreHUD;
+        public static Texture2D _textureFantomeHUD;
         public static Texture2D _texturePersoHUD;
         public static Texture2D _textureLocHUD;
         public static Texture2D _textureVagueHUD;
@@ -27,6 +28,7 @@ namespace Project1
         {
 
             _textureMonstreHUD = Content.Load<Texture2D>("HUD/monstreHUD");
+            _textureFantomeHUD = Content.Load<Texture2D>("HUD/fantomeHUD");
             _texturePersoHUD = Content.Load<Texture2D>("HUD/persoHUD");
             _textureLocHUD = Content.Load<Texture2D>("HUD/locHUD");
             _textureVagueHUD = Content.Load<Texture2D>("HUD/vagueHUD");
@@ -57,7 +59,7 @@ namespace Project1
             {
                 _spriteBatch.Draw(_textureBackgroundHUD, _positionBaseImage - new Vector2(5, 3) + new Vector2(0, 45 * 1), Color.White);
             }
-            _spriteBatch.Draw(_textureMonstreHUD, _positionBaseImage + new Vector2(0, 45 * 1), Color.White);
+            _spriteBatch.Draw(_textureFantomeHUD, _positionBaseImage + new Vector2(0, 45 * 1), Color.White);
             _spriteBatch.DrawString(Message._police, Game1._listeFantome.Count + " fantomes", _positionBaseTexte + new Vector2(0, 45 * 1), Color.White);
 
             //kills

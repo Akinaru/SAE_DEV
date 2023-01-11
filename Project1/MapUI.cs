@@ -12,6 +12,7 @@ namespace Project1
     {
         public static Texture2D _textureMapPerso;
         public static Texture2D _textureMapMonstre;
+        public static Texture2D _textureMapFantome;
         public static Texture2D _textureMapUI;
         public static Texture2D _textureCoeurUI;
         public static Vector2 _positionMapPersoUI;
@@ -29,6 +30,7 @@ namespace Project1
         {
             _textureMapPerso = Content.Load<Texture2D>("MapUI/mapPerso");
             _textureMapMonstre = Content.Load<Texture2D>("MapUI/mapMonstre");
+            _textureMapFantome = Content.Load<Texture2D>("MapUI/mapFantome");
             _textureMapUI = Content.Load<Texture2D>("MapUI/map");
             _textureCoeurUI = Content.Load<Texture2D>("Perso/coeurDrop");
 
@@ -49,7 +51,7 @@ namespace Project1
                     //affichage fantome sur la carte
                     for (int i = 0; i < Game1._listeFantome.Count; i++)
                     {
-                        _spriteBatch.Draw(_textureMapMonstre, new Vector2((Game1._listeFantome[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeFantome[i].Position.Y / 1600 * 600) + 60 - 8), Color.Green);
+                        _spriteBatch.Draw(_textureMapFantome, new Vector2((Game1._listeFantome[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeFantome[i].Position.Y / 1600 * 600) + 60 - 8), Color.Cyan);
                     }
                 }
                 //affichage coeur sur la carte

@@ -1,0 +1,34 @@
+{
+  "textureAtlas": {
+    "texture": "fantome.png",
+    "regionWidth": 16,
+    "regionHeight": 16
+  },
+  "cycles": {
+    "idle": {
+      "frames": [],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "walkNorth": {
+      "frames": [1,5,9,13],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "walkSouth": {
+      "frames": [0,4,8,12],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "walkEast": {
+      "frames": [3,7,11,15],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "walkWest": {
+      "frames": [6,10,14],
+      "isLooping": false,
+      "frameDuration": 0.2
+    }
+  }
+}

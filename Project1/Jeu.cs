@@ -95,7 +95,7 @@ namespace Project1
             }
             for (int i = 0; i < _nombreFantome; i++)
             {
-                Game1._listeFantome.Add(new Fantome("Perso/persoWalkNormal.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+                Game1._listeFantome.Add(new Fantome("fantome.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
             }
             var viewportadapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, Game1._largeurEcran, Game1._hauteurEcran);
             Camera.Initialise(viewportadapter);

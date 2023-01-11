@@ -18,6 +18,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin fantome.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:fantome.png
+
 #begin fee.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -96,6 +108,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:HUD/chronoHUD.png
+
+#begin HUD/fantomeHUD.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:HUD/fantomeHUD.png
 
 #begin HUD/locHUD.png
 /importer:TextureImporter
@@ -197,6 +221,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapUI/map.png
+
+#begin MapUI/mapFantome.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapUI/mapFantome.png
 
 #begin MapUI/mapMonstre.png
 /importer:TextureImporter
