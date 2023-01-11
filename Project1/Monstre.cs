@@ -235,6 +235,7 @@ namespace Project1
                     {
                         Perso._touche = true;
                         Perso._viePerso -= 1;
+                        Perso._coeurPerdu += 1;
                         ViePerso.Update();
                         _sonHit.Play(Game1._volumeSon, 0, 0);
                     }

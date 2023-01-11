@@ -47,7 +47,7 @@ namespace Project1
 
 
             if (Jeu.difficulte != Jeu.NiveauDifficulte.Extreme)
-            vieMax = VIE_MAX_FACILE_DIFFICILE;
+                vieMax = VIE_MAX_FACILE_DIFFICILE;
             else
             {
                 vieMax = VIE_MAX_EXTREME;
