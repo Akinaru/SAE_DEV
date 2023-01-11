@@ -558,6 +558,18 @@
 /processorParam:TextureFormat=Color
 /build:Menu/raccourciTouche/raccourciR.png
 
+#begin Menu/raccourciTouche/raccourciS.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Menu/raccourciTouche/raccourciS.png
+
 #begin Menu/raccourciTouche/raccourciVolumeDown.png
 /importer:TextureImporter
 /processor:TextureProcessor

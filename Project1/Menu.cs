@@ -33,6 +33,8 @@ namespace Project1
         public static Texture2D _textureRaccourciF;
         public static Texture2D _textureRaccourciD;
         public static Texture2D _textureRaccourciE;
+        public static Texture2D _textureRaccourciS;
+        public static Texture2D _textureRaccourciFleche;
 
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
@@ -43,6 +45,9 @@ namespace Project1
         public static Vector2 _positionRaccourciF;
         public static Vector2 _positionRaccourciD;
         public static Vector2 _positionRaccourciE;
+        public static Vector2 _positionRaccourciS;
+        public static Vector2 _positionRaccourciFleche;
+
         public static Vector2 _positionBoutonSon;
         public static Vector2 _positionBoutonSortir;
 
@@ -69,8 +74,11 @@ namespace Project1
             _positionRaccourciF = new Vector2(543, 470);
             _positionRaccourciD = new Vector2(695, 470);
             _positionRaccourciE = new Vector2(631, 532);
+            _positionRaccourciS = new Vector2(1234, 700);
+            _positionRaccourciFleche = new Vector2(24, 70);
+
             _positionBoutonSon = new Vector2(10, 10);
-            _positionBoutonSortir = new Vector2(1220, 660);
+            _positionBoutonSortir = new Vector2(1220, 650);
             _boutonSon = false;
             _sourisClick = false;
             base.Initialize();
@@ -95,6 +103,8 @@ namespace Project1
             _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciDifficile");
             _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciFacile");
             _textureRaccourciE = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciE");
+            _textureRaccourciS = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciS");
+            _textureRaccourciFleche = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeUp");
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _sonDifficulte = Content.Load<SoundEffect>("Son/Difficulte");
@@ -323,6 +333,25 @@ namespace Project1
             {
                 Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                if (Game1._volumeSon == 0.5f)
+				{
+                    _textureRaccourciFleche = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeUp");
+                    Game1._volumeSon -= 0.5f;
+
+
+                }
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                if (Game1._volumeSon == 0)
+				{
+                    _textureRaccourciFleche = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeDown");
+                    Game1._volumeSon += 0.5f;
+                }
+
+            }
         }
 
         public void gameStart()
@@ -346,9 +375,13 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
+            Game1._spriteBatch.Draw(_textureRaccourciFleche, _positionRaccourciFleche, Color.White);
 
             Game1._spriteBatch.Draw(_textureBoutonSortir, _positionBoutonSortir, Color.White);
-            
+            Game1._spriteBatch.Draw(_textureRaccourciS, _positionRaccourciS, Color.White);
+
+
+
             if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
 			{
                 Game1._spriteBatch.Draw(_textureRaccourciD, _positionRaccourciD, Color.White);
@@ -367,9 +400,15 @@ namespace Project1
 
 
             if (Game1._volumeSon == 0)
+			{
                 Game1._spriteBatch.Draw(_textureMoinButton, _positionBoutonSon, Color.White);
+            }
             else
+			{
                 Game1._spriteBatch.Draw(_texturePlusButton, _positionBoutonSon, Color.White);
+                
+            }
+
             Game1._spriteBatch.End();
         }
     }
