@@ -214,7 +214,7 @@ namespace Project1
             Map.Draw(matriceCamera);
             for (int i = 0; i < _listeCoeur.Count; i++)
             {
-                Game1._spriteBatch.Draw(_listeCoeur[i].Texture, _listeCoeur[i].Position, Color.White);
+                Game1._spriteBatch.Draw(_listeCoeur[i].CoeurSprite, _listeCoeur[i].Position);
             }
             Monstre.Draw(Game1._spriteBatch, Content);
             Fantome.Draw(Game1._spriteBatch, Content);

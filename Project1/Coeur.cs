@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Content;
+using MonoGame.Extended.Serialization;
+using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +15,7 @@ namespace Project1
     public class Coeur
     {
 
-        private Texture2D texture;
+        private AnimatedSprite coeur;
         private Vector2 position;
         private bool recupere;
         private float timer;
@@ -20,16 +23,18 @@ namespace Project1
         public Coeur(Vector2 position, ContentManager Content)
         {
             this.Position = position;
-            this.Texture = Content.Load<Texture2D>("Perso/coeurDrop");
+            this.CoeurSprite = new AnimatedSprite(Content.Load<SpriteSheet>("coeurAnim.sf", new JsonContentLoader()));
             this.Recupere = false;
             this.Timer = 10;
             Jeu._listeCoeur.Add(this);
+            
         }
 
         public void CheckRecuperer(float deltaTime)
         {
-
-            if(Vector2.Distance(Perso._positionPerso, this.Position) < 16)
+            this.CoeurSprite.Play("anim");
+            this.CoeurSprite.Update(deltaTime);
+            if (Vector2.Distance(Perso._positionPerso, this.Position) < 16)
             {
                 if(Perso._viePerso < 6)
                 {
@@ -53,18 +58,6 @@ namespace Project1
             Jeu._listeCoeur.Remove(this);
         }
 
-        public Texture2D Texture
-        {
-            get
-            {
-                return this.texture;
-            }
-
-            set
-            {
-                this.texture = value;
-            }
-        }
 
         public Vector2 Position
         {
@@ -102,6 +95,19 @@ namespace Project1
             set
             {
                 this.timer = value;
+            }
+        }
+
+        public AnimatedSprite CoeurSprite
+        {
+            get
+            {
+                return this.coeur;
+            }
+
+            set
+            {
+                this.coeur = value;
             }
         }
     }
