@@ -22,7 +22,7 @@ namespace Project1
         public static Vector2 _positionGameOver;
         public static Vector2 _positionBoutonMenu;
         public static Vector2 _positionRaccourciM;
-        public GameOver(Game1 game) : base(game)
+        public GameOver(Game1 game) : base(game) 
         {
         }
 

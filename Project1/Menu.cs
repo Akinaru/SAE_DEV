@@ -46,6 +46,7 @@ namespace Project1
         public static Vector2 _positionBoutonSon;
         public static Vector2 _positionBoutonSortir;
 
+
         private bool _sourisClick;
         private bool _boutonSon;
         private SoundEffect _sonJouer;
