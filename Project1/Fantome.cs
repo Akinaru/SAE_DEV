@@ -195,6 +195,7 @@ namespace Project1
                         Perso._touche = true;
                         Perso._viePerso -= 1;
                         ViePerso.Update();
+                        Perso._coeurPerdu += 1;
                         _sonHit.Play(Game1._volumeSon, 0, 0);
                     }
 

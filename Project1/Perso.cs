@@ -33,6 +33,7 @@ namespace Project1
         public static SoundEffect _sonHit;
         public static double _viePerso;
         public static bool _mort;
+        public static int _coeurPerdu;
 
 
 
@@ -44,6 +45,7 @@ namespace Project1
             _touche = false;
             _waitBouclier = 0;
             _animEpee = false;
+            _coeurPerdu = 0;
 
             if (Jeu.difficulte == Jeu.NiveauDifficulte.Extreme)
             {
