@@ -35,7 +35,6 @@ namespace Project1
             _sonFee = Content.Load<SoundEffect>("Son/fee");
             _sonJoue = false;
         }
-
         public static void Update(float deltaTime)
         {
             if (_messageDraw)
