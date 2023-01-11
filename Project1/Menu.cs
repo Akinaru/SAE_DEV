@@ -36,6 +36,8 @@ namespace Project1
         public static Texture2D _textureRaccourciS;
         public static Texture2D _textureRaccourciFleche;
 
+        public static Texture2D _textureLogo;
+
         public static Vector2 _positionPlayButton;
         public static Vector2 _positionFacileButton;
         public static Vector2 _positionDifficileButton;
@@ -52,6 +54,7 @@ namespace Project1
         public static Vector2 _positionBoutonSon;
         public static Vector2 _positionBoutonSortir;
 
+        public static Vector2 _positionLogo;
 
         private bool _sourisClick;
         private bool _boutonSon;
@@ -84,6 +87,9 @@ namespace Project1
             _positionBoutonSortir = new Vector2((x*2) - 60, 640);
 
             _positionControls = new Vector2(x -300, 570);
+
+            _positionLogo = new Vector2(x -275, 10);
+
             _boutonSon = false;
             _sourisClick = false;
             base.Initialize();
@@ -111,8 +117,11 @@ namespace Project1
             _textureRaccourciS = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciS");
             _textureRaccourciFleche = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeDown");
 
+            _textureLogo = Content.Load<Texture2D>("Menu/logo");
+
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _sonDifficulte = Content.Load<SoundEffect>("Son/Difficulte");
+
 
             MediaPlayer.Volume = Game1._volumeSon;
         }
@@ -384,6 +393,8 @@ namespace Project1
 
             Game1._spriteBatch.Draw(_textureBoutonSortir, _positionBoutonSortir, Color.White);
             Game1._spriteBatch.Draw(_textureRaccourciS, _positionRaccourciS, Color.White);
+
+            Game1._spriteBatch.Draw(_textureLogo, _positionLogo, Color.White);
 
 
 
