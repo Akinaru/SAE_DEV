@@ -27,6 +27,8 @@ namespace Project1
         public static Texture2D _texturePlusButton;
         public static Texture2D _textureMoinButton;
 
+        public static Texture2D _textureBoutonSortir;
+
         public static Texture2D _textureRaccourciEntree;
         public static Texture2D _textureRaccourciF;
         public static Texture2D _textureRaccourciD;
@@ -42,6 +44,7 @@ namespace Project1
         public static Vector2 _positionRaccourciD;
         public static Vector2 _positionRaccourciE;
         public static Vector2 _positionBoutonSon;
+        public static Vector2 _positionBoutonSortir;
 
         private bool _sourisClick;
         private bool _boutonSon;
@@ -67,6 +70,7 @@ namespace Project1
             _positionRaccourciD = new Vector2(695, 470);
             _positionRaccourciE = new Vector2(631, 532);
             _positionBoutonSon = new Vector2(10, 10);
+            _positionBoutonSortir = new Vector2(1220, 660);
             _boutonSon = false;
             _sourisClick = false;
             base.Initialize();
@@ -85,6 +89,8 @@ namespace Project1
             _texturePlusButton = Content.Load<Texture2D>("Menu/plus");
             _textureMoinButton = Content.Load<Texture2D>("Menu/moins");
 
+            _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortir");
+
             _textureRaccourciEntree = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciEntree");
             _textureRaccourciD = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciDifficile");
             _textureRaccourciF = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciFacile");
@@ -92,6 +98,7 @@ namespace Project1
 
             _sonJouer = Content.Load<SoundEffect>("Son/Accept");
             _sonDifficulte = Content.Load<SoundEffect>("Son/Difficulte");
+
             MediaPlayer.Volume = Game1._volumeSon;
         }
 
@@ -205,10 +212,34 @@ namespace Project1
                 }
             }
 
+            //hover sortir
+            if (Game1._volumeSon != 0)
+            {
+                if (mousePosition.X >= _positionBoutonSortir.X &&
+                    mousePosition.X <= _positionBoutonSortir.X + 50 &&
+                    mousePosition.Y >= _positionBoutonSortir.Y &&
+                    mousePosition.Y <= _positionBoutonSortir.Y + 50)
+                {
+                    _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortirHovevr");
+                }
+                else
+                {
+                    _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortir");
+                }
+            }
+
 
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                if (!_sourisClick) { 
+                if (!_sourisClick) {
+                    //BOUTON SORTIR
+                    if (mousePosition.X >= _positionBoutonSortir.X &&
+                        mousePosition.X <= _positionBoutonSortir.X + 50 &&
+                        mousePosition.Y >= _positionBoutonSortir.Y &&
+                        mousePosition.Y <= _positionBoutonSortir.Y + 50)
+                    {
+                        //euizhfuehzuifhzeuihzfi
+                    }
                     //BOUTON JEU
                     if (mousePosition.X >= _positionPlayButton.X &&
                             mousePosition.X <= _positionPlayButton.X + 300 &&
@@ -315,6 +346,8 @@ namespace Project1
             Game1._spriteBatch.Draw(_textureControls, new Vector2(340, 570), Color.White);
 
             Game1._spriteBatch.Draw(_textureRaccourciEntree, _positionRaccourciEntree, Color.White);
+
+            Game1._spriteBatch.Draw(_textureBoutonSortir, _positionBoutonSortir, Color.White);
             
             if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
 			{
