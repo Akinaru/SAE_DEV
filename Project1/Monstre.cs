@@ -304,6 +304,7 @@ namespace Project1
             if (Vector2.Distance(monstre.Position, Perso._positionPerso) < 40)
             {
                 monstre.Vie -= 1;
+                Jeu._precision += 1;
                 monstre.Hit = true;
                 Perso._sonHit.Play(Game1._volumeSon, 0, 0);
                 //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);

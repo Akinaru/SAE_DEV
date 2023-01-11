@@ -31,6 +31,7 @@ namespace Project1
         public static int _nombreMonstre;
         public static int _nombreKill;
         public static int _nombreCoup;
+        public static double _precision;
         public static float _chrono;
         public static bool _pause;
         public enum NiveauDifficulte { Facile, Difficile, Extreme};
@@ -70,6 +71,7 @@ namespace Project1
             else
                 _nombreMonstre = 100;
             _nombreKill = 0;
+            _precision = 0;
             if (Game1._listeMonstre.Count > 0)
             {
                 Game1._listeMonstre.Clear();

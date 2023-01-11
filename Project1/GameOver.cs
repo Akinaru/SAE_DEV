@@ -105,6 +105,7 @@ namespace Project1
             Game1._spriteBatch.Begin();
             if (Perso._mort)
             {
+
                 Game1._spriteBatch.Draw(_textureblurBackground, new Vector2(0, 0), Color.White);
                 Game1._spriteBatch.Draw(_textureBoutonMenu, _positionBoutonMenu, Color.White);
                 Game1._spriteBatch.Draw(_textureGameOver, _positionGameOver, Color.White);
@@ -114,6 +115,7 @@ namespace Project1
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 40), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de coups: " + Jeu._nombreCoup, new Vector2(1280 / 2 - 100, 720 / 2 + 60), Color.White);
+                Game1._spriteBatch.DrawString(Message._police, "Precision: " + Math.Round((Jeu._precision/Jeu._nombreCoup*100),0) + " pourcent", new Vector2(1280 / 2 - 100, 720 / 2 + 80), Color.White);
             }
             Game1._spriteBatch.End();
         }
