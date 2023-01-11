@@ -21,9 +21,8 @@ namespace Project1
         private AnimatedSprite fumee;
         private double vitesse;
         private int vie;
-        private Texture2D _texturelowLife;
-        private Texture2D _texturemidLife;
-        private Texture2D _texturefullLife;
+        private Texture2D _texturepleinLife;
+        private Texture2D _texturevideLife;
         private Texture2D _textureBossHit;
         private bool _hit;
         private bool _mort;
@@ -42,9 +41,8 @@ namespace Project1
             this.fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader()));
             this.Vitesse = new Random().Next(400, 550) / 10;
             this.Vie = 10;
-            this._texturelowLife = content.Load<Texture2D>("lowLife");
-            this._texturemidLife = content.Load<Texture2D>("midLife");
-            this._texturefullLife = content.Load<Texture2D>("fullLife");
+            this._texturepleinLife = content.Load<Texture2D>("fullLife");
+            this._texturevideLife = content.Load<Texture2D>("fullLife");
             this._textureBossHit = content.Load<Texture2D>("bossHit");
             this._sonHit = content.Load<SoundEffect>("Son/playerHurt");
             this.Spawn();
@@ -273,7 +271,7 @@ namespace Project1
                 _spriteBatch.Draw(boss.fumee, boss.Position);
             }
             if(boss.Vie > 0)
-                _spriteBatch.Draw(boss._texturefullLife, boss.Position + new Vector2(-12, -12), Color.White);
+                _spriteBatch.Draw(boss._texturepleinLife, boss.Position + new Vector2(-12, -12), Color.White);
             else //vie du monstre = 0
             {
                 boss.Hit = false;
