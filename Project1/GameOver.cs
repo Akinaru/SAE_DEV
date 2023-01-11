@@ -180,6 +180,15 @@ namespace Project1
                 Game1._spriteBatch.Draw(_textureRaccourciM, _positionRaccourciM, Color.White);
                 Game1._spriteBatch.Draw(_textureRaccourciR, _positionRaccourciR, Color.White);
                 Game1._spriteBatch.Draw(_textureBoutonSortir, _positionBoutonSortir, Color.White);
+                double multiplicateurNiveau;
+                if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
+                    multiplicateurNiveau = 1;
+                else if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
+                    multiplicateurNiveau = 2;
+                else
+                    multiplicateurNiveau = 2;
+                double score = Math.Round((Jeu._nombreKill * Math.Round((Jeu._precision / Jeu._nombreCoup * 100), 0) + (multiplicateurNiveau * Jeu._vague) - Jeu._chrono),0);
+                Game1._spriteBatch.DrawString(Message._police, "Score: " + score, new Vector2(1280 / 2 - 100, 300 ), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Temps survecu: " + Jeu.getChrono(), new Vector2(1280 / 2 - 100, 720 / 2 - 40), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 - 20), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 0), Color.White);
