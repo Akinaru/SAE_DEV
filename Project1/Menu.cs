@@ -65,7 +65,7 @@ namespace Project1
         public override void Initialize()
         {
             Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
-            _positionPlayButton = new Vector2(490, 300);
+            _positionPlayButton = new Vector2(Game1._largeurEcran/2 -150, 300);
             _positionRaccourciEntree = new Vector2(611, 392);
 
             _positionFacileButton = new Vector2(500, 440);

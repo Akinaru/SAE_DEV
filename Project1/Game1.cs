@@ -28,9 +28,6 @@ namespace Project1
         public static List<Fantome> _listeFantome = new List<Fantome>();
         public static List<Bombe> _listeBombe = new List<Bombe>();
         public static float _volumeSon;
-
-
-
         public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu, Exit };
         public static Etats etat;
         private readonly ScreenManager _screenManager;
@@ -77,7 +74,9 @@ namespace Project1
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _volumeSon = 0.5f;
             _largeurEcran = 1280;
-            _hauteurEcran = 720;
+            _hauteurEcran = 720; 
+            //_largeurEcran = 1440;
+            //_hauteurEcran = 900;
             _graphics.PreferredBackBufferWidth = Game1._largeurEcran;
             _graphics.PreferredBackBufferHeight = Game1._hauteurEcran;
             _graphics.ApplyChanges();
