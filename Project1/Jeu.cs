@@ -55,6 +55,9 @@ namespace Project1
             _chrono = 0;
             _pause = false;
             _nombreCoup = 0;
+            Game1._listeMonstre.Clear();
+            Game1._listeFantome.Clear();
+            Game1._listeBoss.Clear();
             KeyboardManager._frappe = false;
             KeyboardManager._wait = 0;
             KeyboardManager.Initialise();
@@ -76,7 +79,7 @@ namespace Project1
                 _nombreFantome = 5;
             }
             else {
-                _nombreMonstre = 10; //50
+                _nombreMonstre = 50;
                 _nombreFantome = 25;
             }
             _nombreKill = 0;

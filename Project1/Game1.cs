@@ -27,7 +27,6 @@ namespace Project1
         public static List<Boss> _listeBoss = new List<Boss>();
         public static List<Monstre> _listeMonstre = new List<Monstre>();
         public static List<Fantome> _listeFantome = new List<Fantome>();
-        public static List<Bombe> _listeBombe = new List<Bombe>();
         public static float _volumeSon;
         public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu, Exit };
         public static Etats etat;

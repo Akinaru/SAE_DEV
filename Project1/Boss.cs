@@ -25,7 +25,6 @@ namespace Project1
         private bool _hit;
         private bool _mort;
         private float _mortWait;
-        private float _deplaceWait;
         private SoundEffect _sonHit;
 
         private const int DROP_COEUR_FACILE = 100;
@@ -45,7 +44,6 @@ namespace Project1
             this.Hit = false;
             this.Mort = false;
             this._mortWait = 0;
-            this._deplaceWait = 0;
 
         }
 
@@ -168,7 +166,6 @@ namespace Project1
 
             if (distance >= 6 && distance < 16 * 15)
             {
-                this._deplaceWait = 0;
                 Vector2 direction = Vector2.Normalize(Perso._positionPerso - this.Position);
                 Vector2 pos = new Vector2(this.Position.X, this.Position.Y);
                 ushort x;
@@ -250,7 +247,7 @@ namespace Project1
         public void Draw(SpriteBatch _spriteBatch, ContentManager Content)
         {
             Boss boss = this;
-
+            
             if (boss._hit)
             {
                 _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(20, 20), Color.White);

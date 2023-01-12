@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.BitmapFonts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,8 @@ namespace Project1
 {
     internal class VieBoss
     {
-
         public static Texture2D _texturevieCoeurPlein;
         public static Texture2D _texturevieCoeurVide;
-
         private const int VIE_MAX_FACILE_DIFFICILE = 10;
 
 
@@ -36,24 +35,39 @@ namespace Project1
 
         public static void Draw(SpriteBatch _spriteBatch)
         {
-
-            Vector2 pos = new Vector2(Game1._largeurEcran/2 - 200, 10);
-            
-            //affichage coeur plein
-            for (int y = 0; y < Game1._listeBoss.Count; y++)
+            if (!MapUI._showUI)
             {
-                for (int i = 0; i < Game1._listeBoss[y].Vie; i++)
+
+                Vector2 pos = new Vector2(Game1._largeurEcran / 2 - 200, 10);
+
+
+                for (int i = 0; i < Game1._listeBoss.Count; i++)
                 {
-                    _spriteBatch.Draw(_texturevieCoeurPlein, new Vector2(pos.X + 10 + (40 * i), pos.Y + 10 + (45*y)), Color.White);
+                    Vector2 posBoss = Game1._listeBoss[i].Position;
+                    
+
                 }
-            }
-
-            //afichage coeur vide
-            for (int y = 0; y < Game1._listeBoss.Count; y++)
-            {
-                for (int i = 0; i < VIE_MAX_FACILE_DIFFICILE - Game1._listeBoss[y].Vie; i++)
+                //affichage coeur plein
+                for (int y = 0; y < Game1._listeBoss.Count; y++)
                 {
-                    _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(40 * Game1._listeBoss[y].Vie) + 40 * i, pos.Y + 10 + (45 * y)), Color.White);
+                    _spriteBatch.DrawString(Message._police, "Boss " + (y + 1), pos + new Vector2(190,-5 + (y * 50)), Color.Red);
+
+                    //Boss boss = Game1._listeBoss[y];
+                    //_spriteBatch.DrawString(Message._police, "Boss " +(y+1), new Vector2(boss.Position.X, boss.Position.Y) + new Vector2(0, 0), Color.Red);
+
+                    for (int i = 0; i < Game1._listeBoss[y].Vie; i++)
+                    {
+                        _spriteBatch.Draw(_texturevieCoeurPlein, new Vector2(pos.X + 10 + (40 * i), pos.Y + 10 + (50 * y)), Color.White);
+                    }
+                }
+
+                //afichage coeur vide
+                for (int y = 0; y < Game1._listeBoss.Count; y++)
+                {
+                    for (int i = 0; i < VIE_MAX_FACILE_DIFFICILE - Game1._listeBoss[y].Vie; i++)
+                    {
+                        _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(40 * Game1._listeBoss[y].Vie) + 40 * i, pos.Y + 10 + (50 * y)), Color.White);
+                    }
                 }
             }
         }

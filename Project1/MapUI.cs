@@ -49,7 +49,8 @@ namespace Project1
 
                 //on cache les monstres  sur la minimap si la difficulte est à extreme et que le nombre de monstre est plus grand que 10
                 //donc si en extreme le nombre de monstre arrive a 10 ou moins, les monstres apparaissent sur la mini map
-                if (!( Jeu.difficulte == Jeu.NiveauDifficulte.Extreme && Game1._listeMonstre.Count > 10))
+                if (Jeu.difficulte != Jeu.NiveauDifficulte.Extreme ||
+                    (Jeu.difficulte == Jeu.NiveauDifficulte.Extreme && Game1._listeMonstre.Count <= 10))
                 {
                     //affichage monstre sur la carte
                     for (int i = 0; i < Game1._listeMonstre.Count; i++)
