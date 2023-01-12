@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Project1.Game1">
-    <Position X="3.5" Y="1" Width="1.5" />
+    <Position X="4.75" Y="0.5" Width="1.5" />
     <NestedTypes>
       <Enum Name="Project1.Game1.Etats" Collapsed="true">
         <TypeIdentifier>
@@ -12,6 +12,41 @@
     <TypeIdentifier>
       <HashCode>AAQQAAAAAAAAA0AAAgAAAAAABQAAAAACAICAAAAAgIQ=</HashCode>
       <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Menu">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQVCeECCACAAgwAAAgBAAAAAEABAMAgACYFAAIAJADQ=</HashCode>
+      <FileName>Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.GameOver">
+    <Position X="8.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEUAAJAAACAAAwAABCAAAAAAAABQAAAAAAAAARAAABQ=</HashCode>
+      <FileName>GameOver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Jeu">
+    <Position X="10" Y="0.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Project1.Jeu.NiveauDifficulte" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Jeu.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>oAQAEQACAABACwQggAABAFKAApAAIAAAAAAQAAAQACQ=</HashCode>
+      <FileName>Jeu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Pause">
+    <Position X="12.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUCAJACACAAAoAAFAAAAAAAAABAAAABAIIAABAJABQ=</HashCode>
+      <FileName>Pause.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
