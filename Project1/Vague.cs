@@ -22,17 +22,21 @@ namespace Project1
             //si il n'y a plus de monstre et de fantome et de boss
             if (Game1._listeMonstre.Count == 0 && Game1._listeFantome.Count == 0 && Game1._listeBoss.Count == 0)
             {
+                Jeu._vague += 1;
+                Message.Display("Bravo ! Tu es a la vague " + Jeu._vague + ". ", "Les monstres arrivent!", 5);
                 Perso._sonNewVague.Play(Game1._volumeSon, 0, 0);
+
+                //ajout de monstre
                 if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
                     Jeu._nombreMonstre += NOMBRE_MONSTRE_PLUS_FACILE;
                 if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
                     Jeu._nombreMonstre += NOMBRE_MONSTRE_PLUS_DIFFICILE;
                 else
                     Jeu._nombreMonstre += NOMBRE_MONSTRE_PLUS_EXTREME;
-                Jeu._vague += 1;
-                Message.Display("Bravo ! Tu es a la vague " + Jeu._vague + ". ", "Les monstres arrivent!", 5);
                 for (int i = 0; i < Jeu._nombreMonstre; i++)
                     Game1._listeMonstre.Add(new Monstre("monstreAnimation.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
+                
+                //ajout de fantome
                 if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
                     Jeu._nombreFantome += NOMBRE_FANTOME_PLUS_FACILE;
                 if (Jeu.difficulte == Jeu.NiveauDifficulte.Difficile)
@@ -42,6 +46,7 @@ namespace Project1
                 for (int i = 0; i < Jeu._nombreFantome; i++)
                     Game1._listeFantome.Add(new Fantome("fantome.sf", new Vector2(new Random().Next(0, 1600), new Random().Next(0, 1600)), Content));
                 
+                //ajout de boss
                 if(Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
                 {
                     if(Jeu._vague % 5 == 0)
