@@ -54,7 +54,7 @@ namespace Project1
             while (!positionne)
             {
                 positionne = true;
-                pos = new Vector2(new Random().Next(64, 500), new Random().Next(64, 500));
+                pos = new Vector2(new Random().Next(64, 1550), new Random().Next(64, 1550));
                 if (Collision.IsCollision((ushort)(pos.X / Map._tiledMap.TileWidth), (ushort)(pos.Y / Map._tiledMap.TileWidth)))
                 {
                     positionne = false;
