@@ -201,6 +201,7 @@ namespace Project1
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de kills: " + Jeu._nombreKill, new Vector2(1280 / 2 - 100, 720 / 2 - 20), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de vagues: " + Jeu._vague, new Vector2(1280 / 2 - 100, 720 / 2 + 0), Color.White);
                 Game1._spriteBatch.DrawString(Message._police, "Nombre de coups: " + Jeu._nombreCoup, new Vector2(1280 / 2 - 100, 720 / 2 + 20), Color.White);
+                
                 double precision = 0;
                 if (Jeu._nombreCoup > 0) {
                     precision = Math.Round((Jeu._precision / Jeu._nombreCoup * 100), 0);
