@@ -19,7 +19,8 @@ namespace Project1
         private const int NOMBRE_FANTOME_PLUS_EXTREME = 8;
         public static void NewVague(ContentManager Content)
         {
-            if (Game1._listeMonstre.Count == 0 && Game1._listeFantome.Count == 0)
+            //si il n'y a plus de monstre et de fantome et de boss
+            if (Game1._listeMonstre.Count == 0 && Game1._listeFantome.Count == 0 && Game1._listeBoss.Count == 0)
             {
                 Perso._sonNewVague.Play(Game1._volumeSon, 0, 0);
                 if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)
