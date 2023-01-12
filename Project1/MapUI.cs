@@ -29,6 +29,7 @@ namespace Project1
 
         public static void LoadContent(Microsoft.Xna.Framework.Content.ContentManager Content)
         {
+            //chargement des textures liés à la minimap
             _textureMapPerso = Content.Load<Texture2D>("MapUI/mapPerso");
             _textureMapMonstre = Content.Load<Texture2D>("MapUI/mapMonstre");
             _textureMapFantome = Content.Load<Texture2D>("MapUI/mapFantome");
@@ -40,10 +41,15 @@ namespace Project1
 
         internal static void Draw(SpriteBatch _spriteBatch)
         {
+            //on affiche la minimap que si la variable _showUI est true
+            //la variable est true quand la touche tab est préssé
             if (_showUI)
             {
                 _spriteBatch.Draw(_textureMapUI, new Vector2(340, 60), Color.White);
-                if ( (Jeu.difficulte != Jeu.NiveauDifficulte.Extreme) || Game1._listeMonstre.Count <= 10)
+
+                //on cache les monstres  sur la minimap si la difficulte est à extreme et que le nombre de monstre est plus grand que 10
+                //donc si en extreme le nombre de monstre arrive a 10 ou moins, les monstres apparaissent sur la mini map
+                if (!( Jeu.difficulte == Jeu.NiveauDifficulte.Extreme && Game1._listeMonstre.Count > 10))
                 {
                     //affichage monstre sur la carte
                     for (int i = 0; i < Game1._listeMonstre.Count; i++)
@@ -55,27 +61,22 @@ namespace Project1
                     {
                         _spriteBatch.Draw(_textureMapFantome, new Vector2((Game1._listeFantome[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeFantome[i].Position.Y / 1600 * 600) + 60 - 8), Color.Cyan);
                     }
+                    //affiche le boss
+                    for (int i = 0; i < Game1._listeBoss.Count; i++)
+                    {
+                        _spriteBatch.Draw(_textureMapBoss, new Vector2((Game1._listeBoss[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeBoss[i].Position.Y / 1600 * 600) + 60 - 8), Color.White);
+                    }
                 }
-                //affiche le boss
-                for (int i = 0; i < Game1._listeBoss.Count; i++)
-                {
-                    _spriteBatch.Draw(_textureMapBoss, new Vector2((Game1._listeBoss[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeBoss[i].Position.Y / 1600 * 600) + 60 - 8), Color.White);
-                }
-                //affichage coeur sur la carte
+
+                //affichage coeurs sur la carte
                 for (int i = 0; i < Jeu._listeCoeur.Count; i++)
                 {
                     _spriteBatch.Draw(_textureCoeurUI, new Vector2((Jeu._listeCoeur[i].Position.X / 1600 * 600) + 340 - 8, (Jeu._listeCoeur[i].Position.Y / 1600 * 600) + 60 - 8), Color.White);
                 }
-                _spriteBatch.Draw(_textureMapPerso, _positionMapPersoUI, Color.White);
+                //affichage perso sur la carte
+                _spriteBatch.Draw(_textureMapPerso, new Vector2((Perso._positionPerso.X / 1600 * 600) + 340 - 8, (Perso._positionPerso.Y / 1600 * 600) + 60 - 8), Color.White);
 
             }
-
-        }
-
-        internal static void Update()
-        {
-            if (_showUI)
-                _positionMapPersoUI = new Vector2((Perso._positionPerso.X / 1600 * 600) + 340 - 8, (Perso._positionPerso.Y / 1600 * 600) + 60 - 8);
 
         }
     }

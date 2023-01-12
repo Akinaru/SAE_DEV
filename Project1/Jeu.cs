@@ -198,7 +198,6 @@ namespace Project1
                 ViePerso.Update();
                 VieBoss.Update();
                 Camera.Update();
-                MapUI.Update();
                 Zone.Update();
                 _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);
                 for (int i = 0; i < Game1._listeMonstre.Count; i++)
