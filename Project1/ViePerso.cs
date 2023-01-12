@@ -27,12 +27,11 @@ namespace Project1
 
         public static void Update()
         {
-            if(Perso._viePerso == 0)
+            if(Perso._viePerso <= 0)
             {
                 Perso._mort = true;
                 Game1.Etat = Game1.Etats.GameOver;
             }
-            
         }
 
         public static void Draw(SpriteBatch _spriteBatch)
@@ -40,7 +39,6 @@ namespace Project1
 
             Vector2 pos = Perso._positionPerso + new Vector2(-25, -25);
             int vieMax;
-
 
             if (Jeu.difficulte != Jeu.NiveauDifficulte.Extreme)
                 vieMax = VIE_MAX_FACILE_DIFFICILE;
@@ -53,16 +51,12 @@ namespace Project1
 
             //affichage coeur plein
             for (int i = 0; i < Perso._viePerso; i++)
-            {
                 _spriteBatch.Draw(_texturevieCoeurPlein, new Vector2(pos.X + 10 + (5 * i), pos.Y + 10), Color.White);
-            }
             //afichage coeur vide
 
             
             for (int i = 0; i < vieMax - Perso._viePerso; i++)
-            {
                 _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(5 * Perso._viePerso) + 5 * i, pos.Y + 10), Color.White);
-            }
         }
 
     }

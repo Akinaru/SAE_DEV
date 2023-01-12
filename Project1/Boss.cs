@@ -247,11 +247,11 @@ namespace Project1
         public void Draw(SpriteBatch _spriteBatch, ContentManager Content)
         {
             Boss boss = this;
-            
+
+            _spriteBatch.DrawString(Message._police, "Boss " + (Game1._listeBoss.IndexOf(boss) + 1), boss.Position - new Vector2(12,24), Color.White, 0f,Vector2.Zero, 0.5f, SpriteEffects.None, 0);
+
             if (boss._hit)
-            {
                 _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(20, 20), Color.White);
-            }
             else
             {
                 if (!boss.Mort)
@@ -260,9 +260,7 @@ namespace Project1
             if (!boss.Mort)
                 _spriteBatch.Draw(Jeu._textureombrePerso, boss.Position + new Vector2(-16, -10), Color.White);
             if (boss.Mort)
-            {
                 _spriteBatch.Draw(boss.fumee, boss.Position);
-            }
             if(boss.Vie == 0)//vie du monstre = 0
             {
                 boss.Hit = false;
@@ -294,8 +292,6 @@ namespace Project1
                 boss.Vie -= 1;
                 boss.Hit = true;
                 Perso._sonHit.Play(Game1._volumeSon, 0, 0);
-                //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
-                //monstre.Position += direction * 700 * deltaTime;
             }
         }
 

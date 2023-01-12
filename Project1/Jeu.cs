@@ -199,7 +199,6 @@ namespace Project1
                 }
                 Perso.Update(deltaTime);
                 ViePerso.Update();
-                VieBoss.Update();
                 Camera.Update();
                 Zone.Update();
                 _positionObscurite = new Vector2(Perso._positionPerso.X - 1080 / 2, Perso._positionPerso.Y - 720 / 2);

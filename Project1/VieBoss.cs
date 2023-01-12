@@ -23,16 +23,6 @@ namespace Project1
             _texturevieCoeurVide = Content.Load<Texture2D>("vieBossVide");
         }
 
-        public static void Update()
-        {
-            if (Perso._viePerso == 0)
-            {
-                Perso._mort = true;
-                Game1.Etat = Game1.Etats.GameOver;
-            }
-
-        }
-
         public static void Draw(SpriteBatch _spriteBatch)
         {
             if (!MapUI._showUI)
@@ -50,14 +40,11 @@ namespace Project1
                 //affichage coeur plein
                 for (int y = 0; y < Game1._listeBoss.Count; y++)
                 {
-                    _spriteBatch.DrawString(Message._police, "Boss " + (y + 1), pos + new Vector2(190,-5 + (y * 50)), Color.Red);
-
-                    //Boss boss = Game1._listeBoss[y];
-                    //_spriteBatch.DrawString(Message._police, "Boss " +(y+1), new Vector2(boss.Position.X, boss.Position.Y) + new Vector2(0, 0), Color.Red);
-
+                    //affichage du nom du boss au dessus de la barre de vie
+                    _spriteBatch.DrawString(Message._police, "Boss " + (y + 1), pos + new Vector2(190,-5 + (y * 55)), Color.White);
                     for (int i = 0; i < Game1._listeBoss[y].Vie; i++)
                     {
-                        _spriteBatch.Draw(_texturevieCoeurPlein, new Vector2(pos.X + 10 + (40 * i), pos.Y + 10 + (50 * y)), Color.White);
+                        _spriteBatch.Draw(_texturevieCoeurPlein, new Vector2(pos.X + 10 + (40 * i), pos.Y + 10 + (55 * y)), Color.White);
                     }
                 }
 
@@ -66,7 +53,7 @@ namespace Project1
                 {
                     for (int i = 0; i < VIE_MAX_FACILE_DIFFICILE - Game1._listeBoss[y].Vie; i++)
                     {
-                        _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(40 * Game1._listeBoss[y].Vie) + 40 * i, pos.Y + 10 + (50 * y)), Color.White);
+                        _spriteBatch.Draw(_texturevieCoeurVide, new Vector2(pos.X + 10 + (float)(40 * Game1._listeBoss[y].Vie) + 40 * i, pos.Y + 10 + (55 * y)), Color.White);
                     }
                 }
             }
