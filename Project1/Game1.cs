@@ -24,10 +24,7 @@ namespace Project1
         public static SpriteBatch _spriteBatch { get; set; }
         public static int _largeurEcran;
         public static int _hauteurEcran;
-        public static List<Boss> _listeBoss = new List<Boss>();
-        public static List<Monstre> _listeMonstre = new List<Monstre>();
-        public static List<Fantome> _listeFantome = new List<Fantome>();
-        public static float _volumeSon;
+
         public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu, Exit };
         public static Etats etat;
         private readonly ScreenManager _screenManager;
@@ -72,7 +69,6 @@ namespace Project1
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
-            _volumeSon = 0.5f;
             _largeurEcran = 1280;
             _hauteurEcran = 720; 
             //_largeurEcran = 1440;

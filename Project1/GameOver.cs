@@ -40,9 +40,9 @@ namespace Project1
             _positionBoutonRejouer = new Vector2(1280/2 - (538/2), 450);
             _positionBoutonMenu = new Vector2(490, 580);
             _positionBoutonSortir = new Vector2(1220, 650);
-            Game1._listeBoss.Clear();
-            Game1._listeMonstre.Clear();
-            Game1._listeFantome.Clear();
+            Jeu._listeBoss.Clear();
+            Jeu._listeMonstre.Clear();
+            Jeu._listeFantome.Clear();
             base.Initialize();
         }
         public override void LoadContent()
@@ -87,7 +87,7 @@ namespace Project1
                 _textureBoutonRejouer = Content.Load<Texture2D>("Menu/rejouer");
             }
             //hover sortir
-            if (Game1._volumeSon != 0)
+            if (Jeu._volumeSon != 0)
             {
                 if (mousePosition.X >= _positionBoutonSortir.X &&
                     mousePosition.X <= _positionBoutonSortir.X + 50 &&
@@ -156,12 +156,12 @@ namespace Project1
             var matriceCamera = Camera._camera.GetViewMatrix();
             Game1._spriteBatch.Begin(transformMatrix: matriceCamera);
             Map.Draw(matriceCamera);
-            for (int i = 0; i < Game1._listeMonstre.Count; i++)
-                Game1._listeMonstre[i].Draw(Game1._spriteBatch, Content);
-            for (int i = 0; i < Game1._listeFantome.Count; i++)
-                Game1._listeFantome[i].Draw(Game1._spriteBatch, Content);
-            for (int i = 0; i < Game1._listeBoss.Count; i++)
-                Game1._listeBoss[i].Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Jeu._listeMonstre.Count; i++)
+                Jeu._listeMonstre[i].Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Jeu._listeFantome.Count; i++)
+                Jeu._listeFantome[i].Draw(Game1._spriteBatch, Content);
+            for (int i = 0; i < Jeu._listeBoss.Count; i++)
+                Jeu._listeBoss[i].Draw(Game1._spriteBatch, Content);
             Perso.Draw(Game1._spriteBatch);
 
             ViePerso.Draw(Game1._spriteBatch);

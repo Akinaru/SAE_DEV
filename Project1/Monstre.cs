@@ -168,7 +168,7 @@ namespace Project1
                 this._mortWait += 1 * deltaTime;
                 if(this._mortWait >= 0.3)
                 {
-                    Game1._listeMonstre.Remove(this);
+                    Jeu._listeMonstre.Remove(this);
                     Vague.NewVague(Content);
                 }
             }
@@ -237,7 +237,7 @@ namespace Project1
                         Perso._viePerso -= 1;
                         Perso._coeurPerdu += 1;
                         ViePerso.Update();
-                        _sonHit.Play(Game1._volumeSon, 0, 0);
+                        _sonHit.Play(Jeu._volumeSon, 0, 0);
                     }
   
                 }
@@ -299,9 +299,7 @@ namespace Project1
             {
                 monstre.Vie -= 1;
                 monstre.Hit = true;
-                Perso._sonHit.Play(Game1._volumeSon, 0, 0);
-                //Vector2 direction = Vector2.Normalize(monstre.Position - Perso._positionPerso);
-                //monstre.Position += direction * 700 * deltaTime;
+                Perso._sonHit.Play(Jeu._volumeSon, 0, 0);
             }
         }
 

@@ -50,22 +50,22 @@ namespace Project1
                 //on cache les monstres  sur la minimap si la difficulte est à extreme et que le nombre de monstre est plus grand que 10
                 //donc si en extreme le nombre de monstre arrive a 10 ou moins, les monstres apparaissent sur la mini map
                 if (Jeu.difficulte != Jeu.NiveauDifficulte.Extreme ||
-                    (Jeu.difficulte == Jeu.NiveauDifficulte.Extreme && Game1._listeMonstre.Count <= 10))
+                    (Jeu.difficulte == Jeu.NiveauDifficulte.Extreme && Jeu._listeMonstre.Count <= 10))
                 {
                     //affichage monstre sur la carte
-                    for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                    for (int i = 0; i < Jeu._listeMonstre.Count; i++)
                     {
-                        _spriteBatch.Draw(_textureMapMonstre, new Vector2((Game1._listeMonstre[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeMonstre[i].Position.Y / 1600 * 600) + 60 - 8), Color.Red);
+                        _spriteBatch.Draw(_textureMapMonstre, new Vector2((Jeu._listeMonstre[i].Position.X / 1600 * 600) + 340 - 8, (Jeu._listeMonstre[i].Position.Y / 1600 * 600) + 60 - 8), Color.Red);
                     }
                     //affichage fantome sur la carte
-                    for (int i = 0; i < Game1._listeFantome.Count; i++)
+                    for (int i = 0; i < Jeu._listeFantome.Count; i++)
                     {
-                        _spriteBatch.Draw(_textureMapFantome, new Vector2((Game1._listeFantome[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeFantome[i].Position.Y / 1600 * 600) + 60 - 8), Color.Cyan);
+                        _spriteBatch.Draw(_textureMapFantome, new Vector2((Jeu._listeFantome[i].Position.X / 1600 * 600) + 340 - 8, (Jeu._listeFantome[i].Position.Y / 1600 * 600) + 60 - 8), Color.Cyan);
                     }
                     //affiche le boss
-                    for (int i = 0; i < Game1._listeBoss.Count; i++)
+                    for (int i = 0; i < Jeu._listeBoss.Count; i++)
                     {
-                        _spriteBatch.Draw(_textureMapBoss, new Vector2((Game1._listeBoss[i].Position.X / 1600 * 600) + 340 - 8, (Game1._listeBoss[i].Position.Y / 1600 * 600) + 60 - 8), Color.White);
+                        _spriteBatch.Draw(_textureMapBoss, new Vector2((Jeu._listeBoss[i].Position.X / 1600 * 600) + 340 - 8, (Jeu._listeBoss[i].Position.Y / 1600 * 600) + 60 - 8), Color.White);
                     }
                 }
 

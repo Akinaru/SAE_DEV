@@ -123,7 +123,7 @@ namespace Project1
             _sonDifficulte = Content.Load<SoundEffect>("Son/Difficulte");
 
 
-            MediaPlayer.Volume = Game1._volumeSon;
+            MediaPlayer.Volume = Jeu._volumeSon;
         }
 
         public override void Update(GameTime gameTime)
@@ -205,7 +205,7 @@ namespace Project1
 			}
 
             //hover moins volume
-            if (Game1._volumeSon == 0)
+            if (Jeu._volumeSon == 0)
             {
                 if (mousePosition.X >= _positionBoutonSon.X &&
                     mousePosition.X <= _positionBoutonSon.X + 50 &&
@@ -221,7 +221,7 @@ namespace Project1
             }
 
             //hover plus volume
-            if (Game1._volumeSon != 0)
+            if (Jeu._volumeSon != 0)
             {
                 if (mousePosition.X >= _positionBoutonSon.X &&
                     mousePosition.X <= _positionBoutonSon.X + 50 &&
@@ -237,7 +237,7 @@ namespace Project1
             }
 
             //hover sortir
-            if (Game1._volumeSon != 0)
+            if (Jeu._volumeSon != 0)
             {
                 if (mousePosition.X >= _positionBoutonSortir.X &&
                     mousePosition.X <= _positionBoutonSortir.X + 50 &&
@@ -281,7 +281,7 @@ namespace Project1
                         mousePosition.Y <= _positionFacileButton.Y + 32)
                     {
                         Jeu.difficulte = Jeu.NiveauDifficulte.Facile;
-                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                        _sonDifficulte.Play(Jeu._volumeSon, 0, 0);
                     }
                     //BOUTON DIFFICILE
                     if (mousePosition.X >= _positionDifficileButton.X &&
@@ -290,7 +290,7 @@ namespace Project1
                         mousePosition.Y <= _positionDifficileButton.Y + 32)
                     {
                         Jeu.difficulte = Jeu.NiveauDifficulte.Difficile;
-                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                        _sonDifficulte.Play(Jeu._volumeSon, 0, 0);
                     }
                     //BOUTON EXTREME
                     if (mousePosition.X >= _positionExtremeButton.X &&
@@ -299,7 +299,7 @@ namespace Project1
                         mousePosition.Y <= _positionExtremeButton.Y + 32)
                     {
                         Jeu.difficulte = Jeu.NiveauDifficulte.Extreme;
-                        _sonDifficulte.Play(Game1._volumeSon, 0, 0);
+                        _sonDifficulte.Play(Jeu._volumeSon, 0, 0);
                     }
                     //BOUTON SON
                     if (mousePosition.X >= _positionBoutonSon.X &&
@@ -309,10 +309,10 @@ namespace Project1
                     {
                         if (!_boutonSon)
                         {
-                            if (Game1._volumeSon == 0)
-                                Game1._volumeSon += 0.5f;
+                            if (Jeu._volumeSon == 0)
+                                Jeu._volumeSon += 0.5f;
                             else
-                                Game1._volumeSon -= 0.5f;
+                                Jeu._volumeSon -= 0.5f;
                             _boutonSon = true;
                         }
                     }
@@ -349,20 +349,20 @@ namespace Project1
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                if (Game1._volumeSon == 0.5f)
+                if (Jeu._volumeSon == 0.5f)
 				{
                     _textureRaccourciFleche = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeUp");
-                    Game1._volumeSon -= 0.5f;
+                    Jeu._volumeSon -= 0.5f;
 
 
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                if (Game1._volumeSon == 0)
+                if (Jeu._volumeSon == 0)
 				{
                     _textureRaccourciFleche = Content.Load<Texture2D>("Menu/raccourciTouche/raccourciVolumeDown");
-                    Game1._volumeSon += 0.5f;
+                    Jeu._volumeSon += 0.5f;
                 }
 
             }
@@ -373,7 +373,7 @@ namespace Project1
             Jeu._gameStarted = true;
             Jeu._gameBegin = true;
             Game1.Etat = Game1.Etats.Play;
-            _sonJouer.Play(Game1._volumeSon, 0, 0);
+            _sonJouer.Play(Jeu._volumeSon, 0, 0);
         }
         public override void Draw(GameTime gameTime)
         {
@@ -415,7 +415,7 @@ namespace Project1
             }
 
 
-            if (Game1._volumeSon == 0)
+            if (Jeu._volumeSon == 0)
 			{
                 Game1._spriteBatch.Draw(_textureMoinButton, _positionBoutonSon, Color.White);
             }

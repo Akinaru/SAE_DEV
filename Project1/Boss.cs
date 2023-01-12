@@ -158,7 +158,7 @@ namespace Project1
                 this._mortWait += 1 * deltaTime;
                 if (this._mortWait >= 0.3)
                 {
-                    Game1._listeBoss.Remove(this);
+                    Jeu._listeBoss.Remove(this);
                     Vague.NewVague(Content);
                 }
             }
@@ -237,7 +237,7 @@ namespace Project1
                             vieAEnelver = 4;
                         Perso._viePerso -= vieAEnelver;
                         ViePerso.Update();
-                        _sonHit.Play(Game1._volumeSon, 0, 0);
+                        _sonHit.Play(Jeu._volumeSon, 0, 0);
                     }
 
                 }
@@ -248,7 +248,7 @@ namespace Project1
         {
             Boss boss = this;
 
-            _spriteBatch.DrawString(Message._police, "Boss " + (Game1._listeBoss.IndexOf(boss) + 1), boss.Position - new Vector2(12,24), Color.White, 0f,Vector2.Zero, 0.5f, SpriteEffects.None, 0);
+            _spriteBatch.DrawString(Message._police, "Boss " + (Jeu._listeBoss.IndexOf(boss) + 1), boss.Position - new Vector2(12,24), Color.White, 0f,Vector2.Zero, 0.5f, SpriteEffects.None, 0);
 
             if (boss._hit)
                 _spriteBatch.Draw(boss._textureBossHit, boss.Position - new Vector2(20, 20), Color.White);
@@ -291,7 +291,7 @@ namespace Project1
             {
                 boss.Vie -= 1;
                 boss.Hit = true;
-                Perso._sonHit.Play(Game1._volumeSon, 0, 0);
+                Perso._sonHit.Play(Jeu._volumeSon, 0, 0);
             }
         }
 

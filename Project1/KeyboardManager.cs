@@ -102,26 +102,26 @@ namespace Project1
                         Jeu._nombreCoup += 1;
                         Perso._animEpee = true;
                         _frappe = true;
-                        Jeu._sonEpee.Play(Game1._volumeSon, 0, 0);
+                        Jeu._sonEpee.Play(Jeu._volumeSon, 0, 0);
                         Perso._perso = new AnimatedSprite(Perso._spriteSheetWalkNormal);
                         bool aToucheUnMonstre = false;
-                        for (int i = 0; i < Game1._listeMonstre.Count; i++)
+                        for (int i = 0; i < Jeu._listeMonstre.Count; i++)
                         {
-                            if (Vector2.Distance(Game1._listeMonstre[i].Position, Perso._positionPerso) < 40)
+                            if (Vector2.Distance(Jeu._listeMonstre[i].Position, Perso._positionPerso) < 40)
                                 aToucheUnMonstre = true;
-                            Monstre.Touche(Game1._listeMonstre[i]);
+                            Monstre.Touche(Jeu._listeMonstre[i]);
                         }
-                        for (int i = 0; i < Game1._listeFantome.Count; i++)
+                        for (int i = 0; i < Jeu._listeFantome.Count; i++)
                         {
-                            if (Vector2.Distance(Game1._listeFantome[i].Position, Perso._positionPerso) < 40)
+                            if (Vector2.Distance(Jeu._listeFantome[i].Position, Perso._positionPerso) < 40)
                                 aToucheUnMonstre = true;
-                            Fantome.Touche(Game1._listeFantome[i]);
+                            Fantome.Touche(Jeu._listeFantome[i]);
                         }
-                        for (int i = 0; i < Game1._listeBoss.Count; i++)
+                        for (int i = 0; i < Jeu._listeBoss.Count; i++)
                         {
-                            if (Vector2.Distance(Game1._listeBoss[i].Position, Perso._positionPerso) < 40)
+                            if (Vector2.Distance(Jeu._listeBoss[i].Position, Perso._positionPerso) < 40)
                                 aToucheUnMonstre = true;
-                            Boss.Touche(Game1._listeBoss[i]);
+                            Boss.Touche(Jeu._listeBoss[i]);
                         }
                         if (aToucheUnMonstre)
                             Jeu._precision += 1;

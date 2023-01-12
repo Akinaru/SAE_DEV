@@ -69,7 +69,7 @@ namespace Project1
                 if (!_sonJoue)
                 {
                     _sonJoue = true;
-                    _sonFee.Play(Game1._volumeSon, 0, 0);
+                    _sonFee.Play(Jeu._volumeSon, 0, 0);
                 }
             }
         }
