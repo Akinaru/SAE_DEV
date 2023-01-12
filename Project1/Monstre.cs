@@ -19,11 +19,11 @@ namespace Project1
     public class Monstre
     {
 
-        private Vector2 position;
-        private AnimatedSprite monstre;
-        private AnimatedSprite fumee;
-        private double vitesse;
-        private int vie;
+        private Vector2 _position;
+        private AnimatedSprite _monstre;
+        private AnimatedSprite _fumee;
+        private double _vitesse;
+        private int _vie;
         private Texture2D _texturelowLife;
         private Texture2D _texturemidLife;
         private Texture2D _texturefullLife;
@@ -42,7 +42,7 @@ namespace Project1
         public Monstre(String spritesheet, Vector2 position, ContentManager content)
         {
             this.MonstreSprite = new AnimatedSprite(content.Load<SpriteSheet>(spritesheet, new JsonContentLoader()));
-            this.fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader())); 
+            this._fumee = new AnimatedSprite(content.Load<SpriteSheet>("fumee.sf", new JsonContentLoader())); 
             this.Vitesse = new Random().Next(400,550) / 10;
             this.Vie = 3;
             this._texturelowLife = content.Load<Texture2D>("lowLife");
@@ -82,12 +82,12 @@ namespace Project1
         {
             get
             {
-                return this.position;
+                return this._position;
             }
 
             set
             {
-                this.position = value;
+                this._position = value;
             }
         }
 
@@ -95,12 +95,12 @@ namespace Project1
         {
             get
             {
-                return this.monstre;
+                return this._monstre;
             }
 
             set
             {
-                this.monstre = value;
+                this._monstre = value;
             }
         }
 
@@ -108,12 +108,12 @@ namespace Project1
         {
             get
             {
-                return this.vitesse;
+                return this._vitesse;
             }
 
             set
             {
-                this.vitesse = value;
+                this._vitesse = value;
             }
         }
 
@@ -121,12 +121,12 @@ namespace Project1
         {
             get
             {
-                return this.vie;
+                return this._vie;
             }
 
             set
             {
-                this.vie = value;
+                this._vie = value;
             }
         }
 
@@ -158,8 +158,8 @@ namespace Project1
 
         public void Update(float deltaTime, ContentManager Content)
         {
-            this.fumee.Play("fumee");
-            this.fumee.Update(deltaTime);
+            this._fumee.Play("fumee");
+            this._fumee.Update(deltaTime);
 
 
             float distance = Vector2.Distance(this.Position, Perso._positionPerso);
@@ -261,7 +261,7 @@ namespace Project1
                 _spriteBatch.Draw(Jeu._textureombrePerso, monstre.Position + new Vector2(-16, -13), Color.White);
             if (monstre.Mort)
             {
-                _spriteBatch.Draw(monstre.fumee, monstre.Position);
+                _spriteBatch.Draw(monstre._fumee, monstre.Position);
             }
 
             if (monstre.Vie == 3)
