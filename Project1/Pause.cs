@@ -93,7 +93,7 @@ namespace Project1
             }
 
             //hover moins volume
-            if (Jeu._volumeSon == 0)
+            if (Game1._volumeSon == 0)
             {
                 if (mousePosition.X >= _positionBoutonSon.X &&
                     mousePosition.X <= _positionBoutonSon.X + 50 &&
@@ -109,7 +109,7 @@ namespace Project1
             }
 
             //hover plus volume
-            if (Jeu._volumeSon != 0)
+            if (Game1._volumeSon != 0)
             {
                 if (mousePosition.X >= _positionBoutonSon.X &&
                     mousePosition.X <= _positionBoutonSon.X + 50 &&
@@ -124,20 +124,18 @@ namespace Project1
                 }
             }
             //hover sortir
-            if (Jeu._volumeSon != 0)
+            if (mousePosition.X >= _positionBoutonSortir.X &&
+                mousePosition.X <= _positionBoutonSortir.X + 50 &&
+                mousePosition.Y >= _positionBoutonSortir.Y &&
+                mousePosition.Y <= _positionBoutonSortir.Y + 50)
             {
-                if (mousePosition.X >= _positionBoutonSortir.X &&
-                    mousePosition.X <= _positionBoutonSortir.X + 50 &&
-                    mousePosition.Y >= _positionBoutonSortir.Y &&
-                    mousePosition.Y <= _positionBoutonSortir.Y + 50)
-                {
-                    _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortirHovevr");
-                }
-                else
-                {
-                    _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortir");
-                }
+                _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortirHovevr");
             }
+            else
+            {
+                _textureBoutonSortir = Content.Load<Texture2D>("Menu/sortir");
+            }
+            
 
             if (mouseState.LeftButton == ButtonState.Pressed)
 			{
@@ -150,7 +148,7 @@ namespace Project1
                                             mousePosition.Y >= _positionBoutonMenu.Y &&
                                             mousePosition.Y <= _positionBoutonMenu.Y + 100)
                     {
-                        _sonMenuBack.Play(Jeu._volumeSon, 0, 0);
+                        _sonMenuBack.Play(Game1._volumeSon, 0, 0);
                         Game1.etat = Game1.Etats.BackMenu;
                     }
 
@@ -170,10 +168,10 @@ namespace Project1
                     {
                         if (!_boutonSon)
                         {
-                            if (Jeu._volumeSon == 0)
-                                Jeu._volumeSon += 0.5f;
+                            if (Game1._volumeSon == 0)
+                                Game1._volumeSon += 0.5f;
                             else
-                                Jeu._volumeSon -= 0.5f;
+                                Game1._volumeSon -= 0.5f;
                             _boutonSon = true;
                         }
                     }
@@ -223,7 +221,7 @@ namespace Project1
                 _spriteBatch.Draw(_textureRaccourciM, _positionRaccourciM, Color.White);
                 _spriteBatch.Draw(_textureRaccourciR, _positionRaccourciR, Color.White);
                 _spriteBatch.Draw(_textureBoutonSortir, _positionBoutonSortir, Color.White);
-                if (Jeu._volumeSon == 0)
+                if (Game1._volumeSon == 0)
                     Game1._spriteBatch.Draw(_textureMoinButton, _positionBoutonSon, Color.White);
                 else
                     Game1._spriteBatch.Draw(_texturePlusButton, _positionBoutonSon, Color.White);

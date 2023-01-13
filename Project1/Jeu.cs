@@ -38,7 +38,6 @@ namespace Project1
         public static List<Boss> _listeBoss = new List<Boss>();
         public static List<Monstre> _listeMonstre = new List<Monstre>();
         public static List<Fantome> _listeFantome = new List<Fantome>();
-        public static float _volumeSon;
 
         public enum NiveauDifficulte { Facile, Difficile, Extreme};
         public static NiveauDifficulte difficulte;
@@ -60,7 +59,6 @@ namespace Project1
             _chrono = 0;
             _pause = false;
             _nombreCoup = 0;
-            _volumeSon = 0.5f;
 
             _listeMonstre.Clear();
             _listeFantome.Clear();

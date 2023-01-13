@@ -87,7 +87,7 @@ namespace Project1
                 _textureBoutonRejouer = Content.Load<Texture2D>("Menu/rejouer");
             }
             //hover sortir
-            if (Jeu._volumeSon != 0)
+            if (Game1._volumeSon != 0)
             {
                 if (mousePosition.X >= _positionBoutonSortir.X &&
                     mousePosition.X <= _positionBoutonSortir.X + 50 &&

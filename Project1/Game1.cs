@@ -24,6 +24,7 @@ namespace Project1
         public static SpriteBatch _spriteBatch { get; set; }
         public static int _largeurEcran;
         public static int _hauteurEcran;
+        public static float _volumeSon;
 
         public enum Etats { Menu,Play, GameOver, Quit, Attente, BackMenu, Exit };
         public static Etats etat;
@@ -70,9 +71,8 @@ namespace Project1
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             GraphicsDevice.BlendState = BlendState.AlphaBlend;
             _largeurEcran = 1280;
-            _hauteurEcran = 720; 
-            //_largeurEcran = 1440;
-            //_hauteurEcran = 900;
+            _hauteurEcran = 720;
+            _volumeSon = 0.5f;
             _graphics.PreferredBackBufferWidth = Game1._largeurEcran;
             _graphics.PreferredBackBufferHeight = Game1._hauteurEcran;
             _graphics.ApplyChanges();

@@ -102,7 +102,7 @@ namespace Project1
                         Jeu._nombreCoup += 1;
                         Perso._animEpee = true;
                         _frappe = true;
-                        Jeu._sonEpee.Play(Jeu._volumeSon, 0, 0);
+                        Jeu._sonEpee.Play(Game1._volumeSon, 0, 0);
                         Perso._perso = new AnimatedSprite(Perso._spriteSheetWalkNormal);
                         bool aToucheUnMonstre = false;
                         for (int i = 0; i < Jeu._listeMonstre.Count; i++)

@@ -237,7 +237,7 @@ namespace Project1
                         Perso._viePerso -= 1;
                         Perso._coeurPerdu += 1;
                         ViePerso.Update();
-                        _sonHit.Play(Jeu._volumeSon, 0, 0);
+                        _sonHit.Play(Game1._volumeSon, 0, 0);
                     }
   
                 }
@@ -299,7 +299,7 @@ namespace Project1
             {
                 monstre.Vie -= 1;
                 monstre.Hit = true;
-                Perso._sonHit.Play(Jeu._volumeSon, 0, 0);
+                Perso._sonHit.Play(Game1._volumeSon, 0, 0);
             }
         }
 

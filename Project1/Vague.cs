@@ -24,7 +24,7 @@ namespace Project1
             {
                 Jeu._vague += 1;
                 Message.Display("Bravo ! Tu es a la vague " + Jeu._vague + ". ", "Les monstres arrivent!", 5);
-                Perso._sonNewVague.Play(Jeu._volumeSon, 0, 0);
+                Perso._sonNewVague.Play(Game1._volumeSon, 0, 0);
 
                 //ajout de monstre
                 if (Jeu.difficulte == Jeu.NiveauDifficulte.Facile)

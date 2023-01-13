@@ -237,7 +237,7 @@ namespace Project1
                             vieAEnelver = 4;
                         Perso._viePerso -= vieAEnelver;
                         ViePerso.Update();
-                        _sonHit.Play(Jeu._volumeSon, 0, 0);
+                        _sonHit.Play(Game1._volumeSon, 0, 0);
                     }
 
                 }
@@ -291,7 +291,7 @@ namespace Project1
             {
                 boss.Vie -= 1;
                 boss.Hit = true;
-                Perso._sonHit.Play(Jeu._volumeSon, 0, 0);
+                Perso._sonHit.Play(Game1._volumeSon, 0, 0);
             }
         }
 
