@@ -70,5 +70,82 @@
       <FileName>Camera.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Project1.MapUI">
+    <Position X="18" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAIwAAAgAAAEIAAAAAAAAIAAAAAAQBAAQ=</HashCode>
+      <FileName>MapUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Map">
+    <Position X="20" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAEAAAAABAAAAAAAAAIAAAAAAAIAAQ=</HashCode>
+      <FileName>Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Fee">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACBAAAAAAwAAABAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Fee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Vague">
+    <Position X="20" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAIAAAAAAAAAAEAAABAAACAAAEAAABAAAAAA=</HashCode>
+      <FileName>Vague.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Zone">
+    <Position X="12.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Zone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Coeur">
+    <Position X="22" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAggIAAJIAAAEAAACAAAAAAAAAEAAA=</HashCode>
+      <FileName>Coeur.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Fantome">
+    <Position X="23.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAQAAAwiIkAKMQJAAABAAgAAQBAAAACFAAAAA=</HashCode>
+      <FileName>Fantome.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Boss">
+    <Position X="25.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAQAAAwgIgAIMQIEAABAAAAAwAAAAAClAAAAA=</HashCode>
+      <FileName>Boss.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.VieBoss">
+    <Position X="2" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgBAAABAAAAAAAAAAAAAAgAAAAAAAAQ=</HashCode>
+      <FileName>VieBoss.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.Collision">
+    <Position X="3.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Collision.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project1.KeyboardManager">
+    <Position X="3.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAQABCAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KeyboardManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

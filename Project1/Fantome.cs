@@ -198,7 +198,6 @@ namespace Project1
                         Perso._coeurPerdu += 1;
                         _sonHit.Play(Game1._volumeSon, 0, 0);
                     }
-
                 }
             }
         }
@@ -238,9 +237,7 @@ namespace Project1
                 }
 
                 fantome.Mort = true;
-
             }
-            
         }
         public static void Touche(Fantome fantome)
         {
