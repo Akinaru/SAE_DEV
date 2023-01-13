@@ -10,7 +10,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAQQAAAAAAAAA0AAAgAAAAAABQAAAAACAICAAAAAgIQ=</HashCode>
+      <HashCode>AAQQAAAAAABAA0AAAgAAAAAABQAAAAACAICAAAAAgIQ=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>oAQAEQACAABACwQggAABAFKAApAAIAAAAAAQAAAQACQ=</HashCode>
+      <HashCode>oAQAEQACAAAACwQggAABAFKAApAAIAAAAAAQAAAQACQ=</HashCode>
       <FileName>Jeu.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -63,8 +63,8 @@
       <FileName>Monstre.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Project1.Camera" Collapsed="true">
-    <Position X="18.5" Y="1.75" Width="1.5" />
+  <Class Name="Project1.Camera">
+    <Position X="17.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAQAAAAAAAAAAAAAACAAAAAAAACAAAAA=</HashCode>
       <FileName>Camera.cs</FileName>

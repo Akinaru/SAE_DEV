@@ -26,6 +26,8 @@ namespace Project1
             //ici on evite a la camera de sortie de la map et d'afficher une zone "morte" qui ne contient pas de tuile
             _cameraPosition = new Vector2(Perso._positionPerso.X, Perso._positionPerso.Y);
 
+            //on divise la taille de l'écran par 5 et non par 2 car la camera est zoomé
+
             //si le personnage arrive dans l'angle a gauche, on place la camera
             if (Perso._positionPerso.X < Game1._largeurEcran / 5)
                 _cameraPosition.X = Game1._largeurEcran / 5;
