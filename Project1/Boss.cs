@@ -166,6 +166,7 @@ namespace Project1
 
             if (distance >= 6 && distance < 16 * 15)
             {
+                //on créer la direction entre le perso et le monstre
                 Vector2 direction = Vector2.Normalize(Perso._positionPerso - this.Position);
                 Vector2 pos = new Vector2(this.Position.X, this.Position.Y);
                 ushort x;
@@ -174,7 +175,7 @@ namespace Project1
                     animation = "walkWest";
                 else
                     animation = "walkEast";
-                if (direction.X <= 0) //x gauche
+                if (direction.X <= 0) //x < 0 donc il va a gauche
                 {
                     x = (ushort)(pos.X / Map._tiledMap.TileWidth - 0.5);
                     y = (ushort)(pos.Y / Map._tiledMap.TileHeight);
@@ -183,7 +184,7 @@ namespace Project1
                         direction.X = 0;
                     }
                 }
-                if (direction.X > 0) //x droite
+                if (direction.X > 0) //x > 0 donc il va a droite
                 {
                     x = (ushort)(pos.X / Map._tiledMap.TileWidth + 0.5);
                     y = (ushort)(pos.Y / Map._tiledMap.TileHeight);
